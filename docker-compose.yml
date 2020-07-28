@@ -1,0 +1,41 @@
+version: '3'
+
+services:
+  db:
+    image: postgres
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: 'postgres'
+  api:
+    build:
+      context: ./api/
+      dockerfile: Dockerfile
+    command: /bin/sh -c "rm -f /myapp/tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    image: rails:dev
+    volumes:
+      - ./api:/myapp
+      - ./api/vendor/bundle:/myapp/vendor/bundle
+    environment:
+      TZ: Asia/Tokyo
+      RAILS_ENV: development
+    ports:
+      - 3000:3000
+    depends_on:
+      - db
+    stdin_open: true
+    tty: true
+  front:
+    build:
+      context: ./front/
+      dockerfile: Dockerfile
+    volumes:
+      - ./front:/usr/src/app
+    command: sh -c "cd react-sample && yarn start"
+    ports:
+      - "8000:3000"
+    stdin_open: true
+    tty: true
+volumes:
+  postgres-data:
+    driver: local
