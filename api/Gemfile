@@ -29,6 +29,8 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'rack-cors'
 
 gem 'devise_token_auth'
+gem 'omniauth'
+gem 'omniauth-oauth2'
 gem 'omniauth-twitter'
 gem 'dotenv-rails'
 

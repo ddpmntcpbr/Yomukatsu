@@ -23,11 +23,15 @@ ActiveRecord::Schema.define(version: 2020_07_28_121336) do
     t.datetime "reset_password_sent_at"
     t.boolean "allow_password_change", default: false
     t.datetime "remember_created_at"
+    t.integer "sign_in_count", default: 0, null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.inet "current_sign_in_ip"
+    t.inet "last_sign_in_ip"
     t.string "name"
     t.string "nickname"
     t.string "image"
     t.string "email"
-    t.boolean "is_admin", default: false
     t.json "tokens"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
