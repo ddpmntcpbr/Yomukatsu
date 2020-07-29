@@ -31,10 +31,10 @@ module Myapp
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
-
-    config.session_store :cookie_store, key: '_session_mechaco'
-    config.middleware.use ActionDispatch::Cookies
+    config.session_store :cookie_store, key: '_interslice_session'
+    config.middleware.use ActionDispatch::Cookies # Required for all session management
     config.middleware.use ActionDispatch::Session::CookieStore, config.session_options
+    config.middleware.use ActionDispatch::Flash
     config.middleware.use Rack::Cors do
       allow do
         origins '*'
