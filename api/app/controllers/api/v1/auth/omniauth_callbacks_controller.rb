@@ -43,5 +43,4 @@ class Api::V1::Auth::OmniauthCallbacksController < DeviseTokenAuth::OmniauthCall
       render json: @resource, status: :ok
     end
   end
-
 end
