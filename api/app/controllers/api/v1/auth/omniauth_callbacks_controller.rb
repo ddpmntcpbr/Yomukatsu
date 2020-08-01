@@ -1,4 +1,5 @@
 class Api::V1::Auth::OmniauthCallbacksController < DeviseTokenAuth::OmniauthCallbacksController
+  skip_before_action :skip_session
 
   def redirect_callbacks
     super
@@ -6,6 +7,7 @@ class Api::V1::Auth::OmniauthCallbacksController < DeviseTokenAuth::OmniauthCall
 
   def omniauth_success
     super
+    update_auth_header
   end
 
   def omniauth_failure
