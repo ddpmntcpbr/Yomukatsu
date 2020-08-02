@@ -6,6 +6,7 @@ AllCops:
     - "vendor/**/*"       # rubocop config/default.yml
     - "db/schema.rb"
     - "db/migrate/*"
+    - "app/models/user.rb"
 
 #################### Layout ################################
 

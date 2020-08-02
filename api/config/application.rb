@@ -1,4 +1,4 @@
-require_relative 'boot'
+require_relative "boot"
 
 require "rails"
 # Pick the frameworks you want:
@@ -33,7 +33,7 @@ module Myapp
     config.api_only = true
 
     # 主にdeviseを使うのに必要
-    config.session_store :cookie_store, key: '_interslice_session'
+    config.session_store :cookie_store, key: "_interslice_session"
     config.middleware.use ActionDispatch::Cookies # Required for all session management
     config.middleware.use ActionDispatch::Session::CookieStore, config.session_options
     config.middleware.use ActionDispatch::Flash
@@ -41,11 +41,11 @@ module Myapp
     # クロスドメイン対策は入れておいたほうが良い
     config.middleware.insert_before 0, Rack::Cors do
       allow do
-        origins '*'
-        resource '*',
-                 :headers => :any,
-                 :expose => ['access-token', 'expiry', 'token-type', 'uid', 'client'],
-                 :methods => [:get, :post, :options, :delete, :put]
+        origins "*"
+        resource "*",
+                 headers: :any,
+                 expose: ["access-token", "expiry", "token-type", "uid", "client"],
+                 methods: [:get, :post, :options, :delete, :put]
       end
     end
 
@@ -58,11 +58,11 @@ module Myapp
       g.stylesheets false
       g.helper true
       g.test_framework :rspec,
-                        view_specs: false,
-                        routing_specs: false,
-                        helper_specs: false,
-                        controller_specs: false,
-                        request_specs: true
+                       view_specs: false,
+                       routing_specs: false,
+                       helper_specs: false,
+                       controller_specs: false,
+                       request_specs: true
     end
   end
 end
