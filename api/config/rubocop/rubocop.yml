@@ -5,6 +5,7 @@ AllCops:
     - "node_modules/**/*" # rubocop config/default.yml
     - "vendor/**/*"       # rubocop config/default.yml
     - "db/schema.rb"
+    - "db/migrate/*"
 
 #################### Layout ################################
 
@@ -72,6 +73,9 @@ Lint/AmbiguousBlockAssociation:
 
 Lint/DeprecatedOpenSSLConstant:
   Enabled: false
+
+Lint/DuplicateElsifCondition:
+  Enabled: true
 
 # Style/EmptyCaseCondition と同じく網羅の表現力が empty when を認めた方が高いし、
 # 頻出する対象を最初の when で撥ねるのはパフォーマンス向上で頻出する。
@@ -204,6 +208,9 @@ Security/YAMLLoad:
 
 #################### Style #################################
 
+Style/AccessorGrouping:
+  Enabled: true
+
 # レキシカルスコープの扱いが alias_method の方が自然。
 # https://ernie.io/2014/10/23/in-defense-of-alias/ のように
 # 問題になる場合は自分で緩める。
@@ -214,8 +221,14 @@ Style/Alias:
 Style/AndOr:
   EnforcedStyle: conditionals
 
+Style/ArrayCoercion:
+  Enabled: false
+
 # 日本語のコメントを許可する
 Style/AsciiComments:
+  Enabled: false
+
+Style/BisectedAttrAccessor:
   Enabled: false
 
 # do .. end から更にメソッドチェーンすると見づらいので
@@ -229,6 +242,9 @@ Style/BlockDelimiters:
 # option 等、明示的にハッシュにした方が分かりやすい場合もある
 # Style/BracesAroundHashParameters:
 #   Enabled: false
+
+Style/CaseLikeIf:
+  Enabled: false
 
 # scope が違うとか親 module の存在確認が必要とかデメリットはあるが、
 # namespace 付きのクラスはかなり頻繁に作るので簡単に書きたい。
@@ -293,6 +309,12 @@ Style/FrozenStringLiteralComment:
 Style/GuardClause:
   MinBodyLength: 5
 
+Style/HashAsLastArrayItem:
+  Enabled: false
+
+Style/HashLikeCase:
+  Enabled: false
+
 # rake タスクの順序の hash は rocket を許可する
 Style/HashSyntax:
   Exclude:
@@ -350,6 +372,16 @@ Style/PerlBackrefs:
 # Hash#has_key? の方が key? よりも意味が通る
 Style/PreferredHashMethods:
   EnforcedStyle: verbose
+
+
+Style/RedundantAssignment:
+  Enabled: true
+
+Style/RedundantFetchBlock:
+  Enabled: false
+
+Style/RedundantFileExtensionInRequire:
+  Enabled: false
 
 # 受け取り側で multiple assignment しろというのを明示
 Style/RedundantReturn:

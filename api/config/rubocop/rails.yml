@@ -1,6 +1,11 @@
 Rails:
   Enabled: true
 
+Rails/ActiveRecordCallbacksOrder:
+  Enabled: true
+
+Rails/BulkChangeTable:
+  Enabled: false
 # ActiveRecord で association を安易に delegate すると
 # N+1 を起こしまくるので、なるべく delegate 的なメソッドを使わずに
 # コストが掛かっていることを自覚できるようにしておきたい。
@@ -13,6 +18,9 @@ Rails/Delegate:
 Rails/Exit:
   Enabled: false
 
+Rails/FindById:
+  Enabled: false
+
 # -File.join(Rails.root, "app", "models")
 # +Rails.root.join("app", "models")
 # はともかく
@@ -20,6 +28,24 @@ Rails/Exit:
 # +Rails.root.join("app", "models")
 # は Pathname#plus が行っているので意味無いのでは？
 Rails/FilePath:
+  Enabled: false
+
+Rails/Inquiry:
+  Enabled: false
+
+Rails/MailerName:
+  Enabled: true
+
+Rails/MatchRoute:
+  Enabled: false
+
+Rails/NegateInclude:
+  Enabled: false
+
+Rails/Pluck:
+  Enabled: false
+
+Rails/PluckInWhere:
   Enabled: false
 
 # 桁が揃わなくて気持ち悪い
@@ -34,6 +60,12 @@ Rails/PluralizationGrammar:
 Rails/Present:
   Enabled: false
 
+Rails/RenderInline:
+  Enabled: false
+
+Rails/RenderPlainText:
+  Enabled: false
+
 # method_missing を隠したい場合は respond_to? を使うべき
 Rails/SafeNavigation:
   ConvertTry: true
@@ -41,6 +73,9 @@ Rails/SafeNavigation:
 # valid? チェックし忘れを防ぎたい
 Rails/SaveBang:
   Enabled: true
+
+Rails/ShortI18n:
+  Enabled: false
 
 # staging 環境を使っているので追加
 Rails/UnknownEnv:
@@ -50,5 +85,5 @@ Rails/UnknownEnv:
     - production  # rubocop default.yml
     - staging
 
-Rails/BulkChangeTable:
+Rails/WhereExists:
   Enabled: false
