@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
   skip_before_action :verify_authenticity_token, if: :devise_controller?
 
   protected
+
     def skip_session
       request.session_options[:skip] = true
     end

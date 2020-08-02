@@ -1,0 +1,89 @@
+Rails:
+  Enabled: true
+
+Rails/ActiveRecordCallbacksOrder:
+  Enabled: true
+
+Rails/BulkChangeTable:
+  Enabled: false
+# ActiveRecord で association を安易に delegate すると
+# N+1 を起こしまくるので、なるべく delegate 的なメソッドを使わずに
+# コストが掛かっていることを自覚できるようにしておきたい。
+# メソッドでも危ういが、DSL だと更に意識から抜けるので無効に。
+Rails/Delegate:
+  Enabled: false
+
+# 意図せずに exit を書くこと無いでしょ？
+# 毎回 Exclude / rubocop:disable する方が手間。
+Rails/Exit:
+  Enabled: false
+
+Rails/FindById:
+  Enabled: false
+
+# -File.join(Rails.root, "app", "models")
+# +Rails.root.join("app", "models")
+# はともかく
+# -Rails.root.join("app/models")
+# +Rails.root.join("app", "models")
+# は Pathname#plus が行っているので意味無いのでは？
+Rails/FilePath:
+  Enabled: false
+
+Rails/Inquiry:
+  Enabled: false
+
+Rails/MailerName:
+  Enabled: true
+
+Rails/MatchRoute:
+  Enabled: false
+
+Rails/NegateInclude:
+  Enabled: false
+
+Rails/Pluck:
+  Enabled: false
+
+Rails/PluckInWhere:
+  Enabled: false
+
+# 桁が揃わなくて気持ち悪い
+#   create(:user, logged_in_at: 1.day.ago)
+#   create(:user, logged_in_at: 2.days.ago)
+Rails/PluralizationGrammar:
+  Enabled: false
+
+# unless 文を使ってでも「空」を条件にした方が
+# 「存在する」よりも「空」の方が状態として特別なので
+# 脳内モデルと合致しやすい。
+Rails/Present:
+  Enabled: false
+
+Rails/RenderInline:
+  Enabled: false
+
+Rails/RenderPlainText:
+  Enabled: false
+
+# method_missing を隠したい場合は respond_to? を使うべき
+Rails/SafeNavigation:
+  ConvertTry: true
+
+# valid? チェックし忘れを防ぎたい
+Rails/SaveBang:
+  Enabled: true
+
+Rails/ShortI18n:
+  Enabled: false
+
+# staging 環境を使っているので追加
+Rails/UnknownEnv:
+  Environments:
+    - development # rubocop default.yml
+    - test        # rubocop default.yml
+    - production  # rubocop default.yml
+    - staging
+
+Rails/WhereExists:
+  Enabled: false

@@ -1,0 +1,78 @@
+require: "rubocop-rspec"
+
+RSpec/AnyInstance:
+  Enabled: false
+
+# 日本語だと「〜の場合」になるので suffix でないと対応できない
+RSpec/ContextWording:
+  Enabled: false
+
+# subject はコピペ可搬性よりもそのまま USAGE であって欲しい
+RSpec/DescribedClass:
+  EnforcedStyle: explicit
+
+# it が一つしか無いような context では空行を開ける方が読みづらい
+#   context "when foo is bar" do
+#     let(:foo) { bar }
+#     it { is_expected.to do_something }
+#   end
+RSpec/EmptyLineAfterFinalLet:
+  Enabled: false
+
+# each で回したり aggregate_failures 使ってたりすると厳しい。
+# feature spec は exclude でも良いかもしれない。
+# ヒアドキュメント使うと一瞬で超えるので disable も検討。
+RSpec/ExampleLength:
+  Max: 12
+
+# block の方がテスト対象が
+# * `{}` の前後のスペースと相まって目立つ
+# * 普段書く形と同じなので自然に脳内に入ってくる
+RSpec/ExpectChange:
+  EnforcedStyle: block
+
+# one-liner の should は書きやすいし意味が通りやすいし副作用も無いので撥ねる必要がない。
+# ただ expect 派に対して強制するほどでもないので統一はしない。
+RSpec/ImplicitExpect:
+  Enabled: false
+
+# let を使うのは context 間で条件が違うものが存在する時だけにしたい。
+# before の方が事前条件を整えていることが分かりやすい。
+RSpec/InstanceVariable:
+  Enabled: false
+
+# spec_helper で meta[:aggregate_failures] を設定することで
+# aggregate_failures が全ての spec で有効になる。
+#
+# ほぼ MultipleExpectations についてはチェックされなくなる設定なので注意。
+# パフォーマンスの問題さえ無ければ 1 example 1 assertion にしておく方が
+# 読みやすいテストになりやすいので、そこはレビューで担保していく必要がある。
+RSpec/MultipleExpectations:
+  Enabled: false
+
+RSpec/LetSetup:
+  Enabled: false
+
+
+# 変に名前つけて呼ぶ方が分かりづらい。
+# テスト対象メソッドを呼ぶだけの subject 以外を書かないようにする方が効く。
+RSpec/NamedSubject:
+  Enabled: false
+
+# Model
+#  `- #method
+#      |- 頻出ケースのテスト 1
+#      |- 頻出ケースのテスト 2
+#      `- レアケース
+#          |- レアケースのテスト 1
+#          `- レアケースのテスト 2
+# のように括り出すと、レアケースのテストを読み飛ばせるようになり
+# テストを読む人にやさしくなる。
+# デフォルトの 3 より少し緩めてもヨサソウ。
+RSpec/NestedGroups:
+  Max: 4
+
+# ブロックは初見だと返り値を書いていると気づけないので and_return にしたいが、
+# ブロックの方が見た目がスッキリして見やすいので、どちらでもお好きにどうぞ。
+RSpec/ReturnFromStub:
+  Enabled: false
