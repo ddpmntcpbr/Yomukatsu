@@ -12,15 +12,16 @@ export const signInAction = (userState) => {
   }
 };
 
-// export const SIGN_OUT = "SIGN_OUT";
-// export const signOutAction = () => {
-//   return {
-//     type: "SIGN_OUT",
-//     payload: {
-//       isSignedIn: false,
-//       role: "",
-//       uid: "",
-//       username: ""
-//     }
-//   }
-// }
+export const SIGN_OUT = "SIGN_OUT";
+export const signOutAction = () => {
+  return {
+    type: "SIGN_OUT",
+    payload: {
+      isSignedIn: false,
+      role: "",
+      uid: "",
+      username: "",
+      image: ""
+    }
+  }
+}

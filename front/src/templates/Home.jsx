@@ -2,7 +2,6 @@ import React from 'react';
 import {getUserId, getUserName, getUserImage} from '../reducks/users/selectors';
 import {useSelector, useDispatch} from 'react-redux'
 import {signOut} from "../reducks/users/operations"
-import {noImage} from "../assets/img/src/no_image.png"
 
 const Home = () => {
   const dispatch = useDispatch()
