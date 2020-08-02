@@ -6,7 +6,8 @@ export const signInAction = (userState) => {
       isSignedIn: true,
       role: userState.role,
       uid: userState.uid,
-      username: userState.username
+      username: userState.username,
+      image: userState.image
     }
   }
 };
