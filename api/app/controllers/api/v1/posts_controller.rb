@@ -2,7 +2,7 @@ class Api::V1::PostsController < Api::V1::ApiController
   before_action :authenticate_user!
 
   def show
-    post = current_user.post.find(params[:id])
+    post = current_user.posts.find(params[:id])
     render json: post
   end
 
@@ -25,7 +25,7 @@ class Api::V1::PostsController < Api::V1::ApiController
 
   private
 
-    def posts_params
+    def post_params
       params.require(:post).permit(:title, :url, :image, :status, post_items_attributes: [:content])
     end
 end

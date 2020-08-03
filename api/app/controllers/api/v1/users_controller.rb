@@ -2,7 +2,7 @@ class Api::V1::UsersController < Api::V1::ApiController
   before_action :authenticate_user!
 
   def destroy
-    @user = current_api_v1_user
+    @user = current_user
     @user.destroy!
     render json: { status: "SUCCESS", message: "Delete the user", data: @user }
   end
