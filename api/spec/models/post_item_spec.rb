@@ -9,12 +9,12 @@ RSpec.describe PostItem, type: :model do
     end
   end
 
-  context "content が指定されていない場合" do
-    let(:post_item) { build(:post_item, content: nil) }
+  # context "content が指定されていない場合" do
+  #   let(:post_item) { build(:post_item, content: nil) }
 
-    it "エラーする" do
-      post_item.valid?
-      expect(post_item.errors.messages[:content]).to include "can't be blank"
-    end
-  end
+  #   it "エラーする" do
+  #     post_item.valid?
+  #     expect(post_item.errors.messages[:content]).to include "can't be blank"
+  #   end
+  # end
 end

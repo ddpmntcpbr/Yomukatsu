@@ -1,5 +1,3 @@
 class PostItem < ApplicationRecord
-  belongs_to :post, optional: true
-
-  validates :content, presence: true
+  belongs_to :post
 end
