@@ -145,4 +145,33 @@ RSpec.describe "Api::V1::Posts", type: :request do
       end
     end
   end
+
+  describe "DELETE /api/v1/posts/:id" do
+    subject { delete(api_v1_post_path(post.id), headers: headers) }
+
+    let(:headers) { current_user.create_new_auth_token }
+    let(:current_user) { create(:user) }
+
+    before do
+      allow_any_instance_of(Api::V1::ApiController).to receive(:current_user).and_return(current_user)
+    end
+
+    context "post の作者が自分自身の場合" do
+      let!(:post) { create(:post, user: current_user) }
+
+      it "削除できる" do
+        expect { subject }.to change { current_user.posts.count }.by(-1)
+        expect(response).to have_http_status(:ok)
+      end
+    end
+
+    context "post の作者が他人の場合" do
+      let!(:post) { create(:post) }
+
+      it "削除できない" do
+        subject
+        expect(response).to have_http_status(404)
+      end
+    end
+  end
 end
