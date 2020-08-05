@@ -65,30 +65,55 @@ RSpec.describe "Api::V1::Posts", type: :request do
     end
   end
 
-  # describe "PATCH api/v1/posts" do
-    subject { patch(api_v1_post_path(article.id), params: params, headers: headers) }
+  describe "PATCH api/v1/posts" do
+    subject { patch(api_v1_post_path(@post.id), params: @params, headers: headers) }
 
-  #   let(:headers) { current_user.create_new_auth_token }
-  #   let(:current_user) { create(:user) }
-  #   let(:params) { { article: { title: Faker::Lorem.sentence, body: Faker::Lorem.paragraph, created_at: Time.current } } }
+    let(:headers) { current_user.create_new_auth_token }
+    let(:current_user) { create(:user) }
 
-  #   context " の作者が自分自身の場合" do
-  #     let(:post) { create(:post, user: current_user) }
+    context "正しく post を作成した場合" do
+      before do
+        @post = create(:post, user: current_user)
+        @params =  { post: { title: Faker::Lorem.word, url: Faker::Internet.url, image: Faker::Internet.url, status: "complete", created_at: Time.current }}
+        @params[:post][:post_items_attributes] = [  {id:@post.post_items.first.id, content: @post.post_items.first.content},
+                                                    {id:@post.post_items.second.id, content: @post.post_items.second.content},
+                                                    {id:@post.post_items.third.id, content: Faker::Lorem.paragraph},
+                                                    attributes_for(:post_item)]
+        # @params[:post][:post_items_attributes] = [{id:post.post_items.first.id, content:}]
+        # binding.pry
 
-  #     it "更新できる" do
-  #       expect { subject }.to change { post.reload.title }.from(article.title).to(params[:article][:title]) &
-  #                             change { article.reload.body }.from(article.body).to(params[:article][:body]) &
-  #                             not_change { article.reload.created_at }
-  #       expect(response).to have_http_status(:ok)
-  #     end
-  #   end
+      end
 
-  #   context "article の作者が他人の場合" do
-  #     let(:article) { create(:article) }
+      it "post レコードが更新される" do
+        expect { subject }.to change { @post.reload.title }.from(@post.title).to(@params[:post][:title]) &
+                              change { @post.reload.url }.from(@post.url).to(@params[:post][:url]) &
+                              change { @post.reload.image }.from(@post.image).to(@params[:post][:image]) &
+                              change { @post.reload.status }.from(@post.status).to(@params[:post][:status]) &
+                              not_change { @post.reload.created_at } &
+                              change { @post.reload.post_items.count }.from(3).to(4) &
+                              not_change { @post.reload.post_items.first.content } &
+                              not_change { @post.reload.post_items.second.content } &
+                              change {@post.reload.post_items.third.content}.from(@post.post_items.third.content).to(@params[:post][:post_items_attributes].third[:content]) &
+        expect(response).to have_http_status(:ok)
+      end
+    end
 
-  #     it "更新できない" do
-  #       expect { subject }.to raise_error ActiveRecord::RecordNotFound
-  #     end
-  #   end
-  # end
+    # context "post_items を一部を削除して更新しようとした場合" do
+      # it "更新できる" do
+
+      # end
+    # end
+
+    # context "post_items を全て消して更新しようとした場合" do
+      # it "更新できない" do
+
+      # end
+    # end
+
+    # context "post 作成者以外が更新しようとした場合" do
+      # it "更新できない" do
+
+      # end
+    # end
+  end
 end
