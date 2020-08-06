@@ -1,29 +1,31 @@
 class Api::V1::AmazonBooksController < ApplicationController
   def search
-    if params[:keyword].present?
-      #デバックログ出力するために記述
-      Amazon::Ecs.debug = true
-
-      # Amazon::Ecs::Responceオブジェクトの取得
-      amazon_books = Amazon::Ecs.item_search(
-        params[:keyword],
-        search_index:  'Books',
-        dataType: 'script',
-        response_group: 'ItemAttributes, Images',
-        country:  'jp',
-        power: "Not kindle"
-      )
-
-      # 本のタイトル,画像URL, 詳細ページURLの取得
-      @amazon_books = []
-      amazon_books.items.each do |item|
-        amazon_book = AmazonBook.new(
-          item.get('ItemAttributes/Title'),
-          item.get('LargeImage/URL'),
-          item.get('DetailPageURL'),
-        )
-        @amazon_books << amazon_book
-      end
-    end
+    # AmazonAPIでの検索結果を渡したパーシャルファイルを返す
+    amazon_books = search_by_amazon(params[:keyword])
+    render json: amazon_books
   end
+
+  private
+    def search_by_amazon(keyword)
+      request = Vacuum.new(marketplace: 'JP',
+        access_key: ENV['AMAZON_API_ACCESS_KEY'],
+        secret_key: ENV['AMAZON_API_SECRET_KEY'],
+        partner_tag: ENV['ASSOCIATE_TAG'])
+      response = request.search_items(keywords: keyword,
+                      search_index: 'Books',
+                      resources: ['ItemInfo.Title', 'Images.Primary.Large']).to_h
+      items = response.dig('SearchResult', 'Items')
+
+      # 検索結果から本のタイトル,画像URL, 詳細ページURLの取得して配列へ格納
+      amazon_books = []
+      items.each do |item|
+      amazon_book = {
+        title: item.dig('ItemInfo', 'Title', 'DisplayValue'),
+        image: item.dig('Images', 'Primary', 'Large', 'URL'),
+        url: item.dig('DetailPageURL')
+      }
+      amazon_books << amazon_book
+      end
+      amazon_books
+    end
 end
