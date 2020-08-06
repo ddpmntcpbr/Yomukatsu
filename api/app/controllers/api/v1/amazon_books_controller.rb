@@ -14,7 +14,7 @@ class Api::V1::AmazonBooksController < ApplicationController
       response = request.search_items(keywords: keyword,
                       search_index: 'Books',
                       resources: ['ItemInfo.Title', 'Images.Primary.Large']).to_h
-      items = response.dig('SearchResult', 'Items')
+
 
       # 検索結果から本のタイトル,画像URL, 詳細ページURLの取得して配列へ格納
       amazon_books = []
@@ -25,7 +25,7 @@ class Api::V1::AmazonBooksController < ApplicationController
         url: item.dig('DetailPageURL')
       }
       amazon_books << amazon_book
-      end
-      amazon_books
+    end
+    amazon_books
     end
 end
