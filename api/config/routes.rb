@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
       resources :posts, only: [:show, :create, :update, :destroy]
       get "users/currentuser"
+      get 'amazon_books/search'
     end
   end
 end
