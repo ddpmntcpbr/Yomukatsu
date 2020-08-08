@@ -2,6 +2,7 @@ import React from 'react';
 import {getUserId, getUserName, getUserImage} from '../reducks/users/selectors';
 import {useSelector, useDispatch} from 'react-redux'
 import {signOut} from "../reducks/users/operations"
+import { TweetButton } from '../components/UIKit';
 
 const Home = () => {
   const dispatch = useDispatch()
@@ -20,6 +21,9 @@ const Home = () => {
         <img src={image} alt="アイコン"/>
       </div>
       <button onClick={() => dispatch(signOut())}>SIGN OUT</button>
+      <div>
+        <TweetButton label="ツイート" />
+      </div>
     </div>
   );
 };
