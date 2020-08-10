@@ -1,4 +1,7 @@
 const initialState = {
+  posts: {
+    list: []
+  },
 
   users: {
     isSignedIn: false,
