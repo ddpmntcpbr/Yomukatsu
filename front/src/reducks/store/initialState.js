@@ -1,7 +1,7 @@
 const initialState = {
-  posts: {
-    list: []
-  },
+  // posts: {
+  //   list: []
+  // },
 
   users: {
     isSignedIn: false,
