@@ -2,8 +2,8 @@ import React from 'react';
 import {getUserId, getUserName, getUserImage} from '../reducks/users/selectors';
 import {useSelector, useDispatch} from 'react-redux'
 import {signOut} from "../reducks/users/operations"
-import { TweetButton } from '../components/UIKit';
-import { Helmet } from 'react-helmet';
+// import { Helmet } from 'react-helmet';
+import {TwitterShareButton,TwitterIcon} from "react-share";
 
 const Home = () => {
   const dispatch = useDispatch()
@@ -15,7 +15,7 @@ const Home = () => {
 
   return (
     <div>
-      <Helmet
+      {/* <Helmet
       title={'Hello World'}
       meta={[
         { name: 'twitter:card', content: 'summary' },
@@ -24,7 +24,7 @@ const Home = () => {
         { property: 'og:description', content: 'サンプルページです' },
         { property: "og:url", content: "https://twitter.com/ddpmntcpbr" }
       ]}
-      />
+      /> */}
 
 
       <h2>Home</h2>
@@ -35,7 +35,9 @@ const Home = () => {
       </div>
       <button onClick={() => dispatch(signOut())}>SIGN OUT</button>
       <div>
-        <TweetButton label="ツイート" />
+        <TwitterShareButton url={"https://qiita.com/ddpmntcpbr"} title={"Twitterでシェアしました！\n#ヨムカツ\n"}>
+            <TwitterIcon size={48} round={true} />
+        </TwitterShareButton>
       </div>
     </div>
   );
