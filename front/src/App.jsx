@@ -5,7 +5,7 @@ import "./assets/style.css"
 
 const App = () => {
   return (
-    <main>
+    <main className="c-main">
       <Router />
    </main>
   )
