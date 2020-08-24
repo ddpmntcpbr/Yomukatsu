@@ -4,9 +4,11 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import { PrimaryButton, BookCard } from "../UIKit";
+import {SearchResultItem} from "./";
 
 const SearchResultDialog = (props) => {
+  console.log("props",props)
+  console.log("props.searchResults",props.searchResults)
 
   const setBookInfo = (searchResult) => {
     console.log("setBookInfo")
@@ -18,7 +20,11 @@ const SearchResultDialog = (props) => {
     props.setAuthor(author)
     props.setThumbnail(thumbnail)
     props.handleClose()
-  }
+  };
+
+  // useEffect(()=>{
+  //   console.log("useEffect")
+  // },[])
 
   return (
     <Dialog
@@ -32,7 +38,7 @@ const SearchResultDialog = (props) => {
         {props.searchResults.length > 0 &&(
           props.searchResults.map(searchResult => (
             <div key={searchResult.id} onClick={()=>setBookInfo(searchResult.volumeInfo)}>
-              <BookCard
+              <SearchResultItem
                 searchResult={searchResult.volumeInfo}
               />
             </div>

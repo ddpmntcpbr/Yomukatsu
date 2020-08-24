@@ -8,15 +8,11 @@ import axios from "axios";
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import {SearchResultDialog} from "../components/Posts"
+import {BookCard} from "../components/UIKit"
 
 const useStyles = makeStyles({
-  // checkIcon: {
-  //   float: "right"
-  // },
   searchField: {
-    // alignItems: "center",
     display: "flex",
-    // marginLeft: 32
   }
 })
 
@@ -42,19 +38,12 @@ const PostEdit = () => {
       .then(response => {
         // console.log(response.data.items);
         setSearchResults(response.data.items)
-        // setTitle(response.data.items.volumeInfo.title)
-        // setAuthor(response.data.items.volumeInfo.authors)
-        // setThumbnail(response.data.items.volumeInfo.imageLinks.thumbnail)
       })
       .catch(error => {
         console.log(error)
       });
     }
   }
-
-  // const handleClickOpen = () => {
-  //   setOpen(true)
-  // };
 
   const handleClose = useCallback(() => {
     setOpen(false)
@@ -63,13 +52,12 @@ const PostEdit = () => {
   const handleClickSearchIcon = () => {
     // console.log("handleClickSearchIconのquery",query)
     getSearchBooks(query)
-
     setOpen(true)
   };
 
   return (
     <section>
-      <h2 className="u-text__headline u-text-center">ヨムカツの登録</h2>
+      <h2 className="u-text__headline u-text-center">POST登録</h2>
       <div className="c-section-container">
         <Typography>
           書籍登録
@@ -83,7 +71,10 @@ const PostEdit = () => {
             <SearchIcon/>
           </IconButton>
         </div>
-        <SearchResultDialog open={open} searchResults={searchResults} handleClose={handleClose} setTitle={setTitle} setAuthor={setAuthor} setThumbnail={setThumbnail}/>
+        <SearchResultDialog
+          open={open} searchResults={searchResults} handleClose={handleClose}
+          setTitle={setTitle} setAuthor={setAuthor} setThumbnail={setThumbnail}
+        />
         <div>
           {title}
         </div>
