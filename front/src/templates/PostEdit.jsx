@@ -1,14 +1,11 @@
 import React, { useState, useCallback} from 'react';
-import { PrimaryButton, TextInput } from "../components/UIKit"
+import { TextInput } from "../components/UIkit"
 import IconButton from "@material-ui/core/IconButton";
 import SearchIcon from "@material-ui/icons/Search";
-import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import {makeStyles} from "@material-ui/styles";
 import axios from "axios";
-import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import {SearchResultDialog} from "../components/Posts"
-import {BookCard} from "../components/UIKit"
 
 const useStyles = makeStyles({
   searchField: {
@@ -77,6 +74,12 @@ const PostEdit = () => {
         />
         <div>
           {title}
+        </div>
+        <div>
+          {author}
+        </div>
+        <div>
+          <img src={thumbnail} alt="サムネイル"/>
         </div>
       </div>
     </section>
