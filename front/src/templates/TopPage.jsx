@@ -2,7 +2,7 @@ import React from 'react';
 import {useDispatch} from 'react-redux'
 import {signIn} from "../reducks/users/operations"
 
-const Home = () => {
+const TopPage = () => {
   const dispatch = useDispatch()
 
   return (
@@ -13,4 +13,4 @@ const Home = () => {
   );
 };
 
-export default Home
+export default TopPage

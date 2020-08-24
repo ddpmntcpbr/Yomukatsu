@@ -48,6 +48,6 @@ class Api::V1::Auth::OmniauthCallbacksController < DeviseTokenAuth::OmniauthCall
       uid = data["uid"]
 
       # ex) http://localhost:8000/?auth_token=XXX&blank=true&client_id=XXXX&config=&expiry=XXXX&uid=XXX
-      "http://#{auth_origin_url}/?auth_token=#{auth_token}&blank=true&client_id=#{client_id}&config=&expiry=#{expiry}&uid=#{uid}"
+      "http://#{auth_origin_url}/mypage/?auth_token=#{auth_token}&blank=true&client_id=#{client_id}&config=&expiry=#{expiry}&uid=#{uid}"
     end
 end

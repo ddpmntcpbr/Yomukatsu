@@ -6,7 +6,7 @@ import {signOut} from "../reducks/users/operations"
 import {TwitterShareButton,TwitterIcon} from "react-share";
 import {push} from "connected-react-router";
 
-const Home = () => {
+const MyPage = () => {
   const dispatch = useDispatch()
   const selector = useSelector(state => state);
 
@@ -45,4 +45,4 @@ const Home = () => {
   );
 };
 
-export default Home
+export default MyPage
