@@ -59,7 +59,7 @@ const ClosableDrawer = (props) => {
   const menus = [
     {func: selectMenu, label: "トップ", icon: <AddCircleIcon/>, id: "register", value: "/"},
     {func: selectMenu, label: "マイページ", icon: <HistoryIcon/>, id: "history", value: "/mypage"},
-    {func: selectMenu, label: "ヨムカツ登録", icon: <PersonIcon/>, id: "profile", value: "/posts/edit"},
+    {func: selectMenu, label: "POST登録", icon: <PersonIcon/>, id: "profile", value: "/posts/edit"},
   ];
 
   return (

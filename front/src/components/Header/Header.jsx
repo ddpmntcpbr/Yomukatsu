@@ -8,6 +8,7 @@ import {push} from "connected-react-router"
 import {ClosableDrawer} from "./index"
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu"
+import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles({
   root: {
@@ -24,6 +25,9 @@ const useStyles = makeStyles({
   },
   iconButtons: {
     margin: "0 0 0 auto"
+  },
+  headerTypography: {
+    fontSize:32
   }
 })
 
@@ -44,10 +48,7 @@ const Header = () => {
     <div className={classes.root}>
       <AppBar position="fixed" className={classes.menuBar}>
         <Toolbar className={classes.toolBar}>
-          <img
-            src={logo} alt="Torahack Logo" width="128px"
-            onClick={()=>dispatch(push("/"))}
-          />
+          <Typography className={classes.headerTypography}>ヘッダー</Typography>
           <div className={classes.iconButtons}>
             <IconButton>
               <MenuIcon onClick={(event) => handleDrawerToggle(event)}/>

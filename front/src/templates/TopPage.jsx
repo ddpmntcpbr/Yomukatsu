@@ -1,15 +1,22 @@
 import React from 'react';
+import Container from '@material-ui/core/Container';
+import Typography from '@material-ui/core/Typography';
 import {useDispatch} from 'react-redux'
 import {signIn} from "../reducks/users/operations"
+import {TwitterLoginButton} from "../components/UIkit"
+import {makeStyles} from "@material-ui/styles";
 
 const TopPage = () => {
   const dispatch = useDispatch()
 
   return (
-    <div>
-      <h2>かんたん！5秒で登録！</h2>
-      <button onClick={() => dispatch(signIn())}>Twitterログイン/新規登録</button>
-    </div>
+    <Container>
+      <Typography>かんたん！5秒で登録！</Typography>
+      <TwitterLoginButton
+        label={"Twitter ログイン / 新規登録"}
+        onClick={() => dispatch(signIn())}
+      />
+    </Container>
   );
 };
 
