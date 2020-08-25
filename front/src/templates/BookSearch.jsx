@@ -1,5 +1,5 @@
 import React, { useState, useCallback} from 'react';
-import { TextInput } from "../components/UIKit"
+import { TextInput } from "../components/UIkit"
 import IconButton from "@material-ui/core/IconButton";
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import {makeStyles} from "@material-ui/styles";

@@ -34,7 +34,7 @@ export const listenAuthState = () => {
 
     // LocalStorageに認証情報が含まれていない場合
     } else {
-      dispatch(push("/signin"))
+      dispatch(push("/"))
     }
   }
 }
@@ -48,7 +48,7 @@ export const signIn = () => {
     window.location.href = 'http://127.0.0.1:3000/api/v1/auth/twitter?auth_origin_url=localhost:8000';
 
     // 失敗したら、SignIn画面へリダイレクト
-    // dispatch(push("/"));
+    // dispatch(push("/mypage"));
   }
 }
 
@@ -60,6 +60,6 @@ export const signOut = () => {
 
     // Store Userの初期化
     dispatch(signOutAction());
-    dispatch(push("/signin"));
+    dispatch(push("/"));
   }
 }

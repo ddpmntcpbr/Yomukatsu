@@ -4,8 +4,9 @@ import {useSelector, useDispatch} from 'react-redux'
 import {signOut} from "../reducks/users/operations"
 // import { Helmet } from 'react-helmet';
 import {TwitterShareButton,TwitterIcon} from "react-share";
+import {push} from "connected-react-router";
 
-const Home = () => {
+const MyPage = () => {
   const dispatch = useDispatch()
   const selector = useSelector(state => state);
 
@@ -34,6 +35,7 @@ const Home = () => {
         <img src={image} alt="アイコン"/>
       </div>
       <button onClick={() => dispatch(signOut())}>SIGN OUT</button>
+      <button onClick={() => dispatch(push("/posts/edit"))}>投稿ページ</button>
       <div>
         <TwitterShareButton url={"https://qiita.com/ddpmntcpbr"} title={"Twitterでシェアしました！\n#ヨムカツ\n"}>
             <TwitterIcon size={48} round={true} />
@@ -43,4 +45,4 @@ const Home = () => {
   );
 };
 
-export default Home
+export default MyPage
