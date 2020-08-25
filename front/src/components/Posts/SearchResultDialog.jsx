@@ -7,8 +7,8 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import {SearchResultItem} from "./index";
 
 const SearchResultDialog = (props) => {
-  console.log("props",props)
-  console.log("props.searchResults",props.searchResults)
+  console.log("?SearchResultDialog props",props)
+  console.log("?SearchResultDialog props.searchResults",props.searchResults)
 
   const setBookInfo = (searchResult) => {
     console.log("setBookInfo")

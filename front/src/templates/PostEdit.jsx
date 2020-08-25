@@ -28,13 +28,15 @@ const PostEdit = () => {
   },[setQuery])
 
   const getSearchBooks = (query) => {
+    console.log("getSearchBooks")
     if (query === "") {
       return false
     } else {
       axios.get("https://www.googleapis.com/books/v1/volumes?q=search" + query)
       .then(response => {
-        // console.log(response.data.items);
+        console.log("?response ",response.data.items);
         setSearchResults(response.data.items)
+        setOpen(true)
       })
       .catch(error => {
         console.log(error)
@@ -49,9 +51,9 @@ const PostEdit = () => {
   const handleClickSearchIcon = () => {
     // console.log("handleClickSearchIconのquery",query)
     getSearchBooks(query)
-    setOpen(true)
   };
 
+  console.log("?:return ",searchResults)
   return (
     <section>
       <h2 className="u-text__headline u-text-center">POST登録</h2>
