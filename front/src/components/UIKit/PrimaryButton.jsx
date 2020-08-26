@@ -2,16 +2,16 @@ import React from "react";
 import Button from "@material-ui/core/Button";
 import {makeStyles} from "@material-ui/styles";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme)=>({
   "button": {
-    backgroundColor: "#4dd0e1",
-    color: "#000",
+    backgroundColor: theme.palette.primary.main,
+    color: theme.palette.grey["100"],
     fontSize: 16,
     height: 48,
     marginButton: 16,
     width: 256
   }
-})
+}))
 
 const PrimaryButton = (props) => {
 

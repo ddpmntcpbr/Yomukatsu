@@ -1,5 +1,5 @@
 import React, {useCallback, useMemo, useState} from 'react';
-import {TextInput} from "../UIkit";
+import {PrimaryButton, TextInput} from "../UIkit";
 import IconButton from "@material-ui/core/IconButton";
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -77,8 +77,8 @@ const SetSizeArea = (props) => {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell>id</TableCell>
-              <TableCell>テキスト</TableCell>
+              <TableCell>No.</TableCell>
+              <TableCell>マップアイテム</TableCell>
               <TableCell className={classes.iconCell} />
               <TableCell className={classes.iconCell} />
             </TableRow>
@@ -114,6 +114,9 @@ const SetSizeArea = (props) => {
           </IconButton>
         </Box>
       </TableContainer>
+      <Box textAlign="center" mt={4}>
+        <PrimaryButton label="POSTを登録！" onClick={() => console.log("Clicked!")} />
+      </Box>
     </Box>
   )
 }
