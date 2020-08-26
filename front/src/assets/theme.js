@@ -33,4 +33,9 @@ export const theme = createMuiTheme({
       A700: "#616161"
     }
   },
+  typography: {
+    button: {
+      textTransform: "none",
+    }
+  }
 });
