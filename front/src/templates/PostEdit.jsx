@@ -1,5 +1,5 @@
 import React, { useState, useCallback} from 'react';
-import { BookCard,TextInput } from "../components/UIkit"
+import { BookCard,PrimaryButton, TextInput } from "../components/UIkit"
 import IconButton from "@material-ui/core/IconButton";
 import SearchIcon from "@material-ui/icons/Search";
 import {makeStyles} from "@material-ui/styles";
@@ -7,6 +7,8 @@ import axios from "axios";
 import Typography from '@material-ui/core/Typography';
 import {SearchResultDialog,SetMapArea} from "../components/Posts"
 import {Container,Box} from "@material-ui/core"
+import {savePosts} from "../reducks/posts/operations"
+import {useDispatch} from "react-redux"
 
 const useStyles = makeStyles((theme)=>({
   titleTypography: {
@@ -25,14 +27,16 @@ const useStyles = makeStyles((theme)=>({
 
 const PostEdit = () => {
   const classes = useStyles();
+  const dispatch = useDispatch();
+
   const [query, setQuery] = useState("")
   const [open, setOpen] = useState(false);
-
   const [searchResults, setSearchResults] = useState([]);
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [thumbnail, setThumbnail] = useState("");
-  const [mapItems, setMapItems] = useState([])
+  const [infoLink,setInfoLink] = useState("#");
+  const [mapItems, setMapItems] = useState([]);
 
   const inputQuery = useCallback((event) => {
     setQuery(event.target.value)
@@ -44,6 +48,7 @@ const PostEdit = () => {
     } else {
       axios.get("https://www.googleapis.com/books/v1/volumes?q=search" + query)
       .then(response => {
+        // console.log(response.data.items)
         setSearchResults(response.data.items)
         setOpen(true)
       })
@@ -80,7 +85,7 @@ const PostEdit = () => {
       </Box>
       <SearchResultDialog
         open={open} searchResults={searchResults} handleClose={handleClose}
-        setTitle={setTitle} setAuthor={setAuthor} setThumbnail={setThumbnail}
+        setTitle={setTitle} setAuthor={setAuthor} setThumbnail={setThumbnail} setInfoLink={setInfoLink}
       />
       <BookCard title={title} author={author} thumbnail={thumbnail} />
       <Box style={{height:24}}/>
@@ -88,6 +93,11 @@ const PostEdit = () => {
         読書メンタルマップ
       </Typography>
       <SetMapArea mapItems={mapItems} setMapItems={setMapItems}  />
+      <Box textAlign="center" mt={4}>
+        <PrimaryButton
+          label="POSTを登録！"
+          onClick={() => dispatch(savePosts(title,infoLink,author,thumbnail,mapItems))} />
+      </Box>
     </Container>
   );
 };
