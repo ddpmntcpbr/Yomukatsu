@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 2020_08_02_085959) do
   create_table "posts", force: :cascade do |t|
     t.string "title"
     t.string "url"
+    t.string "author"
     t.string "image"
     t.string "status"
     t.bigint "user_id"

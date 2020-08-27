@@ -14,7 +14,7 @@ RSpec.describe "Api::V1::Posts", type: :request do
         subject
         expect(Post.count).to eq 1
         res = JSON.parse(response.body)
-        expect(res.keys).to eq ["id", "title", "url", "image", "status", "created_at", "updated_at", "user", "post_items"]
+        expect(res.keys).to eq ["id", "title", "url", "author", "image", "status", "created_at", "updated_at", "user", "post_items"]
         expect(response).to have_http_status(:ok)
       end
     end
@@ -56,6 +56,7 @@ RSpec.describe "Api::V1::Posts", type: :request do
         res = JSON.parse(response.body)
         expect(res["title"]).to eq @params[:post][:title]
         expect(res["url"]).to eq @params[:post][:url]
+        expect(res["author"]).to eq @params[:post][:author]
         expect(res["image"]).to eq @params[:post][:image]
         expect(res["status"]).to eq "reading"
         expect(res["post_items"].length).to eq 3
