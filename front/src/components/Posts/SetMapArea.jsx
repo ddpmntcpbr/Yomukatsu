@@ -107,7 +107,7 @@ const SetSizeArea = (props) => {
         <Box className={classes.inputMapItemArea}>
           <TextInput
             fullWidth={true} label={"マップアイテムを入力"} multiline={true} requires={true}
-            onChange={inputMapItem} rows={2} value={mapItem} type={"text"}
+            onChange={inputMapItem} rows={5} value={mapItem} type={"text"}
           />
           <IconButton className={classes.checkIcon} onClick={() => addMapItem(index, mapItem)}>
             <CheckCircleIcon/>
