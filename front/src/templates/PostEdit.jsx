@@ -1,27 +1,42 @@
 import React, { useState, useCallback} from 'react';
-import { TextInput } from "../components/UIkit"
+import { BookCard,PrimaryButton, TextInput } from "../components/UIkit"
 import IconButton from "@material-ui/core/IconButton";
 import SearchIcon from "@material-ui/icons/Search";
 import {makeStyles} from "@material-ui/styles";
 import axios from "axios";
 import Typography from '@material-ui/core/Typography';
-import {SearchResultDialog} from "../components/Posts"
+import {SearchResultDialog,SetMapArea} from "../components/Posts"
+import {Container,Box} from "@material-ui/core"
+import {savePosts} from "../reducks/posts/operations"
+import {useDispatch} from "react-redux"
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme)=>({
+  titleTypography: {
+    color: theme.palette.primary.main,
+    fontSize: "2rem",
+    paddingBottom: theme.spacing(2),
+  },
+  subTitleTypography: {
+    color: theme.palette.grey["700"],
+    fontSize: "1.5rem",
+  },
   searchField: {
     display: "flex",
   }
-})
+}))
 
 const PostEdit = () => {
   const classes = useStyles();
+  const dispatch = useDispatch();
+
   const [query, setQuery] = useState("")
   const [open, setOpen] = useState(false);
-
   const [searchResults, setSearchResults] = useState([]);
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [thumbnail, setThumbnail] = useState("");
+  const [infoLink,setInfoLink] = useState("#");
+  const [mapItems, setMapItems] = useState([]);
 
   const inputQuery = useCallback((event) => {
     setQuery(event.target.value)
@@ -33,8 +48,9 @@ const PostEdit = () => {
     } else {
       axios.get("https://www.googleapis.com/books/v1/volumes?q=search" + query)
       .then(response => {
-        // console.log(response.data.items);
+        // console.log(response.data.items)
         setSearchResults(response.data.items)
+        setOpen(true)
       })
       .catch(error => {
         console.log(error)
@@ -47,42 +63,42 @@ const PostEdit = () => {
   }, [setOpen]);
 
   const handleClickSearchIcon = () => {
-    // console.log("handleClickSearchIconのquery",query)
     getSearchBooks(query)
-    setOpen(true)
   };
 
   return (
-    <section>
-      <h2 className="u-text__headline u-text-center">POST登録</h2>
-      <div className="c-section-container">
-        <Typography>
-          書籍登録
-        </Typography>
-        <div className={classes.searchField}>
-          <TextInput
-            fullWidth={true} label={"タイトル / 著者名 で 検索"} multiline={false} required={true}
-            onChange={inputQuery} rows={1} type={"text"}
-          />
-          <IconButton onClick={() => handleClickSearchIcon()}>
-            <SearchIcon/>
-          </IconButton>
-        </div>
-        <SearchResultDialog
-          open={open} searchResults={searchResults} handleClose={handleClose}
-          setTitle={setTitle} setAuthor={setAuthor} setThumbnail={setThumbnail}
+    <Container maxWidth="sm" style={{backgroundColor:"white"}}>
+      <Typography variant="h2" className={classes.titleTypography}>
+        POST登録
+      </Typography>
+      <Typography variant="h3" className={classes.subTitleTypography}>
+        書籍登録
+      </Typography>
+      <Box className={classes.searchField}>
+        <TextInput
+          fullWidth={true} label={"タイトル / 著者名 で 検索"} multiline={false} required={true}
+          onChange={inputQuery} rows={1} type={"text"}
         />
-        <div>
-          {title}
-        </div>
-        <div>
-          {author}
-        </div>
-        <div>
-          <img src={thumbnail} alt="サムネイル"/>
-        </div>
-      </div>
-    </section>
+        <IconButton onClick={() => handleClickSearchIcon()}>
+          <SearchIcon/>
+        </IconButton>
+      </Box>
+      <SearchResultDialog
+        open={open} searchResults={searchResults} handleClose={handleClose}
+        setTitle={setTitle} setAuthor={setAuthor} setThumbnail={setThumbnail} setInfoLink={setInfoLink}
+      />
+      <BookCard title={title} author={author} thumbnail={thumbnail} />
+      <Box style={{height:24}}/>
+      <Typography variant="h3" className={classes.subTitleTypography}>
+        読書メンタルマップ
+      </Typography>
+      <SetMapArea mapItems={mapItems} setMapItems={setMapItems}  />
+      <Box textAlign="center" mt={4}>
+        <PrimaryButton
+          label="POSTを登録！"
+          onClick={() => dispatch(savePosts(title,infoLink,author,thumbnail,mapItems))} />
+      </Box>
+    </Container>
   );
 };
 
