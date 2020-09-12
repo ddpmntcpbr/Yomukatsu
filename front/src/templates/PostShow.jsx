@@ -1,27 +1,54 @@
-import React, { useEffect } from "react";
+import React, { useEffect,useState } from "react";
 import { useSelector, useDispatch } from 'react-redux'
-import { Container } from "@material-ui/core"
-import { fetchPostDetail } from "../reducks/posts/operations";
-import { getPosts } from "../reducks/posts/selectors";
+import { Box,Container } from "@material-ui/core"
+import axios from "axios"
+import { BookCard } from "../components/UIkit"
+import { MapItemCard } from "../components/Posts"
 
 const PostShow = () => {
   const dispatch = useDispatch();
   const selector = useSelector((state)=>state);
   const path = selector.router.location.pathname;
   const id = path.split("/posts/")[1];
-  const post = getPosts(selector);
+
+  const [title, setTitle] = useState("");
+  const [author, setAuthor] = useState("");
+  const [image, setImage] = useState("");
+  const [url,setUrl] = useState("#");
+  const [mapItems, setMapItems] = useState([]);
 
   useEffect(()=>{
-    dispatch(fetchPostDetail(id))
+    axios.get(('http://localhost:3000/api/v1/posts/' +  String(id)), {
+      headers: {
+        'access-token': localStorage.getItem('auth_token'),
+        'client': localStorage.getItem('client_id'),
+        'uid': localStorage.getItem('uid'),
+      }
+    })
+    .then((response) => {
+      setTitle(response.data.title)
+      setAuthor(response.data.author)
+      setImage(response.data.image)
+      setUrl(response.data.url)
+      setMapItems(response.data.post_items)
+    })
+    .catch((error) => {
+      console.log("error",error)
+    })
   },[])
 
   return (
     <Container maxWidth="sm">
-      This is PostShow page.
-      {post.length > 0 &&(
-        <div>
-          {post[0].title}
-        </div>
+      <Box>
+        <BookCard title={title} author={author} image={image} />
+      </Box>
+
+      {mapItems.length > 0 && (
+        mapItems.map(mapItem => (
+        <Box key={mapItem.id}>
+          <MapItemCard content={mapItem.content} />
+        </Box>
+        ))
       )}
     </Container>
   )
