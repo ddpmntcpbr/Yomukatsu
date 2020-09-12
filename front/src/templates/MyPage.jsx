@@ -74,9 +74,8 @@ const MyPage = () => {
         {posts.length > 0 && (
           posts.map(post => (
             post.status === "reading" &&(
-              <Box className={classes.cardListItem}>
+              <Box key={post.id} className={classes.cardListItem}>
                 <BookCard
-                  key={post.id}
                   title={post.title}
                   author={post.author}
                   image={post.image}
@@ -95,9 +94,8 @@ const MyPage = () => {
         {posts.length > 0 && (
           posts.map(post => (
             post.status === "completed" &&(
-              <Box className={classes.cardListItem}>
+              <Box key={post.id} className={classes.cardListItem}>
                 <BookCard
-                  key={post.id}
                   title={post.title}
                   author={post.author}
                   image={post.image}
