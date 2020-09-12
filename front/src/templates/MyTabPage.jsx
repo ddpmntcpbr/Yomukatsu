@@ -1,15 +1,15 @@
-import React,{ useEffect,useState } from 'react';
+import React,{ useCallback,useEffect,useState } from 'react';
 import {getUserId, getUserName, getUserImage} from '../reducks/users/selectors';
 import {useSelector, useDispatch} from 'react-redux'
 import {TwitterShareButton,TwitterIcon} from "react-share";
 import {push} from "connected-react-router";
 import {makeStyles} from "@material-ui/styles";
-import {AppBar,Avatar,Box,Container,Paper,Tab,Tabs,Typography} from '@material-ui/core';
-import { TabPanel,PrimaryButton } from "../components/UIkit";
+import {Avatar,Box,Container,Paper,Tab,Tabs,Typography} from '@material-ui/core';
+import { TabPanel,PrimaryButton,QuestionDialog } from "../components/UIkit";
 import {fetchPosts} from "../reducks/posts/operations";
 import {getPosts} from "../reducks/posts/selectors";
-import { BookCard } from "../components/UIkit";
 import { ReadingBookDetail, CompletedBooksList } from "../components/Posts"
+
 
 const useStyles = makeStyles((theme)=>({
   root: {
@@ -28,10 +28,20 @@ const MyTabPage = () => {
   const posts = getPosts(selector);
 
   const [selectedTab,setSelectedTab] = useState(0);
+  const [dialogOpen, setDialogOpen] = useState(false);
 
   const handleChange = (event, newSelectedTab) => {
     setSelectedTab(newSelectedTab)
   };
+
+  const handleDialogOpen = () => {
+    setDialogOpen(true);
+  }
+
+  const handleDialogClose = useCallback(() => {
+    setDialogOpen(false)
+  }, [setDialogOpen]);
+
 
   useEffect(()=>{
     dispatch(fetchPosts())
@@ -54,11 +64,20 @@ const MyTabPage = () => {
       </Tabs>
       <TabPanel value={selectedTab} index={0}>
         <ReadingBookDetail />
+        <PrimaryButton
+          label="完読した！"
+          onClick={()=>handleDialogOpen()}
+        />
+        <QuestionDialog
+          open={dialogOpen}
+          handleDialogClose={handleDialogClose}
+          title="完読にしてよろしいですか？"
+          contentText="一度完読にしたアイテムは、元には戻せません"
+        />
       </TabPanel>
       <TabPanel value={selectedTab} index={1}>
         <CompletedBooksList />
       </TabPanel>
-
     </Container>
   )
 }
