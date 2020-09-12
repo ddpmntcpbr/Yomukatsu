@@ -9,7 +9,7 @@ import { TabPanel,PrimaryButton } from "../components/UIkit";
 import {fetchPosts} from "../reducks/posts/operations";
 import {getPosts} from "../reducks/posts/selectors";
 import { BookCard } from "../components/UIkit";
-import { ReadingBookDetail } from "../components/Posts"
+import { ReadingBookDetail, CompletedBooksList } from "../components/Posts"
 
 const useStyles = makeStyles((theme)=>({
   root: {
@@ -56,7 +56,7 @@ const MyTabPage = () => {
         <ReadingBookDetail />
       </TabPanel>
       <TabPanel value={selectedTab} index={1}>
-        Item Two
+        <CompletedBooksList />
       </TabPanel>
 
     </Container>
