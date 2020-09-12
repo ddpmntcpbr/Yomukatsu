@@ -26,7 +26,7 @@ const BookCard = (props) => {
     <Card className={classes.root} variant="outlined">
 
           <Image
-            src={props.thumbnail}
+            src={props.image}
             width={100}
             height={200}
           />

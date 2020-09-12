@@ -34,8 +34,8 @@ const PostEdit = () => {
   const [searchResults, setSearchResults] = useState([]);
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
-  const [thumbnail, setThumbnail] = useState("");
-  const [infoLink,setInfoLink] = useState("#");
+  const [image, setImage] = useState("");
+  const [url,setUrl] = useState("#");
   const [mapItems, setMapItems] = useState([]);
 
   const inputQuery = useCallback((event) => {
@@ -85,9 +85,9 @@ const PostEdit = () => {
       </Box>
       <SearchResultDialog
         open={open} searchResults={searchResults} handleClose={handleClose}
-        setTitle={setTitle} setAuthor={setAuthor} setThumbnail={setThumbnail} setInfoLink={setInfoLink}
+        setTitle={setTitle} setAuthor={setAuthor} setImage={setImage} setUrl={setUrl}
       />
-      <BookCard title={title} author={author} thumbnail={thumbnail} />
+      <BookCard title={title} author={author} image={image} />
       <Box style={{height:24}}/>
       <Typography variant="h3" className={classes.subTitleTypography}>
         読書メンタルマップ
@@ -96,7 +96,7 @@ const PostEdit = () => {
       <Box textAlign="center" mt={4}>
         <PrimaryButton
           label="POSTを登録！"
-          onClick={() => dispatch(savePosts(title,infoLink,author,thumbnail,mapItems))} />
+          onClick={() => dispatch(savePosts(title,url,author,image,mapItems))} />
       </Box>
     </Container>
   );
