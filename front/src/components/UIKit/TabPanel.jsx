@@ -8,7 +8,7 @@ const TabPanel = (props) => {
       hidden={props.value !== props.index}
     >
       {props.value === props.index && (
-        <Box p={3}>
+        <Box py={3}>
           {props.children}
         </Box>
       )}

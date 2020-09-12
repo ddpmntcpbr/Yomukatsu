@@ -9,6 +9,7 @@ import { TabPanel,PrimaryButton } from "../components/UIkit";
 import {fetchPosts} from "../reducks/posts/operations";
 import {getPosts} from "../reducks/posts/selectors";
 import { BookCard } from "../components/UIkit";
+import { ReadingBookDetail } from "../components/Posts"
 
 const useStyles = makeStyles((theme)=>({
   root: {
@@ -52,7 +53,7 @@ const MyTabPage = () => {
         <Tab label="完読リスト" />
       </Tabs>
       <TabPanel value={selectedTab} index={0}>
-        Item One
+        <ReadingBookDetail />
       </TabPanel>
       <TabPanel value={selectedTab} index={1}>
         Item Two
