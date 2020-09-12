@@ -13,6 +13,21 @@ export const fetchPosts = () => {
     })
     .then((response) => {
       // console.log(response.data)
+      // const postList = []
+
+      // response.data.forEach(data => {
+      //   const post = {
+      //     "title": data.title,
+      //     "url": data.infoLink,
+      //     "author": data.author,
+      //     "image": data.thumbnail,
+      //     "status": data.status,
+      //     "post_items_attributes": data.post_items_attributes,
+      //     "created_at": data.created_at,
+      //     "user": data.user,
+      //   }
+      //   postList.push(post)
+      // })
       // const data = {
       //   "title": response.data.title,
       //   "url": response.data.infoLink,
@@ -21,7 +36,7 @@ export const fetchPosts = () => {
       //   "status": response.data.status,
       //   "post_items_attributes": response.data.post_items_attributes
       // }
-
+      // console.log(postList)
       dispatch(fetchPostsAction(response.data))
 
     })
@@ -31,7 +46,7 @@ export const fetchPosts = () => {
   }
 }
 
-export const savePosts = (title,infoLink,author,thumbnail,mapItems) => {
+export const savePosts = (title,url,author,image,mapItems) => {
   return async (dispatch) => {
 
     const post_items_attributes = []
@@ -41,9 +56,9 @@ export const savePosts = (title,infoLink,author,thumbnail,mapItems) => {
 
     const data = {
       "title": title,
-      "url": infoLink,
+      "url": url,
       "author": author,
-      "image": thumbnail,
+      "image": image,
       "status": "reading",
       "post_items_attributes": post_items_attributes
       }

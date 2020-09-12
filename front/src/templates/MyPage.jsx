@@ -11,6 +11,7 @@ import Typography from '@material-ui/core/Typography';
 import {PrimaryButton} from "../components/UIkit";
 import {fetchPosts} from "../reducks/posts/operations";
 import {getPosts} from "../reducks/posts/selectors";
+import { BookCard } from "../components/UIkit";
 
 const useStyles = makeStyles((theme)=>({
   container: {
@@ -62,13 +63,13 @@ const MyPage = () => {
           読書中
         </Typography>
 
-        {/* <Box>
+        <Box>
           {posts.length > 0 && (
             posts.map(post => (
-              <BookCard title={post.title} author={post.author} thumbnail={post.thumbnail} />
+              <BookCard key={post.id} title={post.title} author={post.author} image={post.image} />
             ))
           )}
-        </Box> */}
+        </Box>
 
 
 
