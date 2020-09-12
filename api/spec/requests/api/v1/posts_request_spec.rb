@@ -1,7 +1,6 @@
 require "rails_helper"
 
 RSpec.describe "Api::V1::Posts", type: :request do
-
   describe "GET api/v1/posts" do
     subject { get(api_v1_posts_path, headers: headers) }
 
@@ -10,8 +9,9 @@ RSpec.describe "Api::V1::Posts", type: :request do
 
     context "認証ユーザーがアクセスする場合" do
       before do
-        create_list(:post,3, user: current_user)
+        create_list(:post, 3, user: current_user)
       end
+
       it "自身が作成した posts 一覧を取得できる" do
         subject
         res = JSON.parse(response.body)
