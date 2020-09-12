@@ -5,7 +5,7 @@ class Post < ApplicationRecord
 
   validates :post_items, length: { minimum: 1 }
   validates :title, presence: true
-  enum status: { reading: "reading", complete: "complete" }
+  enum status: { reading: "reading", completed: "completed" }
 
   def reject_blank(attributes)
     if attributes[:id]
