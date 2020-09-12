@@ -73,14 +73,16 @@ const MyPage = () => {
 
         {posts.length > 0 && (
           posts.map(post => (
-            <Box className={classes.cardListItem}>
-              <BookCard
-                key={post.id}
-                title={post.title}
-                author={post.author}
-                image={post.image}
-              />
-            </Box>
+            post.status === "reading" &&(
+              <Box className={classes.cardListItem}>
+                <BookCard
+                  key={post.id}
+                  title={post.title}
+                  author={post.author}
+                  image={post.image}
+                />
+              </Box>
+            )
           ))
         )}
 
@@ -92,14 +94,16 @@ const MyPage = () => {
 
         {posts.length > 0 && (
           posts.map(post => (
-            <Box className={classes.cardListItem}>
-              <BookCard
-                key={post.id}
-                title={post.title}
-                author={post.author}
-                image={post.image}
-              />
-            </Box>
+            post.status === "completed" &&(
+              <Box className={classes.cardListItem}>
+                <BookCard
+                  key={post.id}
+                  title={post.title}
+                  author={post.author}
+                  image={post.image}
+                />
+              </Box>
+            )
           ))
         )}
 
