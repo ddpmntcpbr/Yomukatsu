@@ -28,8 +28,14 @@ const useStyles = makeStyles((theme)=>({
     marginBottom: theme.spacing(2),
   },
   subTitleTypography: {
-    fontSize: "1.5rem"
+    fontSize: "1.5rem",
+    marginTop: theme.spacing(2),
+    marginBottom: theme.spacing(2),
   },
+  cardListItem: {
+    textAlign: "left",
+    marginBottom: theme.spacing(2),
+  }
 }))
 
 const MyPage = () => {
@@ -58,20 +64,44 @@ const MyPage = () => {
         <PrimaryButton
           label="新しい書籍を登録する"
           onClick={() => dispatch(push("/posts/edit"))}
-          />
+        />
+
+        <Box py="2rem" />
         <Typography variant="h3" className={classes.subTitleTypography} >
           読書中
         </Typography>
 
-        <Box>
-          {posts.length > 0 && (
-            posts.map(post => (
-              <BookCard key={post.id} title={post.title} author={post.author} image={post.image} />
-            ))
-          )}
-        </Box>
+        {posts.length > 0 && (
+          posts.map(post => (
+            <Box className={classes.cardListItem}>
+              <BookCard
+                key={post.id}
+                title={post.title}
+                author={post.author}
+                image={post.image}
+              />
+            </Box>
+          ))
+        )}
 
+        <Box py="2rem" />
 
+        <Typography variant="h3" className={classes.subTitleTypography} >
+          完読
+        </Typography>
+
+        {posts.length > 0 && (
+          posts.map(post => (
+            <Box className={classes.cardListItem}>
+              <BookCard
+                key={post.id}
+                title={post.title}
+                author={post.author}
+                image={post.image}
+              />
+            </Box>
+          ))
+        )}
 
         <div>
           <TwitterShareButton url={"https://qiita.com/ddpmntcpbr"} title={"Twitterでシェアしました！\n#ヨムカツ\n"}>
