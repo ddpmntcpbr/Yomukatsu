@@ -1,6 +1,6 @@
 import React, { useEffect,useState } from "react";
 import { useSelector, useDispatch } from 'react-redux'
-import { Box,Container } from "@material-ui/core"
+import { Box,Container,Typography } from "@material-ui/core"
 import axios from "axios"
 import { BookCard } from "../components/UIkit"
 import { MapItemCard } from "../components/Posts"
@@ -39,9 +39,16 @@ const PostShow = () => {
 
   return (
     <Container maxWidth="sm">
+      <Typography variant="h5" component="h3">
+        書籍情報
+      </Typography>
       <Box>
         <BookCard title={title} author={author} image={image} />
       </Box>
+
+      <Typography variant="h5" component="h3">
+        メンタルマップ
+      </Typography>
 
       {mapItems.length > 0 && (
         mapItems.map(mapItem => (

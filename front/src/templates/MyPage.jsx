@@ -74,7 +74,11 @@ const MyPage = () => {
         {posts.length > 0 && (
           posts.map(post => (
             post.status === "reading" &&(
-              <Box key={post.id} className={classes.cardListItem}>
+              <Box
+                key={post.id}
+                className={classes.cardListItem}
+                onClick={()=>dispatch(push("posts/" + String(post.id)))}
+              >
                 <BookCard
                   title={post.title}
                   author={post.author}
@@ -94,7 +98,11 @@ const MyPage = () => {
         {posts.length > 0 && (
           posts.map(post => (
             post.status === "completed" &&(
-              <Box key={post.id} className={classes.cardListItem}>
+              <Box
+                key={post.id}
+                className={classes.cardListItem}
+                onClick={()=>dispatch(push("posts/" + String(post.id)))}
+              >
                 <BookCard
                   title={post.title}
                   author={post.author}
