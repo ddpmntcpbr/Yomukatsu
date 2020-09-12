@@ -1,5 +1,35 @@
 import axios from "axios";
 import {push} from "connected-react-router";
+import { fetchPostsAction } from "./actions";
+
+export const fetchPosts = () => {
+  return async (dispatch) => {
+    axios.get('http://localhost:3000/api/v1/posts', {
+      headers: {
+        'access-token': localStorage.getItem('auth_token'),
+        'client': localStorage.getItem('client_id'),
+        'uid': localStorage.getItem('uid'),
+      }
+    })
+    .then((response) => {
+      // console.log(response.data)
+      // const data = {
+      //   "title": response.data.title,
+      //   "url": response.data.infoLink,
+      //   "author": response.data.author,
+      //   "image": response.data.thumbnail,
+      //   "status": response.data.status,
+      //   "post_items_attributes": response.data.post_items_attributes
+      // }
+
+      dispatch(fetchPostsAction(response.data))
+
+    })
+    .catch((error) => {
+      console.log("error",error)
+    })
+  }
+}
 
 export const savePosts = (title,infoLink,author,thumbnail,mapItems) => {
   return async (dispatch) => {
@@ -26,7 +56,6 @@ export const savePosts = (title,infoLink,author,thumbnail,mapItems) => {
         }
       })
       .then((response) => {
-        // console.log("response", response)
         dispatch(push("/mypage"))
       })
       .catch((error) => {
