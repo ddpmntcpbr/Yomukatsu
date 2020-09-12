@@ -5,7 +5,7 @@ Rails.application.routes.draw do
         omniauth_callbacks: "api/v1/auth/omniauth_callbacks",
       }
 
-      resources :posts, only: [:show, :create, :update, :destroy]
+      resources :posts, only: [:index, :show, :create, :update, :destroy]
       get "users/currentuser"
       get "amazon_books/search"
     end

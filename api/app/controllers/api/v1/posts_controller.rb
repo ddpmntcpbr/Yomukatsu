@@ -1,6 +1,11 @@
 class Api::V1::PostsController < Api::V1::ApiController
   before_action :authenticate_user!
 
+  def index
+    posts = current_user.posts
+    render json: posts
+  end
+
   def show
     post = current_user.posts.find(params[:id])
     render json: post
