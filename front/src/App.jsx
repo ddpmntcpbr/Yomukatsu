@@ -8,7 +8,7 @@ import { makeStyles } from "@material-ui/styles";
 const useStyles = makeStyles((theme)=>({
   root: {
     padding: "96px 0",
-    backgroundColor: theme.palette.primary.main,
+    backgroundColor: theme.palette.primary.light,
   }
 }))
 

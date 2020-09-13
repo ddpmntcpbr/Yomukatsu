@@ -49,7 +49,7 @@ const PostShow = () => {
   },[])
 
   return (
-    <Container maxWidth="md" >
+    <Container maxWidth="sm" >
       <Box className={classes.root}>
         {status === "reading"
           ? <ReadingBookDetail

@@ -5,7 +5,7 @@ import axios from "axios"
 import { BookCard } from "../UIkit"
 import { MapItemCard } from "./index"
 import { getPosts } from "../../reducks/posts/selectors";
-import { PrimaryButton,QuestionDialog } from "../UIkit"
+import { PrimaryButton,SecondaryButton,QuestionDialog } from "../UIkit"
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import { makeStyles } from "@material-ui/styles";
@@ -54,7 +54,7 @@ const ReadingBookDetail = (props) => {
         )}
 
         <Box display="flex" justifyContent="center" p={1}>
-          <PrimaryButton
+          <SecondaryButton
             label="完読した!"
             onClick={handleClickOpen}
           />
