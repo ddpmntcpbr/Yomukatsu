@@ -8,7 +8,7 @@ import Image from "react-image-resizer";
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
-    height: 200
+    height: 200,
   },
   details: {
     flex: 1
@@ -33,7 +33,7 @@ const BookCard = (props) => {
 
           <div className={classes.details}>
             <CardContent>
-              <Typography component="p" variant="p" >
+              <Typography component="p">
                 {props.title}
               </Typography>
               <Typography variant="subtitle1" color="textSecondary">

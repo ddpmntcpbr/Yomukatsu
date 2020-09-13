@@ -4,8 +4,8 @@ import {makeStyles} from "@material-ui/styles";
 
 const useStyles = makeStyles((theme)=>({
   "button": {
-    backgroundColor: theme.palette.primary.dark,
-    color: theme.palette.grey["100"],
+    backgroundColor: theme.palette.secondary.main,
+    color: "white",
     fontSize: 16,
     height: 48,
     marginButton: 16,
@@ -13,15 +13,15 @@ const useStyles = makeStyles((theme)=>({
   }
 }))
 
-const PrimaryButton = (props) => {
+const SecondaryButton = (props) => {
 
   const classes = useStyles();
 
   return(
-    <Button className={classes.button} variant="contained" onClick={() => props.onClick()}>
+    <Button className={classes.button} variant="outliend" onClick={() => props.onClick()}>
       {props.label}
     </Button>
   )
 }
 
-export default PrimaryButton
+export default SecondaryButton
