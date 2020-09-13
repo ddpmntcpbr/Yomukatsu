@@ -16,7 +16,7 @@ const QuestionDialog = (props) => {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button variant="outlined" color="primary" onClick={props.handleClose} >
+          <Button variant="outlined" color="primary" onClick={props.handleEvent} >
             OK
           </Button>
           <Button variant="outlined" color="primary" onClick={props.handleClose} autoFocus>

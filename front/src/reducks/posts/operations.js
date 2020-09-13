@@ -1,6 +1,8 @@
 import axios from "axios";
-import {push} from "connected-react-router";
+import { push } from "connected-react-router";
 import { fetchPostDetailAction,fetchPostsAction } from "./actions";
+import { useSelector } from "react-redux";
+import { getPosts } from "../posts/selectors";
 
 export const fetchPostDetail = (id) => {
   return async (dispatch) => {
@@ -14,7 +16,7 @@ export const fetchPostDetail = (id) => {
     })
     .then((response) => [response.data])
     .catch(() => [])
-
+    console.log("fetchPostDetail",data)
     dispatch(fetchPostDetailAction(data))
   }
 }
@@ -67,5 +69,33 @@ export const savePosts = (title,url,author,image,mapItems) => {
       .catch((error) => {
         console.log("error",error)
       })
+  }
+}
+
+export const updateStatusToCompleted = (prevData) =>{
+  return async (dispatch) => {
+    const id = prevData.id
+
+    const data = {
+      // "id": prevData.id,
+      "status": "completed"
+      }
+    console.log("updateStatusToCompleted", data)
+
+    axios.put(('http://localhost:3000/api/v1/posts/' + String(id)), data, {
+        headers: {
+          'access-token': localStorage.getItem('auth_token'),
+          'client': localStorage.getItem('client_id'),
+          'uid': localStorage.getItem('uid'),
+        }
+      })
+      .then((response) => {
+        console.log(response)
+        dispatch(push("/mypage"))
+      })
+      .catch((error) => {
+        console.log("error",error)
+      })
+
   }
 }
