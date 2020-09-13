@@ -4,19 +4,18 @@ import { fetchPostDetailAction,fetchPostsAction } from "./actions";
 
 export const fetchPostDetail = (id) => {
   return async (dispatch) => {
-    axios.get(('http://localhost:3000/api/v1/posts/' +  String(id)), {
+
+    const data = await axios.get(('http://localhost:3000/api/v1/posts/' +  String(id)), {
       headers: {
         'access-token': localStorage.getItem('auth_token'),
         'client': localStorage.getItem('client_id'),
         'uid': localStorage.getItem('uid'),
       }
     })
-    .then((response) => {
-       dispatch(fetchPostDetailAction([response.data]))
-    })
-    .catch((error) => {
-      console.log("error",error)
-    })
+    .then((response) => [response.data])
+    .catch(() => [])
+
+    dispatch(fetchPostDetailAction(data))
   }
 }
 

@@ -12,7 +12,7 @@ const MapItemCard = (props) => {
   const classes = useStyles();
 
   return (
-    <Card className={classes.root} variant="outliend">
+    <Card className={classes.root} variant="outlined">
       <CardContent>
         <Typography component="p">
           {props.content}

@@ -1,41 +1,24 @@
-import React, { useEffect,useState } from "react";
+import React, { useCallback,useEffect,useState } from "react";
 import { useSelector, useDispatch } from 'react-redux'
-import { Box,Container,Typography } from "@material-ui/core"
+import { Button,Box,Container,Typography } from "@material-ui/core"
 import axios from "axios"
 import { BookCard } from "../UIkit"
 import { MapItemCard } from "./index"
+import { getPosts } from "../../reducks/posts/selectors";
+import { PrimaryButton,QuestionDialog } from "../UIkit"
+import DeleteIcon from '@material-ui/icons/Delete';
+import EditIcon from '@material-ui/icons/Edit';
 
-const ReadingBookDetail = () => {
-  const dispatch = useDispatch();
-  const selector = useSelector((state)=>state);
-  const path = selector.router.location.pathname;
-  const id = path.split("/posts/")[1];
+const ReadingBookDetail = (props) => {
+  const [open, setOpen] = useState(false);
 
-  const [title, setTitle] = useState("");
-  const [author, setAuthor] = useState("");
-  const [image, setImage] = useState("");
-  const [url,setUrl] = useState("#");
-  const [mapItems, setMapItems] = useState([]);
+  const handleClickOpen = useCallback(() => {
+    setOpen(true);
+  }, [setOpen])
 
-  useEffect(()=>{
-    axios.get(('http://localhost:3000/api/v1/posts/' +  String(id)), {
-      headers: {
-        'access-token': localStorage.getItem('auth_token'),
-        'client': localStorage.getItem('client_id'),
-        'uid': localStorage.getItem('uid'),
-      }
-    })
-    .then((response) => {
-      setTitle(response.data.title)
-      setAuthor(response.data.author)
-      setImage(response.data.image)
-      setUrl(response.data.url)
-      setMapItems(response.data.post_items)
-    })
-    .catch((error) => {
-      console.log("error",error)
-    })
-  },[])
+  const handleClose = useCallback(() => {
+    setOpen(false)
+  }, [setOpen]);
 
   return (
     <Container maxWidth="sm">
@@ -43,20 +26,52 @@ const ReadingBookDetail = () => {
         書籍情報
       </Typography>
       <Box>
-        <BookCard title={title} author={author} image={image} />
+        <BookCard title={props.title} author={props.author} image={props.image} />
       </Box>
 
       <Typography variant="h5" component="h3">
         メンタルマップ
       </Typography>
 
-      {mapItems.length > 0 && (
-        mapItems.map(mapItem => (
+      {props.mapItems.length > 0 && (
+        props.mapItems.map(mapItem => (
         <Box key={mapItem.id}>
           <MapItemCard content={mapItem.content} />
         </Box>
         ))
       )}
+
+      <PrimaryButton
+        label="完読した"
+        onClick={handleClickOpen}
+      />
+
+      <Button variant="contained" color="secondary" size="large" onClick={()=>handleClickOpen()}>
+        完読した！
+      </Button>
+
+      <Button
+        variant="outlined"
+        color="primary"
+        startIcon={<EditIcon />}
+      >
+        編集
+      </Button>
+
+      <Button
+        variant="outlined"
+        color="inherit"
+        startIcon={<DeleteIcon />}
+      >
+        削除
+      </Button>
+
+      <QuestionDialog
+        open={open}
+        handleClose={handleClose}
+        title="完読にしてよろしいですか？"
+        contentText="一度完読にしたアイテムは、元には戻せません"
+      />
     </Container>
   )
 }

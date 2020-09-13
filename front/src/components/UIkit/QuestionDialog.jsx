@@ -6,8 +6,8 @@ const QuestionDialog = (props) => {
   return (
     <Box>
       <Dialog
-        open={props.dialogOpen}
-        onClose={props.handleDialogClose}
+        open={props.open}
+        onClose={props.handleClose}
       >
         <DialogTitle>{props.title}</DialogTitle>
         <DialogContent>
@@ -16,10 +16,10 @@ const QuestionDialog = (props) => {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={props.handleDialogClose} >
+          <Button variant="outlined" color="primary" onClick={props.handleClose} >
             OK
           </Button>
-          <Button onClick={props.handleDialogClose} autoFocus>
+          <Button variant="outlined" color="primary" onClick={props.handleClose} autoFocus>
             Cancel
           </Button>
         </DialogActions>

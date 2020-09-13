@@ -8,7 +8,7 @@ import {Avatar,Box,Container,Paper,Tab,Tabs,Typography} from '@material-ui/core'
 import { TabPanel,PrimaryButton,QuestionDialog } from "../components/UIkit";
 import {fetchPosts} from "../reducks/posts/operations";
 import {getPosts} from "../reducks/posts/selectors";
-import { ReadingBookDetail, CompletedBooksList } from "../components/Posts"
+import { ReadingBooksList, CompletedBooksList } from "../components/Posts"
 
 
 const useStyles = makeStyles((theme)=>({
@@ -28,20 +28,10 @@ const MyTabPage = () => {
   const posts = getPosts(selector);
 
   const [selectedTab,setSelectedTab] = useState(0);
-  const [dialogOpen, setDialogOpen] = useState(false);
 
   const handleChange = (event, newSelectedTab) => {
     setSelectedTab(newSelectedTab)
   };
-
-  const handleDialogOpen = () => {
-    setDialogOpen(true);
-  }
-
-  const handleDialogClose = useCallback(() => {
-    setDialogOpen(false)
-  }, [setDialogOpen]);
-
 
   useEffect(()=>{
     dispatch(fetchPosts())
@@ -63,17 +53,7 @@ const MyTabPage = () => {
         <Tab label="完読リスト" />
       </Tabs>
       <TabPanel value={selectedTab} index={0}>
-        <ReadingBookDetail />
-        <PrimaryButton
-          label="完読した！"
-          onClick={()=>handleDialogOpen()}
-        />
-        <QuestionDialog
-          open={dialogOpen}
-          handleDialogClose={handleDialogClose}
-          title="完読にしてよろしいですか？"
-          contentText="一度完読にしたアイテムは、元には戻せません"
-        />
+        <ReadingBooksList />
       </TabPanel>
       <TabPanel value={selectedTab} index={1}>
         <CompletedBooksList />

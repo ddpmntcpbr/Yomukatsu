@@ -3,8 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Box,Container,Typography } from "@material-ui/core"
 import axios from "axios"
 import { BookCard } from "../components/UIkit"
-import { MapItemCard, ReadingBookDetail,CompletedBookDetail } from "../components/Posts"
-import { fetchPostDetail } from "../reducks/posts/operations"
+import { MapItemCard } from "../components/Posts"
 
 const PostShow = () => {
   const dispatch = useDispatch();
@@ -16,11 +15,9 @@ const PostShow = () => {
   const [author, setAuthor] = useState("");
   const [image, setImage] = useState("");
   const [url,setUrl] = useState("#");
-  const [status,setStatus] = useState("");
   const [mapItems, setMapItems] = useState([]);
 
   useEffect(()=>{
-    // dispatch(fetchPostDetail(id))
     axios.get(('http://localhost:3000/api/v1/posts/' +  String(id)), {
       headers: {
         'access-token': localStorage.getItem('auth_token'),
@@ -33,7 +30,6 @@ const PostShow = () => {
       setAuthor(response.data.author)
       setImage(response.data.image)
       setUrl(response.data.url)
-      setStatus(response.data.status)
       setMapItems(response.data.post_items)
     })
     .catch((error) => {
@@ -43,18 +39,7 @@ const PostShow = () => {
 
   return (
     <Container maxWidth="sm">
-      {status === "reading"
-        ? <ReadingBookDetail
-            title={title} author={author} image={image}
-            url={url} status={status} mapItems={mapItems}
-          />
-        : <CompletedBookDetail
-            title={title} author={author} image={image}
-            url={url} status={status} mapItems={mapItems}
-          />
-      }
-
-      {/* <Typography variant="h5" component="h3">
+      <Typography variant="h5" component="h3">
         書籍情報
       </Typography>
       <Box>
@@ -71,7 +56,7 @@ const PostShow = () => {
           <MapItemCard content={mapItem.content} />
         </Box>
         ))
-      )} */}
+      )}
     </Container>
   )
 }
