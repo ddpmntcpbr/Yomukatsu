@@ -11,6 +11,8 @@ import EditIcon from '@material-ui/icons/Edit';
 import { makeStyles } from "@material-ui/styles";
 import { push } from "connected-react-router";
 import { updateStatusToCompleted } from "../../reducks/posts/operations"
+import {TwitterShareButton} from "react-share";
+import { Helmet } from "react-helmet";
 
 const useStyles = makeStyles((theme)=>({
   root: {
@@ -44,7 +46,21 @@ const ReadingBookDetail = (props) => {
   },[])
 
   return (
-    <Paper>
+    <div>
+      <Helmet
+        title={'metaタグ差し込めてる'}
+        meta={[
+          {"name": "twitter:card", "content": "summary"},
+          {"name": "twitter:site", "content": "@sambaiz"},
+          {"name": "twitter:title", "content": "sambaiz.net"},
+          {"name": "twitter:description", "content": "僕のホームページ"},
+          {"property": "og:title", "content": "sambaiz.net"},
+          {"property": "og:type", "content": "blog"},
+          {"property": "og:image", "content": "http://d2wgaf7ubdj1mv.cloudfront.net/my.jpg"},
+          {"property": "og:url", "content": "https://www.sambaiz.net"}
+      ]}
+      />
+      <Paper>
         <Box p={1} >
           <Typography component="h3">
             <Box fontSize="1.5rem" fontWeight="fontWeightBold">
@@ -69,43 +85,43 @@ const ReadingBookDetail = (props) => {
             </Box>
           ))}
 
-          <Box display="flex" justifyContent="center" my={4}>
-            <SecondaryButton
-              label="完読した!"
-              onClick={handleClickOpen}
-            />
-          </Box>
+          {props.post.status === "reading" && (
+            <Box>
 
-          <Box display="flex" justifyContent="center">
-            <Box my={1}>
-              <Button
-                variant="contained"
-                color="default"
-                startIcon={<EditIcon />}
-              >
-                編集
-              </Button>
-            </Box>
-            <Box m={1}>
-              <Button
-                variant="outlined"
-                color="default"
-                startIcon={<DeleteIcon />}
-              >
-                削除
-              </Button>
-            </Box>
-          </Box>
+              <Box display="flex" justifyContent="center" my={4}>
+                <SecondaryButton label="完読した!" onClick={handleClickOpen}/>
+              </Box>
 
-          <QuestionDialog
-            open={open}
-            handleClose={handleClose}
-            handleEvent={handleUpdateStatus}
-            title="完読にしてよろしいですか？"
-            contentText="一度完読にしたアイテムは、元には戻せません"
-          />
+              <Box display="flex" justifyContent="center">
+                <Box my={1}>
+                  <Button variant="contained" color="default" startIcon={<EditIcon />}>
+                    編集
+                  </Button>
+                </Box>
+                <Box m={1}>
+                  <Button variant="outlined" color="default" startIcon={<DeleteIcon />}>
+                    削除
+                  </Button>
+                </Box>
+              </Box>
+
+              <QuestionDialog
+                open={open}
+                handleClose={handleClose}
+                handleEvent={handleUpdateStatus}
+                title="完読にしてよろしいですか？"
+                contentText="一度完読にしたアイテムは、元には戻せません"
+              />
+            </Box>
+          )}
+          <TwitterShareButton url="https://www.sambaiz.net">
+            <Button variant="outlined" color="default" startIcon={<DeleteIcon />}>
+              Twitterで共有！
+            </Button>
+          </TwitterShareButton>
         </Box>
-    </Paper>
+      </Paper>
+    </div>
   )
 }
 
