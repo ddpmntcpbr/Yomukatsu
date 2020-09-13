@@ -46,18 +46,18 @@ const MyTabPage = () => {
             {username}さんのマイページ
           </Typography>
         </Box>
-      </Paper>
 
-      <Tabs value={selectedTab} onChange={handleChange}>
-        <Tab label="読書中" />
-        <Tab label="完読リスト" />
-      </Tabs>
-      <TabPanel value={selectedTab} index={0}>
-        <ReadingBooksList />
-      </TabPanel>
-      <TabPanel value={selectedTab} index={1}>
-        <CompletedBooksList />
-      </TabPanel>
+        <Tabs value={selectedTab} onChange={handleChange}>
+          <Tab label="読書中" />
+          <Tab label="完読リスト" />
+        </Tabs>
+        <TabPanel value={selectedTab} index={0}>
+          <ReadingBooksList />
+        </TabPanel>
+        <TabPanel value={selectedTab} index={1}>
+          <CompletedBooksList />
+        </TabPanel>
+      </Paper>
     </Container>
   )
 }

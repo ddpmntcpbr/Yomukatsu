@@ -9,10 +9,9 @@ const Router = () => {
       <Route exact path={"/"} component={TopPage} />
 
       <Auth>
-        <Route exact path={"/mypage"} component={MyPage} />
-        <Route exact path={"/my_tab_page"} component={MyTabPage} />
+        <Route exact path={"/mypage"} component={MyTabPage} />
         <Route exact path={"/posts/edit"} component={PostEdit} />
-        <Route path={"/posts(/:id)?"} component={PostShow} />
+        <Route path={"/posts/show(/:id)?"} component={PostShow} />
       </Auth>
     </Switch>
   );

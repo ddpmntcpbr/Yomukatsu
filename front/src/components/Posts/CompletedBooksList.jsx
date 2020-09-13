@@ -36,7 +36,7 @@ const CompletedBooksList = () => {
             <Box
               key={post.id}
               className={classes.cardListItem}
-              onClick={()=>dispatch(push("posts/" + String(post.id)))}
+              onClick={()=>dispatch(push("posts/show/" + String(post.id)))}
             >
               <BookCard
                 title={post.title}

@@ -8,7 +8,7 @@ import Image from "react-image-resizer";
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
-    height: 200
+    height: 200,
   },
   details: {
     flex: 1

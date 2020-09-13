@@ -5,12 +5,19 @@ import axios from "axios"
 import { BookCard } from "../components/UIkit"
 import { MapItemCard, ReadingBookDetail,CompletedBookDetail } from "../components/Posts"
 import { fetchPostDetail } from "../reducks/posts/operations"
+import { makeStyles } from "@material-ui/styles";
+
+const useStyles = makeStyles((theme)=>({
+  root: {
+  }
+}))
 
 const PostShow = () => {
+  const classes = useStyles();
   const dispatch = useDispatch();
   const selector = useSelector((state)=>state);
   const path = selector.router.location.pathname;
-  const id = path.split("/posts/")[1];
+  const id = path.split("/posts/show/")[1];
 
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
@@ -42,36 +49,19 @@ const PostShow = () => {
   },[])
 
   return (
-    <Container maxWidth="sm">
-      {status === "reading"
-        ? <ReadingBookDetail
-            title={title} author={author} image={image}
-            url={url} status={status} mapItems={mapItems}
-          />
-        : <CompletedBookDetail
-            title={title} author={author} image={image}
-            url={url} status={status} mapItems={mapItems}
-          />
-      }
-
-      {/* <Typography variant="h5" component="h3">
-        書籍情報
-      </Typography>
-      <Box>
-        <BookCard title={title} author={author} image={image} />
+    <Container maxWidth="md" >
+      <Box className={classes.root}>
+        {status === "reading"
+          ? <ReadingBookDetail
+              title={title} author={author} image={image}
+              url={url} status={status} mapItems={mapItems}
+            />
+          : <CompletedBookDetail
+              title={title} author={author} image={image}
+              url={url} status={status} mapItems={mapItems}
+            />
+        }
       </Box>
-
-      <Typography variant="h5" component="h3">
-        メンタルマップ
-      </Typography>
-
-      {mapItems.length > 0 && (
-        mapItems.map(mapItem => (
-        <Box key={mapItem.id}>
-          <MapItemCard content={mapItem.content} />
-        </Box>
-        ))
-      )} */}
     </Container>
   )
 }

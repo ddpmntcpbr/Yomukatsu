@@ -9,7 +9,7 @@ const PostShow = () => {
   const dispatch = useDispatch();
   const selector = useSelector((state)=>state);
   const path = selector.router.location.pathname;
-  const id = path.split("/posts/")[1];
+  const id = path.split("/posts/show/")[1];
 
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
