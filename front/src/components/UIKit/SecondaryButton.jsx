@@ -18,7 +18,7 @@ const SecondaryButton = (props) => {
   const classes = useStyles();
 
   return(
-    <Button className={classes.button} variant="outliend" onClick={() => props.onClick()}>
+    <Button className={classes.button} variant="outlined" onClick={() => props.onClick()}>
       {props.label}
     </Button>
   )
