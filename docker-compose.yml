@@ -2,11 +2,14 @@ version: '3'
 
 services:
   db:
-    image: postgres
+    image: mysql:5.7
     volumes:
-      - postgres-data:/var/lib/postgresql/data
+      - ./db/mysql/volumes:/var/lib/mysql
     environment:
-      POSTGRES_PASSWORD: 'postgres'
+      MYSQL_USER: root
+      MYSQL_ROOT_PASSWORD: password
+    ports:
+      - "3306:3306"
   api:
     build:
       context: ./api/
@@ -36,6 +39,3 @@ services:
       - "8000:3000"
     stdin_open: true
     tty: true
-volumes:
-  postgres-data:
-    driver: local
