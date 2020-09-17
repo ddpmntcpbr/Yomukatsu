@@ -13,3 +13,10 @@ development:
 test:
   <<: *default
   database: myapp_test
+
+production:
+  <<: *default
+  host: <%= ENV["AWS_RDS_HOST"] %>
+  database: <%= ENV["AWS_RDS_DATABASE"] %>
+  username: <%= ENV["AWS_RDS_USERNAME"] %>
+  password: <%= ENV["AWS_RDS_PASSWORD"] %>
