@@ -42,13 +42,16 @@ const PostEdit = () => {
     setQuery(event.target.value)
   },[setQuery])
 
-  const getSearchBooks = (query) => {
+  const getSearchBooks = (inputText) => {
+    const query = inputText.replace("　","+").replace(" ","+")
     if (query === "") {
       return false
     } else {
-      axios.get("https://www.googleapis.com/books/v1/volumes?q=search" + query)
+      const baseUrl = "https://www.googleapis.com/books/v1/volumes";
+      const params = "?q=" + query + "&maxResults=20&Country=JP"
+
+      axios.get(baseUrl+params)
       .then(response => {
-        // console.log(response.data.items)
         setSearchResults(response.data.items)
         setOpen(true)
       })
