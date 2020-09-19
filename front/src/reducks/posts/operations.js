@@ -7,7 +7,7 @@ import { getPosts } from "../posts/selectors";
 export const fetchPostDetail = (id) => {
   return async (dispatch) => {
 
-    const data = await axios.get(('http://localhost:3000/api/v1/posts/' +  String(id)), {
+    const data = await axios.get((process.env.REACT_APP_API_V1_URL + '/posts/' +  String(id)), {
       headers: {
         'access-token': localStorage.getItem('auth_token'),
         'client': localStorage.getItem('client_id'),
@@ -23,7 +23,7 @@ export const fetchPostDetail = (id) => {
 
 export const fetchPosts = () => {
   return async (dispatch) => {
-    axios.get('http://localhost:3000/api/v1/posts', {
+    axios.get(process.env.REACT_APP_API_V1_URL + '/posts', {
       headers: {
         'access-token': localStorage.getItem('auth_token'),
         'client': localStorage.getItem('client_id'),
@@ -56,7 +56,7 @@ export const savePosts = (title,url,author,image,mapItems) => {
       "post_items_attributes": post_items_attributes
       }
 
-    axios.post('http://localhost:3000/api/v1/posts', data, {
+    axios.post(process.env.REACT_APP_API_V1_URL + '/posts', data, {
         headers: {
           'access-token': localStorage.getItem('auth_token'),
           'client': localStorage.getItem('client_id'),
@@ -82,7 +82,7 @@ export const updateStatusToCompleted = (prevData) =>{
       }
     console.log("updateStatusToCompleted", data)
 
-    axios.put(('http://localhost:3000/api/v1/posts/' + String(id)), data, {
+    axios.put((process.env.REACT_APP_API_V1_URL + '/posts/' + String(id)), data, {
         headers: {
           'access-token': localStorage.getItem('auth_token'),
           'client': localStorage.getItem('client_id'),
