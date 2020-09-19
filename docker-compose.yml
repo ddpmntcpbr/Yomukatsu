@@ -4,7 +4,7 @@ services:
   db:
     image: mysql:5.7
     volumes:
-      - mysql-datavolume:/var/lib/mysql
+      - db-data:/var/lib/mysql
     environment:
       MYSQL_USER: root
       MYSQL_ROOT_PASSWORD: password
@@ -14,14 +14,12 @@ services:
     build:
       context: ./api/
       dockerfile: Dockerfile
-    command: /bin/sh -c "rm -f /myapp/tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
-    image: rails:dev
+    command: /bin/sh -c "rm -f /myapp/tmp/pids/server.pid && bundle exec puma -C config/puma.rb"
     volumes:
       - ./api:/myapp
-      - ./api/vendor/bundle:/myapp/vendor/bundle
-    environment:
-      TZ: Asia/Tokyo
-      RAILS_ENV: development
+      - public-data:/myapp/public
+      - tmp-data:/myapp/tmp
+      - log-data:/myapp/log
     ports:
       - 3000:3000
     depends_on:
@@ -39,6 +37,18 @@ services:
       - "8000:3000"
     stdin_open: true
     tty: true
+  web:
+    build:
+      context: ./nginx
+    volumes:
+      - public-data:/myapp/public
+      - tmp-data:/myapp/tmp
+    ports:
+      - 80:80
+    depends_on:
+      - api
 volumes:
-  mysql-datavolume:
-    driver: local
+  public-data:
+  tmp-data:
+  log-data:
+  db-data:
