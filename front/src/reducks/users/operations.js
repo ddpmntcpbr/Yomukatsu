@@ -11,7 +11,7 @@ export const listenAuthState = () => {
       const client_id = localStorage.getItem('client_id')
       const uid = localStorage.getItem('uid')
 
-      axios.get('http://localhost:3000/api/v1/users/currentuser', {
+      axios.get('http://localhost:80/api/v1/users/currentuser', {
         headers: {
           'access-token': auth_token,
           'client': client_id,
