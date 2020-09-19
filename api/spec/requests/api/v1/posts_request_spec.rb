@@ -44,8 +44,7 @@ RSpec.describe "Api::V1::Posts", type: :request do
       let(:other_user) { create(:user) }
 
       it "post の中身を取得できない" do
-        subject
-        expect(response).to have_http_status(:not_found)
+        expect { subject }.to raise_error ActiveRecord::RecordNotFound
       end
     end
 
@@ -53,8 +52,7 @@ RSpec.describe "Api::V1::Posts", type: :request do
       let(:post_id) { 1_000_000 }
 
       it "post が見つからない" do
-        subject
-        expect(response).to have_http_status(:not_found)
+        expect { subject }.to raise_error ActiveRecord::RecordNotFound
       end
     end
   end
@@ -124,7 +122,7 @@ RSpec.describe "Api::V1::Posts", type: :request do
     context "post_items を一部を削除して更新しようとした場合" do
       before do
         @post = create(:post, user: current_user)
-        @params = { post: { title: Faker::Lorem.word, url: Faker::Internet.url, image: Faker::Internet.url, status: "complete", created_at: Time.current } }
+        @params = { post: { title: Faker::Lorem.word, url: Faker::Internet.url, image: Faker::Internet.url, status: "completed", created_at: Time.current } }
         @params[:post][:post_items_attributes] = [{ id: @post.post_items.first.id, content: @post.post_items.first.content },
                                                   { id: @post.post_items.second.id, content: @post.post_items.second.content },
                                                   { id: @post.post_items.third.id, content: "" }]
@@ -139,15 +137,14 @@ RSpec.describe "Api::V1::Posts", type: :request do
     context "post_items を全て消して更新しようとした場合" do
       before do
         @post = create(:post, user: current_user)
-        @params = { post: { title: Faker::Lorem.word, url: Faker::Internet.url, image: Faker::Internet.url, status: "complete", created_at: Time.current } }
+        @params = { post: { title: Faker::Lorem.word, url: Faker::Internet.url, image: Faker::Internet.url, status: "completed", created_at: Time.current } }
         @params[:post][:post_items_attributes] = [{ id: @post.post_items.first.id, content: "" },
                                                   { id: @post.post_items.second.id, content: "" },
                                                   { id: @post.post_items.third.id, content: "" }]
       end
 
       it "バリデーションエラーにより更新できない" do
-        subject
-        expect(response).to have_http_status(:unprocessable_entity)
+        expect{ subject }.to raise_error(ActiveRecord::RecordInvalid)
       end
     end
 
@@ -162,8 +159,7 @@ RSpec.describe "Api::V1::Posts", type: :request do
       end
 
       it "更新できない" do
-        subject
-        expect(response).to have_http_status(:not_found)
+        expect { subject }.to raise_error ActiveRecord::RecordNotFound
       end
     end
   end
@@ -191,8 +187,7 @@ RSpec.describe "Api::V1::Posts", type: :request do
       let!(:post) { create(:post) }
 
       it "削除できない" do
-        subject
-        expect(response).to have_http_status(:not_found)
+        expect { subject }.to raise_error ActiveRecord::RecordNotFound
       end
     end
   end
