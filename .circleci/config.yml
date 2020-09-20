@@ -1,15 +1,117 @@
 version: 2.1
-orbs:
-  ruby: circleci/ruby@0.1.2 
+executors:
+  default_container:
+    docker:
+      - image: circleci/ruby:2.5.8-node
+        environment:
+          RAILS_ENV: test
+          BUNDLE_JOBS: 4
+          BUNDLE_RETRY: 3
+          BUNDLE_PATH: vendor/bundle
+          BUNDLER_VERSION: 2.0.2
+      - image: circleci/mysql:5.7
+        environment:
+          MYSQL_USER: root
+          MYSQL_ROOT_PASSWORD: password
+    working_directory: ~/rails_react_docker
+
+commands:
+  install_bundler:
+    description: Bundler install
+    steps:
+      - run: gem install bundler -v 2.0.2
 
 jobs:
-  build:
-    docker:
-      - image: circleci/ruby:2.6.3-stretch-node
-    executor: ruby/default
+  fetch_source_code:
+    executor:
+      name: default_container
     steps:
       - checkout
+      - save_cache:
+          key: v1-rails_react_docker-{{ .Environment.CIRCLE_SHA1 }}
+          paths:
+            - ~/rails_react_docker
+  bundle_dependencies:
+    executor:
+      name: default_container
+    steps:
+      - restore_cache:
+          key: v1-rails_react_docker-{{ .Environment.CIRCLE_SHA1 }}
+      - restore_cache:
+          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+      - install_bundler
       - run:
-          name: Which bundler?
-          command: bundle -v
-      - ruby/bundle-install
+          name: Bundle Install Dependencies
+          command: |
+            bundle install
+      - save_cache:
+          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle
+  rspec:
+    executor:
+      name: default_container
+    steps:
+      - restore_cache:
+          key: v1-rails_react_docker-{{ .Environment.CIRCLE_SHA1 }}
+      - restore_cache:
+          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+      - run:
+          name: Watting stand up database
+          command: |
+            dockerize -wait \
+            tcp://127.0.0.1:3306 -timeout 120s
+      # Database setup
+      - run: mv ./config/database.yml.ci ./config/database.yml
+      - install_bundler
+      - run: bundle install
+      - run:
+          name: Testing DB migration and seed
+          command: |
+            bundle exec rails db:create db:migrate db:seed db:drop
+      - run:
+          name: Run rspec
+          command: |
+            mkdir /tmp/test-results
+            mkdir -p ~/rspec
+            bundle exec rails db:create db:migrate
+            TEST_FILES="$(circleci tests glob \"spec/**/*_spec.rb\" | circleci tests split --split-by=timings)"
+            bundle exec rspec --require rails_helper \
+                              --color \
+                              --format progress \
+                              --format RspecJunitFormatter \
+                              --out ~/rspec/rspec.xml
+      # collect reports
+      - store_test_results:
+          path: ~/rspec
+      - store_artifacts:
+          path: ~/tmp/test-results
+          destination: test-results
+
+  rubocop:
+    executor:
+      name: default_container
+    steps:
+      - restore_cache: # ソースコードの復元
+          key: v1-rails_react_docker-{{ .Environment.CIRCLE_SHA1 }}
+      - restore_cache: # vendor/bundleを復元
+          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+      - install_bundler
+      - run: bundle install
+      - run:
+          name: Execute rubocop
+          command: |
+            bundle exec rubocop
+workflows:
+  build:
+    jobs:
+      - fetch_source_code
+      - bundle_dependencies:
+          requires:
+            - fetch_source_code
+      - rubocop:
+          requires:
+            - bundle_dependencies
+      - rspec:
+          requires:
+            - bundle_dependencies
