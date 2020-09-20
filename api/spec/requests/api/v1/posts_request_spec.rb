@@ -144,7 +144,7 @@ RSpec.describe "Api::V1::Posts", type: :request do
       end
 
       it "バリデーションエラーにより更新できない" do
-        expect{ subject }.to raise_error(ActiveRecord::RecordInvalid)
+        expect { subject }.to raise_error(ActiveRecord::RecordInvalid)
       end
     end
 
