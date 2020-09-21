@@ -13,7 +13,7 @@ executors:
         environment:
           MYSQL_USER: root
           MYSQL_ROOT_PASSWORD: password
-    working_directory: ~/myapp
+    working_directory: ~/rails_react_docker
 
 commands:
   install_bundler:
@@ -28,15 +28,15 @@ jobs:
     steps:
       - checkout
       - save_cache:
-          key: v1-myapp-{{ .Environment.CIRCLE_SHA1 }}
+          key: v1-rails_react_docker-{{ .Environment.CIRCLE_SHA1 }}
           paths:
-            - ~/myapp
+            - ~/rails_react_docker
   bundle_dependencies:
     executor:
       name: default_container
     steps:
       - restore_cache:
-          key: v1-myapp-{{ .Environment.CIRCLE_SHA1 }}
+          key: v1-rails_react_docker-{{ .Environment.CIRCLE_SHA1 }}
       - restore_cache:
           key: v1-dependencies-{{ checksum "Gemfile.lock" }}
       - install_bundler
@@ -53,7 +53,7 @@ jobs:
       name: default_container
     steps:
       - restore_cache:
-          key: v1-myapp-{{ .Environment.CIRCLE_SHA1 }}
+          key: v1-rails_react_docker-{{ .Environment.CIRCLE_SHA1 }}
       - restore_cache:
           key: v1-dependencies-{{ checksum "Gemfile.lock" }}
       - run:
@@ -93,7 +93,7 @@ jobs:
       name: default_container
     steps:
       - restore_cache: # ソースコードの復元
-          key: v1-myapp-{{ .Environment.CIRCLE_SHA1 }}
+          key: v1-rails_react_docker-{{ .Environment.CIRCLE_SHA1 }}
       - restore_cache: # vendor/bundleを復元
           key: v1-dependencies-{{ checksum "Gemfile.lock" }}
       - install_bundler
