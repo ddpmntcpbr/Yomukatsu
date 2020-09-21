@@ -38,14 +38,14 @@ jobs:
       - restore_cache:
           key: v1-rails_react_docker-{{ .Environment.CIRCLE_SHA1 }}
       - restore_cache:
-          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+          key: v1-dependencies-{{ checksum "api/Gemfile.lock" }}
       - install_bundler
       - run:
           name: Bundle Install Dependencies
           command: |
             bundle install
       - save_cache:
-          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+          key: v1-dependencies-{{ checksum "api/Gemfile.lock" }}
           paths:
             - vendor/bundle
   rspec:
@@ -55,7 +55,7 @@ jobs:
       - restore_cache:
           key: v1-rails_react_docker-{{ .Environment.CIRCLE_SHA1 }}
       - restore_cache:
-          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+          key: v1-dependencies-{{ checksum "api/Gemfile.lock" }}
       - run:
           name: Watting stand up database
           command: |
@@ -95,7 +95,7 @@ jobs:
       - restore_cache: # ソースコードの復元
           key: v1-rails_react_docker-{{ .Environment.CIRCLE_SHA1 }}
       - restore_cache: # vendor/bundleを復元
-          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+          key: v1-dependencies-{{ checksum "api/Gemfile.lock" }}
       - install_bundler
       - run: bundle install
       - run:
