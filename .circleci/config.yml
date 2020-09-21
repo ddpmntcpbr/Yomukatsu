@@ -44,10 +44,11 @@ jobs:
           name: Bundle Install Dependencies
           command: |
             bundle install
+          working_directory: api
       - save_cache:
           key: v1-dependencies-{{ checksum "api/Gemfile.lock" }}
           paths:
-            - vendor/bundle
+            - api/vendor/bundle
   rspec:
     executor:
       name: default_container
@@ -61,14 +62,17 @@ jobs:
           command: |
             dockerize -wait \
             tcp://127.0.0.1:3306 -timeout 120s
+          working_directory: api
       # Database setup
-      - run: mv ./config/database.yml.ci ./config/database.yml
-      - install_bundler
+      - run: mv ./api/config/database.yml.ci ./api/config/database.yml
+      # - install_bundler
       - run: bundle install
+          working_directory: api
       - run:
           name: Testing DB migration and seed
           command: |
             bundle exec rails db:create db:migrate db:seed db:drop
+          working_directory: api
       - run:
           name: Run rspec
           command: |
@@ -81,11 +85,12 @@ jobs:
                               --format progress \
                               --format RspecJunitFormatter \
                               --out ~/rspec/rspec.xml
+          working_directory: api
       # collect reports
       - store_test_results:
-          path: ~/rspec
+          path: ~/api/rspec
       - store_artifacts:
-          path: ~/tmp/test-results
+          path: ~/api/tmp/test-results
           destination: test-results
 
   rubocop:
@@ -98,10 +103,13 @@ jobs:
           key: v1-dependencies-{{ checksum "api/Gemfile.lock" }}
       - install_bundler
       - run: bundle install
+          working_directory: api
       - run:
           name: Execute rubocop
           command: |
             bundle exec rubocop
+          working_directory: api
+
 workflows:
   build:
     jobs:
