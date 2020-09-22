@@ -114,7 +114,7 @@ RSpec.describe "Api::V1::Posts", type: :request do
                               change { @post.reload.post_items.count }.from(3).to(4) &
                               not_change { @post.reload.post_items.first.content } &
                               not_change { @post.reload.post_items.second.content }
-        change {@post.reload.post_items.third.content}.from(@post.post_items.third.content).to(@params[:post][:post_items_attributes].third[:content])
+        change { @post.reload.post_items.third.content }.from(@post.post_items.third.content).to(@params[:post][:post_items_attributes].third[:content])
         expect(response).to have_http_status(:ok)
       end
     end
