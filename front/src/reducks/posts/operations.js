@@ -90,7 +90,7 @@ export const updateStatusToCompleted = (prevData) =>{
         }
       })
       .then((response) => {
-        console.log(response)
+        // console.log(response)
         dispatch(push("/mypage"))
       })
       .catch((error) => {
