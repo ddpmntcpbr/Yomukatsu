@@ -90,34 +90,34 @@ RSpec.describe "Api::V1::Posts", type: :request do
     let(:headers) { current_user.create_new_auth_token }
     let(:current_user) { create(:user) }
 
-    # context "正しく post を作成した場合" do
-    #   before do
-    #     @post = create(:post, user: current_user)
-    #     @params = { post: { title: Faker::Lorem.word, url: Faker::Internet.url, image: Faker::Internet.url, status: "complete", created_at: Time.current } }
-    #     @params[:post][:post_items_attributes] = [{ id: @post.post_items.first.id, content: @post.post_items.first.content },
-    #                                               { id: @post.post_items.second.id, content: @post.post_items.second.content },
-    #                                               { id: @post.post_items.third.id, content: "updated content." },
-    #                                               attributes_for(:post_item)]
+    context "正しく post を作成した場合" do
+      before do
+        @post = create(:post, user: current_user)
+        @params = { post: { title: Faker::Lorem.word, url: Faker::Internet.url, image: Faker::Internet.url, status: "complete", created_at: Time.current } }
+        @params[:post][:post_items_attributes] = [{ id: @post.post_items.first.id, content: @post.post_items.first.content },
+                                                  { id: @post.post_items.second.id, content: @post.post_items.second.content },
+                                                  { id: @post.post_items.third.id, content: "updated content." },
+                                                  attributes_for(:post_item)]
 
-    #     # @params[:post][:post_items_attributes] = {  "0"=>{id:@post.post_items.first.id, content: @post.post_items.first.content},
-    #     #                                             "1"=>{id:@post.post_items.second.id, content: @post.post_items.second.content},
-    #     #                                             "2"=>{id:@post.post_items.third.id, content: "updated content." },
-    #     #                                             "3"=>attributes_for(:post_item)}
-    #   end
+        # @params[:post][:post_items_attributes] = {  "0"=>{id:@post.post_items.first.id, content: @post.post_items.first.content},
+        #                                             "1"=>{id:@post.post_items.second.id, content: @post.post_items.second.content},
+        #                                             "2"=>{id:@post.post_items.third.id, content: "updated content." },
+        #                                             "3"=>attributes_for(:post_item)}
+      end
 
-    #   it "post レコードが更新される" do
-    #     expect { subject }.to change { @post.reload.title }.from(@post.title).to(@params[:post][:title]) &
-    #                           change { @post.reload.url }.from(@post.url).to(@params[:post][:url]) &
-    #                           change { @post.reload.image }.from(@post.image).to(@params[:post][:image]) &
-    #                           change { @post.reload.status }.from(@post.status).to(@params[:post][:status]) &
-    #                           not_change { @post.reload.created_at } &
-    #                           change { @post.reload.post_items.count }.from(3).to(4) &
-    #                           not_change { @post.reload.post_items.first.content } &
-    #                           not_change { @post.reload.post_items.second.content }
-    #     change {@post.reload.post_items.third.content}.from(@post.post_items.third.content).to(@params[:post][:post_items_attributes].third[:content])
-    #     expect(response).to have_http_status(:ok)
-    #   end
-    # end
+      it "post レコードが更新される" do
+        expect { subject }.to change { @post.reload.title }.from(@post.title).to(@params[:post][:title]) &
+                              change { @post.reload.url }.from(@post.url).to(@params[:post][:url]) &
+                              change { @post.reload.image }.from(@post.image).to(@params[:post][:image]) &
+                              change { @post.reload.status }.from(@post.status).to(@params[:post][:status]) &
+                              not_change { @post.reload.created_at } &
+                              change { @post.reload.post_items.count }.from(3).to(4) &
+                              not_change { @post.reload.post_items.first.content } &
+                              not_change { @post.reload.post_items.second.content }
+        change {@post.reload.post_items.third.content}.from(@post.post_items.third.content).to(@params[:post][:post_items_attributes].third[:content])
+        expect(response).to have_http_status(:ok)
+      end
+    end
 
     context "post_items を一部を削除して更新しようとした場合" do
       before do
