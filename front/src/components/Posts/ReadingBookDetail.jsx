@@ -1,28 +1,17 @@
-import React, { useCallback,useEffect,useState } from "react";
-import { useSelector, useDispatch } from 'react-redux'
-import { Button,Box,Container,Divider,Paper,Typography } from "@material-ui/core"
-import axios from "axios"
+import React, { useCallback,useState } from "react";
+import { useDispatch } from 'react-redux'
+import { Button,Box,Divider,Paper,Typography } from "@material-ui/core"
 import { BookCard } from "../UIkit"
 import { MapItemCard } from "./index"
-import { getPosts } from "../../reducks/posts/selectors";
-import { PrimaryButton,SecondaryButton,QuestionDialog } from "../UIkit"
+import { SecondaryButton,QuestionDialog } from "../UIkit"
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
-import { makeStyles } from "@material-ui/styles";
 import { push } from "connected-react-router";
 import { updateStatusToCompleted } from "../../reducks/posts/operations"
 import {TwitterShareButton} from "react-share";
 import { Helmet } from "react-helmet";
 
-const useStyles = makeStyles((theme)=>({
-  root: {
-    margin:"0 1rem"
-  }
-}))
-
-
 const ReadingBookDetail = (props) => {
-  const classes = useStyles();
   const dispatch = useDispatch();
 
   const [open, setOpen] = useState(false);

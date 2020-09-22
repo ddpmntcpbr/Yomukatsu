@@ -1,20 +1,19 @@
 import React,{ useEffect,useState } from 'react';
-import {getUserId, getUserName, getUserImage} from '../reducks/users/selectors';
+import {getUserName, getUserImage} from '../reducks/users/selectors';
 import {useSelector, useDispatch} from 'react-redux'
 import {Avatar,Box,Container,Paper,Tab,Tabs,Typography} from '@material-ui/core';
 import { TabPanel } from "../components/UIkit";
 import {fetchPosts} from "../reducks/posts/operations";
-import {getPosts} from "../reducks/posts/selectors";
 import { ReadingBooksList, CompletedBooksList } from "../components/Posts"
 
 const MyPage = () => {
   const dispatch = useDispatch();
   const selector = useSelector(state => state);
 
-  const uid = getUserId(selector);
+  // const uid = getUserId(selector);
   const username = getUserName(selector);
   const image = getUserImage(selector);
-  const posts = getPosts(selector);
+  // const posts = getPosts(selector);
 
   const [selectedTab,setSelectedTab] = useState(0);
 

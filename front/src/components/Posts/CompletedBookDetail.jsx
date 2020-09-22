@@ -1,10 +1,7 @@
-import React, { useEffect,useState } from "react";
-import { useSelector, useDispatch } from 'react-redux'
-import { Box,Container,Paper,Typography } from "@material-ui/core"
-import axios from "axios"
+import React from "react";
+import { Box,Paper,Typography } from "@material-ui/core"
 import { BookCard } from "../UIkit"
 import { MapItemCard } from "./index"
-import { getPosts } from "../../reducks/posts/selectors";
 
 const CompletedBookDetail = (props) => {
 
