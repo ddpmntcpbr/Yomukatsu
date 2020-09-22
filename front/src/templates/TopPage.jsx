@@ -4,7 +4,6 @@ import Typography from '@material-ui/core/Typography';
 import {useDispatch} from 'react-redux'
 import {signIn} from "../reducks/users/operations"
 import {TwitterLoginButton} from "../components/UIkit"
-import {makeStyles} from "@material-ui/styles";
 
 const TopPage = () => {
   const dispatch = useDispatch()

@@ -1,9 +1,7 @@
-import React, { useEffect,useState } from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from 'react-redux'
-import { Box,Container,Typography } from "@material-ui/core"
-import axios from "axios"
-import { BookCard } from "../components/UIkit"
-import { MapItemCard, ReadingBookDetail,CompletedBookDetail } from "../components/Posts"
+import { Box,Container } from "@material-ui/core"
+import { ReadingBookDetail } from "../components/Posts"
 import { fetchPostDetail } from "../reducks/posts/operations"
 import { makeStyles } from "@material-ui/styles";
 import { getPosts } from "../reducks/posts/selectors"
@@ -20,9 +18,9 @@ const PostShow = () => {
   const path = selector.router.location.pathname;
   const id = path.split("/posts/show/")[1];
   const posts = getPosts(selector);
-  console.log("selector",selector);
-  console.log("posts",posts);
-  console.log(posts.length>0)
+  // console.log("selector",selector);
+  // console.log("posts",posts);
+  // console.log(posts.length>0)
 
   // const [title, setTitle] = useState("");
   // const [author, setAuthor] = useState("");
@@ -35,7 +33,7 @@ const PostShow = () => {
 
   useEffect(()=>{
     dispatch(fetchPostDetail(id))
-    console.log("fetchの直後",selector)
+    // console.log("fetchの直後",selector)
     // setTitle(response.data.title)
     // setAuthor(response.data.author)
     // setImage(response.data.image)

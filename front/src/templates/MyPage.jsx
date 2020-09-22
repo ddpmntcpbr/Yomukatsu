@@ -1,45 +1,13 @@
-import React,{ useEffect } from 'react';
+import React,{ useEffect,useState } from 'react';
 import {getUserId, getUserName, getUserImage} from '../reducks/users/selectors';
 import {useSelector, useDispatch} from 'react-redux'
-import {TwitterShareButton,TwitterIcon} from "react-share";
-import {push} from "connected-react-router";
-import Container from "@material-ui/core/COntainer"
-import {makeStyles} from "@material-ui/styles";
-import Avatar from '@material-ui/core/Avatar';
-import Box from "@material-ui/core/Box"
-import Typography from '@material-ui/core/Typography';
-import {PrimaryButton} from "../components/UIkit";
+import {Avatar,Box,Container,Paper,Tab,Tabs,Typography} from '@material-ui/core';
+import { TabPanel } from "../components/UIkit";
 import {fetchPosts} from "../reducks/posts/operations";
 import {getPosts} from "../reducks/posts/selectors";
-import { BookCard } from "../components/UIkit";
-
-const useStyles = makeStyles((theme)=>({
-  container: {
-    textAlign: "center",
-  },
-  avator: {
-    width: theme.spacing(8),
-    height: theme.spacing(8),
-    margin: "0 auto",
-  },
-  titleTypography: {
-    fontSize: "2rem",
-    marginTop: theme.spacing(2),
-    marginBottom: theme.spacing(2),
-  },
-  subTitleTypography: {
-    fontSize: "1.5rem",
-    marginTop: theme.spacing(2),
-    marginBottom: theme.spacing(2),
-  },
-  cardListItem: {
-    textAlign: "left",
-    marginBottom: theme.spacing(2),
-  }
-}))
+import { ReadingBooksList, CompletedBooksList } from "../components/Posts"
 
 const MyPage = () => {
-  const classes = useStyles();
   const dispatch = useDispatch();
   const selector = useSelector(state => state);
 
@@ -48,79 +16,43 @@ const MyPage = () => {
   const image = getUserImage(selector);
   const posts = getPosts(selector);
 
+  const [selectedTab,setSelectedTab] = useState(0);
+
+  const handleChange = (event, newSelectedTab) => {
+    setSelectedTab(newSelectedTab)
+  };
+
   useEffect(()=>{
     dispatch(fetchPosts())
   },[])
 
-  console.log(posts)
-  return (
-    <Container maxWidth="sm">
-      <Box className={classes.container}>
-        <Avatar alt="User Icon" src={image} className={classes.avator} />
-        <Typography variant="h2" className={classes.titleTypography} >
-          {username}さんの<br/>
-          マイページ
-        </Typography>
-        <PrimaryButton
-          label="新しい書籍を登録する"
-          onClick={() => dispatch(push("/posts/edit"))}
-        />
+  return(
+    <Container maxWidth="sm" >
+      <Paper>
+        <Box m={1} >
+          <Box display="flex" flexDirection="row" my={2} alignItems="center">
+            <Avatar alt="User Icon" src={image} />
+              <Typography component="h2">
+                <Box fontSize="1.5rem" ml={2}>
+                 {username}さんの<br/>マイページ
+                </Box>
+              </Typography>
+          </Box>
 
-        <Box py="2rem" />
-        <Typography variant="h3" className={classes.subTitleTypography} >
-          読書中
-        </Typography>
-
-        {posts.length > 0 && (
-          posts.map(post => (
-            post.status === "reading" &&(
-              <Box
-                key={post.id}
-                className={classes.cardListItem}
-                onClick={()=>dispatch(push("posts/" + String(post.id)))}
-              >
-                <BookCard
-                  title={post.title}
-                  author={post.author}
-                  image={post.image}
-                />
-              </Box>
-            )
-          ))
-        )}
-
-        <Box py="2rem" />
-
-        <Typography variant="h3" className={classes.subTitleTypography} >
-          完読
-        </Typography>
-
-        {posts.length > 0 && (
-          posts.map(post => (
-            post.status === "completed" &&(
-              <Box
-                key={post.id}
-                className={classes.cardListItem}
-                onClick={()=>dispatch(push("posts/" + String(post.id)))}
-              >
-                <BookCard
-                  title={post.title}
-                  author={post.author}
-                  image={post.image}
-                />
-              </Box>
-            )
-          ))
-        )}
-
-        <div>
-          <TwitterShareButton url={"https://qiita.com/ddpmntcpbr"} title={"Twitterでシェアしました！\n#ヨムカツ\n"}>
-              <TwitterIcon size={48} round={true} />
-          </TwitterShareButton>
-        </div>
-      </Box>
+          <Tabs value={selectedTab} onChange={handleChange}>
+            <Tab label="読書中" />
+            <Tab label="完読リスト" />
+          </Tabs>
+          <TabPanel value={selectedTab} index={0}>
+            <ReadingBooksList />
+          </TabPanel>
+          <TabPanel value={selectedTab} index={1}>
+            <CompletedBooksList />
+          </TabPanel>
+        </Box>
+      </Paper>
     </Container>
-  );
-};
+  )
+}
 
 export default MyPage
