@@ -8,11 +8,11 @@ default: &default
 
 development:
   <<: *default
-  database: myapp_development
+  database: rails_react_docker_development
 
 test:
   <<: *default
-  database: myapp_test
+  database: rails_react_docker_test
 
 production:
   <<: *default
