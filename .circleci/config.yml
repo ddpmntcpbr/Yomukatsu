@@ -42,9 +42,9 @@ jobs:
       - install_bundler
       - run:
           name: Bundle Install Dependencies
+          working_directory: api
           command: |
             bundle install
-          working_directory: api
       - save_cache:
           key: v1-dependencies-{{ checksum "api/Gemfile.lock" }}
           paths:
@@ -59,20 +59,20 @@ jobs:
           key: v1-dependencies-{{ checksum "api/Gemfile.lock" }}
       - run:
           name: Watting stand up database
+          working_directory: api
           command: |
             dockerize -wait \
             tcp://127.0.0.1:3306 -timeout 120s
-          working_directory: api
       # Database setup
       - run: mv ./api/config/database.yml.ci ./api/config/database.yml
-      # - install_bundler
+      - install_bundler
       - run: bundle install
           working_directory: api
       - run:
           name: Testing DB migration and seed
+          working_directory: api
           command: |
             bundle exec rails db:create db:migrate db:seed db:drop
-          working_directory: api
       - run:
           name: Run rspec
           command: |
