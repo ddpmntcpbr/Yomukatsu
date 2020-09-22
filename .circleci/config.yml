@@ -44,7 +44,7 @@ jobs:
           name: Bundle Install Dependencies
           working_directory: api
           command: |
-            bundle install
+            bundle exec install
       - save_cache:
           key: v1-dependencies-{{ checksum "api/Gemfile.lock" }}
           paths:
@@ -66,8 +66,10 @@ jobs:
       # Database setup
       - run: mv ./api/config/database.yml.ci ./api/config/database.yml
       - install_bundler
-      - run: bundle install
-          working_directory: api
+      - run:
+        command: |
+          bundle install
+        working_directory: api
       - run:
           name: Testing DB migration and seed
           working_directory: api
@@ -102,13 +104,15 @@ jobs:
       - restore_cache: # vendor/bundleを復元
           key: v1-dependencies-{{ checksum "api/Gemfile.lock" }}
       - install_bundler
-      - run: bundle install
+      - run:
+          command: |
+            bundle exec install
           working_directory: api
       - run:
           name: Execute rubocop
+          working_directory: api
           command: |
             bundle exec rubocop
-          working_directory: api
 
 workflows:
   build:
