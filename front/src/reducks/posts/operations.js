@@ -1,8 +1,8 @@
 import axios from "axios";
 import { push } from "connected-react-router";
 import { fetchPostDetailAction,fetchPostsAction } from "./actions";
-import { useSelector } from "react-redux";
-import { getPosts } from "../posts/selectors";
+// import { useSelector } from "react-redux";
+// import { getPosts } from "../posts/selectors";
 
 export const fetchPostDetail = (id) => {
   return async (dispatch) => {
@@ -16,7 +16,7 @@ export const fetchPostDetail = (id) => {
     })
     .then((response) => [response.data])
     .catch(() => [])
-    console.log("fetchPostDetail",data)
+    // console.log("fetchPostDetail",data)
     dispatch(fetchPostDetailAction(data))
   }
 }
@@ -80,7 +80,7 @@ export const updateStatusToCompleted = (prevData) =>{
       // "id": prevData.id,
       "status": "completed"
       }
-    console.log("updateStatusToCompleted", data)
+    // console.log("updateStatusToCompleted", data)
 
     axios.put((process.env.REACT_APP_API_V1_URL + '/posts/' + String(id)), data, {
         headers: {
@@ -90,7 +90,7 @@ export const updateStatusToCompleted = (prevData) =>{
         }
       })
       .then((response) => {
-        console.log(response)
+        // console.log(response)
         dispatch(push("/mypage"))
       })
       .catch((error) => {

@@ -2,9 +2,9 @@ import React,{useCallback,useState} from 'react';
 import {makeStyles} from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import logo from "../../assets/img/icons/logo.png";
-import { useDispatch } from 'react-redux';
-import {push} from "connected-react-router"
+// import logo from "../../assets/img/icons/logo.png";
+// import { useDispatch } from 'react-redux';
+// import {push} from "connected-react-router"
 import {ClosableDrawer} from "./index"
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu"
@@ -33,7 +33,7 @@ const useStyles = makeStyles({
 
 const Header = () => {
   const classes = useStyles();
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   const [open, setOpen] = useState(false);
 
