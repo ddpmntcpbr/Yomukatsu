@@ -93,7 +93,7 @@ RSpec.describe "Api::V1::Posts", type: :request do
     context "正しく post を作成した場合" do
       before do
         @post = create(:post, user: current_user)
-        @params = { post: { title: Faker::Lorem.word, url: Faker::Internet.url, image: Faker::Internet.url, status: "complete", created_at: Time.current } }
+        @params = { post: { title: Faker::Lorem.word, url: Faker::Internet.url, image: Faker::Internet.url, status: "completed", created_at: Time.current } }
         @params[:post][:post_items_attributes] = [{ id: @post.post_items.first.id, content: @post.post_items.first.content },
                                                   { id: @post.post_items.second.id, content: @post.post_items.second.content },
                                                   { id: @post.post_items.third.id, content: "updated content." },
