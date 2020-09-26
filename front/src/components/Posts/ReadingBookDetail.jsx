@@ -32,7 +32,7 @@ const ReadingBookDetail = (props) => {
     dispatch(updateStatusToCompleted(props.post))
     handleClose()
     dispatch(push("/mypage"))
-  },[])
+  },[dispatch,handleClose,props])
 
   return (
     <div>

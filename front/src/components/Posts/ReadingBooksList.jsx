@@ -26,7 +26,7 @@ const ReadingBooksList = () => {
 
   useEffect(()=>{
     dispatch(fetchPosts())
-  },[])
+  },[dispatch])
 
   return (
     <div>
