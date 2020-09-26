@@ -63,7 +63,7 @@ const PostShow = () => {
     // .catch((error) => {
     //   console.log("error",error)
     // })
-  },[])
+  },[dispatch,id])
 
   // useEffect(()=>{
   //   setPost(posts[0])

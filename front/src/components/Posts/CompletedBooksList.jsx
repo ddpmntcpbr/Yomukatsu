@@ -26,7 +26,7 @@ const CompletedBooksList = () => {
 
   useEffect(()=>{
     dispatch(fetchPosts())
-  },[])
+  },[dispatch])
 
   return (
     <div>

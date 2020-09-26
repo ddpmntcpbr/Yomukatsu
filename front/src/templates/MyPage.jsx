@@ -23,7 +23,7 @@ const MyPage = () => {
 
   useEffect(()=>{
     dispatch(fetchPosts())
-  },[])
+  },[dispatch])
 
   return(
     <Container maxWidth="sm" >

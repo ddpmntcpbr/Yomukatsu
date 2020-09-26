@@ -24,7 +24,7 @@ const Auth = ({children}) => {
     } else if (!isSignedIn) {
         dispatch(listenAuthState())
     }
-  }, []);
+  }, [dispatch,isSignedIn]);
 
   if (!isSignedIn) {
     return <></>
