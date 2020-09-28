@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 // import { getUserId, getUserName, getUserImage } from '../../reducks/users/selectors';
 import { getPosts } from '../../reducks/posts/selectors';
-import { BookCard } from "../UIkit";
+// import { BookCard } from "../UIkit";
 import { Box } from "@material-ui/core";
 import { push } from "connected-react-router";
 import { fetchPosts } from "../../reducks/posts/operations";
