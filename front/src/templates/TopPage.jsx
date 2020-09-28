@@ -3,7 +3,7 @@ import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 import {useDispatch} from 'react-redux'
 import {signIn} from "../reducks/users/operations"
-import {TwitterLoginButton} from "../components/Uikit"
+import {TwitterLoginButton} from "../../components/Uikit"
 
 const TopPage = () => {
   const dispatch = useDispatch()
