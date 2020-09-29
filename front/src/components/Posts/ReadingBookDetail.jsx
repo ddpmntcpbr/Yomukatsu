@@ -9,7 +9,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import { push } from "connected-react-router";
 import { updateStatusToCompleted } from "../../reducks/posts/operations"
 import {TwitterShareButton} from "react-share";
-import { Helmet } from "react-helmet";
+// import { Helmet } from "react-helmet";
 
 const ReadingBookDetail = (props) => {
   const dispatch = useDispatch();
@@ -36,7 +36,7 @@ const ReadingBookDetail = (props) => {
 
   return (
     <div>
-      <Helmet
+      {/* <Helmet
         title={'metaタグ差し込めてる'}
         meta={[
           {"name": "twitter:card", "content": "summary"},
@@ -48,7 +48,7 @@ const ReadingBookDetail = (props) => {
           {"property": "og:image", "content": "http://d2wgaf7ubdj1mv.cloudfront.net/my.jpg"},
           {"property": "og:url", "content": "https://www.sambaiz.net"}
       ]}
-      />
+      /> */}
       <Paper>
         <Box p={1} >
           <Typography component="h3">
