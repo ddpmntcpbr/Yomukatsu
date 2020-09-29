@@ -1,6 +1,6 @@
 import React from 'react';
 // import ReactDOM from 'react-dom';
-import { render } from "react-snap";
+import { render } from "react-snapshot";
 import {Provider} from 'react-redux';
 import createStore from './reducks/store/store';
 import {ConnectedRouter} from 'connected-react-router';
