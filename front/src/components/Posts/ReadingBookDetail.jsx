@@ -1,9 +1,9 @@
 import React, { useCallback,useState } from "react";
 import { useDispatch } from 'react-redux'
 import { Button,Box,Divider,Paper,Typography } from "@material-ui/core"
-// import { BookCard } from "../UIkit"
+import { BookCard } from "../UIkit"
 import { MapItemCard } from "./index"
-// import { SecondaryButton,QuestionDialog } from "../UIkit"
+import { SecondaryButton,QuestionDialog } from "../UIkit"
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import { push } from "connected-react-router";
