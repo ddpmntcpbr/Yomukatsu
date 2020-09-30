@@ -1,10 +1,10 @@
 import React,{ useEffect,useState } from 'react';
-import {getUserName, getUserImage} from '../reducks/users/selectors';
+import {getUserName, getUserImage} from 'reducks/users/selectors';
 import {useSelector, useDispatch} from 'react-redux'
 import {Avatar,Box,Container,Paper,Tab,Tabs,Typography} from '@material-ui/core';
-import { TabPanel } from "../components/UIkit";
-import {fetchPosts} from "../reducks/posts/operations";
-import { ReadingBooksList, CompletedBooksList } from "../components/Posts"
+import { TabPanel } from "components/UIkit";
+import {fetchPosts} from "reducks/posts/operations";
+import { ReadingBooksList, CompletedBooksList } from "components/Posts"
 
 const MyPage = () => {
   const dispatch = useDispatch();

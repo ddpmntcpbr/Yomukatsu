@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from 'react-redux'
 import { Box,Container } from "@material-ui/core"
-import { ReadingBookDetail } from "../components/Posts"
-import { fetchPostDetail } from "../reducks/posts/operations"
+import { ReadingBookDetail } from "components/Posts"
+import { fetchPostDetail } from "reducks/posts/operations"
 import { makeStyles } from "@material-ui/styles";
-import { getPosts } from "../reducks/posts/selectors"
+import { getPosts } from "reducks/posts/selectors"
 
 const useStyles = makeStyles((theme)=>({
   root: {

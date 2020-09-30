@@ -1,13 +1,13 @@
 import React, { useState, useCallback} from 'react';
-import { BookCard,PrimaryButton, TextInput } from "../components/UIkit"
+import { BookCard,PrimaryButton, TextInput } from "components/UIkit"
 import IconButton from "@material-ui/core/IconButton";
 import SearchIcon from "@material-ui/icons/Search";
 import {makeStyles} from "@material-ui/styles";
 import axios from "axios";
 import Typography from '@material-ui/core/Typography';
-import {SearchResultDialog,SetMapArea} from "../components/Posts"
+import {SearchResultDialog,SetMapArea} from "components/Posts"
 import {Container,Box} from "@material-ui/core"
-import {savePosts} from "../reducks/posts/operations"
+import {savePosts} from "reducks/posts/operations"
 import {useDispatch} from "react-redux"
 
 const useStyles = makeStyles((theme)=>({

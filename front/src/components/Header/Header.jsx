@@ -5,7 +5,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 // import logo from "../../assets/img/icons/logo.png";
 // import { useDispatch } from 'react-redux';
 // import {push} from "connected-react-router"
-import {ClosableDrawer} from "./index"
+import {ClosableDrawer} from "components/Header"
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu"
 import Typography from '@material-ui/core/Typography';

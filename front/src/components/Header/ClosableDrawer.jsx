@@ -11,7 +11,7 @@ import PersonIcon from "@material-ui/icons/Person";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp"
 import { useDispatch } from "react-redux";
 import { push } from "connected-react-router";
-import {signOut} from "../../reducks/users/operations";
+import {signOut} from "reducks/users/operations";
 
 const useStyles = makeStyles((theme)=>({
   drawer: {

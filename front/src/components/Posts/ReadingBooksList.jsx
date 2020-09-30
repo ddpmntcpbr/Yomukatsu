@@ -2,11 +2,11 @@ import React, { useEffect } from "react";
 // import { makeStyles } from "@material-ui/styles"
 import { useDispatch, useSelector } from "react-redux";
 // import { getUserId, getUserName, getUserImage } from '../../reducks/users/selectors';
-import { getPosts } from '../../reducks/posts/selectors';
-import { BookCard } from "../UIkit";
+import { getPosts } from 'reducks/posts/selectors';
+import { BookCard } from "components/UIkit";
 import { Box } from "@material-ui/core";
 import { push } from "connected-react-router";
-import { fetchPosts } from "../../reducks/posts/operations";
+import { fetchPosts } from "reducks/posts/operations";
 
 // const useStyles = makeStyles((theme)=>({
 //   root: {
