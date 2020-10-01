@@ -4,7 +4,7 @@ services:
   db:
     image: mysql:5.7
     volumes:
-      - db-data:/var/lib/mysql
+      - db-data:/var/lib/mysql:cached
     environment:
       MYSQL_USER: root
       MYSQL_ROOT_PASSWORD: password
@@ -16,10 +16,10 @@ services:
       dockerfile: Dockerfile
     command: /bin/sh -c "rm -f /myapp/tmp/pids/server.pid && bundle exec puma -C config/puma.rb"
     volumes:
-      - ./api:/myapp
-      - public-data:/myapp/public
-      - tmp-data:/myapp/tmp
-      - log-data:/myapp/log
+      - ./api:/myapp:cached
+      - public-data:/myapp/public:cached
+      - tmp-data:/myapp/tmp:cached
+      - log-data:/myapp/log:cached
     ports:
       - 3000:3000
     depends_on:
@@ -31,7 +31,7 @@ services:
       context: ./front/
       dockerfile: Dockerfile
     volumes:
-      - ./front:/usr/src/app
+      - ./front:/usr/src/app:cached
     command: sh -c "yarn start"
     ports:
       - "8000:3000"
@@ -41,8 +41,8 @@ services:
     build:
       context: ./nginx
     volumes:
-      - public-data:/myapp/public
-      - tmp-data:/myapp/tmp
+      - public-data:/myapp/public:cached
+      - tmp-data:/myapp/tmp:cached
     ports:
       - 80:80
     depends_on:
