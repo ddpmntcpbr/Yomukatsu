@@ -1,6 +1,6 @@
 import React from 'react';
 import {Route, Switch} from "react-router";
-import {TopPage, MyPage} from "./templates";
+import {PostEdit, PostShow, TopPage, MyPage} from "./templates";
 import Auth from "./Auth"
 
 const Router = () => {
@@ -10,6 +10,8 @@ const Router = () => {
 
       <Auth>
         <Route exact path={"/mypage"} component={MyPage} />
+        <Route exact path={"/posts/edit"} component={PostEdit} />
+        <Route path={"/posts/show(/:id)?"} component={PostShow} />
       </Auth>
     </Switch>
   );

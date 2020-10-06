@@ -1,7 +1,7 @@
 import React from 'react';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
-import {PrimaryButton} from "../components/UIkit";
+import { TwitterLoginButton } from "../components/UIkit";
 import { Helmet } from "react-helmet";
 import { TwitterShareButton,TwitterIcon } from 'react-share';
 import {useDispatch} from 'react-redux'
