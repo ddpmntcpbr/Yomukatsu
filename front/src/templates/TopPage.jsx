@@ -4,8 +4,11 @@ import Typography from '@material-ui/core/Typography';
 import {PrimaryButton} from "../components/UIkit";
 import { Helmet } from "react-helmet";
 import { TwitterShareButton,TwitterIcon } from 'react-share';
+import {useDispatch} from 'react-redux'
+import {signIn} from "../reducks/users/operations"
 
 const TopPage = () => {
+  const dispatch = useDispatch()
 
   return (
     <Container>
@@ -24,11 +27,11 @@ const TopPage = () => {
         ]}
       />
       <Typography>かんたん！5秒で登録！</Typography>
-      <PrimaryButton
-        label={"ボタン"}
-        onClick={() => console.log("Clicked!")}
+      <TwitterLoginButton
+        label={"Twitter ログイン / 新規登録"}
+        onClick={() => dispatch(signIn())}
       />
-      <TwitterShareButton url="https://master.d11sevmfggnvt.amplifyapp.com/" title="Yomukatsu">
+      <TwitterShareButton url="https://qiita.com/ddpmntcpbr" title="ddpmntcpbrのQiitaマイページ">
           <TwitterIcon size={64} round />
       </TwitterShareButton>
 
