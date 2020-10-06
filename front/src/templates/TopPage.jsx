@@ -10,7 +10,7 @@ import {signIn} from "../reducks/users/operations"
 const TopPage = () => {
   const dispatch = useDispatch()
 
-  const title = `開発途中のアプリです\n#TechTrain`;
+  const title = `開発途中のアプリです\n#hashtag_test`;
 
   return (
     <Container>
