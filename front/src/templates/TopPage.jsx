@@ -10,6 +10,8 @@ import {signIn} from "../reducks/users/operations"
 const TopPage = () => {
   const dispatch = useDispatch()
 
+  const title = `開発途中のアプリです\n#TechTrain`;
+
   return (
     <Container>
       <Helmet
@@ -31,7 +33,7 @@ const TopPage = () => {
         label={"Twitter ログイン / 新規登録"}
         onClick={() => dispatch(signIn())}
       />
-      <TwitterShareButton url="https://qiita.com/ddpmntcpbr" title="ddpmntcpbrのQiitaマイページ">
+      <TwitterShareButton url="https://replace-front.d3jvqpc6kffbhf.amplifyapp.com/" title={title}>
           <TwitterIcon size={64} round />
       </TwitterShareButton>
 
