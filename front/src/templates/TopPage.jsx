@@ -10,6 +10,7 @@ import {signIn} from "../reducks/users/operations"
 const TopPage = () => {
   const dispatch = useDispatch()
 
+  const url = process.env.REACT_APP_BASE_URL;
   const title = `開発途中のアプリです\n#hashtag_test`;
 
   return (
@@ -33,7 +34,7 @@ const TopPage = () => {
         label={"Twitter ログイン / 新規登録"}
         onClick={() => dispatch(signIn())}
       />
-      <TwitterShareButton url="https://replace-front.d3jvqpc6kffbhf.amplifyapp.com/" title={title}>
+      <TwitterShareButton url={url} title={title}>
           <TwitterIcon size={64} round />
       </TwitterShareButton>
 
