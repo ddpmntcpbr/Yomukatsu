@@ -11,7 +11,7 @@ const TopPage = () => {
   const dispatch = useDispatch()
 
   const url = process.env.REACT_APP_BASE_URL;
-  const title = `開発途中のアプリです\n#hashtag_test`;
+  const title = `開発途中のアプリです\n#hashtag_test\n`;
 
   return (
     <Container>
