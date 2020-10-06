@@ -1,5 +1,6 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+// import ReactDOM from 'react-dom';
+import { render } from "react-snapshot";
 import {Provider} from 'react-redux';
 import createStore from './reducks/store/store';
 import {ConnectedRouter} from 'connected-react-router';
@@ -12,7 +13,7 @@ import * as serviceWorker from './serviceWorker';
 const history = History.createBrowserHistory();
 export const store = createStore(history);
 
-ReactDOM.render(
+render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
       <MuiThemeProvider theme={theme}>
