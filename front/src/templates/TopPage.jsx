@@ -7,8 +7,8 @@ import { TwitterShareButton,TwitterIcon } from 'react-share';
 import {useDispatch} from 'react-redux';
 import {signIn} from "../reducks/users/operations";
 // import logo from "../assets/img/icons/logo.png";
-// import topPageImage from "../assets/img/src/top-page-img.png";
-import logo from "../assets/img/icons/top.png";
+import topPageImage from "../assets/img/src/top.png";
+// import logo from "../assets/img/icons/top.png";
 
 
 const TopPage = () => {
@@ -35,7 +35,7 @@ const TopPage = () => {
       />
       <div>
         <img
-          src={logo} alt="topPageImage"
+          src={topPageImage} alt="topPageImage"
         />
       </div>
       <Typography>かんたん！5秒で登録！</Typography>
