@@ -4,8 +4,12 @@ import Typography from '@material-ui/core/Typography';
 import { TwitterLoginButton } from "../components/UIkit";
 import { Helmet } from "react-helmet";
 import { TwitterShareButton,TwitterIcon } from 'react-share';
-import {useDispatch} from 'react-redux'
-import {signIn} from "../reducks/users/operations"
+import {useDispatch} from 'react-redux';
+import {signIn} from "../reducks/users/operations";
+// import logo from "../assets/img/icons/logo.png";
+import topPageImage from "../assets/img/src/top.png";
+// import logo from "../assets/img/icons/top.png";
+
 
 const TopPage = () => {
   const dispatch = useDispatch()
@@ -29,6 +33,11 @@ const TopPage = () => {
           { property: 'og:description', content: 'TopPageの詳細です' },
         ]}
       />
+      <div>
+        <img
+          src={topPageImage} alt="topPageImage"
+        />
+      </div>
       <Typography>かんたん！5秒で登録！</Typography>
       <TwitterLoginButton
         label={"Twitter ログイン / 新規登録"}
