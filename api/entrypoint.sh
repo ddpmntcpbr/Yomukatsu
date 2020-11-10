@@ -1,8 +1,8 @@
-# デバッグ用コメント
-echo "Start /api/entrypoint.sh"
-
 #!/bin/bash
 set -e
+
+# デバッグ用コメント
+echo "Start /api/entrypoint.sh"
 
 # Remove a potentially pre-existing server.pid for Rails.
 rm -f /myapp/tmp/pids/server.pid
