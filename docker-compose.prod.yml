@@ -14,7 +14,7 @@ services:
     build:
       context: ./api/
       dockerfile: Dockerfile.staging
-    command: /bin/sh -c "rm -f /myapp/tmp/pids/server.pid && bundle exec puma -C config/puma.rb"
+    command: bundle exec pumastl start
     volumes:
       - ./api:/myapp
       - public-data:/myapp/public

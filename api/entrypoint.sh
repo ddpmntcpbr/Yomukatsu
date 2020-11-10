@@ -1,3 +1,6 @@
+# デバッグ用コメント
+echo "Start /api/entrypoint.sh"
+
 #!/bin/bash
 set -e
 
