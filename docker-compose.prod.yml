@@ -14,7 +14,7 @@ services:
     build:
       context: ./api/
       dockerfile: Dockerfile.staging
-    command: bundle exec pumastl start
+    command: "bundle exec pumactl start"
     volumes:
       - ./api:/myapp
       - public-data:/myapp/public
