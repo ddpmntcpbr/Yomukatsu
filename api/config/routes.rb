@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
       resources :posts, only: [:index, :show, :create, :update, :destroy]
       get "users/currentuser"
-      get "amazon_books/search"
+      get :health_check, to: 'health_check#index'
     end
   end
 end
