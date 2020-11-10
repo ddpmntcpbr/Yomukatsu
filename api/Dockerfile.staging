@@ -36,9 +36,9 @@ RUN mkdir -p tmp/pids
 
 # Add a script to be executed every time the container starts.
 VOLUME /myapp/tmp
-COPY entrypoint.sh /usr/bin/
-RUN chmod +x /usr/bin/entrypoint.sh
-ENTRYPOINT ["entrypoint.sh"]
+COPY entrypoint.staging.sh /usr/bin/
+RUN chmod +x /usr/bin/entrypoint.staging.sh
+ENTRYPOINT ["entrypoint.staging.sh"]
 EXPOSE 3000
 
 # puma.sockを配置するディレクトリを作成
