@@ -8,7 +8,7 @@ import {push} from "connected-react-router"
 import {ClosableDrawer} from "./index"
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu"
-import Typography from '@material-ui/core/Typography';
+// import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles((theme)=>({
   root: {
