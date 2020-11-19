@@ -23,6 +23,7 @@ commands:
 
 orbs:
   aws-ecr: circleci/aws-ecr@6.12.2
+  aws-ecs: circleci/aws-ecs@1.3.0
 
 jobs:
   fetch_source_code:
@@ -34,6 +35,7 @@ jobs:
           key: v1-rails_react_docker-{{ .Environment.CIRCLE_SHA1 }}
           paths:
             - ~/rails_react_docker
+
   bundle_dependencies:
     executor:
       name: default_container
@@ -52,6 +54,7 @@ jobs:
           key: v1-dependencies-{{ checksum "api/Gemfile.lock" }}
           paths:
             - api/vendor/bundle
+
   rspec:
     executor:
       name: default_container
@@ -141,6 +144,8 @@ jobs:
           tag: "${CIRCLE_SHA1}"
           path: ./nginx/
 
+
+
 workflows:
   build:
     jobs:
@@ -163,7 +168,28 @@ workflows:
               only: master
       - build_and_push_image_web:
           requires:
+            - rubocop
+            - rspec
+          filters:
+            branches:
+              only: master
+      - aws-ecs/deploy-service-update:
+          requires:
             - build_and_push_image_api
+          family: "rails-react-docker-ecs-task"
+          service-name: "rails-react-docker-service"
+          cluster-name: "rails-react-docker-cluster"
+          container-image-name-updates: "container=rails_react_docker_api,tag=${CIRCLE_SHA1}"
+          filters:
+            branches:
+              only: master
+      - aws-ecs/deploy-service-update:
+          requires:
+            - build_and_push_image_web
+          family: "rails-react-docker-ecs-task"
+          service-name: "rails-react-docker-service"
+          cluster-name: "rails-react-docker-cluster"
+          container-image-name-updates: "container=rails_react_docker_web,tag=${CIRCLE_SHA1}"
           filters:
             branches:
               only: master
