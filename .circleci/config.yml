@@ -21,6 +21,9 @@ commands:
     steps:
       - run: gem install bundler -v 2.0.2
 
+orbs:
+  aws-ecr: circleci/aws-ecr@6.12.2
+
 jobs:
   fetch_source_code:
     executor:
@@ -114,6 +117,30 @@ jobs:
           command: |
             bundle exec rubocop
 
+  build_and_push_image_api:
+    machine:
+      image: ubuntu-1604:201903-01
+    steps:
+      - checkout
+      - aws-ecr/build-and-push-image:
+          account-url: AWS_ACCOUNT_URL
+          repo: "rails_react_docker_api"
+          region: AWS_REGION
+          tag: "${CIRCLE_SHA1}"
+          path: ./api/
+
+  build_and_push_image_web:
+    machine:
+      image: ubuntu-1604:201903-01
+    steps:
+      - checkout
+      - aws-ecr/build-and-push-image:
+          account-url: AWS_ACCOUNT_URL
+          repo: "rails_react_docker_web"
+          region: AWS_REGION
+          tag: "${CIRCLE_SHA1}"
+          path: ./nginx/
+
 workflows:
   build:
     jobs:
@@ -127,3 +154,16 @@ workflows:
       - rspec:
           requires:
             - bundle_dependencies
+      - build_and_push_image_api:
+          requires:
+            - rubocop
+            - rspec
+          filters:
+            branches:
+              only: master
+      - build_and_push_image_web:
+          requires:
+            - build_and_push_image_api
+          filters:
+            branches:
+              only: master
