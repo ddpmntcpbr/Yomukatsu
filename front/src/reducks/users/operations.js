@@ -48,10 +48,15 @@ export const signIn = () => {
 
   return async (dispatch) => {
     // TwitterAPIのエンドポイントへリダイレクト
-    const authOriginUrl = process.env.REACT_APP_BASE_URL.replace("http://","")
+    // const authOriginUrl = process.env.REACT_APP_BASE_URL.replace("http://","")
+    const authOriginUrl = process.env.REACT_APP_BASE_URL.match(/^https?:\/{2,}(.*?)(?:\/|\?|#|$)/)[1]
+    // const authOriginUrl = document.domain
+    // console.log("document.domain: ",document.domain)
+    // console.log(process.env.REACT_APP_BASE_URL.match(/^https?:\/{2,}(.*?)(?:\/|\?|#|$)/)[1])
+    // const authOriginUrl = process.env.REACT_APP_BASE_URL.replace("http://","")
     // console.log("signIn", process.env.REACT_APP_API127_URL + '/api/v1/auth/twitter?auth_origin_url=' + authOriginUrl)
 
-    window.location.href = process.env.REACT_APP_API127_URL + '/api/v1/auth/twitter?auth_origin_url=' + authOriginUrl;
+    window.location.href = process.env.REACT_APP_API_V1_URL + '/auth/twitter?auth_origin_url=' + authOriginUrl;
     // window.location.href = 'http://127.0.0.1:3000/api/v1/auth/twitter?auth_origin_url=' + process.env.REACT_APP_URL;
 
     // 失敗したら、SignIn画面へリダイレクト

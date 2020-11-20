@@ -18,8 +18,8 @@ const Auth = ({children}) => {
       localStorage.setItem('client_id', tokens.client_id)
       localStorage.setItem('uid', tokens.uid)
 
-      // window.location.href = process.env.REACT_APP_BASE_URL
-      window.location.href = "http://localhost:8000/mypage"
+      window.location.href = process.env.REACT_APP_BASE_URL + "/mypage"
+      // window.location.href = "http://localhost:8000/mypage"
 
     } else if (!isSignedIn) {
         dispatch(listenAuthState())
