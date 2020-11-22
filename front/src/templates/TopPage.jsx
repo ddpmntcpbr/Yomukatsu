@@ -44,7 +44,7 @@ const TopPage = () => {
         onClick={() => dispatch(signIn())}
       />
       <TwitterShareButton url={url} title={title}>
-          <TwitterIcon size={128} round />
+          <TwitterIcon size={64} round />
       </TwitterShareButton>
 
     </Container>
