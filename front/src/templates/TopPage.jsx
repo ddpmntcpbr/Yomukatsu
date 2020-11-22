@@ -38,6 +38,7 @@ const TopPage = () => {
           src={topPageImage} alt="topPageImage"
         />
       </div>
+      <Typography>HTTPS対応</Typography>
       <Typography>かんたん！5秒で登録！</Typography>
       <TwitterLoginButton
         label={"Twitter ログイン / 新規登録"}
