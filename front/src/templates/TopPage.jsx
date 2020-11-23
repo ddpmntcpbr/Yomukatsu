@@ -6,16 +6,36 @@ import { Helmet } from "react-helmet";
 import { TwitterShareButton,TwitterIcon } from 'react-share';
 import {useDispatch} from 'react-redux';
 import {signIn} from "../reducks/users/operations";
-// import logo from "../assets/img/icons/logo.png";
 import topPageImage from "../assets/img/src/top.png";
-// import logo from "../assets/img/icons/top.png";
+import axios from "axios";
+import {PrimaryButton} from "../components/UIkit"
 
+const fetchUsersCount = () => {
+    return async () => {
+      const apiEndpoint = process.env.REACT_APP_API_V1_URL + "/users_count"
+      console.log("apiEndpoint",apiEndpoint)
+      axios.get(apiEndpoint)
+      .then((response) => {
+        console.log("fetchUsersCount",response)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+    }
+  }
 
 const TopPage = () => {
   const dispatch = useDispatch()
 
   const url = process.env.REACT_APP_BASE_URL;
   const title = `開発途中のアプリです\n#hashtag_test`;
+  // const [usersCount,setUsersCount] = useState(0);
+  // const usersCount = fetchUsersCount()
+
+  // useEffect(()=>{
+  //   // setUsersCount(fetchUsersCount())
+  //   const usersCount = fetchUsersCount()
+  // },[])
 
   return (
     <Container>
@@ -47,7 +67,11 @@ const TopPage = () => {
       <TwitterShareButton url={url} title={title}>
           <TwitterIcon size={64} round />
       </TwitterShareButton>
-
+      <PrimaryButton
+        label="ユーザーカウント"
+        onClick={fetchUsersCount()}
+      />
+      {/* <Typography>{usersCount}</Typography> */}
     </Container>
   );
 };
