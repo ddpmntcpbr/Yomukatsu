@@ -10,13 +10,28 @@ import topPageImage from "../assets/img/src/top.png";
 import axios from "axios";
 import {PrimaryButton} from "../components/UIkit"
 
-const fetchUsersCount = () => {
+const fetchHttpsUsersCount = () => {
     return async () => {
-      const apiEndpoint = process.env.REACT_APP_API_V1_URL + "/users_count"
-      console.log("apiEndpoint",apiEndpoint)
+      // const apiEndpoint = process.env.REACT_APP_API_V1_URL + "/users_count"
+      const apiEndpoint = "https://backend.book.yomukatsu.com/api/v1/users_count"
+      console.log("httpsApiEndpoint",apiEndpoint)
       axios.get(apiEndpoint)
       .then((response) => {
-        console.log("fetchUsersCount",response)
+        console.log("fetchHttpsUsersCount",response)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+    }
+  }
+
+const fetchHttpUsersCount = () => {
+    return async () => {
+      const apiEndpoint = "http://backend.book.yomukatsu.com/api/v1/users_count"
+      console.log("httpApiEndpoint",apiEndpoint)
+      axios.get(apiEndpoint)
+      .then((response) => {
+        console.log("fetchHttpUsersCount",response)
       })
       .catch((error) => {
         console.log(error)
@@ -68,8 +83,12 @@ const TopPage = () => {
           <TwitterIcon size={64} round />
       </TwitterShareButton>
       <PrimaryButton
-        label="ユーザーカウント"
-        onClick={fetchUsersCount()}
+        label="fetchHttpUsersCount"
+        onClick={fetchHttpUsersCount()}
+      />
+      <PrimaryButton
+        label="fetchHttpsUsersCount"
+        onClick={fetchHttpsUsersCount()}
       />
       {/* <Typography>{usersCount}</Typography> */}
     </Container>
