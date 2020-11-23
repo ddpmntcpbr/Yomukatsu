@@ -53,6 +53,7 @@ const PostEdit = () => {
       axios.get(baseUrl+params)
       .then(response => {
         setSearchResults(response.data.items)
+        console.log(response.data.items)
         setOpen(true)
       })
       .catch(error => {

@@ -11,8 +11,10 @@ const SearchResultDialog = (props) => {
   const setBookInfo = (searchResult) => {
     let title = ("title" in searchResult) ? searchResult.title : "No title";
     let author = ("authors" in searchResult) ? searchResult.authors[0] : "No author";
-    let image = ("imageLinks" in searchResult) ? searchResult.imageLinks.thumbnail : "https://lh3.googleusercontent.com/proxy/OT0HbEcJ4HNmkzaUIptt_i9_Zu2XlKeqnT6svBmsr1ytaQewvUVBiTXAc7yfe3O_PqfEMnT8ix6g1G4CpHAvHJK3X_EkzilGE7NHhbM";
-    let url = ("infoLink" in searchResult) ? searchResult.infoLink : "https://books.google.co.jp/";
+    let image = ("imageLinks" in searchResult) ? searchResult.imageLinks.thumbnail.replace("http://","https://") : "https://lh3.googleusercontent.com/proxy/OT0HbEcJ4HNmkzaUIptt_i9_Zu2XlKeqnT6svBmsr1ytaQewvUVBiTXAc7yfe3O_PqfEMnT8ix6g1G4CpHAvHJK3X_EkzilGE7NHhbM";
+    let url = ("infoLink" in searchResult) ? searchResult.infoLink.replace("http://","https://") : "https://books.google.co.jp/";
+    console.log("image",image)
+    console.log("url",url)
 
     props.setTitle(title)
     props.setAuthor(author)
