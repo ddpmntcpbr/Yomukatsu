@@ -1,34 +1,71 @@
-import React, {useState} from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
-import RestoreIcon from '@material-ui/icons/Restore';
-import FavoriteIcon from '@material-ui/icons/Favorite';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
+import HomeIcon from '@material-ui/icons/Home';
+import InfoIcon from '@material-ui/icons/Info';
+import {useLocation} from 'react-router-dom';
+import { push } from "connected-react-router";
+import { useDispatch } from 'react-redux';
 
-const useStyles = makeStyles({
-  root: {
-    width: 500,
+const useStyles = makeStyles((theme)=>({
+  wrapper:{
+    display: 'block',
+    width: '100%',
+    position: 'fixed',
+    left: 0,
+    bottom: 0,
+    zIndex: 1000,
+    textAlign: 'center',
   },
-});
+  root: {
+    [theme.breakpoints.up('md')]: {
+      display: 'none',
+    },
+  },
+  button: {
+    maxWidth: '100%', // ボタンが横一杯に広がって欲しくない時はコメントアウト
+  },
+}));
 
 const ResponsiveBottomNavigation = () => {
   const classes = useStyles();
-  const [value, setValue] = useState(0);
+  const location = useLocation();
+  const dispatch = useDispatch();
+
+ const currentActiveBottomNavigationAction = (pathname) => {
+    const pathIndex = ["/", "/mypage", "/posts/edit"];
+    return pathIndex.indexOf(pathname)
+  }
 
   return (
-    <BottomNavigation
-      value={value}
-      onChange={(event, newValue) => {
-        setValue(newValue);
-      }}
-      showLabels
-      className={classes.root}
-    >
-      <BottomNavigationAction label="Recents" icon={<RestoreIcon />} />
-      <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} />
-      <BottomNavigationAction label="Nearby" icon={<LocationOnIcon />} />
-    </BottomNavigation>
+    <div className={classes.wrapper}>
+      <BottomNavigation
+        value={currentActiveBottomNavigationAction(location.pathname)}
+        showLabels
+        className={classes.root}
+      >
+        <BottomNavigationAction
+          label={"ホーム"}
+          className={classes.button}
+          icon={<HomeIcon/>}
+          onClick={()=>dispatch(push("/"))}
+        />
+        <BottomNavigationAction
+          label={"マイページ"}
+          className={classes.button}
+          icon={<InfoIcon/>}
+          onClick={()=>dispatch(push("/mypage"))}
+        />
+        <BottomNavigationAction
+          label={"新規登録"}
+          className={classes.button}
+          icon={<LocationOnIcon/>}
+          onClick={()=>dispatch(push("/posts/edit"))}
+        />
+      </BottomNavigation>
+  </div>
   );
 }
 
