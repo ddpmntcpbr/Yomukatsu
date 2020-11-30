@@ -5,7 +5,7 @@ import { Header } from './components/Header'
 import { ResponsiveBottomNavigation } from './components/ResponsiveBottomNavigation';
 import { Loading } from "./components/UIkit"
 import "./assets/reset.css"
-import "./assets/style.css"
+// import "./assets/style.css"
 
 const useStyles = makeStyles((theme)=>({
   root: {
