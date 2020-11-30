@@ -23,14 +23,14 @@ export const fetchPostDetail = (id) => {
     .catch(() => [])
     // console.log("fetchPostDetail",data)
     dispatch(fetchPostDetailAction(data))
-    await _sleep(2000);
+    await _sleep(1000);
     dispatch(hideLoadingAction())
   }
 }
 
 export const fetchPosts = () => {
   return async (dispatch) => {
-    console.log("fetchPosts")
+    // console.log("fetchPosts")
     dispatch(showLoadingAction("書籍リストを取得中..."))
     axios.get(process.env.REACT_APP_API_V1_URL + '/posts', {
       headers: {
@@ -46,7 +46,7 @@ export const fetchPosts = () => {
       console.log("error",error)
     })
 
-    await _sleep(2000);
+    await _sleep(1000);
 
     dispatch(hideLoadingAction())
 

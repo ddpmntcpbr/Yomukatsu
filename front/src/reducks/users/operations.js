@@ -50,7 +50,7 @@ export const signIn = () => {
 
   return async (dispatch) => {
     dispatch(showLoadingAction("Sign in..."))
-    await _sleep(500)
+    await _sleep(1000)
     // TwitterAPIのエンドポイントへリダイレクト
     // const authOriginUrl = process.env.REACT_APP_BASE_URL.replace("http://","")
     const authOriginUrl = process.env.REACT_APP_BASE_URL.match(/^https?:\/{2,}(.*?)(?:\/|\?|#|$)/)[1]
@@ -76,7 +76,7 @@ export const signOut = () => {
 
     // Store Userの初期化
     dispatch(signOutAction());
-    await _sleep(500)
+    await _sleep(1000)
     dispatch(push("/"));
     dispatch(hideLoadingAction())
   }
