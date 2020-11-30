@@ -1,10 +1,12 @@
 import { signInAction, signOutAction } from "./actions";
 import { push } from "connected-react-router";
 import axios from "axios"
+import {hideLoadingAction, showLoadingAction} from "../loading/actions";
+// import { hideLoading, showLoading } from "../loading/operations";
+import {_sleep} from "../../helpers"
 
 export const listenAuthState = () => {
   return async (dispatch) => {
-
     // LocalStorageに認証情報が含まれている場合
     if (localStorage.getItem('auth_token')) {
       const auth_token = localStorage.getItem('auth_token')
@@ -47,6 +49,8 @@ export const listenAuthState = () => {
 export const signIn = () => {
 
   return async (dispatch) => {
+    dispatch(showLoadingAction("Sign in..."))
+    await _sleep(1000)
     // TwitterAPIのエンドポイントへリダイレクト
     // const authOriginUrl = process.env.REACT_APP_BASE_URL.replace("http://","")
     const authOriginUrl = process.env.REACT_APP_BASE_URL.match(/^https?:\/{2,}(.*?)(?:\/|\?|#|$)/)[1]
@@ -66,12 +70,14 @@ export const signIn = () => {
 
 export const signOut = () => {
   return async (dispatch) => {
-
+    dispatch(showLoadingAction("Sign out..."))
     // Local Storageの初期化
     localStorage.clear()
 
     // Store Userの初期化
     dispatch(signOutAction());
+    await _sleep(1000)
     dispatch(push("/"));
+    dispatch(hideLoadingAction())
   }
 }

@@ -3,9 +3,14 @@ import { push } from "connected-react-router";
 import { fetchPostDetailAction,fetchPostsAction } from "./actions";
 // import { useSelector } from "react-redux";
 // import { getPosts } from "../posts/selectors";
+import {hideLoadingAction, showLoadingAction} from "../loading/actions";
+// import { hideLoading, showLoading } from "../loading/operations";
+import {_sleep} from "../../helpers"
+
 
 export const fetchPostDetail = (id) => {
   return async (dispatch) => {
+    dispatch(showLoadingAction("書籍情報を取得中..."))
 
     const data = await axios.get((process.env.REACT_APP_API_V1_URL + '/posts/' +  String(id)), {
       headers: {
@@ -18,11 +23,15 @@ export const fetchPostDetail = (id) => {
     .catch(() => [])
     // console.log("fetchPostDetail",data)
     dispatch(fetchPostDetailAction(data))
+    await _sleep(1000);
+    dispatch(hideLoadingAction())
   }
 }
 
 export const fetchPosts = () => {
   return async (dispatch) => {
+    // console.log("fetchPosts")
+    dispatch(showLoadingAction("書籍リストを取得中..."))
     axios.get(process.env.REACT_APP_API_V1_URL + '/posts', {
       headers: {
         'access-token': localStorage.getItem('auth_token'),
@@ -36,6 +45,11 @@ export const fetchPosts = () => {
     .catch((error) => {
       console.log("error",error)
     })
+
+    await _sleep(1000);
+
+    dispatch(hideLoadingAction())
+
   }
 }
 
