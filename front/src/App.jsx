@@ -3,6 +3,7 @@ import Router from './Router'
 import { makeStyles } from "@material-ui/styles";
 import { Header } from './components/Header'
 import { ResponsiveBottomNavigation } from './components/ResponsiveBottomNavigation';
+import { Loading } from "./components/UIkit"
 import "./assets/reset.css"
 import "./assets/style.css"
 
@@ -17,11 +18,13 @@ const App = () => {
 
   return (
     <>
-      <Header />
-      <main className={classes.root}>
-        <Router />
-      </main>
-      <ResponsiveBottomNavigation />
+      <Loading>
+        <Header />
+        <main className={classes.root}>
+          <Router />
+        </main>
+        <ResponsiveBottomNavigation />
+      </Loading>
    </>
   )
 }
