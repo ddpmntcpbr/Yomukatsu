@@ -2,6 +2,7 @@ import React from 'react'
 import Router from './Router'
 import { makeStyles } from "@material-ui/styles";
 import { Header } from './components/Header'
+import { ResponsiveBottomNavigation } from './components/ResponsiveBottomNavigation';
 import "./assets/reset.css"
 import "./assets/style.css"
 
@@ -20,6 +21,7 @@ const App = () => {
       <main className={classes.root}>
         <Router />
       </main>
+      <ResponsiveBottomNavigation />
    </>
   )
 }
