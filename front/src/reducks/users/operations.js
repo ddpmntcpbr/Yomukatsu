@@ -5,7 +5,6 @@ import {hideLoadingAction, showLoadingAction} from "../loading/actions";
 
 export const listenAuthState = () => {
   return async (dispatch) => {
-    dispatch(showLoadingAction("Sign up..."))
     // LocalStorageに認証情報が含まれている場合
     if (localStorage.getItem('auth_token')) {
       const auth_token = localStorage.getItem('auth_token')
@@ -31,11 +30,9 @@ export const listenAuthState = () => {
           uid: userData.id,
           username: userData.name,
         }))
-        dispatch(hideLoadingAction())
       })
       .catch((error) => {
         console.log(error)
-        dispatch(hideLoadingAction())
       })
 
     // LocalStorageに認証情報が含まれていない場合
@@ -51,6 +48,7 @@ export const listenAuthState = () => {
 export const signIn = () => {
 
   return async (dispatch) => {
+    dispatch(showLoadingAction("Sign in..."))
     // TwitterAPIのエンドポイントへリダイレクト
     // const authOriginUrl = process.env.REACT_APP_BASE_URL.replace("http://","")
     const authOriginUrl = process.env.REACT_APP_BASE_URL.match(/^https?:\/{2,}(.*?)(?:\/|\?|#|$)/)[1]
