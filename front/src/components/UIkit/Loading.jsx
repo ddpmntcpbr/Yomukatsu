@@ -6,13 +6,13 @@ import {makeStyles} from "@material-ui/styles";
 
 const useStyles = makeStyles((theme)=>({
   "root": {
-    alignItems: center,
-    background: rgba(255, 255, 255, 0.7),
-    display: flex,
-    flexFlow: column,
-    justifyContent: center,
+    alignItems: "center",
+    background: "rgba(255, 255, 255, 0.7)",
+    display: "flex",
+    flexFlow: "column",
+    justifyContent: "center",
     opacity: 0.9,
-    position: fixed,
+    position: "fixed",
     top: 0,
     left: 0,
     height: "100vh",
