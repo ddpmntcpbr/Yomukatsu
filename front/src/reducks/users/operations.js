@@ -1,10 +1,11 @@
 import { signInAction, signOutAction } from "./actions";
 import { push } from "connected-react-router";
 import axios from "axios"
+import {hideLoadingAction, showLoadingAction} from "../loading/actions";
 
 export const listenAuthState = () => {
   return async (dispatch) => {
-
+    dispatch(showLoadingAction("Sign up..."))
     // LocalStorageに認証情報が含まれている場合
     if (localStorage.getItem('auth_token')) {
       const auth_token = localStorage.getItem('auth_token')
@@ -30,14 +31,17 @@ export const listenAuthState = () => {
           uid: userData.id,
           username: userData.name,
         }))
+        dispatch(hideLoadingAction())
       })
       .catch((error) => {
         console.log(error)
+        dispatch(hideLoadingAction())
       })
 
     // LocalStorageに認証情報が含まれていない場合
     } else {
       console.log("LocalStorageに認証情報が含まれていません")
+      dispatch(hideLoadingAction())
       dispatch(push("/"))
     }
   }
@@ -66,12 +70,13 @@ export const signIn = () => {
 
 export const signOut = () => {
   return async (dispatch) => {
-
+    dispatch(showLoadingAction("Sign out..."))
     // Local Storageの初期化
     localStorage.clear()
 
     // Store Userの初期化
     dispatch(signOutAction());
     dispatch(push("/"));
+    dispatch(hideLoadingAction())
   }
 }
