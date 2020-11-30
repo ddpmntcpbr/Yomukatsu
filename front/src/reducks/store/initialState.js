@@ -1,4 +1,8 @@
 const initialState = {
+  loading: {
+    state: false,
+    text: ""
+  },
   posts: {
     list: []
   },
