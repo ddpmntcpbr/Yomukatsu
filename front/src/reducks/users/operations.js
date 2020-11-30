@@ -2,6 +2,8 @@ import { signInAction, signOutAction } from "./actions";
 import { push } from "connected-react-router";
 import axios from "axios"
 import {hideLoadingAction, showLoadingAction} from "../loading/actions";
+// import { hideLoading, showLoading } from "../loading/operations";
+import {_sleep} from "../../helpers"
 
 export const listenAuthState = () => {
   return async (dispatch) => {
@@ -38,7 +40,6 @@ export const listenAuthState = () => {
     // LocalStorageに認証情報が含まれていない場合
     } else {
       console.log("LocalStorageに認証情報が含まれていません")
-      dispatch(hideLoadingAction())
       dispatch(push("/"))
     }
   }
@@ -49,6 +50,7 @@ export const signIn = () => {
 
   return async (dispatch) => {
     dispatch(showLoadingAction("Sign in..."))
+    await _sleep(500)
     // TwitterAPIのエンドポイントへリダイレクト
     // const authOriginUrl = process.env.REACT_APP_BASE_URL.replace("http://","")
     const authOriginUrl = process.env.REACT_APP_BASE_URL.match(/^https?:\/{2,}(.*?)(?:\/|\?|#|$)/)[1]
@@ -74,6 +76,7 @@ export const signOut = () => {
 
     // Store Userの初期化
     dispatch(signOutAction());
+    await _sleep(500)
     dispatch(push("/"));
     dispatch(hideLoadingAction())
   }
