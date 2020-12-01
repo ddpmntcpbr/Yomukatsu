@@ -47,13 +47,8 @@ GEM
       i18n (>= 0.7, < 2)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
-    addressable (2.7.0)
-      public_suffix (>= 2.0.2, < 5.0)
     arel (9.0.0)
     ast (2.4.1)
-    aws-eventstream (1.1.0)
-    aws-sigv4 (1.2.1)
-      aws-eventstream (~> 1, >= 1.0.2)
     bcrypt (3.1.15)
     bootsnap (1.4.7)
       msgpack (~> 1.0)
@@ -61,6 +56,7 @@ GEM
     byebug (11.1.3)
     case_transform (0.2)
       activesupport
+    choice (0.2.0)
     coderay (1.1.3)
     concurrent-ruby (1.1.6)
     crass (1.0.6)
@@ -75,8 +71,6 @@ GEM
       devise (> 3.5.2, < 5)
       rails (>= 4.2.0, < 6.1)
     diff-lcs (1.4.4)
-    domain_name (0.5.20190701)
-      unf (>= 0.0.5, < 1.0.0)
     dotenv (2.7.6)
     dotenv-rails (2.7.6)
       dotenv (= 2.7.6)
@@ -92,22 +86,9 @@ GEM
     faraday (1.0.1)
       multipart-post (>= 1.2, < 3)
     ffi (1.13.1)
-    ffi-compiler (1.0.1)
-      ffi (>= 1.0.0)
-      rake
     globalid (0.4.2)
       activesupport (>= 4.2.0)
     hashie (4.1.0)
-    http (4.4.1)
-      addressable (~> 2.3)
-      http-cookie (~> 1.0)
-      http-form_data (~> 2.2)
-      http-parser (~> 1.2.0)
-    http-cookie (1.0.3)
-      domain_name (~> 0.5)
-    http-form_data (2.3.0)
-    http-parser (1.2.1)
-      ffi-compiler (>= 1.0, < 2.0)
     i18n (1.8.5)
       concurrent-ruby (~> 1.0)
     jsonapi-renderer (0.2.2)
@@ -170,7 +151,6 @@ GEM
       yard (~> 0.9.11)
     pry-rails (0.3.9)
       pry (>= 0.10.4)
-    public_suffix (4.0.5)
     puma (3.12.6)
     rack (2.2.3)
     rack-cors (1.1.1)
@@ -193,6 +173,11 @@ GEM
     rails-dom-testing (2.0.3)
       activesupport (>= 4.2.0)
       nokogiri (>= 1.6)
+    rails-erd (1.6.0)
+      activerecord (>= 4.2)
+      activesupport (>= 4.2)
+      choice (~> 0.2.0)
+      ruby-graphviz (~> 1.2)
     rails-html-sanitizer (1.3.0)
       loofah (~> 2.3)
     railties (5.2.4.3)
@@ -250,6 +235,8 @@ GEM
       rubocop (>= 0.87.0)
     rubocop-rspec (1.42.0)
       rubocop (>= 0.87.0)
+    ruby-graphviz (1.2.5)
+      rexml
     ruby-progressbar (1.10.1)
     ruby_dep (1.5.0)
     spring (2.1.0)
@@ -267,13 +254,7 @@ GEM
     thread_safe (0.3.6)
     tzinfo (1.2.7)
       thread_safe (~> 0.1)
-    unf (0.1.4)
-      unf_ext
-    unf_ext (0.0.7.7)
     unicode-display_width (1.7.0)
-    vacuum (3.4.0)
-      aws-sigv4 (~> 1.0)
-      http (~> 4.0)
     warden (1.2.8)
       rack (>= 2.0.6)
     websocket-driver (0.7.3)
@@ -302,6 +283,7 @@ DEPENDENCIES
   puma (~> 3.11)
   rack-cors
   rails (~> 5.2.4, >= 5.2.4.3)
+  rails-erd
   rspec-rails
   rspec_junit_formatter
   rubocop-faker
@@ -310,7 +292,6 @@ DEPENDENCIES
   spring
   spring-watcher-listen (~> 2.0.0)
   tzinfo-data
-  vacuum
 
 RUBY VERSION
    ruby 2.5.8p224

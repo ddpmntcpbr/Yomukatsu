@@ -2,7 +2,8 @@ FROM ruby:2.5
 RUN apt-get update -qq && apt-get -y install \
     build-essential \
     libpq-dev \
-    nodejs
+    nodejs \
+    graphviz
 RUN mkdir /myapp
 WORKDIR /myapp
 COPY Gemfile /myapp/Gemfile
