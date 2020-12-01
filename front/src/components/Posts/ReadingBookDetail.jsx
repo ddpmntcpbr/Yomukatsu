@@ -8,7 +8,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import { push } from "connected-react-router";
 import { updateStatusToCompleted } from "../../reducks/posts/operations"
-import {TwitterShareButton} from "react-share";
+import {TwitterShareButton,TwitterIcon} from "react-share";
 // import { Helmet } from "react-helmet";
 
 const ReadingBookDetail = (props) => {
@@ -33,6 +33,10 @@ const ReadingBookDetail = (props) => {
     handleClose()
     dispatch(push("/mypage"))
   },[dispatch,handleClose,props])
+
+  // useEffect((props)=>{
+  //   dispatch(fetchPostDetail(props.id))
+  // },[dispatch])
 
   return (
     <div>
@@ -103,10 +107,8 @@ const ReadingBookDetail = (props) => {
               />
             </Box>
           )}
-          <TwitterShareButton url="https://www.sambaiz.net">
-            <Button variant="outlined" color="default" startIcon={<DeleteIcon />}>
-              Twitterで共有！
-            </Button>
+          <TwitterShareButton url={"https://www.sambaiz.net"} title={"タイトル"}>
+            <TwitterIcon size={64} round />
           </TwitterShareButton>
         </Box>
       </Paper>
