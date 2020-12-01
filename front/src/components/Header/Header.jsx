@@ -51,8 +51,8 @@ const Header = () => {
             onClick={()=>dispatch(push("/"))}
           />
           <div className={classes.iconButtons}>
-            <IconButton>
-              <MenuIcon onClick={(event) => handleDrawerToggle(event)}/>
+            <IconButton onClick={(event) => handleDrawerToggle(event)}>
+              <MenuIcon />
             </IconButton>
           </div>
         </Toolbar>
