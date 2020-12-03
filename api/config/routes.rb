@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
       namespace :posts do
         resources :reading, only: [:index]
-        # resources :resistered, only: [:index]
+        resources :registered, only: [:index]
         # resources :completed, only: [:index]
       end
 
