@@ -9,9 +9,10 @@ RSpec.describe "Api::V1::Posts::Reading", type: :request do
 
     context "reading post が存在する場合" do
       before do
-        create_list(:post, 3, user: current_user)
+        create_list(:post, 1, user: current_user, status: "reading")
+        create_list(:post, 2, user: current_user, status: "registered")
+        create_list(:post, 3, user: current_user, status: "completed")
       end
-      let!(:post_reading) { create(:post, user: current_user, status: "reading") }
 
       it "自身が作成した reading post を取得できる" do
         subject
@@ -25,7 +26,7 @@ RSpec.describe "Api::V1::Posts::Reading", type: :request do
 
     context "reading post が存在しない場合" do
       before do
-        create_list(:post, 3, user: current_user)
+        create_list(:post, 2, user: current_user, status: "registered")
         create_list(:post, 3, user: current_user, status: "completed")
       end
 
