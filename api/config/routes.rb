@@ -5,6 +5,12 @@ Rails.application.routes.draw do
         omniauth_callbacks: "api/v1/auth/omniauth_callbacks",
       }
 
+      namespace :posts do
+        resources :reading, only: [:index]
+        # resources :resistered, only: [:index]
+        # resources :completed, only: [:index]
+      end
+
       resources :posts, only: [:index, :show, :create, :update, :destroy]
       get "users/currentuser"
       get :health_check, to: "health_check#index"
