@@ -17,4 +17,15 @@ RSpec.describe Post, type: :model do
       expect(post.errors.messages[:title]).to include "can't be blank"
     end
   end
+
+  context "status が reading であるカラムを2個以上登録する場合" do
+    let!(:current_user) { create(:user) }
+    let!(:post) { create(:post, status: "reading",user: current_user) }
+
+    it "エラーする" do
+      second_reading_status_post = build(:post, status: "reading",user: current_user)
+      second_reading_status_post.valid?
+      expect(second_reading_status_post.errors[:post]).to include "Current user already has reading status post"
+    end
+  end
 end
