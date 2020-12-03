@@ -11,16 +11,16 @@ class Post < ApplicationRecord
 
     def up_to_one_reading_status_post_per_user
       if self.status == "reading" && Post.where(user: self.user).where(status: "reading").count > 0
-        errors.add(:post,"Current user already has reading status post")
+        errors.add(:post, "Current user already has reading status post")
       end
     end
 
-  def reject_blank(attributes)
-    if attributes[:id]
-      attributes.merge!(_destroy: true) if attributes[:content].blank?
-      !attributes[:content].blank?
-    else
-      attributes[:content].blank?
+    def reject_blank(attributes)
+      if attributes[:id]
+        attributes.merge!(_destroy: true) if attributes[:content].blank?
+        !attributes[:content].blank?
+      else
+        attributes[:content].blank?
+      end
     end
-  end
 end
