@@ -13,7 +13,13 @@ export const PostsReducer = (state = initialState.posts, action) => {
         ...state,
         list: [...action.payload]
       };
-    case Actions.FETCH_READING_POST:
+    case Actions.FETCH_READING_POSTS:
+      return {
+        ...state,
+        list: [...action.payload]
+      };
+    case Actions.FETCH_REGISTERED_POSTS_DETAIL:
+      console.log("FETCH_REGISTERED_POSTS_DETAIL",[...action.payload])
       return {
         ...state,
         list: [...action.payload]

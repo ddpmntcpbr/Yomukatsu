@@ -5,7 +5,8 @@ import {_sleep} from "../../helpers"
 import {
   fetchPostDetailAction,
   fetchPostsAction,
-  fetchReadingPostAction,
+  fetchReadingPostsAction,
+  fetchRegisteredPostsDetailAction,
   fetchRegisteredPostsAction
 } from "./actions";
 
@@ -21,10 +22,12 @@ export const fetchPostDetail = (id) => {
         'uid': localStorage.getItem('uid'),
       }
     })
-    .then((response) => [response.data])
-    .catch(() => [])
-    // console.log("fetchPostDetail",data)
-    dispatch(fetchPostDetailAction(data))
+    .then((response) => {
+      dispatch(fetchPostDetailAction(response.data))
+   })
+   .catch((error) => {
+     console.log("error",error)
+   })
     await _sleep(1000);
     dispatch(hideLoadingAction())
   }
@@ -54,10 +57,10 @@ export const fetchPosts = () => {
   }
 }
 
-export const fetchReadingPost = () => {
+export const fetchReadingPosts = () => {
   return async (dispatch) => {
     dispatch(showLoadingAction("読書中の書籍を取得中..."))
-    axios.get(process.env.REACT_APP_API_V1_URL + '/posts/reading', {
+    axios.get(process.env.REACT_APP_API_V1_URL + '/reading/posts', {
       headers: {
         'access-token': localStorage.getItem('auth_token'),
         'client': localStorage.getItem('client_id'),
@@ -65,7 +68,7 @@ export const fetchReadingPost = () => {
       }
     })
     .then((response) => {
-       dispatch(fetchReadingPostAction(response.data))
+       dispatch(fetchReadingPostsAction(response.data))
     })
     .catch((error) => {
       console.log("error",error)
@@ -78,10 +81,34 @@ export const fetchReadingPost = () => {
   }
 }
 
+export const fetchRegisteredPostsDetail = (id) => {
+  return async (dispatch) => {
+    dispatch(showLoadingAction("fetchRegisteredPostDetail..."))
+    console.log("id",id)
+    const data = await axios.get((process.env.REACT_APP_API_V1_URL + '/registered/posts/' +  String(id)), {
+      headers: {
+        'access-token': localStorage.getItem('auth_token'),
+        'client': localStorage.getItem('client_id'),
+        'uid': localStorage.getItem('uid'),
+      }
+    })
+    .then((response) => {
+      console.log("fetchRegisteredPostsDetail",response.data)
+      dispatch(fetchRegisteredPostsDetailAction([response.data]))
+   })
+   .catch((error) => {
+     console.log("error!",error)
+   })
+
+    await _sleep(1000);
+    dispatch(hideLoadingAction())
+  }
+}
+
 export const fetchRegisteredPosts = () => {
   return async (dispatch) => {
     dispatch(showLoadingAction("登録済みの書籍を取得中..."))
-    axios.get(process.env.REACT_APP_API_V1_URL + '/posts/registered', {
+    axios.get(process.env.REACT_APP_API_V1_URL + '/registered/posts', {
       headers: {
         'access-token': localStorage.getItem('auth_token'),
         'client': localStorage.getItem('client_id'),

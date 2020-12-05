@@ -1,32 +1,43 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from 'react-redux'
 import { Box,Container,Typography } from "@material-ui/core"
-// import { ReadingBookDetail } from "../components/Posts"
-import { fetchReadingPosts } from "../reducks/posts/operations"
+import { fetchRegisteredPosts } from "../reducks/posts/operations"
 import { makeStyles } from "@material-ui/styles";
 import { getPosts } from "../reducks/posts/selectors"
+import { BookCard } from "../components/UIkit"
+import { push } from "connected-react-router";
 
 const useStyles = makeStyles((theme)=>({
   root: {
   }
 }))
 
-const ReadingBookPage = () => {
+const RegisteredPostsList = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const selector = useSelector((state)=>state);
   const posts = getPosts(selector);
 
   useEffect(()=>{
-    dispatch(fetchReadingPosts())
+    dispatch(fetchRegisteredPosts())
   },[dispatch])
 
-  console.log(posts[0])
-  console.log(posts.length)
+  console.log("Render RegisteredPostList")
   return (
     <Container maxWidth="sm" >
       {posts.length > 0 ? (
-        <Typography>{posts[0].title}</Typography>
+        posts.map(post => (
+          <Box
+            key={post.id}
+            onClick={()=>dispatch(push("/registered/posts/" + String(post.id)))}
+          >
+            <BookCard
+              title={post.title}
+              author={post.author}
+              image={post.image}
+            />
+          </Box>
+        ))
       ) : (
         <Typography>読書中アイテムなし</Typography>
       )}
@@ -34,4 +45,4 @@ const ReadingBookPage = () => {
   )
 }
 
-export default ReadingBookPage
+export default RegisteredPostsList

@@ -1,42 +1,37 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from 'react-redux'
 import { Box,Container,Typography } from "@material-ui/core"
-import { fetchRegisteredPosts } from "../reducks/posts/operations"
+import { fetchRegisteredPostsDetail } from "../reducks/posts/operations"
 import { makeStyles } from "@material-ui/styles";
 import { getPosts } from "../reducks/posts/selectors"
-import { BookCard } from "../components/UIkit"
-import { push } from "connected-react-router";
 
 const useStyles = makeStyles((theme)=>({
   root: {
   }
 }))
 
-const RegisteredBookPage = () => {
+const RegisteredPostsDetail = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const selector = useSelector((state)=>state);
   const posts = getPosts(selector);
+  const path = selector.router.location.pathname;
+  // console.log("path",path)
+  const id = path.split("/registered/posts/")[1];
+  // console.log("id",id)
 
   useEffect(()=>{
-    dispatch(fetchRegisteredPosts())
-  },[dispatch])
+    // console.log(id)
+    dispatch(fetchRegisteredPostsDetail(id))
+  },[dispatch,id])
 
+  console.log("Render RegisteredPostsDetail")
+  console.log("posts",posts)
   return (
     <Container maxWidth="sm" >
+      <div>RegisteredPostDetail</div>
       {posts.length > 0 ? (
-        posts.map(post => (
-          <Box
-            key={post.id}
-            onClick={()=>dispatch(push("posts/show/" + String(post.id)))}
-          >
-            <BookCard
-              title={post.title}
-              author={post.author}
-              image={post.image}
-            />
-          </Box>
-        ))
+        <Typography>{posts[0].title}</Typography>
       ) : (
         <Typography>読書中アイテムなし</Typography>
       )}
@@ -44,4 +39,4 @@ const RegisteredBookPage = () => {
   )
 }
 
-export default RegisteredBookPage
+export default RegisteredPostsDetail
