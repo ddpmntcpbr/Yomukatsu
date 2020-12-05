@@ -7,7 +7,7 @@ import axios from "axios";
 import Typography from '@material-ui/core/Typography';
 import {SearchResultDialog,SetMapArea} from "../components/Posts";
 import {Container,Box} from "@material-ui/core";
-import {savePosts} from "../reducks/posts/operations";
+import {saveRegisteredPost} from "../reducks/posts/operations";
 import {useDispatch} from "react-redux";
 
 const useStyles = makeStyles((theme)=>({
@@ -100,7 +100,7 @@ const PostEdit = () => {
       <Box textAlign="center" mt={4}>
         <PrimaryButton
           label="POSTを登録！"
-          onClick={() => dispatch(savePosts(title,url,author,image,mapItems))} />
+          onClick={() => dispatch(saveRegisteredPost(title,url,author,image,mapItems))} />
       </Box>
     </Container>
   );

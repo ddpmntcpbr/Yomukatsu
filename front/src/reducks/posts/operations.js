@@ -77,7 +77,7 @@ export const fetchReadingPost = () => {
   }
 }
 
-export const savePosts = (title,url,author,image,mapItems) => {
+export const saveRegisteredPost = (title,url,author,image,mapItems) => {
   return async (dispatch) => {
 
     const post_items_attributes = []
@@ -90,7 +90,7 @@ export const savePosts = (title,url,author,image,mapItems) => {
       "url": url,
       "author": author,
       "image": image,
-      "status": "reading",
+      "status": "registered",
       "post_items_attributes": post_items_attributes
       }
 
