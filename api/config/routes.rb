@@ -5,6 +5,10 @@ Rails.application.routes.draw do
         omniauth_callbacks: "api/v1/auth/omniauth_callbacks",
       }
 
+      namespace :reading do
+        resources :posts, only: [:index,:show]
+      end
+
       namespace :posts do
         resources :reading, only: [:index]
         resources :registered, only: [:index]
