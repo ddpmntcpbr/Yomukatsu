@@ -21,3 +21,11 @@ export const fetchReadingPostAction = (posts) => {
     payload: posts
   }
 }
+
+export const FETCH_REGISTERED_POSTS = "FETCH_REGISTERED_POSTS";
+export const fetchRegisteredPostsAction = (posts) => {
+  return {
+    type: "FETCH_REGISTERED_POSTS",
+    payload: posts
+  }
+}

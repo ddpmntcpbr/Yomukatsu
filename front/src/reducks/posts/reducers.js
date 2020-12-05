@@ -18,6 +18,11 @@ export const PostsReducer = (state = initialState.posts, action) => {
         ...state,
         list: [...action.payload]
       };
+    case Actions.FETCH_REGISTERED_POSTS:
+      return {
+        ...state,
+        list: [...action.payload]
+      };
     default:
       return state
   }

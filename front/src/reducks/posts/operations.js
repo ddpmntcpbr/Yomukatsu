@@ -5,7 +5,8 @@ import {_sleep} from "../../helpers"
 import {
   fetchPostDetailAction,
   fetchPostsAction,
-  fetchReadingPostAction
+  fetchReadingPostAction,
+  fetchRegisteredPostsAction
 } from "./actions";
 
 
@@ -65,6 +66,30 @@ export const fetchReadingPost = () => {
     })
     .then((response) => {
        dispatch(fetchReadingPostAction(response.data))
+    })
+    .catch((error) => {
+      console.log("error",error)
+    })
+
+    await _sleep(1000);
+
+    dispatch(hideLoadingAction())
+
+  }
+}
+
+export const fetchRegisteredPosts = () => {
+  return async (dispatch) => {
+    dispatch(showLoadingAction("登録済みの書籍を取得中..."))
+    axios.get(process.env.REACT_APP_API_V1_URL + '/posts/registered', {
+      headers: {
+        'access-token': localStorage.getItem('auth_token'),
+        'client': localStorage.getItem('client_id'),
+        'uid': localStorage.getItem('uid'),
+      }
+    })
+    .then((response) => {
+       dispatch(fetchRegisteredPostsAction(response.data))
     })
     .catch((error) => {
       console.log("error",error)
