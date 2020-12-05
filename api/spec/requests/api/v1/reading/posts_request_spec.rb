@@ -44,7 +44,7 @@ RSpec.describe "Api::V1::Reading::Posts", type: :request do
 
     let(:headers) { current_user.create_new_auth_token }
     let(:current_user) { create(:user) }
-    let(:post) { create(:post, user: current_user) }
+    let(:post) { create(:post, user: current_user, status: "reading") }
     let(:post_id) { post.id }
 
     context "post 作成者自身がアクセスする場合" do

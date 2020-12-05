@@ -7,7 +7,7 @@ class Api::V1::Reading::PostsController < Api::V1::ApiController
   end
 
   def show
-    post = current_user.posts.find(params[:id])
+    post = current_user.posts.reading.find(params[:id])
     render json: post
   end
 end
