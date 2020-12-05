@@ -1,9 +1,11 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from 'react-redux'
-import { Container,Typography } from "@material-ui/core"
+import { Box,Container,Typography } from "@material-ui/core"
 import { fetchRegisteredPosts } from "../reducks/posts/operations"
 import { makeStyles } from "@material-ui/styles";
 import { getPosts } from "../reducks/posts/selectors"
+import { BookCard } from "../components/UIkit"
+import { push } from "connected-react-router";
 
 const useStyles = makeStyles((theme)=>({
   root: {
@@ -23,7 +25,18 @@ const RegisteredBookPage = () => {
   return (
     <Container maxWidth="sm" >
       {posts.length > 0 ? (
-        <Typography>{posts[0].title}</Typography>
+        posts.map(post => (
+          <Box
+            key={post.id}
+            onClick={()=>dispatch(push("posts/show/" + String(post.id)))}
+          >
+            <BookCard
+              title={post.title}
+              author={post.author}
+              image={post.image}
+            />
+          </Box>
+        ))
       ) : (
         <Typography>読書中アイテムなし</Typography>
       )}
