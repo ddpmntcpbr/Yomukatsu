@@ -19,7 +19,6 @@ export const PostsReducer = (state = initialState.posts, action) => {
         list: [...action.payload]
       };
     case Actions.FETCH_REGISTERED_POSTS_DETAIL:
-      console.log("FETCH_REGISTERED_POSTS_DETAIL",[...action.payload])
       return {
         ...state,
         list: [...action.payload]

@@ -24,7 +24,6 @@ export const fetchReadingPostsAction = (posts) => {
 
 export const FETCH_REGISTERED_POSTS_DETAIL = "FETCH_REGISTERED_POSTS_DETAIL";
 export const fetchRegisteredPostsDetailAction = (posts) => {
-  console.log("fetchRegisteredPostsDetailAction",posts)
   return {
     type: "FETCH_REGISTERED_POSTS_DETAIL",
     payload: posts

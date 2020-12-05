@@ -16,17 +16,12 @@ const RegisteredPostsDetail = () => {
   const selector = useSelector((state)=>state);
   const posts = getPosts(selector);
   const path = selector.router.location.pathname;
-  // console.log("path",path)
   const id = path.split("/registered/posts/")[1];
-  // console.log("id",id)
 
   useEffect(()=>{
-    // console.log(id)
     dispatch(fetchRegisteredPostsDetail(id))
   },[dispatch,id])
 
-  console.log("Render RegisteredPostsDetail")
-  console.log("posts",posts)
   return (
     <Container maxWidth="sm" >
       <div>RegisteredPostDetail</div>

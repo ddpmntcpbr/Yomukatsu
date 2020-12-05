@@ -22,7 +22,6 @@ const RegisteredPostsList = () => {
     dispatch(fetchRegisteredPosts())
   },[dispatch])
 
-  console.log("Render RegisteredPostList")
   return (
     <Container maxWidth="sm" >
       {posts.length > 0 ? (

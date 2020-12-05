@@ -84,7 +84,6 @@ export const fetchReadingPosts = () => {
 export const fetchRegisteredPostsDetail = (id) => {
   return async (dispatch) => {
     dispatch(showLoadingAction("fetchRegisteredPostDetail..."))
-    console.log("id",id)
     const data = await axios.get((process.env.REACT_APP_API_V1_URL + '/registered/posts/' +  String(id)), {
       headers: {
         'access-token': localStorage.getItem('auth_token'),
@@ -93,7 +92,6 @@ export const fetchRegisteredPostsDetail = (id) => {
       }
     })
     .then((response) => {
-      console.log("fetchRegisteredPostsDetail",response.data)
       dispatch(fetchRegisteredPostsDetailAction([response.data]))
    })
    .catch((error) => {
