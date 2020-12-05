@@ -1,4 +1,12 @@
 Rails.application.routes.draw do
+  namespace :api do
+    namespace :v1 do
+      namespace :registered do
+        get 'posts/index'
+        get 'posts/show'
+      end
+    end
+  end
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
       mount_devise_token_auth_for "User", at: "auth", controllers: {
@@ -6,6 +14,10 @@ Rails.application.routes.draw do
       }
 
       namespace :reading do
+        resources :posts, only: [:index,:show]
+      end
+
+      namespace :registered do
         resources :posts, only: [:index,:show]
       end
 
