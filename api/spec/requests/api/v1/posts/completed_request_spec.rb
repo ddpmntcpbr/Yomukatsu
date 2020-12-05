@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe "Api::V1::Posts::Completed", type: :request do
   describe "GET api/v1/posts/completed" do

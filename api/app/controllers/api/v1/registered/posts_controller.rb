@@ -1,5 +1,5 @@
 class Api::V1::Registered::PostsController < Api::V1::ApiController
-  before_action :authenticate_user!, only: [:index,:show]
+  before_action :authenticate_user!, only: [:index, :show]
 
   def index
     posts = current_user.posts.registered.order(created_at: :desc)

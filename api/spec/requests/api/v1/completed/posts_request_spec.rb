@@ -1,7 +1,6 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe "Api::V1::Completed::Posts", type: :request do
-
   describe "GET api/v1/completed/posts" do
     subject { get(api_v1_completed_posts_path, headers: headers) }
 
@@ -74,5 +73,4 @@ RSpec.describe "Api::V1::Completed::Posts", type: :request do
       end
     end
   end
-
 end
