@@ -1,11 +1,12 @@
 import axios from "axios";
 import { push } from "connected-react-router";
-import { fetchPostDetailAction,fetchPostsAction } from "./actions";
-// import { useSelector } from "react-redux";
-// import { getPosts } from "../posts/selectors";
 import {hideLoadingAction, showLoadingAction} from "../loading/actions";
-// import { hideLoading, showLoading } from "../loading/operations";
 import {_sleep} from "../../helpers"
+import {
+  fetchPostDetailAction,
+  fetchPostsAction,
+  fetchReadingPostAction
+} from "./actions";
 
 
 export const fetchPostDetail = (id) => {
@@ -30,7 +31,6 @@ export const fetchPostDetail = (id) => {
 
 export const fetchPosts = () => {
   return async (dispatch) => {
-    // console.log("fetchPosts")
     dispatch(showLoadingAction("書籍リストを取得中..."))
     axios.get(process.env.REACT_APP_API_V1_URL + '/posts', {
       headers: {
@@ -41,6 +41,30 @@ export const fetchPosts = () => {
     })
     .then((response) => {
        dispatch(fetchPostsAction(response.data))
+    })
+    .catch((error) => {
+      console.log("error",error)
+    })
+
+    await _sleep(1000);
+
+    dispatch(hideLoadingAction())
+
+  }
+}
+
+export const fetchReadingPost = () => {
+  return async (dispatch) => {
+    dispatch(showLoadingAction("読書中の書籍を取得中..."))
+    axios.get(process.env.REACT_APP_API_V1_URL + '/posts/reading', {
+      headers: {
+        'access-token': localStorage.getItem('auth_token'),
+        'client': localStorage.getItem('client_id'),
+        'uid': localStorage.getItem('uid'),
+      }
+    })
+    .then((response) => {
+       dispatch(fetchReadingPostAction(response.data))
     })
     .catch((error) => {
       console.log("error",error)

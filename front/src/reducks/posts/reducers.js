@@ -13,6 +13,11 @@ export const PostsReducer = (state = initialState.posts, action) => {
         ...state,
         list: [...action.payload]
       };
+    case Actions.FETCH_READING_POST:
+      return {
+        ...state,
+        list: [...action.payload]
+      };
     default:
       return state
   }

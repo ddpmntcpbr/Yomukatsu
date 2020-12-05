@@ -13,3 +13,11 @@ export const fetchPostsAction = (posts) => {
     payload: posts
   }
 }
+
+export const FETCH_READING_POST = "FETCH_READING_POST";
+export const fetchReadingPostAction = (posts) => {
+  return {
+    type: "FETCH_READING_POST",
+    payload: posts
+  }
+}
