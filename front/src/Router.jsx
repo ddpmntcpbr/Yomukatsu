@@ -4,12 +4,10 @@ import {
   CompletedPostsDetail,
   CompletedPostsList,
   PostEdit,
-  PostShow,
   ReadingPostsDetail,
   RegisteredPostsDetail,
   RegisteredPostsList,
-  TopPage,
-  MyPage}
+  TopPage}
 from "./templates";
 import Auth from "./Auth"
 
@@ -24,9 +22,7 @@ const Router = () => {
         <Route exact path={"/reading/posts"} component={ReadingPostsDetail} />
         <Route exact path={"/registered/posts"} component={RegisteredPostsList} />
         <Route exaxt path={"/registered/posts/:id"} component={RegisteredPostsDetail} />
-        <Route exact path={"/mypage"} component={MyPage} />
         <Route exact path={"/posts/edit"} component={PostEdit} />
-        <Route path={"/posts/show(/:id)?"} component={PostShow} />
       </Auth>
     </Switch>
   );

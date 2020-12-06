@@ -87,7 +87,7 @@ const PostEdit = () => {
   },[dispatch,title,url,author,image,mapItems])
 
   return (
-    <Container maxWidth="sm" style={{backgroundColor:"white"}}>
+    <Container maxWidth="md" style={{backgroundColor:"white"}}>
       <Typography variant="h2" className={classes.titleTypography}>
         POST登録
       </Typography>
