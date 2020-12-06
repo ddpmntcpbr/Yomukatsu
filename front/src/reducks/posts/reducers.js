@@ -18,12 +18,22 @@ export const PostsReducer = (state = initialState.posts, action) => {
         ...state,
         list: [...action.payload]
       };
-    case Actions.FETCH_REGISTERED_POSTS_DETAIL:
+    case Actions.FETCH_COMPLETED_POSTS:
+      return {
+        ...state,
+        list: [...action.payload]
+      };
+    case Actions.FETCH_COMPLETED_POSTS_DETAIL:
       return {
         ...state,
         list: [...action.payload]
       };
     case Actions.FETCH_REGISTERED_POSTS:
+      return {
+        ...state,
+        list: [...action.payload]
+      };
+    case Actions.FETCH_REGISTERED_POSTS_DETAIL:
       return {
         ...state,
         list: [...action.payload]
