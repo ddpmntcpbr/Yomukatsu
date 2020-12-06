@@ -52,7 +52,7 @@ const ResponsiveBottomNavigation = () => {
           label={"ホーム"}
           className={classes.button}
           icon={<HomeIcon/>}
-          onClick={()=>dispatch(push("/current/posts"))}
+          onClick={()=>dispatch(push("/reading/posts"))}
         />
         <BottomNavigationAction
           label={"登録中"}
