@@ -5,7 +5,6 @@ import {
   CompletedPostsList,
   PostEdit,
   PostShow,
-  ReadingBookPage,
   ReadingPostsDetail,
   RegisteredPostsDetail,
   RegisteredPostsList,
@@ -22,7 +21,6 @@ const Router = () => {
       <Auth>
         <Route exact path={"/completed/posts/:id"} component={CompletedPostsDetail} />
         <Route exact path={"/completed/posts"} component={CompletedPostsList} />
-        <Route exact path={"/reading/posts"} component={ReadingBookPage} />
         <Route exact path={"/reading/posts"} component={ReadingPostsDetail} />
         <Route exact path={"/registered/posts"} component={RegisteredPostsList} />
         <Route exaxt path={"/registered/posts/:id"} component={RegisteredPostsDetail} />
