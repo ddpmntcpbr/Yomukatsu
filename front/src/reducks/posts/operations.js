@@ -200,7 +200,7 @@ export const saveRegisteredPost = (title,url,author,image,mapItems) => {
         }
       })
       .then((response) => {
-        dispatch(push("/mypage"))
+        dispatch(push("/registered/posts"))
       })
       .catch((error) => {
         console.log("error",error)
