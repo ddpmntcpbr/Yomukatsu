@@ -2,9 +2,11 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
-import LocationOnIcon from '@material-ui/icons/LocationOn';
+import HelpIcon from '@material-ui/icons/Help';
 import HomeIcon from '@material-ui/icons/Home';
-import InfoIcon from '@material-ui/icons/Info';
+import BookmarksIcon from '@material-ui/icons/Bookmarks';
+import AccountBoxIcon from '@material-ui/icons/AccountBox';
+import BookmarkBorderIcon from '@material-ui/icons/BookmarkBorder';
 import {useLocation} from 'react-router-dom';
 import { push } from "connected-react-router";
 import { useDispatch } from 'react-redux';
@@ -50,19 +52,31 @@ const ResponsiveBottomNavigation = () => {
           label={"ホーム"}
           className={classes.button}
           icon={<HomeIcon/>}
-          onClick={()=>dispatch(push("/"))}
+          onClick={()=>dispatch(push("/current/posts"))}
         />
         <BottomNavigationAction
-          label={"マイページ"}
+          label={"登録中"}
           className={classes.button}
-          icon={<InfoIcon/>}
-          onClick={()=>dispatch(push("/mypage"))}
+          icon={<BookmarkBorderIcon/>}
+          onClick={()=>dispatch(push("/registered/posts"))}
         />
         <BottomNavigationAction
-          label={"新規登録"}
+          label={"完読済"}
           className={classes.button}
-          icon={<LocationOnIcon/>}
-          onClick={()=>dispatch(push("/posts/edit"))}
+          icon={<BookmarksIcon/>}
+          onClick={()=>dispatch(push("/completed/posts"))}
+        />
+        <BottomNavigationAction
+          label={"ヒント"}
+          className={classes.button}
+          icon={<HelpIcon/>}
+          onClick={()=>dispatch(push("/help"))}
+        />
+        <BottomNavigationAction
+          label={"アカウント"}
+          className={classes.button}
+          icon={<AccountBoxIcon/>}
+          onClick={()=>dispatch(push("/account"))}
         />
       </BottomNavigation>
   </div>
