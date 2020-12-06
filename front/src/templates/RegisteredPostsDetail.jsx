@@ -1,9 +1,7 @@
 import React, { useEffect,useState,useCallback } from "react";
 import { useSelector, useDispatch } from 'react-redux'
 import { Box,Button,Card,CardContent,Container,Paper,Typography,Divider } from "@material-ui/core"
-// import { fetchRegisteredPostsDetail } from "../reducks/posts/operations"
 import { makeStyles } from "@material-ui/styles";
-// import { getPosts } from "../reducks/posts/selectors"
 import axios from "axios"
 import { BookCard,SecondaryButton,QuestionDialog } from "../components/UIkit"
 import { updateStatusToCompleted } from "../reducks/posts/operations"
@@ -12,6 +10,7 @@ import { push } from "connected-react-router";
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import { Helmet } from "react-helmet";
+import { isNonEmptyArray } from "../helpers"
 
 const useStyles = makeStyles((theme)=>({
   root: {
@@ -87,17 +86,23 @@ const RegisteredPostsDetail = () => {
             </Typography>
             <Divider />
 
-            {post.post_items && post.post_items.map(mapItem => (
-              <Box key={mapItem.id} my={2} >
-                <Card className={classes.mapItem} variant="outlined">
-                  <CardContent>
-                    <Typography component="p">
-                      {mapItem.content}
-                    </Typography>
-                  </CardContent>
-                </Card>
-              </Box>
-            ))}
+            <Box>
+              {isNonEmptyArray(post.post_items) ? post.post_items.map(mapItem => (
+                <Box key={mapItem.id} my={2} >
+                  <Typography>マップアイテムがありません</Typography>
+                  <Card className={classes.mapItem} variant="outlined">
+                    <CardContent>
+                      <Typography component="p">
+                        {mapItem.content}
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                </Box>
+              )) :
+                <Typography>マップアイテムがありません</Typography>
+              }
+            </Box>
+
             <Box>
               <Box display="flex" justifyContent="center" my={4}>
                 <SecondaryButton label="完読した!" onClick={handleClickOpen}/>
