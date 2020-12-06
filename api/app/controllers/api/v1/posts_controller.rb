@@ -13,11 +13,13 @@ class Api::V1::PostsController < Api::V1::ApiController
 
   def create
     post = current_user.posts.create!(post_params)
+    prevent_duplication_of_reading_post(post)
     render json: post
   end
 
   def update
     @post = current_user.posts.find(params[:id])
+    prevent_duplication_of_reading_post(@post)
     @post.update!(post_params)
     render json: @post
   end
@@ -32,5 +34,12 @@ class Api::V1::PostsController < Api::V1::ApiController
 
     def post_params
       params.require(:post).permit(:title, :url, :author, :image, :status, post_items_attributes: [:id, :content, :_destroy])
+    end
+
+    def prevent_duplication_of_reading_post(post)
+      if post.status == "reading"
+        current_reading_post = current_user.posts.reading
+        current_reading_post.update!(status: "registered")
+      end
     end
 end
