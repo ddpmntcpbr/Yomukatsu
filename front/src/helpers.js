@@ -5,6 +5,8 @@ export const isNonEmptyArray = (obj) => {
     return false
   } else if(obj.length === 0) {
     return false
+  } else if(0 === Object.keys(obj).length){
+    return false
   } else {
     return true
   }
