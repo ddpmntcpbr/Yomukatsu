@@ -11,6 +11,7 @@ import {TwitterShareButton,TwitterIcon} from "react-share";
 import { push } from "connected-react-router";
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
+import { Helmet } from "react-helmet";
 
 const useStyles = makeStyles((theme)=>({
   root: {
@@ -27,6 +28,9 @@ const RegisteredPostsDetail = () => {
   const id = path.split("/registered/posts/")[1];
   const [post,setPost] = useState({});
   const [open, setOpen] = useState(false);
+  // const [siteUrl, setSiteUrl] = useState("");
+  const title = `この本を読みます！\n#yomukatsu`;
+  const [tweetMessage,setTweetMessage] = useState("")
 
   useEffect(()=>{
     const fetchPostsDetail = async () => {
@@ -38,6 +42,7 @@ const RegisteredPostsDetail = () => {
         }
       })
       setPost(response.data)
+      setTweetMessage(`今から『`+ response.data.title +`』を読み切ります！\n#yomukatsu`)
     };
     fetchPostsDetail()
   },[dispatch,id])
@@ -56,8 +61,15 @@ const RegisteredPostsDetail = () => {
     dispatch(push("/completed/posts"))
   },[dispatch,handleClose,post])
 
+  console.log(post)
   return (
     <Container maxWidth="md" >
+      <Helmet
+        meta={[
+          {"property": "og:image", "content": post.image},
+          {"property": "og:url", "content": process.env.REACT_APP_BASE_URL}
+        ]}
+      />
       {post && (
         <Paper>
           <Box p={1} >
@@ -114,7 +126,7 @@ const RegisteredPostsDetail = () => {
                 contentText="一度完読にしたアイテムは、元には戻せません"
               />
             </Box>
-            <TwitterShareButton url={"https://www.sambaiz.net"} title={"タイトル"}>
+            <TwitterShareButton url={process.env.REACT_APP_BASE_URL} title={tweetMessage}>
               <TwitterIcon size={64} round />
             </TwitterShareButton>
           </Box>
