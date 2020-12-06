@@ -1,6 +1,7 @@
 export {default as CompletedBookDetail} from "./CompletedBookDetail"
 export {default as CompletedBooksList} from "./CompletedBooksList"
 export {default as MapItemCard} from "./MapItemCard"
+export {default as PostEditDialog} from "./PostEditDialog"
 export {default as ReadingBookDetail} from "./ReadingBookDetail"
 export {default as ReadingBooksList} from "./ReadingBooksList"
 export {default as SearchResultDialog} from "./SearchResultDialog"

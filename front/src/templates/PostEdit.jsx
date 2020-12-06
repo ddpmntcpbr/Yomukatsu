@@ -5,9 +5,9 @@ import SearchIcon from "@material-ui/icons/Search";
 import {makeStyles} from "@material-ui/styles";
 import axios from "axios";
 import Typography from '@material-ui/core/Typography';
-import {SearchResultDialog,SetMapArea} from "../components/Posts";
+import {PostEditDialog,SearchResultDialog,SetMapArea} from "../components/Posts";
 import {Container,Box} from "@material-ui/core";
-import {saveRegisteredPost} from "../reducks/posts/operations";
+import {saveReadingPost,saveRegisteredPost} from "../reducks/posts/operations";
 import {useDispatch} from "react-redux";
 
 const useStyles = makeStyles((theme)=>({
@@ -30,7 +30,8 @@ const PostEdit = () => {
   const dispatch = useDispatch();
 
   const [query, setQuery] = useState("")
-  const [open, setOpen] = useState(false);
+  const [searchModalOpen, setSearchModalOpen] = useState(false);
+  const [saveModalOpen, setSaveModalOpen] = useState(false);
   const [searchResults, setSearchResults] = useState([]);
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
@@ -53,8 +54,7 @@ const PostEdit = () => {
       axios.get(baseUrl+params)
       .then(response => {
         setSearchResults(response.data.items)
-        console.log(response.data.items)
-        setOpen(true)
+        setSearchModalOpen(true)
       })
       .catch(error => {
         console.log(error)
@@ -62,13 +62,29 @@ const PostEdit = () => {
     }
   }
 
-  const handleClose = useCallback(() => {
-    setOpen(false)
-  }, [setOpen]);
+  const handleSearchModalClose = useCallback(() => {
+    setSearchModalOpen(false)
+  }, [setSearchModalOpen]);
+
+  const handleSaveModalOpen = useCallback(() => {
+    setSaveModalOpen(true)
+  }, [setSaveModalOpen]);
+
+  const handleSaveModalClose = useCallback(() => {
+    setSaveModalOpen(false)
+  }, [setSaveModalOpen]);
 
   const handleClickSearchIcon = () => {
     getSearchBooks(query)
   };
+
+  const handleSaveReadingPost = useCallback(() => {
+    dispatch(saveReadingPost(title,url,author,image,mapItems))
+  },[dispatch,title,url,author,image,mapItems])
+
+  const handleSaveRegisteredPost = useCallback(() => {
+    dispatch(saveRegisteredPost(title,url,author,image,mapItems))
+  },[dispatch,title,url,author,image,mapItems])
 
   return (
     <Container maxWidth="sm" style={{backgroundColor:"white"}}>
@@ -88,7 +104,7 @@ const PostEdit = () => {
         </IconButton>
       </Box>
       <SearchResultDialog
-        open={open} searchResults={searchResults} handleClose={handleClose}
+        open={searchModalOpen} searchResults={searchResults} handleClose={handleSearchModalClose}
         setTitle={setTitle} setAuthor={setAuthor} setImage={setImage} setUrl={setUrl}
       />
       <BookCard title={title} author={author} image={image} />
@@ -101,7 +117,18 @@ const PostEdit = () => {
         <PrimaryButton
           label="POSTを登録！"
           onClick={() => dispatch(saveRegisteredPost(title,url,author,image,mapItems))} />
+        <PrimaryButton
+          label="モーダルを開く"
+          onClick={handleSaveModalOpen} />
       </Box>
+      <PostEditDialog
+        open={saveModalOpen}
+        handleClose={handleSaveModalClose}
+        handleSaveReadingPost={handleSaveReadingPost}
+        handleSaveRegisteredPost={handleSaveRegisteredPost}
+        title="書籍を読書中アイテムとしてセットしますか？"
+        contentText="読書中の切り替えは後からでも変更できます"
+      />
     </Container>
   );
 };
