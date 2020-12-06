@@ -39,9 +39,8 @@ const ReadingPostsDetail = () => {
           'uid': localStorage.getItem('uid'),
         }
       })
-      console.log(response)
-      setPost(response.data)
-      setTweetMessage(`今から『`+ response.data.title +`』を読み切ります！\n#yomukatsu`)
+      setPost(response.data[0])
+      setTweetMessage(`今から『`+ response.data[0].title +`』を読み切ります！\n#yomukatsu`)
     };
     fetchPostsDetail()
   },[dispatch,id])
@@ -60,7 +59,6 @@ const ReadingPostsDetail = () => {
     dispatch(push("/completed/posts"))
   },[dispatch,handleClose,post])
 
-  console.log(post)
   return (
     <Container maxWidth="md" >
       <Helmet
