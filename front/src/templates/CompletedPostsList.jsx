@@ -23,7 +23,7 @@ const CompletedPostsList = () => {
   },[dispatch])
 
   return (
-    <Container maxWidth="sm" >
+    <Container maxWidth="md" className={classes.root}>
       {posts.length > 0 ? (
         posts.map(post => (
           <Box

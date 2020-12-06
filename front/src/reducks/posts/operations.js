@@ -5,59 +5,10 @@ import {_sleep} from "../../helpers"
 import {
   fetchCompletedPostsAction,
   fetchCompletedPostsDetailAction,
-  fetchPostDetailAction,
-  fetchPostsAction,
   fetchReadingPostsAction,
   fetchRegisteredPostsAction,
   fetchRegisteredPostsDetailAction
 } from "./actions";
-
-
-export const fetchPostDetail = (id) => {
-  return async (dispatch) => {
-    dispatch(showLoadingAction("書籍情報を取得中..."))
-
-    const data = await axios.get((process.env.REACT_APP_API_V1_URL + '/posts/' +  String(id)), {
-      headers: {
-        'access-token': localStorage.getItem('auth_token'),
-        'client': localStorage.getItem('client_id'),
-        'uid': localStorage.getItem('uid'),
-      }
-    })
-    .then((response) => {
-      dispatch(fetchPostDetailAction(response.data))
-   })
-   .catch((error) => {
-     console.log("error",error)
-   })
-    await _sleep(1000);
-    dispatch(hideLoadingAction())
-  }
-}
-
-export const fetchPosts = () => {
-  return async (dispatch) => {
-    dispatch(showLoadingAction("書籍リストを取得中..."))
-    axios.get(process.env.REACT_APP_API_V1_URL + '/posts', {
-      headers: {
-        'access-token': localStorage.getItem('auth_token'),
-        'client': localStorage.getItem('client_id'),
-        'uid': localStorage.getItem('uid'),
-      }
-    })
-    .then((response) => {
-       dispatch(fetchPostsAction(response.data))
-    })
-    .catch((error) => {
-      console.log("error",error)
-    })
-
-    await _sleep(1000);
-
-    dispatch(hideLoadingAction())
-
-  }
-}
 
 export const fetchReadingPosts = () => {
   return async (dispatch) => {
@@ -110,7 +61,7 @@ export const fetchCompletedPosts = () => {
 export const fetchCompletedPostsDetail = (id) => {
   return async (dispatch) => {
     dispatch(showLoadingAction("fetchCompletedPostsDetail..."))
-    const data = await axios.get((process.env.REACT_APP_API_V1_URL + '/completed/posts/' +  String(id)), {
+    await axios.get((process.env.REACT_APP_API_V1_URL + '/completed/posts/' +  String(id)), {
       headers: {
         'access-token': localStorage.getItem('auth_token'),
         'client': localStorage.getItem('client_id'),
@@ -156,7 +107,7 @@ export const fetchRegisteredPosts = () => {
 export const fetchRegisteredPostsDetail = (id) => {
   return async (dispatch) => {
     dispatch(showLoadingAction("fetchRegisteredPostDetail..."))
-    const data = await axios.get((process.env.REACT_APP_API_V1_URL + '/registered/posts/' +  String(id)), {
+    await axios.get((process.env.REACT_APP_API_V1_URL + '/registered/posts/' +  String(id)), {
       headers: {
         'access-token': localStorage.getItem('auth_token'),
         'client': localStorage.getItem('client_id'),
@@ -192,7 +143,7 @@ export const saveReadingPost = (title,url,author,image,mapItems) => {
       "post_items_attributes": post_items_attributes
       }
 
-    axios.post(process.env.REACT_APP_API_V1_URL + '/posts', data, {
+    await axios.post(process.env.REACT_APP_API_V1_URL + '/posts', data, {
         headers: {
           'access-token': localStorage.getItem('auth_token'),
           'client': localStorage.getItem('client_id'),
@@ -200,7 +151,7 @@ export const saveReadingPost = (title,url,author,image,mapItems) => {
         }
       })
       .then((response) => {
-        dispatch(push("/registered/posts"))
+        dispatch(push("/reading/posts"))
       })
       .catch((error) => {
         console.log("error",error)
@@ -225,7 +176,7 @@ export const saveRegisteredPost = (title,url,author,image,mapItems) => {
       "post_items_attributes": post_items_attributes
       }
 
-    axios.post(process.env.REACT_APP_API_V1_URL + '/posts', data, {
+    await axios.post(process.env.REACT_APP_API_V1_URL + '/posts', data, {
         headers: {
           'access-token': localStorage.getItem('auth_token'),
           'client': localStorage.getItem('client_id'),
@@ -246,12 +197,10 @@ export const updateStatusToCompleted = (prevData) =>{
     const id = prevData.id
 
     const data = {
-      // "id": prevData.id,
       "status": "completed"
       }
-    // console.log("updateStatusToCompleted", data)
 
-    axios.put((process.env.REACT_APP_API_V1_URL + '/posts/' + String(id)), data, {
+    await axios.put((process.env.REACT_APP_API_V1_URL + '/posts/' + String(id)), data, {
         headers: {
           'access-token': localStorage.getItem('auth_token'),
           'client': localStorage.getItem('client_id'),
@@ -259,8 +208,7 @@ export const updateStatusToCompleted = (prevData) =>{
         }
       })
       .then((response) => {
-        // console.log(response)
-        dispatch(push("/mypage"))
+        dispatch(push("/completed/posts"))
       })
       .catch((error) => {
         console.log("error",error)

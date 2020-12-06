@@ -28,8 +28,6 @@ const RegisteredPostsDetail = () => {
   const id = path.split("/registered/posts/")[1];
   const [post,setPost] = useState({});
   const [open, setOpen] = useState(false);
-  // const [siteUrl, setSiteUrl] = useState("");
-  const title = `この本を読みます！\n#yomukatsu`;
   const [tweetMessage,setTweetMessage] = useState("")
 
   useEffect(()=>{
@@ -61,7 +59,6 @@ const RegisteredPostsDetail = () => {
     dispatch(push("/completed/posts"))
   },[dispatch,handleClose,post])
 
-  console.log(post)
   return (
     <Container maxWidth="md" >
       <Helmet

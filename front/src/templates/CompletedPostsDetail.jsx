@@ -1,12 +1,10 @@
-import React, { useEffect,useState,useCallback } from "react";
+import React, { useEffect,useState } from "react";
 import { useSelector, useDispatch } from 'react-redux'
 import { Box,Button,Card,CardContent,Container,Paper,Typography,Divider } from "@material-ui/core"
 import { makeStyles } from "@material-ui/styles";
 import axios from "axios"
 import { BookCard } from "../components/UIkit"
-import { updateStatusToCompleted } from "../reducks/posts/operations"
 import {TwitterShareButton,TwitterIcon} from "react-share";
-import { push } from "connected-react-router";
 import DeleteIcon from '@material-ui/icons/Delete';
 import { Helmet } from "react-helmet";
 import { isNonEmptyArray } from "../helpers"
