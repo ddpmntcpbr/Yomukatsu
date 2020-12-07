@@ -37,7 +37,9 @@ const CompletedPostsDetail = () => {
       setPost(response.data)
       setTweetMessage(`『`+ response.data.title +`』を完読しました！\n#yomukatsu`)
     };
-    fetchPostsDetail()
+    if(typeof id !== 'undefined'){
+      fetchPostsDetail()
+    }
   },[dispatch,id])
 
   return (

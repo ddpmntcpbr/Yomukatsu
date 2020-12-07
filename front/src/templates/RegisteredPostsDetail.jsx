@@ -41,7 +41,9 @@ const RegisteredPostsDetail = () => {
       setPost(response.data)
       setTweetMessage(`今から『`+ response.data.title +`』を読み切ります！\n#yomukatsu`)
     };
-    fetchPostsDetail()
+    if(typeof id !== 'undefined'){
+      fetchPostsDetail()
+    }
   },[dispatch,id])
 
   const handleClickOpen = useCallback(() => {
