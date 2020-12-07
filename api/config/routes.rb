@@ -12,6 +12,7 @@ Rails.application.routes.draw do
 
       namespace :registered do
         resources :posts, only: [:index, :show]
+        get "/posts/exchange_registered_and_reading_post/:id", to: "posts#exchange_registered_and_reading_post"
       end
 
       namespace :completed do

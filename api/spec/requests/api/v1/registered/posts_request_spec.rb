@@ -73,4 +73,28 @@ RSpec.describe "Api::V1::Registered::Posts", type: :request do
       end
     end
   end
+
+  describe "GET api/v1/registered/change_status_from_reading_to_registered" do
+    subject { get(api_v1_registered_path(registered_post_id), headers: headers) }
+
+    let(:headers) { current_user.create_new_auth_token }
+    let(:current_user) { create(:user) }
+
+    context "reading post が存在する場合" do
+      let(:registered_post) { create(:post, user: current_user, status: "registered") }
+      let!(:registered_post_id) { registered_post.id }
+      let(:reading_post) { create(:post, user: current_user, status: "reading") }
+      let!(:reading_post_id) { reading_post.id }
+
+      it "reading post と registered post の status が交換される" do
+        subject
+        res = JSON.parse(response.body)
+        expect(current_user.posts.reading.count).to eq 1
+        expect(current_user.posts.registered.count).to eq 1
+        expect(current_user.posts.find(reading_post_id).status).to eq "registered"
+        expect(current_user.posts.find(registered_post_id).status).to eq "reading"
+        expect(response).to have_http_status(:ok)
+      end
+    end
+  end
 end
