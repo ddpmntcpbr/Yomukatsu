@@ -33,5 +33,4 @@ class Api::V1::PostsController < Api::V1::ApiController
     def post_params
       params.require(:post).permit(:title, :url, :author, :image, :status, post_items_attributes: [:id, :content, :_destroy])
     end
-
 end
