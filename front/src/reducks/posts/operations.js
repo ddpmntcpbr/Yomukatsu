@@ -128,7 +128,7 @@ export const fetchRegisteredPostsDetail = (id) => {
 
 export const saveReadingPost = (title,url,author,image,mapItems) => {
   return async (dispatch) => {
-
+    dispatch(showLoadingAction("書籍情報を作成中..."))
     const post_items_attributes = []
     mapItems.map((mapItem) => (
       post_items_attributes.push({"content":mapItem.mapItem})
@@ -143,19 +143,35 @@ export const saveReadingPost = (title,url,author,image,mapItems) => {
       "post_items_attributes": post_items_attributes
       }
 
-    await axios.post(process.env.REACT_APP_API_V1_URL + '/posts', data, {
+
+    axios.get(process.env.REACT_APP_API_V1_URL + '/reading/change_status_from_reading_to_registered', {
+      headers: {
+        'access-token': localStorage.getItem('auth_token'),
+        'client': localStorage.getItem('client_id'),
+        'uid': localStorage.getItem('uid'),
+      }
+    })
+    .then(() => {
+      axios.post(process.env.REACT_APP_API_V1_URL + '/posts', data, {
         headers: {
           'access-token': localStorage.getItem('auth_token'),
           'client': localStorage.getItem('client_id'),
           'uid': localStorage.getItem('uid'),
         }
       })
-      .then((response) => {
+      .then(() => {
         dispatch(push("/reading/posts"))
       })
       .catch((error) => {
         console.log("error",error)
       })
+    })
+    .catch((error) => {
+      console.log("error",error)
+    })
+
+    await _sleep(1000);
+    dispatch(hideLoadingAction())
   }
 }
 
