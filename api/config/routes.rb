@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
       namespace :reading do
         resources :posts, only: [:index, :show]
+        get :change_status_from_reading_to_registered, to: "posts#change_status_from_reading_to_registered"
       end
 
       namespace :registered do

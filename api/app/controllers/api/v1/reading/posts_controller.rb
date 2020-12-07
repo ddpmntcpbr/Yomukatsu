@@ -10,4 +10,12 @@ class Api::V1::Reading::PostsController < Api::V1::ApiController
     post = current_user.posts.reading.find(params[:id])
     render json: post
   end
+
+  def change_status_from_reading_to_registered
+    @post = current_user.posts.reading.first
+    if @post.present?
+      @post.update!(status: "registered")
+    end
+  end
+
 end

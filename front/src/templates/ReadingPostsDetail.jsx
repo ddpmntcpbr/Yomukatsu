@@ -39,8 +39,10 @@ const ReadingPostsDetail = () => {
         }
       })
       .then((response) => {
-        setPost(response.data[0])
-        setTweetMessage(`今から『`+ response.data[0].title +`』を読み切ります！\n#yomukatsu`)
+        if(isNonEmptyArray(response.data[0])){
+          setPost(response.data[0])
+          setTweetMessage(`今から『`+ response.data[0].title +`』を読み切ります！\n#yomukatsu`)
+        }
       })
       .catch((error) => {
         console.log(error)
@@ -63,7 +65,6 @@ const ReadingPostsDetail = () => {
     dispatch(push("/completed/posts"))
   },[dispatch,handleClose,post])
 
-  console.log("post",post)
   return (
     <Container maxWidth="md" >
       {isNonEmptyArray(post) ?
