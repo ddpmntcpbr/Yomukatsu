@@ -5,7 +5,7 @@ FactoryBot.define do
     author { Faker::Name.name }
     image { Faker::Internet.url(host: "m.media-amazon.com/images") }
     user
-    status { "reading" }
+    status { "registered" }
 
     after(:build) do |post|
       3.times do

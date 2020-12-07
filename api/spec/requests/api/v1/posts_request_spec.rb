@@ -76,7 +76,7 @@ RSpec.describe "Api::V1::Posts", type: :request do
         expect(res["url"]).to eq @params[:post][:url]
         expect(res["author"]).to eq @params[:post][:author]
         expect(res["image"]).to eq @params[:post][:image]
-        expect(res["status"]).to eq "reading"
+        expect(res["status"]).to eq "registered"
         expect(res["post_items"].length).to eq 3
         expect(res["post_items"].first["content"]).to eq @params[:post][:post_items_attributes].first[:content]
         expect(response).to have_http_status(:ok)
@@ -134,19 +134,19 @@ RSpec.describe "Api::V1::Posts", type: :request do
       end
     end
 
-    context "post_items を全て消して更新しようとした場合" do
-      before do
-        @post = create(:post, user: current_user)
-        @params = { post: { title: Faker::Lorem.word, url: Faker::Internet.url, image: Faker::Internet.url, status: "completed", created_at: Time.current } }
-        @params[:post][:post_items_attributes] = [{ id: @post.post_items.first.id, content: "" },
-                                                  { id: @post.post_items.second.id, content: "" },
-                                                  { id: @post.post_items.third.id, content: "" }]
-      end
+    # context "post_items を全て消して更新しようとした場合" do
+    #   before do
+    #     @post = create(:post, user: current_user)
+    #     @params = { post: { title: Faker::Lorem.word, url: Faker::Internet.url, image: Faker::Internet.url, status: "completed", created_at: Time.current } }
+    #     @params[:post][:post_items_attributes] = [{ id: @post.post_items.first.id, content: "" },
+    #                                               { id: @post.post_items.second.id, content: "" },
+    #                                               { id: @post.post_items.third.id, content: "" }]
+    #   end
 
-      it "バリデーションエラーにより更新できない" do
-        expect { subject }.to raise_error(ActiveRecord::RecordInvalid)
-      end
-    end
+    #   it "バリデーションエラーにより更新できない" do
+    #     expect { subject }.to raise_error(ActiveRecord::RecordInvalid)
+    #   end
+    # end
 
     context "post 作成者以外が更新しようとした場合" do
       before do
