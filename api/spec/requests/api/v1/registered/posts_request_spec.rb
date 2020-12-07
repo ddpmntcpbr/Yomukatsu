@@ -88,7 +88,6 @@ RSpec.describe "Api::V1::Registered::Posts", type: :request do
 
       it "reading post と registered post の status が交換される" do
         subject
-        res = JSON.parse(response.body)
         expect(current_user.posts.reading.count).to eq 1
         expect(current_user.posts.registered.count).to eq 1
         expect(current_user.posts.find(reading_post_id).status).to eq "registered"

@@ -16,7 +16,6 @@ class Api::V1::Reading::PostsController < Api::V1::ApiController
     if @post.present?
       @post.update!(status: "registered")
     end
-    render json: @post ,status: 200
+    render json: @post, status: 200
   end
-
 end
