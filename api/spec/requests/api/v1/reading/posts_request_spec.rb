@@ -92,6 +92,7 @@ RSpec.describe "Api::V1::Reading::Posts", type: :request do
         expect(current_user.posts.reading.count).to eq 0
         expect(current_user.posts.registered.count).to eq 3
         expect(current_user.posts.completed.count).to eq 4
+        expect(response).to have_http_status(:ok)
       end
     end
   end
