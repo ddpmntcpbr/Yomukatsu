@@ -4,7 +4,7 @@ import { Box,Button,Card,CardContent,Container,Paper,Typography,Divider } from "
 import { makeStyles } from "@material-ui/styles";
 import axios from "axios"
 import { BookCard,SecondaryButton,QuestionDialog } from "../components/UIkit"
-import { updateStatusToCompleted } from "../reducks/posts/operations"
+import { exchangeRegisteredAndReadingPost,updateStatusToCompleted } from "../reducks/posts/operations"
 import {TwitterShareButton,TwitterIcon} from "react-share";
 import { push } from "connected-react-router";
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -105,7 +105,12 @@ const RegisteredPostsDetail = () => {
 
             <Box>
               <Box display="flex" justifyContent="center" my={4}>
-                <SecondaryButton label="完読した!" onClick={handleClickOpen}/>
+                <Box>
+                  <SecondaryButton label="カレントブックに登録" onClick={() => dispatch(exchangeRegisteredAndReadingPost(id))}/>
+                </Box>
+                <Box>
+                  <SecondaryButton label="完読した!" onClick={handleClickOpen}/>
+                </Box>
               </Box>
               <Box display="flex" justifyContent="center">
                 <Box my={1}>

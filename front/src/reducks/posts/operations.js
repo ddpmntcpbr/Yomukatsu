@@ -10,6 +10,29 @@ import {
   fetchRegisteredPostsDetailAction
 } from "./actions";
 
+export const exchangeRegisteredAndReadingPost = (id) => {
+  return async (dispatch) => {
+    dispatch(showLoadingAction("カレントブックにセット中..."))
+    await axios.get(process.env.REACT_APP_API_V1_URL + '/registered/posts/exchange_registered_and_reading_post/' + String(id), {
+      headers: {
+        'access-token': localStorage.getItem('auth_token'),
+        'client': localStorage.getItem('client_id'),
+        'uid': localStorage.getItem('uid'),
+      }
+    })
+    .then((response) => {
+      console.log(response)
+      dispatch(push("/reading/posts"))
+    })
+    .catch((error) => {
+      console.log("error",error)
+    })
+
+    await _sleep(1000);
+    dispatch(hideLoadingAction())
+  }
+}
+
 export const fetchReadingPosts = () => {
   return async (dispatch) => {
     dispatch(showLoadingAction("読書中の書籍を取得中..."))
@@ -96,11 +119,8 @@ export const fetchRegisteredPosts = () => {
     .catch((error) => {
       console.log("error",error)
     })
-
     await _sleep(1000);
-
     dispatch(hideLoadingAction())
-
   }
 }
 
