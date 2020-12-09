@@ -28,6 +28,11 @@ export const PostsReducer = (state = initialState.posts, action) => {
         ...state,
         list: [...action.payload]
       };
+    case Actions.START_FETCHING_POSTS:
+      return {
+        ...state,
+        list: [...action.payload]
+      };
     default:
       return state
   }

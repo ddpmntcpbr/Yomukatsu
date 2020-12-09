@@ -7,7 +7,8 @@ import {
   fetchCompletedPostsDetailAction,
   fetchReadingPostsAction,
   fetchRegisteredPostsAction,
-  fetchRegisteredPostsDetailAction
+  fetchRegisteredPostsDetailAction,
+  startFetchingPostsAction
 } from "./actions";
 
 export const exchangeRegisteredAndReadingPost = (id) => {
@@ -250,5 +251,11 @@ export const updateStatusToCompleted = (prevData) =>{
         console.log("error",error)
       })
 
+  }
+}
+
+export const startFetchingPosts = () => {
+  return async (dispatch) => {
+    dispatch(startFetchingPostsAction())
   }
 }

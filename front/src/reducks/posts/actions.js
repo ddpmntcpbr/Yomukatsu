@@ -53,3 +53,14 @@ export const fetchRegisteredPostsDetailAction = (posts) => {
     payload: posts
   }
 }
+
+export const START_FETCHING_POSTS = "START_FETCHING_POSTS";
+export const startFetchingPostsAction = (posts) => {
+  return {
+    type: "START_FETCHING_POSTS",
+    payload: {
+      isFetching: true,
+      list: []
+    }
+  }
+}
