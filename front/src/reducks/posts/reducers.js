@@ -33,6 +33,13 @@ export const PostsReducer = (state = initialState.posts, action) => {
         ...state,
         list: [...action.payload]
       };
+    case Actions.START_FETCHING_POSTS:
+      return {
+        ...state,
+        isFetching: false,
+        list: [...action.payload],
+        error: action.error
+      };
     default:
       return state
   }

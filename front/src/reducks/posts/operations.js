@@ -5,6 +5,7 @@ import {_sleep} from "../../helpers"
 import {
   fetchCompletedPostsAction,
   fetchCompletedPostsDetailAction,
+  fetchPostsFailureAction,
   fetchReadingPostsAction,
   fetchRegisteredPostsAction,
   fetchRegisteredPostsDetailAction,
@@ -36,8 +37,9 @@ export const exchangeRegisteredAndReadingPost = (id) => {
 
 export const fetchReadingPosts = () => {
   return async (dispatch) => {
-    dispatch(showLoadingAction("読書中の書籍を取得中..."))
-    axios.get(process.env.REACT_APP_API_V1_URL + '/reading/posts', {
+    dispatch(startFetchingPostsAction())
+
+    return axios.get(process.env.REACT_APP_API_V1_URL + '/reading/posts', {
       headers: {
         'access-token': localStorage.getItem('auth_token'),
         'client': localStorage.getItem('client_id'),
@@ -48,13 +50,8 @@ export const fetchReadingPosts = () => {
        dispatch(fetchReadingPostsAction(response.data))
     })
     .catch((error) => {
-      console.log("error",error)
+      dispatch(fetchPostsFailureAction(error))
     })
-
-    await _sleep(1000);
-
-    dispatch(hideLoadingAction())
-
   }
 }
 
@@ -251,11 +248,5 @@ export const updateStatusToCompleted = (prevData) =>{
         console.log("error",error)
       })
 
-  }
-}
-
-export const startFetchingPosts = () => {
-  return async (dispatch) => {
-    dispatch(startFetchingPostsAction())
   }
 }
