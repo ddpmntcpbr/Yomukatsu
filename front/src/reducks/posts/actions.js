@@ -58,10 +58,6 @@ export const START_FETCHING_POSTS = "START_FETCHING_POSTS";
 export const startFetchingPostsAction = () => {
   return {
     type: "START_FETCHING_POSTS",
-    payload: {
-      isFetching: true,
-      list: []
-    }
   }
 }
 
@@ -70,7 +66,6 @@ export const fetchPostsFailureAction = (error) => {
   return {
     type: "FETCH_POSTS_FAILURE",
     payload: {
-      isFetching: false,
       error: error
     }
   }
