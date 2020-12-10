@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme)=>({
     position: 'fixed',
     left: 0,
     bottom: 0,
-    zIndex: 1000,
+    zIndex: 9999,
     textAlign: 'center',
   },
   root: {
@@ -36,9 +36,15 @@ const ResponsiveBottomNavigation = () => {
   const location = useLocation();
   const dispatch = useDispatch();
 
- const currentActiveBottomNavigationAction = (pathname) => {
-    const pathIndex = ["/", "/mypage", "/posts/edit"];
-    return pathIndex.indexOf(pathname)
+const currentActiveBottomNavigationAction = (pathname) => {
+  switch (true) {
+    case /^(?=.*reading)(?=.*posts)/.test(pathname): return 0;
+    case /^(?=.*registered)(?=.*posts)/.test(pathname): return 1;
+    case /^(?=.*completed)(?=.*posts)/.test(pathname): return 2;
+    case /help/.test(pathname): return 3;
+    case /account/.test(pathname): return 4;
+    default: return -1;
+   }
   }
 
   return (

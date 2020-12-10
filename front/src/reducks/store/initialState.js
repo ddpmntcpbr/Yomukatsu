@@ -4,6 +4,7 @@ const initialState = {
     text: ""
   },
   posts: {
+    isFetching: false,
     list: []
   },
 
