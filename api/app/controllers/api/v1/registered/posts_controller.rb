@@ -2,7 +2,7 @@ class Api::V1::Registered::PostsController < Api::V1::ApiController
   before_action :authenticate_user!, only: [:index, :show]
 
   def index
-    posts = current_user.posts.registered.order(created_at: :desc)
+    posts = current_user.posts.registered.order(updated_at: :desc)
     render json: posts
   end
 
