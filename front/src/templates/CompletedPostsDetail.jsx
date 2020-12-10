@@ -25,36 +25,21 @@ const CompletedPostsDetail = () => {
   const path = selector.router.location.pathname;
   const id = path.split("/registered/posts/")[1];
 
-  // useEffect(()=>{
-  //   const fetchPostsDetail = async () => {
-  //     const response = await axios.get((process.env.REACT_APP_API_V1_URL + '/completed/posts/' +  String(id)), {
-  //       headers: {
-  //         'access-token': localStorage.getItem('auth_token'),
-  //         'client': localStorage.getItem('client_id'),
-  //         'uid': localStorage.getItem('uid'),
-  //       }
-  //     })
-  //     setPost(response.data)
-  //     setTweetMessage(`『`+ response.data.title +`』を完読しました！\n#yomukatsu`)
-  //   };
-  //   if(typeof id !== 'undefined'){
-  //     fetchPostsDetail()
-  //   }
-  // },[dispatch,id])
-
   useEffect(()=> {
     dispatch(fetchCompletedPosts(id))
   },[dispatch,id])
 
   return (
     <Container maxWidth="md" >
-      <Helmet
-        meta={[
-          {"property": "og:image", "content": posts[0].image},
-          {"property": "og:url", "content": process.env.REACT_APP_BASE_URL}
-        ]}
-      />
-      {posts[0] && (
+      {isNonEmptyArray(posts[0]) ?
+      <Box>
+
+        <Helmet
+          meta={[
+            {"property": "og:image", "content": posts[0].image},
+            {"property": "og:url", "content": process.env.REACT_APP_BASE_URL}
+          ]}
+        />
         <Paper>
           <Box p={1} >
             <Typography component="h3">
@@ -103,7 +88,10 @@ const CompletedPostsDetail = () => {
             </TwitterShareButton>
           </Box>
         </Paper>
-      )}
+      </Box>
+    :
+      <></>
+    }
     </Container>
   )
 }
