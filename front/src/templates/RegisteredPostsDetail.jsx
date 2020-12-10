@@ -2,15 +2,15 @@ import React, { useEffect,useState,useCallback } from "react";
 import { useSelector, useDispatch } from 'react-redux'
 import { Box,Button,Card,CardContent,Container,Paper,Typography,Divider } from "@material-ui/core"
 import { makeStyles } from "@material-ui/styles";
-import axios from "axios"
 import { BookCard,SecondaryButton,QuestionDialog } from "../components/UIkit"
-import { exchangeRegisteredAndReadingPost,updateStatusToCompleted } from "../reducks/posts/operations"
+import { exchangeRegisteredAndReadingPost,fetchRegisteredPosts,updateStatusToCompleted } from "../reducks/posts/operations"
 import {TwitterShareButton,TwitterIcon} from "react-share";
 import { push } from "connected-react-router";
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import { Helmet } from "react-helmet";
 import { isNonEmptyArray } from "../helpers"
+import { getPosts } from "../reducks/posts/selectors"
 
 const useStyles = makeStyles((theme)=>({
   root: {
@@ -23,27 +23,13 @@ const RegisteredPostsDetail = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const selector = useSelector((state)=>state);
+  const posts = getPosts(selector);
   const path = selector.router.location.pathname;
   const id = path.split("/registered/posts/")[1];
-  const [post,setPost] = useState({});
   const [open, setOpen] = useState(false);
-  const [tweetMessage,setTweetMessage] = useState("")
 
-  useEffect(()=>{
-    const fetchPostsDetail = async () => {
-      const response = await axios.get((process.env.REACT_APP_API_V1_URL + '/registered/posts/' +  String(id)), {
-        headers: {
-          'access-token': localStorage.getItem('auth_token'),
-          'client': localStorage.getItem('client_id'),
-          'uid': localStorage.getItem('uid'),
-        }
-      })
-      setPost(response.data)
-      setTweetMessage(`今から『`+ response.data.title +`』を読み切ります！\n#yomukatsu`)
-    };
-    if(typeof id !== 'undefined'){
-      fetchPostsDetail()
-    }
+  useEffect(()=> {
+    dispatch(fetchRegisteredPosts(id))
   },[dispatch,id])
 
   const handleClickOpen = useCallback(() => {
@@ -55,20 +41,20 @@ const RegisteredPostsDetail = () => {
   }, [setOpen]);
 
   const handleUpdateStatus = useCallback(()=>{
-    dispatch(updateStatusToCompleted(post))
+    dispatch(updateStatusToCompleted(posts[0]))
     handleClose()
     dispatch(push("/completed/posts"))
-  },[dispatch,handleClose,post])
+  },[dispatch,handleClose,posts])
 
   return (
     <Container maxWidth="md" >
       <Helmet
         meta={[
-          {"property": "og:image", "content": post.image},
+          {"property": "og:image", "content": posts[0].image},
           {"property": "og:url", "content": process.env.REACT_APP_BASE_URL}
         ]}
       />
-      {post && (
+      {posts[0] && (
         <Paper>
           <Box p={1} >
             <Typography component="h3">
@@ -78,7 +64,7 @@ const RegisteredPostsDetail = () => {
             </Typography>
             <Divider />
             <Box my={3}>
-              <BookCard title={post.title} author={post.author} image={post.image} />
+              <BookCard title={posts[0].title} author={posts[0].author} image={posts[0].image} />
             </Box>
 
             <Typography component="h3">
@@ -89,7 +75,7 @@ const RegisteredPostsDetail = () => {
             <Divider />
 
             <Box>
-              {isNonEmptyArray(post.post_items) ? post.post_items.map(mapItem => (
+              {isNonEmptyArray(posts[0].post_items) ? posts[0].post_items.map(mapItem => (
                 <Box key={mapItem.id} my={2} >
                   <Typography>マップアイテムがありません</Typography>
                   <Card className={classes.mapItem} variant="outlined">
@@ -135,7 +121,7 @@ const RegisteredPostsDetail = () => {
                 contentText="一度完読にしたアイテムは、元には戻せません"
               />
             </Box>
-            <TwitterShareButton url={process.env.REACT_APP_BASE_URL} title={tweetMessage}>
+            <TwitterShareButton url={process.env.REACT_APP_BASE_URL} title={"今から『"+ posts[0].title +"』を読みます！\n#yomukatsu"}>
               <TwitterIcon size={64} round />
             </TwitterShareButton>
           </Box>
