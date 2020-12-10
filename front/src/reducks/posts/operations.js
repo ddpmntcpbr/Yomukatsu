@@ -14,7 +14,6 @@ import {
 
 export const exchangeRegisteredAndReadingPost = (id) => {
   return async (dispatch) => {
-    dispatch(showLoadingAction("カレントブックにセット中..."))
     await axios.get(process.env.REACT_APP_API_V1_URL + '/registered/posts/exchange_registered_and_reading_post/' + String(id), {
       headers: {
         'access-token': localStorage.getItem('auth_token'),
@@ -29,17 +28,13 @@ export const exchangeRegisteredAndReadingPost = (id) => {
     .catch((error) => {
       console.log("error",error)
     })
-
-    await _sleep(1000);
-    dispatch(hideLoadingAction())
   }
 }
 
 export const fetchReadingPosts = () => {
   return async (dispatch) => {
     dispatch(startFetchingPostsAction())
-
-    return axios.get(process.env.REACT_APP_API_V1_URL + '/reading/posts', {
+    axios.get(process.env.REACT_APP_API_V1_URL + '/reading/posts', {
       headers: {
         'access-token': localStorage.getItem('auth_token'),
         'client': localStorage.getItem('client_id'),
@@ -57,7 +52,7 @@ export const fetchReadingPosts = () => {
 
 export const fetchCompletedPosts = () => {
   return async (dispatch) => {
-    dispatch(showLoadingAction("完読済みの書籍を取得中..."))
+    dispatch(startFetchingPostsAction())
     axios.get(process.env.REACT_APP_API_V1_URL + '/completed/posts', {
       headers: {
         'access-token': localStorage.getItem('auth_token'),
@@ -69,19 +64,13 @@ export const fetchCompletedPosts = () => {
        dispatch(fetchCompletedPostsAction(response.data))
     })
     .catch((error) => {
-      console.log("error",error)
+      dispatch(fetchPostsFailureAction(error))
     })
-
-    await _sleep(1000);
-
-    dispatch(hideLoadingAction())
-
   }
 }
 
 export const fetchCompletedPostsDetail = (id) => {
   return async (dispatch) => {
-    dispatch(showLoadingAction("fetchCompletedPostsDetail..."))
     await axios.get((process.env.REACT_APP_API_V1_URL + '/completed/posts/' +  String(id)), {
       headers: {
         'access-token': localStorage.getItem('auth_token'),
@@ -93,17 +82,14 @@ export const fetchCompletedPostsDetail = (id) => {
       dispatch(fetchCompletedPostsDetailAction([response.data]))
    })
    .catch((error) => {
-     console.log("error!",error)
+    dispatch(fetchPostsFailureAction(error))
    })
-
-    await _sleep(1000);
-    dispatch(hideLoadingAction())
   }
 }
 
 export const fetchRegisteredPosts = () => {
   return async (dispatch) => {
-    dispatch(showLoadingAction("登録済みの書籍を取得中..."))
+    dispatch(startFetchingPostsAction())
     axios.get(process.env.REACT_APP_API_V1_URL + '/registered/posts', {
       headers: {
         'access-token': localStorage.getItem('auth_token'),
@@ -115,10 +101,8 @@ export const fetchRegisteredPosts = () => {
        dispatch(fetchRegisteredPostsAction(response.data))
     })
     .catch((error) => {
-      console.log("error",error)
+      dispatch(fetchPostsFailureAction(error))
     })
-    await _sleep(1000);
-    dispatch(hideLoadingAction())
   }
 }
 
@@ -146,7 +130,6 @@ export const fetchRegisteredPostsDetail = (id) => {
 
 export const saveReadingPost = (title,url,author,image,mapItems) => {
   return async (dispatch) => {
-    dispatch(showLoadingAction("書籍情報を作成中..."))
     const post_items_attributes = []
     mapItems.map((mapItem) => (
       post_items_attributes.push({"content":mapItem.mapItem})
@@ -187,15 +170,11 @@ export const saveReadingPost = (title,url,author,image,mapItems) => {
     .catch((error) => {
       console.log("error",error)
     })
-
-    await _sleep(1000);
-    dispatch(hideLoadingAction())
   }
 }
 
 export const saveRegisteredPost = (title,url,author,image,mapItems) => {
   return async (dispatch) => {
-
     const post_items_attributes = []
     mapItems.map((mapItem) => (
       post_items_attributes.push({"content":mapItem.mapItem})
@@ -223,6 +202,8 @@ export const saveRegisteredPost = (title,url,author,image,mapItems) => {
       .catch((error) => {
         console.log("error",error)
       })
+      await _sleep(1000);
+      dispatch(hideLoadingAction())
   }
 }
 
