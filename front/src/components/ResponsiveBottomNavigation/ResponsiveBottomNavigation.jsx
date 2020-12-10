@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme)=>({
     position: 'fixed',
     left: 0,
     bottom: 0,
-    zIndex: 1000,
+    zIndex: 9999,
     textAlign: 'center',
   },
   root: {

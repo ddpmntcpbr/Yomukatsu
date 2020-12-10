@@ -13,6 +13,7 @@ import MenuIcon from "@material-ui/icons/Menu"
 const useStyles = makeStyles((theme)=>({
   root: {
     flexGrow: 1,
+    zIndex: 9999
   },
   menuBar: {
     backgroundColor: theme.palette.primary.main,
