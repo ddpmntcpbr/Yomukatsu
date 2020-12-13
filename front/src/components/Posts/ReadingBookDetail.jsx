@@ -25,34 +25,13 @@ const ReadingBookDetail = (props) => {
   }, [setOpen]);
 
   const handleUpdateStatus = useCallback(()=>{
-    // console.log(props.post)
-    // const data = props.post
-    // data["status"] = "completed"
-    // console.log(data)
     dispatch(updateStatusToCompleted(props.post))
     handleClose()
     dispatch(push("/mypage"))
   },[dispatch,handleClose,props])
 
-  // useEffect((props)=>{
-  //   dispatch(fetchPostDetail(props.id))
-  // },[dispatch])
-
   return (
     <div>
-      {/* <Helmet
-        title={'metaタグ差し込めてる'}
-        meta={[
-          {"name": "twitter:card", "content": "summary"},
-          {"name": "twitter:site", "content": "@sambaiz"},
-          {"name": "twitter:title", "content": "sambaiz.net"},
-          {"name": "twitter:description", "content": "僕のホームページ"},
-          {"property": "og:title", "content": "sambaiz.net"},
-          {"property": "og:type", "content": "blog"},
-          {"property": "og:image", "content": "http://d2wgaf7ubdj1mv.cloudfront.net/my.jpg"},
-          {"property": "og:url", "content": "https://www.sambaiz.net"}
-      ]}
-      /> */}
       <Paper>
         <Box p={1} >
           <Typography component="h3">

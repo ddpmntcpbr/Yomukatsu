@@ -14,7 +14,6 @@ export const listenAuthState = () => {
       const uid = localStorage.getItem('uid')
       const apiEndpoint = process.env.REACT_APP_API_V1_URL + "/users/currentuser"
 
-      // console.log("apiEndpoint",apiEndpoint)
       axios.get(apiEndpoint, {
         headers: {
           'access-token': auth_token,
@@ -23,7 +22,6 @@ export const listenAuthState = () => {
         }
       })
       .then((response) => {
-        // console.log("listenAuthState",response)
         const userData = response.data.data
 
         dispatch(signInAction({
@@ -52,19 +50,11 @@ export const signIn = () => {
     dispatch(showLoadingAction("Sign in..."))
     await _sleep(1000)
     // TwitterAPIのエンドポイントへリダイレクト
-    // const authOriginUrl = process.env.REACT_APP_BASE_URL.replace("http://","")
     const authOriginUrl = process.env.REACT_APP_BASE_URL.match(/^https?:\/{2,}(.*?)(?:\/|\?|#|$)/)[1]
-    // const authOriginUrl = document.domain
-    // console.log("document.domain: ",document.domain)
-    // console.log(process.env.REACT_APP_BASE_URL.match(/^https?:\/{2,}(.*?)(?:\/|\?|#|$)/)[1])
-    // const authOriginUrl = process.env.REACT_APP_BASE_URL.replace("http://","")
-    // console.log("signIn", process.env.REACT_APP_API127_URL + '/api/v1/auth/twitter?auth_origin_url=' + authOriginUrl)
-
     window.location.href = process.env.REACT_APP_API_V1_URL + '/auth/twitter?auth_origin_url=' + authOriginUrl;
-    // window.location.href = 'http://127.0.0.1:3000/api/v1/auth/twitter?auth_origin_url=' + process.env.REACT_APP_URL;
 
     // 失敗したら、SignIn画面へリダイレクト
-    // dispatch(push("/mypage"));
+    dispatch(push("/"));
   }
 }
 

@@ -19,7 +19,6 @@ export const exchangeRegisteredAndReadingPost = (id) => {
 
     await axios.get(apiUrl, { headers: headers })
     .then((response) => {
-      console.log(response)
       dispatch(push("/reading/posts"))
     })
     .catch((error) => {
@@ -35,7 +34,6 @@ export const fetchReadingPosts = () => {
 
     axios.get(apiUrl, {headers: headers})
     .then((response) => {
-      console.log("response",response)
        dispatch(fetchReadingPostsAction(response.data))
     })
     .catch((error) => {

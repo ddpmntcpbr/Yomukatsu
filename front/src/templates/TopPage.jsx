@@ -14,7 +14,6 @@ const fetchHttpsUsersCount = () => {
     return async () => {
       // const apiEndpoint = process.env.REACT_APP_API_V1_URL + "/users_count"
       const apiEndpoint = "https://backend.book.yomukatsu.com/api/v1/users_count"
-      console.log("httpsApiEndpoint",apiEndpoint)
       axios.get(apiEndpoint)
       .then((response) => {
         console.log("fetchHttpsUsersCount",response)
