@@ -1,4 +1,5 @@
 import axios from "axios";
+import { headers } from "../../headers"
 import { push } from "connected-react-router";
 import {hideLoadingAction, showLoadingAction} from "../loading/actions";
 import {_sleep} from "../../helpers"
@@ -14,15 +15,10 @@ import {
 
 export const exchangeRegisteredAndReadingPost = (id) => {
   return async (dispatch) => {
-    await axios.get(process.env.REACT_APP_API_V1_URL + '/registered/posts/exchange_registered_and_reading_post/' + String(id), {
-      headers: {
-        'access-token': localStorage.getItem('auth_token'),
-        'client': localStorage.getItem('client_id'),
-        'uid': localStorage.getItem('uid'),
-      }
-    })
+    const apiUrl = process.env.REACT_APP_API_V1_URL + '/registered/posts/exchange_registered_and_reading_post/' + String(id)
+
+    await axios.get(apiUrl, { headers: headers })
     .then((response) => {
-      console.log(response)
       dispatch(push("/reading/posts"))
     })
     .catch((error) => {
@@ -34,17 +30,14 @@ export const exchangeRegisteredAndReadingPost = (id) => {
 export const fetchReadingPosts = () => {
   return async (dispatch) => {
     dispatch(startFetchingPostsAction())
-    axios.get(process.env.REACT_APP_API_V1_URL + '/reading/posts', {
-      headers: {
-        'access-token': localStorage.getItem('auth_token'),
-        'client': localStorage.getItem('client_id'),
-        'uid': localStorage.getItem('uid'),
-      }
-    })
+    const apiUrl = process.env.REACT_APP_API_V1_URL + '/reading/posts'
+
+    axios.get(apiUrl, {headers: headers})
     .then((response) => {
        dispatch(fetchReadingPostsAction(response.data))
     })
     .catch((error) => {
+      console.log("error",error)
       dispatch(fetchPostsFailureAction(error))
     })
   }
@@ -53,13 +46,9 @@ export const fetchReadingPosts = () => {
 export const fetchCompletedPosts = () => {
   return async (dispatch) => {
     dispatch(startFetchingPostsAction())
-    axios.get(process.env.REACT_APP_API_V1_URL + '/completed/posts', {
-      headers: {
-        'access-token': localStorage.getItem('auth_token'),
-        'client': localStorage.getItem('client_id'),
-        'uid': localStorage.getItem('uid'),
-      }
-    })
+    const apiUrl = process.env.REACT_APP_API_V1_URL + '/completed/posts'
+
+    axios.get(apiUrl, {headers: headers})
     .then((response) => {
        dispatch(fetchCompletedPostsAction(response.data))
     })
@@ -71,13 +60,9 @@ export const fetchCompletedPosts = () => {
 
 export const fetchCompletedPostsDetail = (id) => {
   return async (dispatch) => {
-    await axios.get((process.env.REACT_APP_API_V1_URL + '/completed/posts/' +  String(id)), {
-      headers: {
-        'access-token': localStorage.getItem('auth_token'),
-        'client': localStorage.getItem('client_id'),
-        'uid': localStorage.getItem('uid'),
-      }
-    })
+    const apiUrl = process.env.REACT_APP_API_V1_URL + '/completed/posts/' +  String(id)
+
+    axios.get(apiUrl, {headers: headers})
     .then((response) => {
       dispatch(fetchCompletedPostsDetailAction([response.data]))
    })
@@ -90,13 +75,9 @@ export const fetchCompletedPostsDetail = (id) => {
 export const fetchRegisteredPosts = () => {
   return async (dispatch) => {
     dispatch(startFetchingPostsAction())
-    axios.get(process.env.REACT_APP_API_V1_URL + '/registered/posts', {
-      headers: {
-        'access-token': localStorage.getItem('auth_token'),
-        'client': localStorage.getItem('client_id'),
-        'uid': localStorage.getItem('uid'),
-      }
-    })
+    const apiUrl = process.env.REACT_APP_API_V1_URL + '/registered/posts'
+
+    axios.get(apiUrl, {headers: headers})
     .then((response) => {
        dispatch(fetchRegisteredPostsAction(response.data))
     })
@@ -109,13 +90,9 @@ export const fetchRegisteredPosts = () => {
 export const fetchRegisteredPostsDetail = (id) => {
   return async (dispatch) => {
     dispatch(showLoadingAction("fetchRegisteredPostDetail..."))
-    await axios.get((process.env.REACT_APP_API_V1_URL + '/registered/posts/' +  String(id)), {
-      headers: {
-        'access-token': localStorage.getItem('auth_token'),
-        'client': localStorage.getItem('client_id'),
-        'uid': localStorage.getItem('uid'),
-      }
-    })
+    const apiUrl = process.env.REACT_APP_API_V1_URL + '/registered/posts/' +  String(id)
+
+    axios.get(apiUrl, {headers: headers})
     .then((response) => {
       dispatch(fetchRegisteredPostsDetailAction([response.data]))
    })
@@ -144,22 +121,11 @@ export const saveReadingPost = (title,url,author,image,mapItems) => {
       "post_items_attributes": post_items_attributes
       }
 
+    const apiUrl = process.env.REACT_APP_API_V1_URL + '/reading/change_status_from_reading_to_registered'
 
-    axios.get(process.env.REACT_APP_API_V1_URL + '/reading/change_status_from_reading_to_registered', {
-      headers: {
-        'access-token': localStorage.getItem('auth_token'),
-        'client': localStorage.getItem('client_id'),
-        'uid': localStorage.getItem('uid'),
-      }
-    })
+    axios.get(apiUrl, {headers: headers})
     .then(() => {
-      axios.post(process.env.REACT_APP_API_V1_URL + '/posts', data, {
-        headers: {
-          'access-token': localStorage.getItem('auth_token'),
-          'client': localStorage.getItem('client_id'),
-          'uid': localStorage.getItem('uid'),
-        }
-      })
+      axios.post(process.env.REACT_APP_API_V1_URL + '/posts', data, {headers: headers})
       .then(() => {
         dispatch(push("/reading/posts"))
       })
@@ -189,21 +155,17 @@ export const saveRegisteredPost = (title,url,author,image,mapItems) => {
       "post_items_attributes": post_items_attributes
       }
 
-    await axios.post(process.env.REACT_APP_API_V1_URL + '/posts', data, {
-        headers: {
-          'access-token': localStorage.getItem('auth_token'),
-          'client': localStorage.getItem('client_id'),
-          'uid': localStorage.getItem('uid'),
-        }
-      })
-      .then((response) => {
-        dispatch(push("/registered/posts"))
-      })
-      .catch((error) => {
-        console.log("error",error)
-      })
-      await _sleep(1000);
-      dispatch(hideLoadingAction())
+    const apiUrl = process.env.REACT_APP_API_V1_URL + '/posts';
+
+    axios.post(apiUrl, data, {headers: headers})
+    .then((response) => {
+      dispatch(push("/registered/posts"))
+    })
+    .catch((error) => {
+      console.log("error",error)
+    })
+    await _sleep(1000);
+    dispatch(hideLoadingAction())
   }
 }
 
@@ -213,21 +175,16 @@ export const updateStatusToCompleted = (prevData) =>{
 
     const data = {
       "status": "completed"
-      }
+    }
 
-    await axios.put((process.env.REACT_APP_API_V1_URL + '/posts/' + String(id)), data, {
-        headers: {
-          'access-token': localStorage.getItem('auth_token'),
-          'client': localStorage.getItem('client_id'),
-          'uid': localStorage.getItem('uid'),
-        }
-      })
-      .then((response) => {
-        dispatch(push("/completed/posts"))
-      })
-      .catch((error) => {
-        console.log("error",error)
-      })
+    const apiUrl = process.env.REACT_APP_API_V1_URL + '/posts/' + String(id)
 
+    axios.put(apiUrl, data, {headers: headers})
+    .then((response) => {
+      dispatch(push("/completed/posts"))
+    })
+    .catch((error) => {
+      console.log("error",error)
+    })
   }
 }
