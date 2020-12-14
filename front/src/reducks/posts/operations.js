@@ -1,5 +1,5 @@
 import axios from "axios";
-import { headers } from "../../headers"
+// import { headers } from "../../headers"
 import { push } from "connected-react-router";
 import {hideLoadingAction, showLoadingAction} from "../loading/actions";
 import {_sleep} from "../../helpers"
@@ -17,7 +17,11 @@ export const exchangeRegisteredAndReadingPost = (id) => {
   return async (dispatch) => {
     const apiUrl = process.env.REACT_APP_API_V1_URL + '/registered/posts/exchange_registered_and_reading_post/' + String(id)
 
-    await axios.get(apiUrl, { headers: headers })
+    await axios.get(apiUrl, { headers :{
+      'access-token': localStorage.getItem('auth_token'),
+      'client': localStorage.getItem('client_id'),
+      'uid': localStorage.getItem('uid'),
+    }})
     .then((response) => {
       dispatch(push("/reading/posts"))
     })
@@ -32,7 +36,11 @@ export const fetchReadingPosts = () => {
     dispatch(startFetchingPostsAction())
     const apiUrl = process.env.REACT_APP_API_V1_URL + '/reading/posts'
 
-    axios.get(apiUrl, {headers: headers})
+    await axios.get(apiUrl, {headers :{
+      'access-token': localStorage.getItem('auth_token'),
+      'client': localStorage.getItem('client_id'),
+      'uid': localStorage.getItem('uid'),
+    }})
     .then((response) => {
        dispatch(fetchReadingPostsAction(response.data))
     })
@@ -48,7 +56,11 @@ export const fetchCompletedPosts = () => {
     dispatch(startFetchingPostsAction())
     const apiUrl = process.env.REACT_APP_API_V1_URL + '/completed/posts'
 
-    axios.get(apiUrl, {headers: headers})
+    await axios.get(apiUrl, {headers :{
+      'access-token': localStorage.getItem('auth_token'),
+      'client': localStorage.getItem('client_id'),
+      'uid': localStorage.getItem('uid'),
+    }})
     .then((response) => {
        dispatch(fetchCompletedPostsAction(response.data))
     })
@@ -62,7 +74,11 @@ export const fetchCompletedPostsDetail = (id) => {
   return async (dispatch) => {
     const apiUrl = process.env.REACT_APP_API_V1_URL + '/completed/posts/' +  String(id)
 
-    axios.get(apiUrl, {headers: headers})
+    await axios.get(apiUrl, {headers :{
+      'access-token': localStorage.getItem('auth_token'),
+      'client': localStorage.getItem('client_id'),
+      'uid': localStorage.getItem('uid'),
+    }})
     .then((response) => {
       dispatch(fetchCompletedPostsDetailAction([response.data]))
    })
@@ -77,7 +93,11 @@ export const fetchRegisteredPosts = () => {
     dispatch(startFetchingPostsAction())
     const apiUrl = process.env.REACT_APP_API_V1_URL + '/registered/posts'
 
-    axios.get(apiUrl, {headers: headers})
+    await axios.get(apiUrl, {headers :{
+      'access-token': localStorage.getItem('auth_token'),
+      'client': localStorage.getItem('client_id'),
+      'uid': localStorage.getItem('uid'),
+    }})
     .then((response) => {
        dispatch(fetchRegisteredPostsAction(response.data))
     })
@@ -92,13 +112,17 @@ export const fetchRegisteredPostsDetail = (id) => {
     dispatch(showLoadingAction("fetchRegisteredPostDetail..."))
     const apiUrl = process.env.REACT_APP_API_V1_URL + '/registered/posts/' +  String(id)
 
-    axios.get(apiUrl, {headers: headers})
+    await axios.get(apiUrl, {headers :{
+      'access-token': localStorage.getItem('auth_token'),
+      'client': localStorage.getItem('client_id'),
+      'uid': localStorage.getItem('uid'),
+    }})
     .then((response) => {
       dispatch(fetchRegisteredPostsDetailAction([response.data]))
-   })
+    })
    .catch((error) => {
      console.log("error!",error)
-   })
+    })
 
     await _sleep(1000);
     dispatch(hideLoadingAction())
@@ -123,9 +147,17 @@ export const saveReadingPost = (title,url,author,image,mapItems) => {
 
     const apiUrl = process.env.REACT_APP_API_V1_URL + '/reading/change_status_from_reading_to_registered'
 
-    axios.get(apiUrl, {headers: headers})
+    await axios.get(apiUrl, {headers :{
+      'access-token': localStorage.getItem('auth_token'),
+      'client': localStorage.getItem('client_id'),
+      'uid': localStorage.getItem('uid'),
+    }})
     .then(() => {
-      axios.post(process.env.REACT_APP_API_V1_URL + '/posts', data, {headers: headers})
+      axios.post(process.env.REACT_APP_API_V1_URL + '/posts', data, {headers:{
+        'access-token': localStorage.getItem('auth_token'),
+        'client': localStorage.getItem('client_id'),
+        'uid': localStorage.getItem('uid'),
+      }})
       .then(() => {
         dispatch(push("/reading/posts"))
       })
@@ -157,7 +189,11 @@ export const saveRegisteredPost = (title,url,author,image,mapItems) => {
 
     const apiUrl = process.env.REACT_APP_API_V1_URL + '/posts';
 
-    axios.post(apiUrl, data, {headers: headers})
+    await axios.post(apiUrl, data, {headers :{
+      'access-token': localStorage.getItem('auth_token'),
+      'client': localStorage.getItem('client_id'),
+      'uid': localStorage.getItem('uid'),
+    }})
     .then((response) => {
       dispatch(push("/registered/posts"))
     })
@@ -179,7 +215,11 @@ export const updateStatusToCompleted = (prevData) =>{
 
     const apiUrl = process.env.REACT_APP_API_V1_URL + '/posts/' + String(id)
 
-    axios.put(apiUrl, data, {headers: headers})
+    await axios.put(apiUrl, data, {headers :{
+      'access-token': localStorage.getItem('auth_token'),
+      'client': localStorage.getItem('client_id'),
+      'uid': localStorage.getItem('uid'),
+    }})
     .then((response) => {
       dispatch(push("/completed/posts"))
     })
