@@ -5,7 +5,7 @@ import { makeStyles } from "@material-ui/styles";
 import { BookCard } from "../components/UIkit"
 import {TwitterShareButton,TwitterIcon} from "react-share";
 import DeleteIcon from '@material-ui/icons/Delete';
-// import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet";
 import { isNonEmptyArray } from "../helpers"
 import { fetchCompletedPosts } from "../reducks/posts/operations"
 import { getPosts } from "../reducks/posts/selectors"
@@ -33,13 +33,13 @@ const CompletedPostsDetail = () => {
     <Container maxWidth="md" >
       {isNonEmptyArray(posts[0]) ?
       <Box>
-
-        {/* <Helmet
+        <Helmet
           meta={[
-            {"property": "og:image", "content": posts[0].image},
-            {"property": "og:url", "content": process.env.REACT_APP_BASE_URL}
+            {"property": "og:title", "content": posts[0].title},
+            {"property": "og:description", "content": "Yomukatsu!!"},
+            {"property": "og:image", "content": posts[0].image}
           ]}
-        /> */}
+        />
         <Paper>
           <Box p={1} >
             <Typography component="h3">
@@ -83,7 +83,7 @@ const CompletedPostsDetail = () => {
                 </Box>
               </Box>
             </Box>
-            <TwitterShareButton url={process.env.REACT_APP_BASE_URL} title={`『`+ posts[0].title +`』を完読しました！\n#yomukatsu`}>
+            <TwitterShareButton url={process.env.REACT_APP_BASE_URL + path} title={`『`+ posts[0].title +`』を完読しました！\n#yomukatsu`}>
               <TwitterIcon size={64} round />
             </TwitterShareButton>
           </Box>
