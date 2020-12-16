@@ -7,6 +7,7 @@ import { Loading } from "./components/UIkit"
 import "./assets/reset.css"
 // import "./assets/style.css"
 import { Helmet } from "react-helmet";
+// import { getPosts } from "./reducks/posts/selectors"
 
 const useStyles = makeStyles((theme)=>({
   root: {
@@ -28,6 +29,8 @@ const App = () => {
           {"name": "twitter:description", "content": "twitter:description"},
           {"property": "og:title", "content": "og:title"},
           {"property": "og:type", "content": "website"},
+          {"property": "og:image", "content": "https://books.google.co.jp/books/content?id=Nvx1oAEACAAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE71IuQnf7vY4PgAbAdBijMB7ygXMuyIU4sCmomOirtUMFFnSO3Yf7FjD2dOeklnL2K-dI_X6zYnK4VZPya97rXQgJanXMhSycoUtdD4wJxuhPDQsDLk6yFINOyQkr9dZpDkED0ZQ"},
+          {"property": "og:url", "content": process.env.REACT_APP_BASE_URL}
         ]}
       />
       <Loading>

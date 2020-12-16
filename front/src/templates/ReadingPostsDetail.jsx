@@ -49,12 +49,12 @@ const ReadingPostsDetail = () => {
     <Container maxWidth="md" >
       {isNonEmptyArray(posts[0]) ?
         <Box>
-          <Helmet
+          {/* <Helmet
             meta={[
               {"property": "og:image", "content": posts[0].image},
               {"property": "og:url", "content": process.env.REACT_APP_BASE_URL}
             ]}
-          />
+          /> */}
           <Paper>
             <Box p={1} >
               <Typography component="h3">
