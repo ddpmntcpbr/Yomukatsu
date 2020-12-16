@@ -5,7 +5,7 @@ import { makeStyles } from "@material-ui/styles";
 import { BookCard } from "../components/UIkit"
 import {TwitterShareButton,TwitterIcon} from "react-share";
 import DeleteIcon from '@material-ui/icons/Delete';
-import { Helmet } from "react-helmet";
+// import { Helmet } from "react-helmet";
 import { isNonEmptyArray } from "../helpers"
 import { fetchCompletedPosts } from "../reducks/posts/operations"
 import { getPosts } from "../reducks/posts/selectors"
