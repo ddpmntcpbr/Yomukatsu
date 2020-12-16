@@ -8,7 +8,7 @@ import {TwitterShareButton,TwitterIcon} from "react-share";
 import { push } from "connected-react-router";
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
-import { Helmet } from "react-helmet";
+// import { Helmet } from "react-helmet";
 import { isNonEmptyArray } from "../helpers"
 import { getPosts } from "../reducks/posts/selectors"
 
