@@ -8,7 +8,7 @@ import {TwitterShareButton,TwitterIcon} from "react-share";
 import { push } from "connected-react-router";
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
-// import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet";
 import { isNonEmptyArray } from "../helpers"
 import { getPosts } from "../reducks/posts/selectors"
 
@@ -50,12 +50,13 @@ const RegisteredPostsDetail = () => {
     <Container maxWidth="md" >
       {isNonEmptyArray(posts[0]) ?
         <Box>
-          {/* <Helmet
+          <Helmet
             meta={[
-              {"property": "og:image", "content": posts[0].image},
-              {"property": "og:url", "content": process.env.REACT_APP_BASE_URL}
+              {"property": "og:title", "content": posts[0].title},
+              {"property": "og:description", "content": "Yomukatsu!!"},
+              {"property": "og:image", "content": posts[0].image}
             ]}
-          /> */}
+          />
           <Paper>
             <Box p={1} >
               <Typography component="h3">
@@ -122,7 +123,7 @@ const RegisteredPostsDetail = () => {
                   contentText="一度完読にしたアイテムは、元には戻せません"
                 />
               </Box>
-              <TwitterShareButton url={process.env.REACT_APP_BASE_URL} title={"今から『"+ posts[0].title +"』を読みます！\n#yomukatsu"}>
+              <TwitterShareButton url={process.env.REACT_APP_BASE_URL + path} title={"今から『"+ posts[0].title +"』を読みます！\n#yomukatsu"}>
                 <TwitterIcon size={64} round />
               </TwitterShareButton>
             </Box>
