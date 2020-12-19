@@ -30,9 +30,9 @@ const CompletedPostsDetail = () => {
       <Box>
         <Helmet
           meta={[
-            {"property": "og:title", "content": posts[0].title},
+            {"property": "og:title", "content": post.title},
             {"property": "og:description", "content": "Yomukatsu!!"},
-            {"property": "og:image", "content": posts[0].image}
+            {"property": "og:image", "content": post.image}
           ]}
         />
         <Paper>
@@ -78,7 +78,7 @@ const CompletedPostsDetail = () => {
                 </Box>
               </Box>
             </Box>
-            <TwitterShareButton url={process.env.REACT_APP_BASE_URL + path} title={`『`+ posts[0].title +`』を完読しました！\n#yomukatsu`}>
+            <TwitterShareButton url={process.env.REACT_APP_BASE_URL + path} title={`『`+ post.title +`』を完読しました！\n#yomukatsu`}>
               <TwitterIcon size={64} round />
             </TwitterShareButton>
           </Box>
