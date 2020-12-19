@@ -23,8 +23,9 @@ const ReadingPostsDetail = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const selector = useSelector((state)=>state);
-  const posts = getPosts(selector);
   const path = selector.router.location.pathname;
+  const posts = getReadingPosts(selector);
+  const post = posts[0]
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = useCallback(() => {
@@ -47,9 +48,9 @@ const ReadingPostsDetail = () => {
         <Box>
           <Helmet
             meta={[
-              {"property": "og:title", "content": posts[0].title},
+              {"property": "og:title", "content": post.title},
               {"property": "og:description", "content": "Yomukatsu!!"},
-              {"property": "og:image", "content": posts[0].image}
+              {"property": "og:image", "content": post.image}
             ]}
           />
           <Paper>
@@ -107,7 +108,7 @@ const ReadingPostsDetail = () => {
                   contentText="一度完読にしたアイテムは、元には戻せません"
                 />
               </Box>
-              <TwitterShareButton url={process.env.REACT_APP_BASE_URL + path} title={"今から『"+ posts[0].title +"』を読みます！\n#yomukatsu"}>
+              <TwitterShareButton url={process.env.REACT_APP_BASE_URL + path} title={"今から『"+ post.title +"』を読みます！\n#yomukatsu"}>
                 <TwitterIcon size={64} round />
               </TwitterShareButton>
             </Box>
