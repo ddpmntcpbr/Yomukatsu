@@ -1,9 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useSelector, useDispatch } from 'react-redux'
 import { Box,Container,Typography } from "@material-ui/core"
-import { fetchCompletedPosts } from "../reducks/posts/operations"
 import { makeStyles } from "@material-ui/styles";
-import { getPosts } from "../reducks/posts/selectors"
+import { getCompletedPosts } from "../reducks/posts/selectors"
 import { BookCard } from "../components/UIkit"
 import { push } from "connected-react-router";
 
@@ -16,11 +15,7 @@ const CompletedPostsList = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const selector = useSelector((state)=>state);
-  const posts = getPosts(selector);
-
-  useEffect(()=>{
-    dispatch(fetchCompletedPosts())
-  },[dispatch])
+  const posts = getCompletedPosts(selector);
 
   return (
     <Container maxWidth="md" className={classes.root}>
