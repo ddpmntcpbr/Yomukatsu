@@ -1,5 +1,4 @@
 class Api::V1::Share::PostsController < ApplicationController
-
   def index
     posts = Post.order(updated_at: :desc)
     render json: posts
