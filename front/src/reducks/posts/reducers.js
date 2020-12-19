@@ -21,6 +21,12 @@ export const PostsReducer = (state = initialState.posts, action) => {
         isFetching: false,
         list: [...action.payload]
       };
+    case Actions.FETCH_POSTS:
+      return {
+        ...state,
+        isFetching: false,
+        list: [...action.payload]
+      };
     case Actions.FETCH_REGISTERED_POSTS:
       return {
         ...state,

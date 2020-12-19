@@ -7,6 +7,7 @@ import {
   fetchCompletedPostsAction,
   fetchCompletedPostsDetailAction,
   fetchPostsFailureAction,
+  fetchPostsAction,
   fetchReadingPostsAction,
   fetchRegisteredPostsAction,
   fetchRegisteredPostsDetailAction,
@@ -30,6 +31,34 @@ export const exchangeRegisteredAndReadingPost = (id) => {
     })
   }
 }
+
+
+// posts全体を取得する
+export const fetchPosts = () => {
+  return async (dispatch) => {
+    dispatch(startFetchingPostsAction())
+    const apiUrl = process.env.REACT_APP_API_V1_URL + '/posts'
+
+    await axios.get(apiUrl, {headers :{
+      'access-token': localStorage.getItem('auth_token'),
+      'client': localStorage.getItem('client_id'),
+      'uid': localStorage.getItem('uid'),
+    }})
+    .then((response) => {
+      console.log(response.data)
+      dispatch(fetchPostsAction(response.data))
+    })
+    .catch((error) => {
+      console.log("error",error)
+      dispatch(fetchPostsFailureAction(error))
+    })
+  }
+}
+
+// share用のpostsを取得する
+// export const fetchSharePost = () => {
+
+// }
 
 export const fetchReadingPosts = () => {
   return async (dispatch) => {
