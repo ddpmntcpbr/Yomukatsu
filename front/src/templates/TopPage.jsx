@@ -8,7 +8,8 @@ import {useDispatch} from 'react-redux';
 import {signIn} from "../reducks/users/operations";
 import topPageImage from "../assets/img/src/top.png";
 import axios from "axios";
-import {PrimaryButton} from "../components/UIkit"
+import {PrimaryButton} from "../components/UIkit";
+import { fetchPosts } from "../reducks/posts/operations"
 
 const fetchHttpsUsersCount = () => {
     return async () => {
@@ -88,6 +89,10 @@ const TopPage = () => {
       <PrimaryButton
         label="fetchHttpsUsersCount"
         onClick={fetchHttpsUsersCount()}
+      />
+      <PrimaryButton
+        label="fetchPosts"
+        onClick={()=>dispatch(fetchPosts())}
       />
       {/* <Typography>{usersCount}</Typography> */}
     </Container>
