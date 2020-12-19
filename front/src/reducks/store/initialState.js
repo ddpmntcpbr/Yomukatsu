@@ -5,7 +5,10 @@ const initialState = {
   },
   posts: {
     isFetching: false,
-    list: []
+    list: [],
+    reading: [],
+    registered: [],
+    completed: []
   },
 
   users: {
