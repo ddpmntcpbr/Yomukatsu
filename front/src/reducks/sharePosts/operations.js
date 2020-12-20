@@ -6,7 +6,7 @@ export const fetchSharePosts = () => {
   return async (dispatch) => {
     await axios.get(process.env.REACT_APP_API_V1_URL + '/share/posts')
     .then((response) => {
-      dispatch(fetchSharePostsAction(response.dada))
+      dispatch(fetchSharePostsAction(response.data))
     })
     .catch((error) => {
       console.log(error)
