@@ -1,13 +1,13 @@
-import React from 'react'
+import React, {useEffect} from 'react'
+import { useDispatch } from 'react-redux'
 import Router from './Router'
 import { makeStyles } from "@material-ui/styles";
 import { Header } from './components/Header'
 import { ResponsiveBottomNavigation } from './components/ResponsiveBottomNavigation';
 import { Loading } from "./components/UIkit"
 import "./assets/reset.css"
-// import "./assets/style.css"
 import { Helmet } from "react-helmet";
-// import { getPosts } from "./reducks/posts/selectors"
+import { fetchSharePosts } from "./reducks/sharePosts/operations";
 
 const useStyles = makeStyles((theme)=>({
   root: {
@@ -17,6 +17,12 @@ const useStyles = makeStyles((theme)=>({
 }))
 const App = () => {
   const classes = useStyles();
+  const dispatch = useDispatch();
+
+  useEffect(()=>{
+    console.log("fetchSharePosts")
+    dispatch(fetchSharePosts())
+  },[dispatch])
 
   return (
     <>
