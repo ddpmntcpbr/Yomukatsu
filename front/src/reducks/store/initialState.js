@@ -1,13 +1,20 @@
 const initialState = {
+
   loading: {
     state: false,
     text: ""
   },
+
   posts: {
     isFetching: false,
     reading: [],
     registered: [],
-    completed: []
+    completed: [],
+    share: []
+  },
+
+  sharePosts: {
+    list: []
   },
 
   users: {

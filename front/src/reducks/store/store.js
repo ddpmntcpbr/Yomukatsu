@@ -6,8 +6,9 @@ import {
 } from 'redux';
 import {connectRouter, routerMiddleware} from "connected-react-router";
 import {LoadingReducer} from '../loading/reducers';
-import {UsersReducer} from "../users/reducers";
+import {SharePostsReducer} from "../sharePosts/reducers";
 import {PostsReducer} from "../posts/reducers";
+import {UsersReducer} from "../users/reducers";
 import thunk from "redux-thunk";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -17,8 +18,9 @@ export default function createStore(history) {
     combineReducers({
       loading: LoadingReducer,
       router: connectRouter(history),
-      users: UsersReducer,
+      sharePosts: SharePostsReducer,
       posts: PostsReducer,
+      users: UsersReducer,
     }),
     composeEnhancers(
       applyMiddleware(
