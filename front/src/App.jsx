@@ -1,5 +1,4 @@
-import React, {useEffect} from 'react'
-import { useDispatch } from 'react-redux'
+import React from 'react'
 import Router from './Router'
 import { makeStyles } from "@material-ui/styles";
 import { Header } from './components/Header'
@@ -7,7 +6,6 @@ import { ResponsiveBottomNavigation } from './components/ResponsiveBottomNavigat
 import { Loading } from "./components/UIkit"
 import "./assets/reset.css"
 import { Helmet } from "react-helmet";
-import { fetchSharePosts } from "./reducks/sharePosts/operations";
 
 const useStyles = makeStyles((theme)=>({
   root: {
@@ -17,12 +15,6 @@ const useStyles = makeStyles((theme)=>({
 }))
 const App = () => {
   const classes = useStyles();
-  const dispatch = useDispatch();
-
-  useEffect(()=>{
-    console.log("fetchSharePosts")
-    dispatch(fetchSharePosts())
-  },[dispatch])
 
   return (
     <>
