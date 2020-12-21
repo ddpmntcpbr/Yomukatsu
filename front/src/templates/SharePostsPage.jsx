@@ -35,10 +35,13 @@ const SharePostsPage = () => {
       {isNonEmptyArray(post) ?
       <Box>
         <Helmet
+          title={'Yomukatsu!'}
           meta={[
-            {"property": "og:title", "content": post.title},
-            {"property": "og:description", "content": "Yomukatsu!!"},
-            {"property": "og:image", "content": post.image}
+            {name: "twitter:card", content: "summary_large_image"},
+            {property: "og:image", content: post.image},
+            {property: "og:title", content: "SharePostsPageのog:titleを入れます"},
+            {property: "og:description", content: "Yomukatsu!!"},
+            {property: "og:url", content: process.env.REACT_APP_BASE_URL + path }
           ]}
         />
         <Paper>

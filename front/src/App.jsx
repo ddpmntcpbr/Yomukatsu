@@ -5,7 +5,6 @@ import { Header } from './components/Header'
 import { ResponsiveBottomNavigation } from './components/ResponsiveBottomNavigation';
 import { Loading } from "./components/UIkit"
 import "./assets/reset.css"
-import { Helmet } from "react-helmet";
 
 const useStyles = makeStyles((theme)=>({
   root: {
@@ -18,12 +17,6 @@ const App = () => {
 
   return (
     <>
-      <Helmet
-        title={'Yomukatsu!'}
-        meta={[
-          {"name": "twitter:card", "content": "summary_large_image"}
-        ]}
-      />
       <Loading>
         <Header />
         <main className={classes.root}>

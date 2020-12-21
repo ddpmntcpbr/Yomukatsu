@@ -5,7 +5,6 @@ import { makeStyles } from "@material-ui/styles";
 import { BookCard } from "../components/UIkit"
 import {TwitterShareButton,TwitterIcon} from "react-share";
 import DeleteIcon from '@material-ui/icons/Delete';
-import { Helmet } from "react-helmet";
 import { isNonEmptyArray } from "../helpers"
 import { getCompletedPosts } from "../reducks/posts/selectors"
 
@@ -28,13 +27,6 @@ const CompletedPostsDetail = () => {
     <Container maxWidth="md" >
       {isNonEmptyArray(post) ?
       <Box>
-        <Helmet
-          meta={[
-            {"property": "og:title", "content": post.title},
-            {"property": "og:description", "content": "Yomukatsu!!"},
-            {"property": "og:image", "content": post.image}
-          ]}
-        />
         <Paper>
           <Box p={1} >
             <Typography component="h3">
