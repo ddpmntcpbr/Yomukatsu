@@ -1,11 +1,15 @@
-import React from "react";
-import { useSelector } from 'react-redux'
-import { Box,Container,Paper,Typography,Divider } from "@material-ui/core"
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from 'react-redux';
+import { Box,Container,Paper,Typography,Divider } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
-import { BookCard } from "../components/UIkit"
+import { BookCard,SecondaryButton } from "../components/UIkit"
 import { Helmet } from "react-helmet";
 import { isNonEmptyArray } from "../helpers"
 import { getSharePosts } from "../reducks/sharePosts/selectors"
+import { fetchSharePost } from "../reducks/sharePosts/operations";
+import { push } from "connected-react-router";
+import {TwitterShareButton,TwitterIcon} from "react-share";
+
 
 const useStyles = makeStyles((theme)=>({
   root: {
@@ -16,15 +20,16 @@ const useStyles = makeStyles((theme)=>({
 
 const SharePostsPage = () => {
   const classes = useStyles();
+  const dispatch = useDispatch();
   const selector = useSelector((state)=>state);
-  const posts = getSharePosts(selector);
+  const post = getSharePosts(selector);
   const path = selector.router.location.pathname;
   const id = Number(path.split("/share/posts/")[1]);
-  console.log("id",id)
 
-  const post = posts.find((v) => v.id===id)
+  useEffect(()=>{
+    dispatch(fetchSharePost(id))
+  },[dispatch,id])
 
-  console.log("post",post)
   return (
     <Container maxWidth="md" >
       {isNonEmptyArray(post) ?
@@ -48,6 +53,17 @@ const SharePostsPage = () => {
               <BookCard title={post.title} author={post.author} image={post.image} />
             </Box>
           </Box>
+          <Box>
+            <Box>
+              <SecondaryButton label="Google Books を開く" onClick={() => window.open(post.url)}/>
+            </Box>
+            <Box>
+              <SecondaryButton label="このアプリは?" onClick={() => dispatch(push("/"))}/>
+            </Box>
+          </Box>
+          <TwitterShareButton url={process.env.REACT_APP_BASE_URL + path} title={"今から『"+ post.title +"』を読みます！\n#yomukatsu"}>
+                <TwitterIcon size={64} round />
+              </TwitterShareButton>
         </Paper>
       </Box>
     :
