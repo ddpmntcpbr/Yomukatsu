@@ -31,16 +31,6 @@ export const exchangeRegisteredAndReadingPost = (id) => {
   }
 }
 
-// posts全体を取得する。初回レンダー時のみ使用
-export const initialFetchPosts = () => {
-  return async (dispatch) => {
-    dispatch(showLoadingAction("書籍情報を取得中..."))
-    dispatch(fetchPosts())
-    await _sleep(1000)
-    dispatch(hideLoadingAction())
-  }
-}
-
 // posts全体を取得する
 export const fetchPosts = () => {
   return async (dispatch) => {
@@ -88,104 +78,17 @@ export const fetchPosts = () => {
   }
 }
 
-// export const fetchReadingPosts = () => {
-//   return async (dispatch) => {
-//     dispatch(startFetchingPostsAction())
-//     const apiUrl = process.env.REACT_APP_API_V1_URL + '/reading/posts'
+// posts全体を取得する。初回レンダー時のみ使用
+export const initialFetchPosts = () => {
+  return async (dispatch) => {
+    dispatch(showLoadingAction("書籍情報を取得中..."))
+    dispatch(fetchPosts())
+    await _sleep(1000)
+    dispatch(hideLoadingAction())
+  }
+}
 
-//     await axios.get(apiUrl, {headers :{
-//       'access-token': localStorage.getItem('auth_token'),
-//       'client': localStorage.getItem('client_id'),
-//       'uid': localStorage.getItem('uid'),
-//     }})
-//     .then((response) => {
-//        dispatch(fetchReadingPostsAction(response.data))
-//     })
-//     .catch((error) => {
-//       console.log("error",error)
-//       dispatch(fetchPostsFailureAction(error))
-//     })
-//   }
-// }
-
-// export const fetchCompletedPosts = () => {
-//   return async (dispatch) => {
-//     dispatch(startFetchingPostsAction())
-//     const apiUrl = process.env.REACT_APP_API_V1_URL + '/completed/posts'
-
-//     await axios.get(apiUrl, {headers :{
-//       'access-token': localStorage.getItem('auth_token'),
-//       'client': localStorage.getItem('client_id'),
-//       'uid': localStorage.getItem('uid'),
-//     }})
-//     .then((response) => {
-//        dispatch(fetchCompletedPostsAction(response.data))
-//     })
-//     .catch((error) => {
-//       dispatch(fetchPostsFailureAction(error))
-//     })
-//   }
-// }
-
-// export const fetchCompletedPostsDetail = (id) => {
-//   return async (dispatch) => {
-//     const apiUrl = process.env.REACT_APP_API_V1_URL + '/completed/posts/' +  String(id)
-
-//     await axios.get(apiUrl, {headers :{
-//       'access-token': localStorage.getItem('auth_token'),
-//       'client': localStorage.getItem('client_id'),
-//       'uid': localStorage.getItem('uid'),
-//     }})
-//     .then((response) => {
-//       dispatch(fetchCompletedPostsDetailAction([response.data]))
-//    })
-//    .catch((error) => {
-//     dispatch(fetchPostsFailureAction(error))
-//    })
-//   }
-// }
-
-// export const fetchRegisteredPosts = () => {
-//   return async (dispatch) => {
-//     dispatch(startFetchingPostsAction())
-//     const apiUrl = process.env.REACT_APP_API_V1_URL + '/registered/posts'
-
-//     await axios.get(apiUrl, {headers :{
-//       'access-token': localStorage.getItem('auth_token'),
-//       'client': localStorage.getItem('client_id'),
-//       'uid': localStorage.getItem('uid'),
-//     }})
-//     .then((response) => {
-//        dispatch(fetchRegisteredPostsAction(response.data))
-//     })
-//     .catch((error) => {
-//       dispatch(fetchPostsFailureAction(error))
-//     })
-//   }
-// }
-
-// export const fetchRegisteredPostsDetail = (id) => {
-//   return async (dispatch) => {
-//     dispatch(showLoadingAction("fetchRegisteredPostDetail..."))
-//     const apiUrl = process.env.REACT_APP_API_V1_URL + '/registered/posts/' +  String(id)
-
-//     await axios.get(apiUrl, {headers :{
-//       'access-token': localStorage.getItem('auth_token'),
-//       'client': localStorage.getItem('client_id'),
-//       'uid': localStorage.getItem('uid'),
-//     }})
-//     .then((response) => {
-//       dispatch(fetchRegisteredPostsDetailAction([response.data]))
-//     })
-//    .catch((error) => {
-//      console.log("error!",error)
-//     })
-
-//     await _sleep(1000);
-//     dispatch(hideLoadingAction())
-//   }
-// }
-
+// reading posts として書籍情報を新規登録
 export const saveReadingPost = (title,url,author,image,mapItems) => {
   return async (dispatch) => {
     dispatch(showLoadingAction("カレントブックとして登録中..."))
@@ -234,6 +137,7 @@ export const saveReadingPost = (title,url,author,image,mapItems) => {
   }
 }
 
+// registered posts として書籍情報を新規登録
 export const saveRegisteredPost = (title,url,author,image,mapItems) => {
   return async (dispatch) => {
     dispatch(showLoadingAction("書籍登録中..."))
@@ -272,6 +176,7 @@ export const saveRegisteredPost = (title,url,author,image,mapItems) => {
   }
 }
 
+// reading post を registered post に変更
 export const updateStatusToCompleted = (prevData) =>{
   return async (dispatch) => {
     dispatch(showLoadingAction("完読書籍として登録中..."))

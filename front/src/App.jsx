@@ -5,9 +5,7 @@ import { Header } from './components/Header'
 import { ResponsiveBottomNavigation } from './components/ResponsiveBottomNavigation';
 import { Loading } from "./components/UIkit"
 import "./assets/reset.css"
-// import "./assets/style.css"
 import { Helmet } from "react-helmet";
-// import { getPosts } from "./reducks/posts/selectors"
 
 const useStyles = makeStyles((theme)=>({
   root: {
