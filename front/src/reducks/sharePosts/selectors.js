@@ -4,5 +4,5 @@ const sharePostsSelector = (state) => state.sharePosts;
 
 export const getSharePosts = createSelector(
   [sharePostsSelector],
-  state => state.sharePosts
+  state => state.list
 )
