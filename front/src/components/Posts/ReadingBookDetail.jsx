@@ -9,7 +9,6 @@ import EditIcon from '@material-ui/icons/Edit';
 import { push } from "connected-react-router";
 import { updateStatusToCompleted } from "../../reducks/posts/operations"
 import {TwitterShareButton,TwitterIcon} from "react-share";
-// import { Helmet } from "react-helmet";
 
 const ReadingBookDetail = (props) => {
   const dispatch = useDispatch();
