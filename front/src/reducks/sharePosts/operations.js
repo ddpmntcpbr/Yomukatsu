@@ -17,7 +17,7 @@ export const fetchSharePostsList = () => {
 // share用のpostを取得する
 export const fetchSharePost = (id) => {
   return async (dispatch) => {
-    await axios.get(process.env.REACT_APP_API_V1_URL + '/share/posts' + id)
+    await axios.get(process.env.REACT_APP_API_V1_URL + '/share/posts/' + id)
     .then((response) => {
       dispatch(fetchSharePostAction(response.data))
     })
