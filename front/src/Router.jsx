@@ -7,6 +7,7 @@ import {
   ReadingPostsDetail,
   RegisteredPostsDetail,
   RegisteredPostsList,
+  SharePostsPage,
   TopPage}
 from "./templates";
 import Auth from "./Auth"
@@ -15,6 +16,7 @@ const Router = () => {
   return (
     <Switch>
       <Route exact path={"/"} component={TopPage} />
+      <Route exact path={"/share/posts/:id"} component={SharePostsPage} />
 
       <Auth>
         <Route exact path={"/completed/posts/:id"} component={CompletedPostsDetail} />
