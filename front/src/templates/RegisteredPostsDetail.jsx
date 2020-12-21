@@ -25,8 +25,8 @@ const RegisteredPostsDetail = () => {
   const selector = useSelector((state)=>state);
   const posts = getRegisteredPosts(selector);
   const path = selector.router.location.pathname;
-  const id = Number(path.split("/registered/posts/")[1]);
-  const post = posts.find((v) => v.id===id)
+  const id = path.split("/registered/posts/")[1];
+  const post = posts.find((v) => v.id===Number(id))
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = useCallback(() => {
@@ -91,12 +91,15 @@ const RegisteredPostsDetail = () => {
               </Box>
 
               <Box>
-                <Box display="flex" justifyContent="center" my={4}>
+                <Box my={4}>
                   <Box>
                     <SecondaryButton label="カレントブックに登録" onClick={() => dispatch(exchangeRegisteredAndReadingPost(id))}/>
                   </Box>
                   <Box>
                     <SecondaryButton label="完読した!" onClick={handleClickOpen}/>
+                  </Box>
+                  <Box>
+                    <SecondaryButton label="Share" onClick={()=>dispatch(push("/share/posts/" + id))}/>
                   </Box>
                 </Box>
                 <Box display="flex" justifyContent="center">
