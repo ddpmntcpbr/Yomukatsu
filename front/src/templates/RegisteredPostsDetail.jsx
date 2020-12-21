@@ -1,4 +1,4 @@
-import React, { useState,useCallback } from "react";
+import React, { useEffect,useState,useCallback } from "react";
 import { useSelector, useDispatch } from 'react-redux'
 import { Box,Button,Card,CardContent,Container,Paper,Typography,Divider } from "@material-ui/core"
 import { makeStyles } from "@material-ui/styles";
@@ -11,6 +11,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import { Helmet } from "react-helmet";
 import { isNonEmptyArray } from "../helpers"
 import { getRegisteredPosts } from "../reducks/posts/selectors"
+import { fetchSharePost } from "../reducks/sharePosts/operations"
 
 const useStyles = makeStyles((theme)=>({
   root: {
@@ -28,6 +29,10 @@ const RegisteredPostsDetail = () => {
   const id = path.split("/registered/posts/")[1];
   const post = posts.find((v) => v.id===Number(id))
   const [open, setOpen] = useState(false);
+
+  useEffect(()=>{
+    dispatch(fetchSharePost(id))
+  },[dispatch,id])
 
   const handleClickOpen = useCallback(() => {
     setOpen(true);
