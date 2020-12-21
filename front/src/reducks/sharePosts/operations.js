@@ -1,12 +1,12 @@
 import axios from "axios";
-import { fetchSharePostsAction } from "./actions";
+import { fetchSharePostsListAction } from "./actions";
 
-// share用のpostsを取得する
-export const fetchSharePosts = () => {
+// share用のposts listを取得する
+export const fetchSharePostsList = () => {
   return async (dispatch) => {
     await axios.get(process.env.REACT_APP_API_V1_URL + '/share/posts')
     .then((response) => {
-      dispatch(fetchSharePostsAction(response.data))
+      dispatch(fetchSharePostsListAction(response.data))
     })
     .catch((error) => {
       console.log(error)
