@@ -37,10 +37,10 @@ const SharePostsPage = () => {
         <Helmet
           title={'SharePostsPage!'}
           meta={[
-            {property: "og:image", content: post.image},
-            {property: "og:title", content: "SharePostsPageのog:titleを入れます"},
-            {property: "og:description", content: "Yomukatsu!SharePostPage"},
-            {property: "og:url", content: process.env.REACT_APP_BASE_URL + path }
+            {name: "twitter:card", content: "summary_large_image"},
+            {name: "twitter:image", content: post.image},
+            {name: "twitter:title", content: "SharePostsPageのog:titleを入れます"},
+            {name: "twitter:description", content: "Yomukatsu!SharePostPage"},
           ]}
         />
         <Paper>

@@ -58,10 +58,9 @@ const TopPage = () => {
         title={'Yomukatsu!'}
         meta={[
           {name: "twitter:card", content: "summary_large_image"},
-          {property: "og:image", content: "https://www.book.yomukatsu.com/static/media/logo.e89c3802.png"},
-          {property: "og:title", content: "og:titleを入れます_TopPage"},
-          {property: "og:description", content: "Yomukatsu!TopPage"},
-          {property: "og:url", content: process.env.REACT_APP_BASE_URL }
+          {name: "twitter:image", content: "https://www.book.yomukatsu.com/static/media/logo.e89c3802.png"},
+          {name: "twitter:title", content: "og:titleを入れます_TopPage"},
+          {name: "twitter:description", content: "Yomukatsu!TopPage"}
         ]}
       />
       <div>
