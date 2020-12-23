@@ -37,10 +37,10 @@ const SharePostsPage = () => {
         <Helmet
           title={'SharePostsPage!'}
           meta={[
-            {name: "twitter:card", content: "summary_large_image"},
+            {name: "twitter:card", content: "summary"},
             {name: "twitter:image", content: post.image},
-            {name: "twitter:title", content: "SharePostsPageのog:titleを入れます"},
-            {name: "twitter:description", content: "Yomukatsu!SharePostPage"},
+            {name: "twitter:title", content: post.title},
+            {name: "twitter:description", content: "シェア用ページ"},
           ]}
         />
         <Paper>
