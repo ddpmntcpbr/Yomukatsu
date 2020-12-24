@@ -55,7 +55,6 @@ const TopPage = () => {
   return (
     <Container>
       <Helmet
-        title={'Yomukatsu!'}
         meta={[
           {name: "twitter:card", content: "summary"},
           {name: "twitter:image", content: "https://www.book.yomukatsu.com/static/media/logo.e89c3802.png"},
