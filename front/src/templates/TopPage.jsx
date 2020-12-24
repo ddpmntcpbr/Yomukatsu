@@ -9,7 +9,7 @@ import topPageImage from "../assets/img/src/top.png";
 import axios from "axios";
 import {PrimaryButton} from "../components/UIkit";
 import { fetchPosts } from "../reducks/posts/operations"
-import { Helmet } from "react-helmet";
+// import { Helmet } from "react-helmet";
 
 const fetchHttpsUsersCount = () => {
     return async () => {
@@ -54,14 +54,14 @@ const TopPage = () => {
 
   return (
     <Container>
-      <Helmet
+      {/* <Helmet
         meta={[
           {name: "twitter:card", content: "summary"},
           {name: "twitter:image", content: "https://www.book.yomukatsu.com/static/media/logo.e89c3802.png"},
           {name: "twitter:title", content: "Yomukatsu"},
           {name: "twitter:description", content: "積読解消サポート!"},
         ]}
-      />
+      /> */}
       <div>
         <img
           src={topPageImage} alt="topPageImage"
