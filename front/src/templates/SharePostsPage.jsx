@@ -37,8 +37,8 @@ const SharePostsPage = () => {
         <Helmet
           meta={[
             {name: "twitter:card", content: "summary"},
-            {name: "twitter:image", content: "https://books.google.co.jp/books/content?id=Nvx1oAEACAAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE70x35e1u48P-V3zabEXQ7i3yR4S02MmVbWqH2o8E7qFuNcjtCRbnkalwDqefJvlz7aOYGVwbEYx8MRm7L1M-hj3BCIwhC0YtpApWBe_3zMM-svMuLmtN8gCzSI_TKfO1sIFmpMM"},
-            {name: "twitter:title", content: "シェアページ twitter:title"},
+            {name: "twitter:image", content: post.image},
+            {name: "twitter:title", content: post.title},
             {name: "twitter:description", content: "シェア用ページ"},
           ]}
         />
