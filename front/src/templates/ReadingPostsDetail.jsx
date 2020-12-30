@@ -22,7 +22,7 @@ const ReadingPostsDetail = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const selector = useSelector((state)=>state);
-  const path = selector.router.location.pathname;
+  // const path = selector.router.location.pathname;
   const posts = getReadingPosts(selector);
   const post = posts[0]
   const [open, setOpen] = useState(false);
@@ -100,7 +100,7 @@ const ReadingPostsDetail = () => {
                   contentText="一度完読にしたアイテムは、元には戻せません"
                 />
               </Box>
-              <TwitterShareButton url={process.env.REACT_APP_BASE_URL + path} title={"今から『"+ post.title +"』を読みます！\n#yomukatsu"}>
+              <TwitterShareButton url={process.env.REACT_APP_BASE_URL + "/share/posts/" + post.id} title={"今から『"+ post.title +"』を読みます！\n#yomukatsu"}>
                 <TwitterIcon size={64} round />
               </TwitterShareButton>
             </Box>
