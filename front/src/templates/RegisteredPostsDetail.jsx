@@ -25,7 +25,7 @@ const RegisteredPostsDetail = () => {
   const selector = useSelector((state)=>state);
   const posts = getRegisteredPosts(selector);
   const path = selector.router.location.pathname;
-  const sharePath = path.replace("registered","share")
+  // const sharePath = path.replace("registered","share")
   const id = path.split("/registered/posts/")[1];
   const post = posts.find((v) => v.id===Number(id))
   const [open, setOpen] = useState(false);
@@ -121,7 +121,7 @@ const RegisteredPostsDetail = () => {
                   contentText="一度完読にしたアイテムは、元には戻せません"
                 />
               </Box>
-              <TwitterShareButton url={process.env.REACT_APP_BASE_URL + sharePath} title={"今から『"+ post.title +"』を読みます！\n#yomukatsu"}>
+              <TwitterShareButton url={process.env.REACT_APP_BASE_URL + "/share/posts/" + post.id} title={"今から『"+ post.title +"』を読みます！\n#yomukatsu"}>
                 <TwitterIcon size={64} round />
               </TwitterShareButton>
             </Box>

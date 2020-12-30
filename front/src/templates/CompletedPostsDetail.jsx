@@ -20,7 +20,7 @@ const CompletedPostsDetail = () => {
   const selector = useSelector((state)=>state);
   const posts = getCompletedPosts(selector);
   const path = selector.router.location.pathname;
-  const sharePath = path.replace("completed","share")
+  // const sharePath = path.replace("completed","share")
   const id = Number(path.split("/completed/posts/")[1]);
   const post = posts.find((v) => v.id===id)
 
@@ -71,7 +71,7 @@ const CompletedPostsDetail = () => {
                 </Box>
               </Box>
             </Box>
-            <TwitterShareButton url={process.env.REACT_APP_BASE_URL + sharePath} title={`『`+ post.title +`』を完読しました！\n#yomukatsu`}>
+            <TwitterShareButton url={process.env.REACT_APP_BASE_URL + "/share/posts/" + post.id} title={`『`+ post.title +`』を完読しました！\n#yomukatsu`}>
               <TwitterIcon size={64} round />
             </TwitterShareButton>
           </Box>
