@@ -14,7 +14,7 @@ import { Helmet } from "react-helmet";
 const fetchHttpsUsersCount = () => {
     return async () => {
       // const apiEndpoint = process.env.REACT_APP_API_V1_URL + "/users_count"
-      const apiEndpoint = "https://backend.book.yomukatsu.com/api/v1/users_count"
+      const apiEndpoint = "https://yomukatsu-backend.com/api/v1/users_count"
       axios.get(apiEndpoint)
       .then((response) => {
         console.log("fetchHttpsUsersCount",response)
@@ -27,7 +27,7 @@ const fetchHttpsUsersCount = () => {
 
 const fetchHttpUsersCount = () => {
     return async () => {
-      const apiEndpoint = "http://backend.book.yomukatsu.com/api/v1/users_count"
+      const apiEndpoint = "http://yomukatsu-backend.com/api/v1/users_count"
       console.log("httpApiEndpoint",apiEndpoint)
       axios.get(apiEndpoint)
       .then((response) => {
