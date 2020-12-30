@@ -38,8 +38,8 @@ const SharePostsPage = () => {
           meta={[
             {name: "twitter:card", content: "summary"},
             {name: "twitter:image", content: post.image},
-            {name: "twitter:title", content: post.title},
-            {name: "twitter:description", content: "シェア用ページ"},
+            {name: "twitter:title", content: "Yomukatsu!"},
+            {name: "twitter:description", content: post.title},
           ]}
         />
         <Paper>
