@@ -176,20 +176,20 @@ workflows:
       - aws-ecs/deploy-service-update:
           requires:
             - build_and_push_image_api
-          family: "rails-react-docker-ecs-task"
-          service-name: "rails-react-docker-service"
-          cluster-name: "rails-react-docker-cluster"
-          container-image-name-updates: "container=rails_react_docker_api,tag=${CIRCLE_SHA1}"
+          family: "yomukatsu-task-def"
+          service-name: "yomukatsu-service"
+          cluster-name: "yomukatsu-cluster"
+          container-image-name-updates: "container=rails,tag=${CIRCLE_SHA1}"
           filters:
             branches:
               only: master
       - aws-ecs/deploy-service-update:
           requires:
             - build_and_push_image_web
-          family: "rails-react-docker-ecs-task"
-          service-name: "rails-react-docker-service"
-          cluster-name: "rails-react-docker-cluster"
-          container-image-name-updates: "container=rails_react_docker_web,tag=${CIRCLE_SHA1}"
+          family: "yomukatsu-task-def"
+          service-name: "yomukatsu-service"
+          cluster-name: "yomukatsu-cluster"
+          container-image-name-updates: "container=nginx,tag=${CIRCLE_SHA1}"
           filters:
             branches:
               only: master
