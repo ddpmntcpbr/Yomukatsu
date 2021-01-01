@@ -8,7 +8,7 @@ import {TwitterShareButton,TwitterIcon} from "react-share";
 import { push } from "connected-react-router";
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
-import { isNonEmptyArray } from "../helpers"
+import { getDateString,isNonEmptyArray } from "../helpers"
 import { getRegisteredPosts } from "../reducks/posts/selectors"
 import { fetchSharePost } from "../reducks/sharePosts/operations"
 
@@ -157,7 +157,7 @@ const RegisteredPostsDetail = () => {
                   contentText="一度削除したアイテムは、元には戻せません"
                 />
               </Box>
-              <TwitterShareButton url={process.env.REACT_APP_BASE_URL + "/share/posts/" + post.id} title={"今から『"+ post.title +"』を読みます！\n#yomukatsu"}>
+              <TwitterShareButton url={process.env.REACT_APP_BASE_URL + "/share/posts/" + post.id + "?" + getDateString()} title={"今から『"+ post.title +"』を読みます！\n\n#yomukatsu\n\n"}>
                 <TwitterIcon size={64} round />
               </TwitterShareButton>
             </Box>
