@@ -35,8 +35,6 @@ export const deletePost = (id) => {
   return async (dispatch) => {
     dispatch(showLoadingAction("書籍情報を削除中..."))
     const apiUrl = process.env.REACT_APP_API_V1_URL + '/posts/' + String(id)
-    console.log("id",id)
-    console.log("apiUrl",apiUrl)
 
     await axios.delete(apiUrl, {headers :{
       'access-token': localStorage.getItem('auth_token'),
@@ -44,7 +42,6 @@ export const deletePost = (id) => {
       'uid': localStorage.getItem('uid'),
     }})
     .then((response) => {
-      console.log("response",response)
       dispatch(fetchPosts())
     })
     .catch((error) => {
