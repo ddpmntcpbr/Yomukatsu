@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Box,Button,Card,CardContent,Container,Paper,Typography,Divider } from "@material-ui/core"
 import { makeStyles } from "@material-ui/styles";
 import { BookCard,SecondaryButton,QuestionDialog } from "../components/UIkit"
-import { updateStatusToCompleted } from "../reducks/posts/operations"
+import { deletePost,updateStatusToCompleted } from "../reducks/posts/operations"
 import {TwitterShareButton,TwitterIcon} from "react-share";
 import { push } from "connected-react-router";
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -22,24 +22,37 @@ const ReadingPostsDetail = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const selector = useSelector((state)=>state);
-  // const path = selector.router.location.pathname;
   const posts = getReadingPosts(selector);
   const post = posts[0]
-  const [open, setOpen] = useState(false);
+  const [updatePostStatusOpen, setUpdatePostStatusOpen] = useState(false);
+  const [deletePostDialogOpen, setDeletePostDialogOpen] = useState(false);
 
-  const handleClickOpen = useCallback(() => {
-    setOpen(true);
-  }, [setOpen])
+  const handleUpdatePostStatusDialogOpen = useCallback(() => {
+    setUpdatePostStatusOpen(true);
+  }, [setUpdatePostStatusOpen])
 
-  const handleClose = useCallback(() => {
-    setOpen(false)
-  }, [setOpen]);
+  const handleUpdatePostStatusDialogClose = useCallback(() => {
+    setUpdatePostStatusOpen(false)
+  }, [setUpdatePostStatusOpen]);
 
-  const handleUpdateStatus = useCallback(()=>{
+  const handleUpdatePostStatus = useCallback(()=>{
     dispatch(updateStatusToCompleted(post))
-    handleClose()
+    handleUpdatePostStatusDialogClose()
     dispatch(push("/completed/posts"))
-  },[dispatch,handleClose,post])
+  },[dispatch,handleUpdatePostStatusDialogClose,post])
+
+  const handleDeletePostClickOpen = useCallback(() => {
+    setDeletePostDialogOpen(true);
+  }, [setDeletePostDialogOpen])
+
+  const handleDeletePostDialogClose = useCallback(() => {
+    setDeletePostDialogOpen(false)
+  }, [setDeletePostDialogOpen]);
+
+  const handleDeletePost = useCallback(()=>{
+    dispatch(deletePost(post.id))
+    handleDeletePostDialogClose()
+  },[dispatch,handleDeletePostDialogClose,post])
 
   return (
     <Container maxWidth="md" >
@@ -77,7 +90,10 @@ const ReadingPostsDetail = () => {
               ))}
               <Box>
                 <Box display="flex" justifyContent="center" my={4}>
-                  <SecondaryButton label="完読した!" onClick={handleClickOpen}/>
+                  <SecondaryButton
+                    label="完読した!"
+                    onClick={handleUpdatePostStatusDialogOpen}
+                  />
                 </Box>
                 <Box display="flex" justifyContent="center">
                   <Box my={1}>
@@ -86,18 +102,31 @@ const ReadingPostsDetail = () => {
                     </Button>
                   </Box>
                   <Box m={1}>
-                    <Button variant="outlined" color="default" startIcon={<DeleteIcon />}>
+                    <Button
+                      variant="outlined"
+                      color="default"
+                      startIcon={<DeleteIcon />}
+                      onClick={handleDeletePostClickOpen}
+                    >
                       削除
                     </Button>
                   </Box>
                 </Box>
 
                 <QuestionDialog
-                  open={open}
-                  handleClose={handleClose}
-                  handleEvent={handleUpdateStatus}
+                  open={updatePostStatusOpen}
+                  handleClose={handleUpdatePostStatusDialogClose}
+                  handleEvent={handleUpdatePostStatus}
                   title="完読にしてよろしいですか？"
                   contentText="一度完読にしたアイテムは、元には戻せません"
+                />
+
+                <QuestionDialog
+                  open={deletePostDialogOpen}
+                  handleClose={handleDeletePostDialogClose}
+                  handleEvent={handleDeletePost}
+                  title="本当に削除よろしいですか？"
+                  contentText="一度削除したアイテムは、元には戻せません"
                 />
               </Box>
               <TwitterShareButton url={process.env.REACT_APP_BASE_URL + "/share/posts/" + post.id} title={"今から『"+ post.title +"』を読みます！\n#yomukatsu"}>
