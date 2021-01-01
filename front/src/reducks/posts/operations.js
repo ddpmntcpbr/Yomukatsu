@@ -31,6 +31,30 @@ export const exchangeRegisteredAndReadingPost = (id) => {
   }
 }
 
+export const deletePost = (id) => {
+  return async (dispatch) => {
+    dispatch(showLoadingAction("書籍情報を削除中..."))
+    const apiUrl = process.env.REACT_APP_API_V1_URL + '/posts/' + String(id)
+    console.log("id",id)
+    console.log("apiUrl",apiUrl)
+
+    await axios.delete(apiUrl, {headers :{
+      'access-token': localStorage.getItem('auth_token'),
+      'client': localStorage.getItem('client_id'),
+      'uid': localStorage.getItem('uid'),
+    }})
+    .then((response) => {
+      console.log("response",response)
+      dispatch(fetchPosts())
+    })
+    .catch((error) => {
+      console.log("error",error)
+    })
+    await _sleep(1000);
+    dispatch(hideLoadingAction())
+  }
+}
+
 // posts全体を取得する
 export const fetchPosts = () => {
   return async (dispatch) => {
