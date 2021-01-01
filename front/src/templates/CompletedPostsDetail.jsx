@@ -1,12 +1,14 @@
-import React from "react";
-import { useSelector } from 'react-redux'
+import React, { useState,useCallback } from "react";
+import { useSelector,useDispatch } from 'react-redux'
 import { Box,Button,Card,CardContent,Container,Paper,Typography,Divider } from "@material-ui/core"
 import { makeStyles } from "@material-ui/styles";
-import { BookCard } from "../components/UIkit"
+import { BookCard,QuestionDialog } from "../components/UIkit"
 import {TwitterShareButton,TwitterIcon} from "react-share";
 import DeleteIcon from '@material-ui/icons/Delete';
 import { isNonEmptyArray } from "../helpers"
 import { getCompletedPosts } from "../reducks/posts/selectors"
+import { deletePost } from "../reducks/posts/operations"
+import { push } from "connected-react-router";
 
 const useStyles = makeStyles((theme)=>({
   root: {
@@ -17,12 +19,27 @@ const useStyles = makeStyles((theme)=>({
 
 const CompletedPostsDetail = () => {
   const classes = useStyles();
+  const dispatch = useDispatch();
   const selector = useSelector((state)=>state);
   const posts = getCompletedPosts(selector);
   const path = selector.router.location.pathname;
-  // const sharePath = path.replace("completed","share")
   const id = Number(path.split("/completed/posts/")[1]);
   const post = posts.find((v) => v.id===id)
+  const [deletePostDialogOpen, setDeletePostDialogOpen] = useState(false);
+
+  const handleDeletePostClickOpen = useCallback(() => {
+    setDeletePostDialogOpen(true);
+  }, [setDeletePostDialogOpen])
+
+  const handleDeletePostDialogClose = useCallback(() => {
+    setDeletePostDialogOpen(false)
+  }, [setDeletePostDialogOpen]);
+
+  const handleDeletePost = useCallback(()=>{
+    dispatch(deletePost(post.id))
+    handleDeletePostDialogClose()
+    dispatch(push("/completed/posts"))
+  },[dispatch,handleDeletePostDialogClose,post])
 
   return (
     <Container maxWidth="md" >
@@ -65,11 +82,25 @@ const CompletedPostsDetail = () => {
             <Box>
               <Box display="flex" justifyContent="center">
                 <Box m={1}>
-                  <Button variant="outlined" color="default" startIcon={<DeleteIcon />}>
+                  <Button
+                    variant="outlined"
+                    color="default"
+                    startIcon={<DeleteIcon />}
+                    onClick={handleDeletePostClickOpen}
+                  >
                     削除
                   </Button>
                 </Box>
               </Box>
+
+            <QuestionDialog
+                open={deletePostDialogOpen}
+                handleClose={handleDeletePostDialogClose}
+                handleEvent={handleDeletePost}
+                title="本当に削除よろしいですか？"
+                contentText="一度削除したアイテムは、元には戻せません"
+              />
+
             </Box>
             <TwitterShareButton url={process.env.REACT_APP_BASE_URL + "/share/posts/" + post.id} title={`『`+ post.title +`』を完読しました！\n#yomukatsu`}>
               <TwitterIcon size={64} round />
