@@ -5,7 +5,7 @@ import { makeStyles } from "@material-ui/styles";
 import { BookCard,QuestionDialog } from "../components/UIkit"
 import {TwitterShareButton,TwitterIcon} from "react-share";
 import DeleteIcon from '@material-ui/icons/Delete';
-import { isNonEmptyArray } from "../helpers"
+import { getDateString,isNonEmptyArray } from "../helpers"
 import { getCompletedPosts } from "../reducks/posts/selectors"
 import { deletePost } from "../reducks/posts/operations"
 import { push } from "connected-react-router";
@@ -102,7 +102,7 @@ const CompletedPostsDetail = () => {
               />
 
             </Box>
-            <TwitterShareButton url={process.env.REACT_APP_BASE_URL + "/share/posts/" + post.id} title={`『`+ post.title +`』を完読しました！\n#yomukatsu`}>
+            <TwitterShareButton url={process.env.REACT_APP_BASE_URL + "/share/posts/" + post.id + "?" + getDateString()} title={`『`+ post.title +`』を完読しました！\n\n#yomukatsu\n\n`}>
               <TwitterIcon size={64} round />
             </TwitterShareButton>
           </Box>
