@@ -1,6 +1,7 @@
 export {default as CompletedPostsDetail} from './CompletedPostsDetail'
 export {default as CompletedPostsList} from './CompletedPostsList'
 export {default as PostEdit} from './PostEdit'
+export {default as PostUpdatePage} from './PostUpdatePage'
 export {default as ReadingPostsDetail} from './ReadingPostsDetail'
 export {default as RegisteredPostsDetail} from './RegisteredPostsDetail'
 export {default as RegisteredPostsList} from './RegisteredPostsList'
