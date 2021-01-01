@@ -153,7 +153,7 @@ export const saveReadingPost = (title,url,author,image,mapItems) => {
       console.log("error",error)
     })
 
-    await _sleep(1000);
+    await _sleep(2000);
     dispatch(hideLoadingAction())
   }
 }
