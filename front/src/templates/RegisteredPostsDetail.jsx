@@ -25,7 +25,6 @@ const RegisteredPostsDetail = () => {
   const selector = useSelector((state)=>state);
   const posts = getRegisteredPosts(selector);
   const path = selector.router.location.pathname;
-  // const sharePath = path.replace("registered","share")
   const id = path.split("/registered/posts/")[1];
   const post = posts.find((v) => v.id===Number(id))
   const [updatePostStatusOpen, setUpdatePostStatusOpen] = useState(false);
@@ -34,20 +33,6 @@ const RegisteredPostsDetail = () => {
   useEffect(()=>{
     dispatch(fetchSharePost(id))
   },[dispatch,id])
-
-  // const handleClickOpen = useCallback(() => {
-  //   setOpen(true);
-  // }, [setOpen])
-
-  // const handleClose = useCallback(() => {
-  //   setOpen(false)
-  // }, [setOpen]);
-
-  // const handleUpdateStatus = useCallback(()=>{
-  //   dispatch(updateStatusToCompleted(post))
-  //   handleClose()
-  //   dispatch(push("/completed/posts"))
-  // },[dispatch,handleClose,post])
 
   const handleUpdatePostStatusDialogOpen = useCallback(() => {
     setUpdatePostStatusOpen(true);
