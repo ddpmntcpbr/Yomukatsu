@@ -24,22 +24,22 @@ const ReadingPostsDetail = () => {
   const selector = useSelector((state)=>state);
   const posts = getReadingPosts(selector);
   const post = posts[0]
-  const [open, setOpen] = useState(false);
+  const [updatePostStatusOpen, setUpdatePostStatusOpen] = useState(false);
   const [deletePostDialogOpen, setDeletePostDialogOpen] = useState(false);
 
-  const handleClickOpen = useCallback(() => {
-    setOpen(true);
-  }, [setOpen])
+  const handleUpdatePostStatusDialogOpen = useCallback(() => {
+    setUpdatePostStatusOpen(true);
+  }, [setUpdatePostStatusOpen])
 
-  const handleClose = useCallback(() => {
-    setOpen(false)
-  }, [setOpen]);
+  const handleUpdatePostStatusDialogClose = useCallback(() => {
+    setUpdatePostStatusOpen(false)
+  }, [setUpdatePostStatusOpen]);
 
-  const handleUpdateStatus = useCallback(()=>{
+  const handleUpdatePostStatus = useCallback(()=>{
     dispatch(updateStatusToCompleted(post))
-    handleClose()
+    handleUpdatePostStatusDialogClose()
     dispatch(push("/completed/posts"))
-  },[dispatch,handleClose,post])
+  },[dispatch,handleUpdatePostStatusDialogClose,post])
 
   const handleDeletePostClickOpen = useCallback(() => {
     setDeletePostDialogOpen(true);
@@ -90,7 +90,10 @@ const ReadingPostsDetail = () => {
               ))}
               <Box>
                 <Box display="flex" justifyContent="center" my={4}>
-                  <SecondaryButton label="完読した!" onClick={handleClickOpen}/>
+                  <SecondaryButton
+                    label="完読した!"
+                    onClick={handleUpdatePostStatusDialogOpen}
+                  />
                 </Box>
                 <Box display="flex" justifyContent="center">
                   <Box my={1}>
@@ -111,9 +114,9 @@ const ReadingPostsDetail = () => {
                 </Box>
 
                 <QuestionDialog
-                  open={open}
-                  handleClose={handleClose}
-                  handleEvent={handleUpdateStatus}
+                  open={updatePostStatusOpen}
+                  handleClose={handleUpdatePostStatusDialogClose}
+                  handleEvent={handleUpdatePostStatus}
                   title="完読にしてよろしいですか？"
                   contentText="一度完読にしたアイテムは、元には戻せません"
                 />
