@@ -87,10 +87,6 @@ const PostEdit = () => {
     dispatch(saveRegisteredPost(title,url,author,image,mapItems))
   },[dispatch,title,url,author,image,mapItems])
 
-  const onSubmit = (values) => {
-    console.log(values)
-  }
-
   return (
     <Container maxWidth="md">
       <Box component={Paper} p={2} className={classes.paper}>
