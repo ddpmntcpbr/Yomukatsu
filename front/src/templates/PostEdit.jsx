@@ -4,9 +4,8 @@ import IconButton from "@material-ui/core/IconButton";
 import SearchIcon from "@material-ui/icons/Search";
 import {makeStyles} from "@material-ui/styles";
 import axios from "axios";
-import Typography from '@material-ui/core/Typography';
 import {PostEditDialog,SearchResultDialog,SetMapArea} from "../components/Posts";
-import {Container,Box} from "@material-ui/core";
+import {Container,Box,Typography,Paper} from "@material-ui/core";
 import {saveReadingPost,saveRegisteredPost} from "../reducks/posts/operations";
 import {useDispatch} from "react-redux";
 import { Form, Field } from 'react-final-form'
@@ -15,10 +14,8 @@ import { FieldArray } from 'react-final-form-arrays'
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 
 const useStyles = makeStyles((theme)=>({
-  titleTypography: {
-    color: theme.palette.primary.main,
-    fontSize: "2rem",
-    paddingBottom: theme.spacing(2),
+  paper: {
+    backgroundColor: theme.palette.grey[100]
   },
   subTitleTypography: {
     color: theme.palette.grey["700"],
@@ -95,107 +92,39 @@ const PostEdit = () => {
   }
 
   return (
-    <Container maxWidth="md" style={{backgroundColor:"white"}}>
-      <Typography variant="h2" className={classes.titleTypography}>
-        POST登録
-      </Typography>
-      <Typography variant="h3" className={classes.subTitleTypography}>
-        書籍登録
-      </Typography>
-      <Box className={classes.searchField}>
-        <TextInput
-          fullWidth={true} label={"タイトル / 著者名 で 検索"} multiline={false} required={true}
-          onChange={inputQuery} rows={1} type={"text"}
+    <Container maxWidth="md">
+      <Box component={Paper} p={2} className={classes.paper}>
+        <Typography variant="h3" className={classes.subTitleTypography}>
+          書籍登録
+        </Typography>
+        <Box className={classes.searchField}>
+          <TextInput
+            fullWidth={true} label={"タイトル / 著者名 で 検索"} multiline={false} required={true}
+            onChange={inputQuery} rows={1} type={"text"}
+          />
+          <IconButton onClick={() => handleClickSearchIcon()}>
+            <SearchIcon/>
+          </IconButton>
+        </Box>
+        <SearchResultDialog
+          open={searchModalOpen} searchResults={searchResults} handleClose={handleSearchModalClose}
+          setTitle={setTitle} setAuthor={setAuthor} setImage={setImage} setUrl={setUrl}
         />
-        <IconButton onClick={() => handleClickSearchIcon()}>
-          <SearchIcon/>
-        </IconButton>
+        <BookCard title={title} author={author} image={image} />
+        <Box style={{height:24}}/>
+        <Typography variant="h3" className={classes.subTitleTypography}>
+          メンタルマップ
+        </Typography>
+        <SetMapArea mapItems={mapItems} setMapItems={setMapItems}  />
+
+        <Box textAlign="center" mt={8}>
+          <SecondaryButton
+            label="登録!"
+            onClick={handleSaveModalOpen}
+          />
+        </Box>
       </Box>
-      <SearchResultDialog
-        open={searchModalOpen} searchResults={searchResults} handleClose={handleSearchModalClose}
-        setTitle={setTitle} setAuthor={setAuthor} setImage={setImage} setUrl={setUrl}
-      />
-      <BookCard title={title} author={author} image={image} />
-      <Box style={{height:24}}/>
-      <Typography variant="h3" className={classes.subTitleTypography}>
-        読書メンタルマップ
-      </Typography>
-      <SetMapArea mapItems={mapItems} setMapItems={setMapItems}  />
 
-      {/* <Form
-        onSubmit={onSubmit}
-        mutators={{
-          ...arrayMutators
-        }}
-        render={({
-          handleSubmit,
-          form: {
-            mutators: { push, pop }
-          }, // injected from final-form-arrays above
-          pristine,
-          form,
-          submitting,
-          values
-        }) => {
-          return (
-            <form onSubmit={handleSubmit}>
-              <FieldArray name="mapItems">
-                {({ fields }) =>
-                  fields.map((name, index) => (
-                    <div key={name}>
-                      <label>マップ{index + 1}</label>
-                      <Field
-                        name={`${name}.firstName`}
-                        component="input"
-                        placeholder="マップアイテムを入力"
-                      />
-                      <span
-                        onClick={() => fields.remove(index)}
-                      >
-                        <HighlightOffIcon/>
-                      </span>
-                    </div>
-                  ))
-                }
-              </FieldArray>
-
-              <Box>
-                <PrimaryButton
-                  label="マップアイテムを追加"
-                  onClick={() => push('mapItems', undefined)}
-                />
-              </Box>
-
-              <div className="buttons">
-                <button type="submit" disabled={submitting || pristine}>
-                  Submit
-                </button>
-              </div>
-              <Box>
-                <PrimaryButton
-                  label="保存"
-                  type="submit"
-                  onClick={() => push('mapItems', undefined)}
-                />
-              </Box>
-            </form>
-          )
-        }}
-      /> */}
-
-
-
-
-      <Box textAlign="center" mt={4}>
-        {/* <PrimaryButton
-          label="POSTを登録！"
-          onClick={() => dispatch(saveRegisteredPost(title,url,author,image,mapItems))}
-        /> */}
-        <SecondaryButton
-          label="登録!"
-          onClick={handleSaveModalOpen}
-        />
-      </Box>
       <PostEditDialog
         open={saveModalOpen}
         handleClose={handleSaveModalClose}
