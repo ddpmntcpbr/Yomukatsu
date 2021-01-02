@@ -13,6 +13,7 @@ import { getReadingPosts } from "../reducks/posts/selectors"
 
 const useStyles = makeStyles((theme)=>({
   root: {
+    backgroundColor: theme.palette.grey[100]
   },
   mapItem: {
   }
@@ -55,10 +56,10 @@ const ReadingPostsDetail = () => {
   },[dispatch,handleDeletePostDialogClose,post])
 
   return (
-    <Container maxWidth="md" >
+    <Container maxWidth="md">
       {isNonEmptyArray(post) ?
         <Box>
-          <Paper>
+          <Paper className={classes.root}>
             <Box p={1} >
               <Typography component="h3">
                 <Box fontSize="1.5rem" fontWeight="fontWeightBold">
