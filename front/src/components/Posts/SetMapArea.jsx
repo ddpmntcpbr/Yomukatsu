@@ -12,17 +12,19 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import {makeStyles} from "@material-ui/styles";
-import {Box} from "@material-ui/core"
+import { Box,Button } from "@material-ui/core"
 import { PrimaryButton } from "../UIkit"
 import Grid from '@material-ui/core/Grid';
+import AddIcon from '@material-ui/icons/Add';
+import RemoveIcon from '@material-ui/icons/Remove';
 
 const useStyles = makeStyles((theme)=>({
   checkIcon: {
     float: "right"
   },
   iconCell: {
-    height: 48,
-    width: 48
+    height: 32,
+    width: 32,
   },
   mapItemPaper: {
     padding: theme.spacing(1)
@@ -33,7 +35,7 @@ const useStyles = makeStyles((theme)=>({
   },
   inputButton: {
     display: "flex",
-    justifyContent: "center"
+    justifyContent: "space-between"
   }
 }))
 
@@ -41,11 +43,21 @@ const SetSizeArea = (props) => {
   const classes = useStyles();
 
   const [index, setIndex] = useState(0),
-        [mapItem, setMapItem] = useState("")
+        [mapItem, setMapItem] = useState(""),
+        [inputFormOpen, setInutFormOpen] = useState(false)
 
   const inputMapItem = useCallback((event)=>{
     setMapItem(event.target.value)
   },[setMapItem]);
+
+  const handleInputFormOpen = () => {
+    setInutFormOpen(true);
+  };
+
+  const handleInputFormClose = () => {
+    setMapItem("")
+    setInutFormOpen(false);
+  };
 
   const addMapItem = (index, mapItem) => {
     if (mapItem === "") {
@@ -62,10 +74,12 @@ const SetSizeArea = (props) => {
         setIndex(newMapItems.length)
         setMapItem("")
       }
+      handleInputFormClose()
     }
   };
 
   const editMapItem = (index,mapItem) => {
+    handleInputFormOpen()
     setIndex(index);
     setMapItem(mapItem);
   }
@@ -75,32 +89,26 @@ const SetSizeArea = (props) => {
     props.setMapItems(newMapItems);
   }
 
-  // const memoIndex = useMemo(() => {
-  //   setIndex(props.mapItems.length)
-  // },[props.mapItems.length])
-
-
   return (
     <Box my={2}>
-    { props.mapItems.length > 0 && (
-        props.mapItems.map((item,i) => (
-          <Grid container spacing={3} key={item.mapItem}>
-            <Grid item xs={10}>
-              <Paper className={classes.mapItemPaper} onClick={() => editMapItem(i,item.mapItem)}>
-                {item.mapItem}
-              </Paper>
+      { props.mapItems.length > 0 && (
+          props.mapItems.map((item,i) => (
+            <Grid container spacing={3} key={item.mapItem} alignItems="center" justify="center">
+              <Grid item xs={10}>
+                <Paper className={classes.mapItemPaper} onClick={() => editMapItem(i,item.mapItem)}>
+                  {item.mapItem}
+                </Paper>
+              </Grid>
+              <Grid item xs={2}>
+                <IconButton className={classes.iconCell} onClick={() => deleteMapItem(i)}>
+                  <DeleteIcon />
+                </IconButton>
+              </Grid>
             </Grid>
-            <Grid item xs={2}>
-              <IconButton className={classes.iconCell} onClick={() => deleteMapItem(i)}>
-                <DeleteIcon />
-              </IconButton>
-            </Grid>
-          </Grid>
-        ))
-    )}
+          ))
+      )}
 
-
-      <TableContainer component={Paper}>
+      {/* <TableContainer component={Paper}>
         <Table>
           <TableHead>
             <TableRow>
@@ -141,7 +149,58 @@ const SetSizeArea = (props) => {
           </Box>
 
         </Box>
-      </TableContainer>
+      </TableContainer> */}
+
+
+      {inputFormOpen
+        ?
+        <Box>
+          <TextInput
+            fullWidth={true}
+            label={"マップアイテムを入力"}
+            multiline={true}
+            requires={true}
+            onChange={inputMapItem}
+            rows={3}
+            value={mapItem}
+            type={"text"}
+            autoFocus={true}
+          />
+          <Box className={classes.inputButton}>
+            <Box>
+              <Button
+                variant="contained"
+                color="default"
+                startIcon={<RemoveIcon />}
+                onClick={() => handleInputFormClose()}
+              >
+                キャンセル
+              </Button>
+            </Box>
+            <Box>
+              <Button
+                variant="contained"
+                color="primary"
+                startIcon={<AddIcon />}
+                onClick={() => addMapItem(index, mapItem)}
+              >
+              保存
+              </Button>
+            </Box>
+          </Box>
+        </Box>
+        :
+        <Box textAlign="center" my={2}>
+          <Button
+            variant="outlined"
+            color="default"
+            startIcon={<AddIcon />}
+            onClick={() => handleInputFormOpen()}
+          >
+            マップアイテムを追加
+          </Button>
+        </Box>
+        }
     </Box>
   )
 }
