@@ -66,7 +66,6 @@ const CompletedPostsDetail = () => {
             <Box>
               {isNonEmptyArray(post.post_items) ? post.post_items.map(mapItem => (
                 <Box key={mapItem.id} my={2} >
-                  <Typography>マップアイテムがありません</Typography>
                   <Card className={classes.mapItem} variant="outlined">
                     <CardContent>
                       <Typography component="p">
