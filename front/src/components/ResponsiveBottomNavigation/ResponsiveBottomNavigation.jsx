@@ -42,7 +42,6 @@ const currentActiveBottomNavigationAction = (pathname) => {
     case /^(?=.*registered)(?=.*posts)/.test(pathname): return 1;
     case /^(?=.*completed)(?=.*posts)/.test(pathname): return 2;
     case /help/.test(pathname): return 3;
-    case /account/.test(pathname): return 4;
     default: return -1;
    }
   }
@@ -77,12 +76,6 @@ const currentActiveBottomNavigationAction = (pathname) => {
           className={classes.button}
           icon={<HelpIcon/>}
           onClick={()=>dispatch(push("/help"))}
-        />
-        <BottomNavigationAction
-          label={"アカウント"}
-          className={classes.button}
-          icon={<AccountBoxIcon/>}
-          onClick={()=>dispatch(push("/account"))}
         />
       </BottomNavigation>
   </div>
