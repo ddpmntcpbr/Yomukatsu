@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme)=>({
   }
 }))
 
-const SetSizeArea = (props) => {
+const SetMapArea = (props) => {
   const classes = useStyles();
 
   const [index, setIndex] = useState(0),
@@ -161,4 +161,4 @@ const SetSizeArea = (props) => {
   )
 }
 
-export default SetSizeArea
+export default SetMapArea
