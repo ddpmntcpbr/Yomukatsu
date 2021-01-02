@@ -108,50 +108,6 @@ const SetSizeArea = (props) => {
           ))
       )}
 
-      {/* <TableContainer component={Paper}>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell>マップアイテム</TableCell>
-              <TableCell className={classes.iconCell} />
-            </TableRow>
-          </TableHead>
-          <TableBody >
-            { props.mapItems.length > 0 && (
-              props.mapItems.map((item,i) => (
-                <TableRow key={item.mapItem}>
-                  <TableCell onClick={() => editMapItem(i,item.mapItem)} >
-                    {item.mapItem}
-                  </TableCell>
-                  <TableCell>
-                    <IconButton className={classes.iconCell} onClick={() => deleteMapItem(i)}>
-                      <DeleteIcon />
-                    </IconButton>
-                  </TableCell>
-                </TableRow>
-              ))
-            )}
-          </TableBody>
-        </Table>
-
-        <Box>
-          <TextInput
-            fullWidth={true} label={"マップアイテムを入力"} multiline={true} requires={true}
-            onChange={inputMapItem} rows={5} value={mapItem} type={"text"}
-          />
-          <Box className={classes.inputButton}>
-            <Box>
-              <PrimaryButton label="キャンセル" onClick={() => console.log("キャンセル")} />
-            </Box>
-            <Box>
-              <PrimaryButton label="追加" onClick={() => addMapItem(index, mapItem)} />
-            </Box>
-          </Box>
-
-        </Box>
-      </TableContainer> */}
-
-
       {inputFormOpen
         ?
         <Box>
