@@ -13,6 +13,8 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import {makeStyles} from "@material-ui/styles";
 import {Box} from "@material-ui/core"
+import { PrimaryButton } from "../UIkit"
+import Grid from '@material-ui/core/Grid';
 
 const useStyles = makeStyles((theme)=>({
   checkIcon: {
@@ -22,9 +24,16 @@ const useStyles = makeStyles((theme)=>({
     height: 48,
     width: 48
   },
+  mapItemPaper: {
+    padding: theme.spacing(1)
+  },
   inputMapItemArea: {
     display: "flex",
     padding: theme.spacing(1)
+  },
+  inputButton: {
+    display: "flex",
+    justifyContent: "center"
   }
 }))
 
@@ -72,13 +81,30 @@ const SetSizeArea = (props) => {
 
 
   return (
-    <Box>
+    <Box my={2}>
+    { props.mapItems.length > 0 && (
+        props.mapItems.map((item,i) => (
+          <Grid container spacing={3} key={item.mapItem}>
+            <Grid item xs={10}>
+              <Paper className={classes.mapItemPaper} onClick={() => editMapItem(i,item.mapItem)}>
+                {item.mapItem}
+              </Paper>
+            </Grid>
+            <Grid item xs={2}>
+              <IconButton className={classes.iconCell} onClick={() => deleteMapItem(i)}>
+                <DeleteIcon />
+              </IconButton>
+            </Grid>
+          </Grid>
+        ))
+    )}
+
+
       <TableContainer component={Paper}>
         <Table>
           <TableHead>
             <TableRow>
               <TableCell>マップアイテム</TableCell>
-              <TableCell className={classes.iconCell} />
               <TableCell className={classes.iconCell} />
             </TableRow>
           </TableHead>
@@ -86,11 +112,8 @@ const SetSizeArea = (props) => {
             { props.mapItems.length > 0 && (
               props.mapItems.map((item,i) => (
                 <TableRow key={item.mapItem}>
-                  <TableCell>{item.mapItem}</TableCell>
-                  <TableCell>
-                    <IconButton className={classes.iconCell} onClick={() => editMapItem(i,item.mapItem)}>
-                      <EditIcon />
-                    </IconButton>
+                  <TableCell onClick={() => editMapItem(i,item.mapItem)} >
+                    {item.mapItem}
                   </TableCell>
                   <TableCell>
                     <IconButton className={classes.iconCell} onClick={() => deleteMapItem(i)}>
@@ -102,14 +125,21 @@ const SetSizeArea = (props) => {
             )}
           </TableBody>
         </Table>
-        <Box className={classes.inputMapItemArea}>
+
+        <Box>
           <TextInput
             fullWidth={true} label={"マップアイテムを入力"} multiline={true} requires={true}
             onChange={inputMapItem} rows={5} value={mapItem} type={"text"}
           />
-          <IconButton className={classes.checkIcon} onClick={() => addMapItem(index, mapItem)}>
-            <CheckCircleIcon/>
-          </IconButton>
+          <Box className={classes.inputButton}>
+            <Box>
+              <PrimaryButton label="キャンセル" onClick={() => console.log("キャンセル")} />
+            </Box>
+            <Box>
+              <PrimaryButton label="追加" onClick={() => addMapItem(index, mapItem)} />
+            </Box>
+          </Box>
+
         </Box>
       </TableContainer>
     </Box>
