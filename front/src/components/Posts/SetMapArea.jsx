@@ -77,7 +77,6 @@ const SetSizeArea = (props) => {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell>No.</TableCell>
               <TableCell>マップアイテム</TableCell>
               <TableCell className={classes.iconCell} />
               <TableCell className={classes.iconCell} />
@@ -87,7 +86,6 @@ const SetSizeArea = (props) => {
             { props.mapItems.length > 0 && (
               props.mapItems.map((item,i) => (
                 <TableRow key={item.mapItem}>
-                  <TableCell>{(i+1)}</TableCell>
                   <TableCell>{item.mapItem}</TableCell>
                   <TableCell>
                     <IconButton className={classes.iconCell} onClick={() => editMapItem(i,item.mapItem)}>
