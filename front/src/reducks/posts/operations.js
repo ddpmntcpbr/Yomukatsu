@@ -197,6 +197,33 @@ export const saveRegisteredPost = (title,url,author,image,mapItems) => {
   }
 }
 
+// postItemsを更新
+export const updatePostItems = (id,postItems) => {
+  return async (dispatch) => {
+
+    const data = {
+    "post_items_attributes": postItems
+    }
+
+    console.log(data)
+
+    const apiUrl = process.env.REACT_APP_API_V1_URL + '/posts/' + id;
+
+    await axios.patch(apiUrl, data, {headers :{
+      'access-token': localStorage.getItem('auth_token'),
+      'client': localStorage.getItem('client_id'),
+      'uid': localStorage.getItem('uid'),
+    }})
+    .then((response) => {
+      console.log(response)
+      dispatch(fetchPosts())
+    })
+    .catch((error) => {
+      console.log("error",error)
+    })
+  }
+}
+
 // reading post を registered post に変更
 export const updateStatusToCompleted = (prevData) =>{
   return async (dispatch) => {

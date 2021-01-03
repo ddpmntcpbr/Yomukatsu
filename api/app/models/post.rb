@@ -16,11 +16,9 @@ class Post < ApplicationRecord
     end
 
     def reject_blank(attributes)
-      if attributes[:id]
-        attributes.merge!(_destroy: true) if attributes[:content].blank?
-        !attributes[:content].blank?
-      else
-        attributes[:content].blank?
-      end
+      exists = attributes[:id].present?
+      empty = attributes[:content].blank?
+      attributes.merge!(_destroy: "1") if exists && empty
+      !exists && empty
     end
 end

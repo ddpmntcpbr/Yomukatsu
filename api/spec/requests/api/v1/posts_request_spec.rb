@@ -90,19 +90,23 @@ RSpec.describe "Api::V1::Posts", type: :request do
     let(:headers) { current_user.create_new_auth_token }
     let(:current_user) { create(:user) }
 
-    context "正しく post を作成した場合" do
+    context "正しく post を更新した場合" do
       before do
         @post = create(:post, user: current_user)
-        @params = { post: { title: Faker::Lorem.word, url: Faker::Internet.url, image: Faker::Internet.url, status: "completed", created_at: Time.current } }
-        @params[:post][:post_items_attributes] = [{ id: @post.post_items.first.id, content: @post.post_items.first.content },
-                                                  { id: @post.post_items.second.id, content: @post.post_items.second.content },
-                                                  { id: @post.post_items.third.id, content: "updated content." },
-                                                  attributes_for(:post_item)]
-
-        # @params[:post][:post_items_attributes] = {  "0"=>{id:@post.post_items.first.id, content: @post.post_items.first.content},
-        #                                             "1"=>{id:@post.post_items.second.id, content: @post.post_items.second.content},
-        #                                             "2"=>{id:@post.post_items.third.id, content: "updated content." },
-        #                                             "3"=>attributes_for(:post_item)}
+        @params = {
+          post:{
+            title: Faker::Lorem.word,
+            url: Faker::Internet.url,
+            image: Faker::Internet.url,
+            status: "completed",
+            post_items_attributes:[
+              { id: @post.post_items.first.id, content: @post.post_items.first.content },
+              { id: @post.post_items.second.id, content: @post.post_items.second.content },
+              { id: @post.post_items.third.id, content: @post.post_items.third.content },
+              attributes_for(:post_item)
+            ]
+          }
+        }
       end
 
       it "post レコードが更新される" do
@@ -114,39 +118,63 @@ RSpec.describe "Api::V1::Posts", type: :request do
                               change { @post.reload.post_items.count }.from(3).to(4) &
                               not_change { @post.reload.post_items.first.content } &
                               not_change { @post.reload.post_items.second.content }
-        change { @post.reload.post_items.third.content }.from(@post.post_items.third.content).to(@params[:post][:post_items_attributes].third[:content])
+
         expect(response).to have_http_status(:ok)
       end
     end
 
-    context "post_items を一部を削除して更新しようとした場合" do
+    context "post_items を一部を変更して更新しようとした場合" do
       before do
         @post = create(:post, user: current_user)
-        @params = { post: { title: Faker::Lorem.word, url: Faker::Internet.url, image: Faker::Internet.url, status: "completed", created_at: Time.current } }
-        @params[:post][:post_items_attributes] = [{ id: @post.post_items.first.id, content: @post.post_items.first.content },
-                                                  { id: @post.post_items.second.id, content: @post.post_items.second.content },
-                                                  { id: @post.post_items.third.id, content: "" }]
+        @params = {
+          post:{
+            post_items_attributes:[
+              { id: @post.post_items.first.id, content: @post.post_items.first.content },
+              { id: @post.post_items.second.id, content: @post.post_items.second.content },
+              { id: @post.post_items.third.id, content: "updated!" }
+            ]
+          }
+        }
       end
 
-      it "更新できる" do
-        expect { subject }.to change { @post.reload.post_items.count }.from(3).to(2)
+      it "post レコードが更新される" do
+        expect { subject }.to not_change { @post.reload.title } &
+                              not_change { @post.reload.url } &
+                              not_change { @post.reload.image } &
+                              not_change { @post.reload.status } &
+                              not_change { @post.reload.created_at } &
+                              not_change { @post.reload.post_items.count } &
+                              not_change { @post.reload.post_items.first.content } &
+                              not_change { @post.reload.post_items.second.content }
+
+        change { @post.reload.post_items.third.content }.from(@post.post_items.third.content).to(@params[:post][:post_items_attributes].third[:content])
+        expect(Post.first.post_items.third.content).to eq "updated!"
         expect(response).to have_http_status(:ok)
       end
     end
 
-    # context "post_items を全て消して更新しようとした場合" do
-    #   before do
-    #     @post = create(:post, user: current_user)
-    #     @params = { post: { title: Faker::Lorem.word, url: Faker::Internet.url, image: Faker::Internet.url, status: "completed", created_at: Time.current } }
-    #     @params[:post][:post_items_attributes] = [{ id: @post.post_items.first.id, content: "" },
-    #                                               { id: @post.post_items.second.id, content: "" },
-    #                                               { id: @post.post_items.third.id, content: "" }]
-    #   end
+    context "post_items の content を空にして更新をした場合" do
+      before do
+        @post = create(:post, user: current_user)
+        @params = {
+          post:{
+            post_items_attributes:[
+              { id: @post.post_items.first.id, content: @post.post_items.first.content },
+              { id: @post.post_items.second.id, content: @post.post_items.second.content },
+              { id: @post.post_items.third.id, content: "" }
+            ]
+          }
+        }
+      end
 
-    #   it "バリデーションエラーにより更新できない" do
-    #     expect { subject }.to raise_error(ActiveRecord::RecordInvalid)
-    #   end
-    # end
+      it "対象の post_items が削除される" do
+        expect { subject }.to change { @post.reload.post_items.count }.from(3).to(2)
+        # binding.pry
+
+        expect(response).to have_http_status(:ok)
+      end
+    end
+
 
     context "post 作成者以外が更新しようとした場合" do
       before do
