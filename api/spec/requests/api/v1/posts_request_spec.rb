@@ -94,18 +94,18 @@ RSpec.describe "Api::V1::Posts", type: :request do
       before do
         @post = create(:post, user: current_user)
         @params = {
-          post:{
+          post: {
             title: Faker::Lorem.word,
             url: Faker::Internet.url,
             image: Faker::Internet.url,
             status: "completed",
-            post_items_attributes:[
+            post_items_attributes: [
               { id: @post.post_items.first.id, content: @post.post_items.first.content },
               { id: @post.post_items.second.id, content: @post.post_items.second.content },
               { id: @post.post_items.third.id, content: @post.post_items.third.content },
-              attributes_for(:post_item)
-            ]
-          }
+              attributes_for(:post_item),
+            ],
+          },
         }
       end
 
@@ -127,13 +127,13 @@ RSpec.describe "Api::V1::Posts", type: :request do
       before do
         @post = create(:post, user: current_user)
         @params = {
-          post:{
-            post_items_attributes:[
+          post: {
+            post_items_attributes: [
               { id: @post.post_items.first.id, content: @post.post_items.first.content },
               { id: @post.post_items.second.id, content: @post.post_items.second.content },
-              { id: @post.post_items.third.id, content: "updated!" }
-            ]
-          }
+              { id: @post.post_items.third.id, content: "updated!" },
+            ],
+          },
         }
       end
 
@@ -157,13 +157,13 @@ RSpec.describe "Api::V1::Posts", type: :request do
       before do
         @post = create(:post, user: current_user)
         @params = {
-          post:{
-            post_items_attributes:[
+          post: {
+            post_items_attributes: [
               { id: @post.post_items.first.id, content: @post.post_items.first.content },
               { id: @post.post_items.second.id, content: @post.post_items.second.content },
-              { id: @post.post_items.third.id, content: "" }
-            ]
-          }
+              { id: @post.post_items.third.id, content: "" },
+            ],
+          },
         }
       end
 
@@ -174,7 +174,6 @@ RSpec.describe "Api::V1::Posts", type: :request do
         expect(response).to have_http_status(:ok)
       end
     end
-
 
     context "post 作成者以外が更新しようとした場合" do
       before do
