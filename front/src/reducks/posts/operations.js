@@ -215,12 +215,12 @@ export const updatePostItems = (id,initialPostItems,editedPostItems) => {
 
     const resultPostItems = [...editedPostItems]
 
-    deletedPostItemsIds.map((id,index)=>{
+    deletedPostItemsIds.map((id,index) => (
       resultPostItems.push({
         "id": id,
         "content": ""
       })
-    })
+    ))
 
     const data = {
       "post_items_attributes": {...resultPostItems}
