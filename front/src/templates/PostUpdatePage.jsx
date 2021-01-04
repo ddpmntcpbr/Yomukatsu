@@ -1,26 +1,24 @@
-import React, { useState,useCallback,useEffect } from "react";
+import React, { useState,useCallback } from "react";
 import { useSelector, useDispatch } from 'react-redux'
-import { Box,Button,Container,Paper,Typography,Divider } from "@material-ui/core"
+import { Box,Button,Card,CardContent,Container,Paper,Typography,Divider } from "@material-ui/core"
 import { makeStyles } from "@material-ui/styles";
 import { BookCard,SecondaryButton,QuestionDialog } from "../components/UIkit"
-import { deletePost,updateStatusToCompleted,updatePostItems } from "../reducks/posts/operations"
+import { deletePost,updateStatusToCompleted } from "../reducks/posts/operations"
 import {TwitterShareButton,TwitterIcon} from "react-share";
 import { push } from "connected-react-router";
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import { getDateString,isNonEmptyArray } from "../helpers"
 import { getReadingPosts } from "../reducks/posts/selectors"
-import { CreatedMapItemsList } from "../components/Posts"
 
 const useStyles = makeStyles((theme)=>({
   root: {
-    backgroundColor: theme.palette.grey[100]
   },
   mapItem: {
   }
 }))
 
-const ReadingPostsDetail = () => {
+const PostUpdatePage = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const selector = useSelector((state)=>state);
@@ -28,15 +26,6 @@ const ReadingPostsDetail = () => {
   const post = posts[0]
   const [updatePostStatusOpen, setUpdatePostStatusOpen] = useState(false);
   const [deletePostDialogOpen, setDeletePostDialogOpen] = useState(false);
-  const [initialPostItems, setinitialPostItems] = useState([]);
-  const [postItems, setPostItems] = useState([]);
-
-  useEffect(()=>{
-    if(isNonEmptyArray(post)){
-      setinitialPostItems(post.post_items)
-      setPostItems(post.post_items);
-    }
-  },[setinitialPostItems,setPostItems,post])
 
   const handleUpdatePostStatusDialogOpen = useCallback(() => {
     setUpdatePostStatusOpen(true);
@@ -65,12 +54,11 @@ const ReadingPostsDetail = () => {
     handleDeletePostDialogClose()
   },[dispatch,handleDeletePostDialogClose,post])
 
-
   return (
-    <Container maxWidth="md">
+    <Container maxWidth="md" >
       {isNonEmptyArray(post) ?
         <Box>
-          <Paper className={classes.root}>
+          <Paper>
             <Box p={1} >
               <Typography component="h3">
                 <Box fontSize="1.5rem" fontWeight="fontWeightBold">
@@ -89,8 +77,17 @@ const ReadingPostsDetail = () => {
               </Typography>
               <Divider />
 
-              <CreatedMapItemsList postId={post.id} postItems={postItems} setPostItems={setPostItems} />
-
+              {post.post_items && post.post_items.map(mapItem => (
+                <Box key={mapItem.id} my={2} >
+                  <Card className={classes.mapItem} variant="outlined">
+                    <CardContent>
+                      <Typography component="p">
+                        {mapItem.content}
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                </Box>
+              ))}
               <Box>
                 <Box display="flex" justifyContent="center" my={4}>
                   <SecondaryButton
@@ -100,13 +97,8 @@ const ReadingPostsDetail = () => {
                 </Box>
                 <Box display="flex" justifyContent="center">
                   <Box my={1}>
-                    <Button
-                      variant="contained"
-                      color="default"
-                      startIcon={<EditIcon />}
-                      onClick={()=>dispatch(updatePostItems(post.id,[...initialPostItems],[...postItems]))}
-                    >
-                      変更を保存
+                    <Button variant="contained" color="default" startIcon={<EditIcon />}>
+                      編集
                     </Button>
                   </Box>
                   <Box m={1}>
@@ -150,4 +142,4 @@ const ReadingPostsDetail = () => {
   )
 }
 
-export default ReadingPostsDetail
+export default PostUpdatePage

@@ -1,4 +1,4 @@
-import React, {useCallback, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {TextInput} from "../UIkit";
 import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -17,10 +17,10 @@ const useStyles = makeStyles((theme)=>({
     height: 32,
     width: 32,
   },
-  mapItemPaper: {
+  postItemPaper: {
     padding: theme.spacing(1)
   },
-  inputMapItemArea: {
+  inputPostItemArea: {
     display: "flex",
     padding: theme.spacing(1)
   },
@@ -30,72 +30,83 @@ const useStyles = makeStyles((theme)=>({
   }
 }))
 
-const SetMapArea = (props) => {
+const CreatedMapItemsList = (props) => {
   const classes = useStyles();
+  // const dispatch = useDispatch();
 
-  const [index, setIndex] = useState(0),
-        [mapItem, setMapItem] = useState(""),
-        [inputFormOpen, setInutFormOpen] = useState(false)
+  const [index, setIndex] = useState(-1),
+        [postItem, setPostItem] = useState(""),
+        [inputFormOpen, setInputFormOpen] = useState(false)
 
-  const inputMapItem = useCallback((event)=>{
-    setMapItem(event.target.value)
-  },[setMapItem]);
+  useEffect(()=>{
+    setIndex(props.postItems.length)
+  },[props])
+
+  const inputPostItem = useCallback((event)=>{
+    setPostItem(event.target.value)
+  },[setPostItem]);
 
   const handleInputFormOpen = () => {
-    setInutFormOpen(true);
+    setInputFormOpen(true);
   };
 
   const handleInputFormClose = () => {
-    setMapItem("")
-    setInutFormOpen(false);
+    setPostItem("")
+    setInputFormOpen(false);
   };
 
-  const addMapItem = (index, mapItem) => {
-    if (mapItem === "") {
+  const addPostItem = (index, postItem) => {
+    if (postItem === "") {
       return false
     } else {
-      if (index === props.mapItems.length) {
-        props.setMapItems(prevState => [...prevState, {mapItem:mapItem}])
+      if (index === props.postItems.length) {
+        props.setPostItems(prevState => [...prevState, {content:postItem}])
         setIndex(index + 1)
-        setMapItem("")
+        setPostItem("")
       } else {
-        const newMapItems = props.mapItems
-        newMapItems[index] = {mapItem:mapItem}
-        props.setMapItems(newMapItems)
-        setIndex(newMapItems.length)
-        setMapItem("")
+        const newPostItems = props.postItems
+        newPostItems[index]["content"] = postItem
+        props.setPostItems(newPostItems)
+        setIndex(newPostItems.length)
+        setPostItem("")
       }
+      // console.log(props.postItems)
+      // dispatch(updatePostItems(props.postId,props.postItems))
       handleInputFormClose()
     }
   };
 
-  const editMapItem = (index,mapItem) => {
+  const editPostItem = (index,content) => {
     handleInputFormOpen()
     setIndex(index);
-    setMapItem(mapItem);
+    setPostItem(content);
+    // console.log(props.postItems)
+    // dispatch(updatePostItems(props.postId,props.postItems))
   }
 
-  const deleteMapItem = (deleteIndex) => {
-    const newMapItems = props.mapItems.filter((item,i) => i !== deleteIndex);
-    props.setMapItems(newMapItems);
+  const deletePostItem = (deleteIndex) => {
+    const newPostItems = props.postItems.filter((item,i) => i !== deleteIndex);
+    props.setPostItems(newPostItems);
   }
 
   return (
     <Box my={2}>
-      { props.mapItems.length > 0 && (
-          props.mapItems.map((item,i) => (
-            <Grid container spacing={3} key={item.mapItem} alignItems="center" justify="center">
-              <Grid item xs={10}>
-                <Paper className={classes.mapItemPaper} onClick={() => editMapItem(i,item.mapItem)}>
-                  {item.mapItem}
-                </Paper>
+      { props.postItems.length > 0 && (
+          props.postItems.map((item,i) => (
+            item.content !== "" && (
+              <Grid container spacing={3} key={i} alignItems="center" justify="center">
+                <Grid item xs={10}>
+                  <Paper className={classes.mapItemPaper} onClick={() => editPostItem(i,item.content)}>
+                    {item.content}
+                  </Paper>
+                </Grid>
+                <Grid item xs={2}>
+                  <IconButton className={classes.iconCell} onClick={() => deletePostItem(i)}>
+                    <DeleteIcon />
+                  </IconButton>
+                </Grid>
               </Grid>
-              <Grid item xs={2}>
-                <IconButton className={classes.iconCell} onClick={() => deleteMapItem(i)}>
-                  <DeleteIcon />
-                </IconButton>
-              </Grid>
-            </Grid>
+            )
           ))
       )}
 
@@ -107,9 +118,9 @@ const SetMapArea = (props) => {
             label={"マップアイテムを入力"}
             multiline={true}
             requires={true}
-            onChange={inputMapItem}
+            onChange={inputPostItem}
             rows={3}
-            value={mapItem}
+            value={postItem}
             type={"text"}
             autoFocus={true}
           />
@@ -129,7 +140,7 @@ const SetMapArea = (props) => {
                 variant="contained"
                 color="primary"
                 startIcon={<AddIcon />}
-                onClick={() => addMapItem(index, mapItem)}
+                onClick={() => addPostItem(index, postItem)}
               >
               保存
               </Button>
@@ -152,4 +163,4 @@ const SetMapArea = (props) => {
   )
 }
 
-export default SetMapArea
+export default CreatedMapItemsList

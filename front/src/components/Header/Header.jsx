@@ -8,12 +8,12 @@ import {push} from "connected-react-router"
 import {ClosableDrawer} from "./index"
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu"
-// import Typography from '@material-ui/core/Typography';
+import { Box } from "@material-ui/core"
 
 const useStyles = makeStyles((theme)=>({
   root: {
     flexGrow: 1,
-    zIndex: 9999
+    zIndex: 9999,
   },
   menuBar: {
     backgroundColor: theme.palette.primary.main,
@@ -44,11 +44,11 @@ const Header = () => {
   },[setOpen, open]);
 
   return (
-    <div className={classes.root}>
+    <Box className={classes.root}>
       <AppBar position="fixed" className={classes.menuBar}>
         <Toolbar className={classes.toolBar}>
           <img
-            src={logo} alt="Logo" width="256px"
+            src={logo} alt="Logo" width="200px"
             onClick={()=>dispatch(push("/"))}
           />
           <div className={classes.iconButtons}>
@@ -59,7 +59,7 @@ const Header = () => {
         </Toolbar>
       </AppBar>
       <ClosableDrawer open={open} onClose={handleDrawerToggle}/>
-    </div>
+    </Box>
   )
 }
 

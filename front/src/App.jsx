@@ -5,11 +5,12 @@ import { Header } from './components/Header'
 import { ResponsiveBottomNavigation } from './components/ResponsiveBottomNavigation';
 import { Loading } from "./components/UIkit"
 import "./assets/reset.css"
+import backGroundImage from "./assets/img/src/sheep.png"
 
 const useStyles = makeStyles((theme)=>({
   root: {
     padding: "96px 0",
-    backgroundColor: theme.palette.primary.light,
+    backgroundImage: `url(${backGroundImage})`
   }
 }))
 const App = () => {

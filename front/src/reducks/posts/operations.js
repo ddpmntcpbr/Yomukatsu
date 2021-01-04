@@ -7,6 +7,7 @@ import {
   fetchPostsAction,
   startFetchingPostsAction
 } from "./actions";
+import _ from 'lodash';
 
 export const exchangeRegisteredAndReadingPost = (id) => {
   return async (dispatch) => {
@@ -164,6 +165,7 @@ export const saveRegisteredPost = (title,url,author,image,mapItems) => {
     dispatch(showLoadingAction("書籍登録中..."))
 
     const post_items_attributes = []
+
     mapItems.map((mapItem) => (
       post_items_attributes.push({"content":mapItem.mapItem})
     ))
@@ -194,6 +196,49 @@ export const saveRegisteredPost = (title,url,author,image,mapItems) => {
 
     await _sleep(1000);
     dispatch(hideLoadingAction())
+  }
+}
+
+// postItemsを更新
+export const updatePostItems = (id,initialPostItems,editedPostItems) => {
+  return async (dispatch) => {
+
+    const initialPostItemsIds = initialPostItems.map((item,index) => {
+      return item["id"]
+    })
+
+    const editedPostItemsIds = editedPostItems.map((item,index) => {
+      return item["id"]
+    })
+
+    const deletedPostItemsIds = _.difference(initialPostItemsIds,editedPostItemsIds)
+
+    const resultPostItems = [...editedPostItems]
+
+    deletedPostItemsIds.map((id,index) => (
+      resultPostItems.push({
+        "id": id,
+        "content": ""
+      })
+    ))
+
+    const data = {
+      "post_items_attributes": {...resultPostItems}
+    }
+
+    const apiUrl = process.env.REACT_APP_API_V1_URL + '/posts/' + id;
+
+    await axios.patch(apiUrl, data, {headers :{
+      'access-token': localStorage.getItem('auth_token'),
+      'client': localStorage.getItem('client_id'),
+      'uid': localStorage.getItem('uid'),
+    }})
+    .then((response) => {
+      dispatch(fetchPosts())
+    })
+    .catch((error) => {
+      console.log("error",error)
+    })
   }
 }
 

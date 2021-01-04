@@ -1,20 +1,17 @@
 import React, { useState, useCallback} from 'react';
-import { BookCard,PrimaryButton, TextInput } from "../components/UIkit"
+import { BookCard, SecondaryButton,TextInput } from "../components/UIkit"
 import IconButton from "@material-ui/core/IconButton";
 import SearchIcon from "@material-ui/icons/Search";
 import {makeStyles} from "@material-ui/styles";
 import axios from "axios";
-import Typography from '@material-ui/core/Typography';
 import {PostEditDialog,SearchResultDialog,SetMapArea} from "../components/Posts";
-import {Container,Box} from "@material-ui/core";
+import {Container,Box,Typography,Paper} from "@material-ui/core";
 import {saveReadingPost,saveRegisteredPost} from "../reducks/posts/operations";
 import {useDispatch} from "react-redux";
 
 const useStyles = makeStyles((theme)=>({
-  titleTypography: {
-    color: theme.palette.primary.main,
-    fontSize: "2rem",
-    paddingBottom: theme.spacing(2),
+  paper: {
+    backgroundColor: theme.palette.grey[100]
   },
   subTitleTypography: {
     color: theme.palette.grey["700"],
@@ -87,40 +84,39 @@ const PostEdit = () => {
   },[dispatch,title,url,author,image,mapItems])
 
   return (
-    <Container maxWidth="md" style={{backgroundColor:"white"}}>
-      <Typography variant="h2" className={classes.titleTypography}>
-        POST登録
-      </Typography>
-      <Typography variant="h3" className={classes.subTitleTypography}>
-        書籍登録
-      </Typography>
-      <Box className={classes.searchField}>
-        <TextInput
-          fullWidth={true} label={"タイトル / 著者名 で 検索"} multiline={false} required={true}
-          onChange={inputQuery} rows={1} type={"text"}
+    <Container maxWidth="md">
+      <Box component={Paper} p={2} className={classes.paper}>
+        <Typography variant="h3" className={classes.subTitleTypography}>
+          書籍登録
+        </Typography>
+        <Box className={classes.searchField}>
+          <TextInput
+            fullWidth={true} label={"タイトル / 著者名 で 検索"} multiline={false} required={true}
+            onChange={inputQuery} rows={1} type={"text"}
+          />
+          <IconButton onClick={() => handleClickSearchIcon()}>
+            <SearchIcon/>
+          </IconButton>
+        </Box>
+        <SearchResultDialog
+          open={searchModalOpen} searchResults={searchResults} handleClose={handleSearchModalClose}
+          setTitle={setTitle} setAuthor={setAuthor} setImage={setImage} setUrl={setUrl}
         />
-        <IconButton onClick={() => handleClickSearchIcon()}>
-          <SearchIcon/>
-        </IconButton>
+        <BookCard title={title} author={author} image={image} />
+        <Box style={{height:24}}/>
+        <Typography variant="h3" className={classes.subTitleTypography}>
+          メンタルマップ
+        </Typography>
+        <SetMapArea mapItems={mapItems} setMapItems={setMapItems}  />
+
+        <Box textAlign="center" mt={8}>
+          <SecondaryButton
+            label="登録!"
+            onClick={handleSaveModalOpen}
+          />
+        </Box>
       </Box>
-      <SearchResultDialog
-        open={searchModalOpen} searchResults={searchResults} handleClose={handleSearchModalClose}
-        setTitle={setTitle} setAuthor={setAuthor} setImage={setImage} setUrl={setUrl}
-      />
-      <BookCard title={title} author={author} image={image} />
-      <Box style={{height:24}}/>
-      <Typography variant="h3" className={classes.subTitleTypography}>
-        読書メンタルマップ
-      </Typography>
-      <SetMapArea mapItems={mapItems} setMapItems={setMapItems}  />
-      <Box textAlign="center" mt={4}>
-        <PrimaryButton
-          label="POSTを登録！"
-          onClick={() => dispatch(saveRegisteredPost(title,url,author,image,mapItems))} />
-        <PrimaryButton
-          label="モーダルを開く"
-          onClick={handleSaveModalOpen} />
-      </Box>
+
       <PostEditDialog
         open={saveModalOpen}
         handleClose={handleSaveModalClose}
