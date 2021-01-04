@@ -1,15 +1,16 @@
-import React, { useState,useCallback } from "react";
+import React, { useState,useCallback,useEffect } from "react";
 import { useSelector, useDispatch } from 'react-redux'
 import { Box,Button,Card,CardContent,Container,Paper,Typography,Divider } from "@material-ui/core"
 import { makeStyles } from "@material-ui/styles";
 import { BookCard,SecondaryButton,QuestionDialog } from "../components/UIkit"
-import { deletePost,updateStatusToCompleted } from "../reducks/posts/operations"
+import { deletePost,updateStatusToCompleted,updatePostItems } from "../reducks/posts/operations"
 import {TwitterShareButton,TwitterIcon} from "react-share";
 import { push } from "connected-react-router";
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import { getDateString,isNonEmptyArray } from "../helpers"
 import { getReadingPosts } from "../reducks/posts/selectors"
+import { CreatedMapItemsList } from "../components/Posts"
 
 const useStyles = makeStyles((theme)=>({
   root: {
@@ -27,6 +28,16 @@ const ReadingPostsDetail = () => {
   const post = posts[0]
   const [updatePostStatusOpen, setUpdatePostStatusOpen] = useState(false);
   const [deletePostDialogOpen, setDeletePostDialogOpen] = useState(false);
+  const [initialPostItems, setinitialPostItems] = useState([]);
+  const [postItems, setPostItems] = useState([]);
+
+  useEffect(()=>{
+    console.log("useEffect")
+    if(isNonEmptyArray(post)){
+      setinitialPostItems(post.post_items)
+      setPostItems(post.post_items);
+    }
+  },[setinitialPostItems,setPostItems,post])
 
   const handleUpdatePostStatusDialogOpen = useCallback(() => {
     setUpdatePostStatusOpen(true);
@@ -55,6 +66,7 @@ const ReadingPostsDetail = () => {
     handleDeletePostDialogClose()
   },[dispatch,handleDeletePostDialogClose,post])
 
+
   return (
     <Container maxWidth="md">
       {isNonEmptyArray(post) ?
@@ -78,7 +90,9 @@ const ReadingPostsDetail = () => {
               </Typography>
               <Divider />
 
-              {post.post_items && post.post_items.map(mapItem => (
+              <CreatedMapItemsList postId={post.id} postItems={postItems} setPostItems={setPostItems} />
+
+              {/* {post.post_items && post.post_items.map(mapItem => (
                 <Box key={mapItem.id} my={2} >
                   <Card className={classes.mapItem} variant="outlined">
                     <CardContent>
@@ -88,7 +102,7 @@ const ReadingPostsDetail = () => {
                     </CardContent>
                   </Card>
                 </Box>
-              ))}
+              ))} */}
               <Box>
                 <Box display="flex" justifyContent="center" my={4}>
                   <SecondaryButton
@@ -98,8 +112,13 @@ const ReadingPostsDetail = () => {
                 </Box>
                 <Box display="flex" justifyContent="center">
                   <Box my={1}>
-                    <Button variant="contained" color="default" startIcon={<EditIcon />}>
-                      編集
+                    <Button
+                      variant="contained"
+                      color="default"
+                      startIcon={<EditIcon />}
+                      onClick={()=>dispatch(updatePostItems(post.id,[...initialPostItems],[...postItems]))}
+                    >
+                      変更を保存
                     </Button>
                   </Box>
                   <Box m={1}>
