@@ -1,6 +1,6 @@
 import React, { useState,useCallback,useEffect } from "react";
 import { useSelector, useDispatch } from 'react-redux'
-import { Box,Button,Card,CardContent,Container,Paper,Typography,Divider } from "@material-ui/core"
+import { Box,Button,Container,Paper,Typography,Divider } from "@material-ui/core"
 import { makeStyles } from "@material-ui/styles";
 import { BookCard,SecondaryButton,QuestionDialog } from "../components/UIkit"
 import { deletePost,updateStatusToCompleted,updatePostItems } from "../reducks/posts/operations"
@@ -32,7 +32,6 @@ const ReadingPostsDetail = () => {
   const [postItems, setPostItems] = useState([]);
 
   useEffect(()=>{
-    console.log("useEffect")
     if(isNonEmptyArray(post)){
       setinitialPostItems(post.post_items)
       setPostItems(post.post_items);
@@ -92,17 +91,6 @@ const ReadingPostsDetail = () => {
 
               <CreatedMapItemsList postId={post.id} postItems={postItems} setPostItems={setPostItems} />
 
-              {/* {post.post_items && post.post_items.map(mapItem => (
-                <Box key={mapItem.id} my={2} >
-                  <Card className={classes.mapItem} variant="outlined">
-                    <CardContent>
-                      <Typography component="p">
-                        {mapItem.content}
-                      </Typography>
-                    </CardContent>
-                  </Card>
-                </Box>
-              ))} */}
               <Box>
                 <Box display="flex" justifyContent="center" my={4}>
                   <SecondaryButton

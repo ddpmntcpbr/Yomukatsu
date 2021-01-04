@@ -1,5 +1,5 @@
 import React, { useState, useCallback} from 'react';
-import { BookCard,PrimaryButton, SecondaryButton,TextInput } from "../components/UIkit"
+import { BookCard, SecondaryButton,TextInput } from "../components/UIkit"
 import IconButton from "@material-ui/core/IconButton";
 import SearchIcon from "@material-ui/icons/Search";
 import {makeStyles} from "@material-ui/styles";
@@ -8,10 +8,6 @@ import {PostEditDialog,SearchResultDialog,SetMapArea} from "../components/Posts"
 import {Container,Box,Typography,Paper} from "@material-ui/core";
 import {saveReadingPost,saveRegisteredPost} from "../reducks/posts/operations";
 import {useDispatch} from "react-redux";
-import { Form, Field } from 'react-final-form'
-import arrayMutators from 'final-form-arrays'
-import { FieldArray } from 'react-final-form-arrays'
-import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 
 const useStyles = makeStyles((theme)=>({
   paper: {
