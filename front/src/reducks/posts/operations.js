@@ -7,6 +7,7 @@ import {
   fetchPostsAction,
   startFetchingPostsAction
 } from "./actions";
+import _ from 'lodash';
 
 export const exchangeRegisteredAndReadingPost = (id) => {
   return async (dispatch) => {
@@ -164,6 +165,7 @@ export const saveRegisteredPost = (title,url,author,image,mapItems) => {
     dispatch(showLoadingAction("書籍登録中..."))
 
     const post_items_attributes = []
+
     mapItems.map((mapItem) => (
       post_items_attributes.push({"content":mapItem.mapItem})
     ))
@@ -198,14 +200,31 @@ export const saveRegisteredPost = (title,url,author,image,mapItems) => {
 }
 
 // postItemsを更新
-export const updatePostItems = (id,postItems) => {
+export const updatePostItems = (id,initialPostItems,editedPostItems) => {
   return async (dispatch) => {
 
-    const data = {
-    "post_items_attributes": postItems
-    }
+    const initialPostItemsIds = initialPostItems.map((item,index) => {
+      return item["id"]
+    })
 
-    console.log(data)
+    const editedPostItemsIds = editedPostItems.map((item,index) => {
+      return item["id"]
+    })
+
+    const deletedPostItemsIds = _.difference(initialPostItemsIds,editedPostItemsIds)
+
+    const resultPostItems = [...editedPostItems]
+
+    deletedPostItemsIds.map((id,index)=>{
+      resultPostItems.push({
+        "id": id,
+        "content": ""
+      })
+    })
+
+    const data = {
+      "post_items_attributes": {...resultPostItems}
+    }
 
     const apiUrl = process.env.REACT_APP_API_V1_URL + '/posts/' + id;
 
@@ -215,7 +234,6 @@ export const updatePostItems = (id,postItems) => {
       'uid': localStorage.getItem('uid'),
     }})
     .then((response) => {
-      console.log(response)
       dispatch(fetchPosts())
     })
     .catch((error) => {
