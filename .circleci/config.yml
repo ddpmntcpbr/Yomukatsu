@@ -9,6 +9,8 @@ executors:
           BUNDLE_RETRY: 3
           BUNDLE_PATH: vendor/bundle
           BUNDLER_VERSION: 2.0.2
+          GUEST_USER_SIGNIN_EMAIL: guest@example.com
+          GUEST_USER_SIGNIN_PASSWORD: password
       - image: circleci/mysql:5.7
         environment:
           MYSQL_USER: root
