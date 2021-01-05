@@ -58,6 +58,34 @@ export const signIn = () => {
   }
 }
 
+export const signInGuestUser = () => {
+
+  return async (dispatch) => {
+    dispatch(showLoadingAction("Sign-in as guest user..."))
+
+    const apiUrl = process.env.REACT_APP_API_V1_URL + "/auth/sign_in"
+
+    const data = {
+      "email": process.env.REACT_APP_GUEST_USER_SIGNIN_EMAIL,
+      "password": process.env.REACT_APP_GUEST_USER_SIGNIN_PASSWORD
+    }
+
+    await axios.post(apiUrl,data)
+    .then((response) => {
+      localStorage.setItem('auth_token', response.headers["access-token"]);
+      localStorage.setItem('client_id', response.headers["client"]);
+      localStorage.setItem('uid', response.headers["uid"]);
+      dispatch(push("/reading/posts"))
+    })
+    .catch((error) => {
+      console.log("error",error)
+    })
+
+    await _sleep(1000);
+    dispatch(hideLoadingAction())
+  }
+}
+
 export const signOut = () => {
   return async (dispatch) => {
     dispatch(showLoadingAction("Sign out..."))

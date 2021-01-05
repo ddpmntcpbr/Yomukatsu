@@ -3,7 +3,7 @@ ActiveRecord::Base.transaction do
   name = "ゲストユーザー"
   nickname = "guest_user"
   image = "https://free-designer.net/design_img/0216053006.jpg"
-  email = "guest@example.com"
+  email = ENV["GUEST_USER_SIGNIN_EMAIL"]
   password = ENV["GUEST_USER_SIGNIN_PASSWORD"]
   User.create!(
     name: name,

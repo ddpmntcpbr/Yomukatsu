@@ -4,7 +4,7 @@ import Typography from '@material-ui/core/Typography';
 import { TwitterLoginButton } from "../components/UIkit";
 import { TwitterShareButton,TwitterIcon } from 'react-share';
 import {useDispatch} from 'react-redux';
-import {signIn} from "../reducks/users/operations";
+import {signIn,signInGuestUser} from "../reducks/users/operations";
 import topPageImage from "../assets/img/src/top.png";
 import axios from "axios";
 import {PrimaryButton} from "../components/UIkit";
@@ -87,6 +87,10 @@ const TopPage = () => {
       <PrimaryButton
         label="fetchPosts"
         onClick={()=>dispatch(fetchPosts())}
+      />
+      <PrimaryButton
+        label="ゲストログイン"
+        onClick={()=>dispatch(signInGuestUser())}
       />
       {/* <Typography>{usersCount}</Typography> */}
     </Container>
