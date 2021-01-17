@@ -11,6 +11,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import { getDateString,isNonEmptyArray } from "../helpers"
 import { getRegisteredPosts } from "../reducks/posts/selectors"
 import { fetchSharePost } from "../reducks/sharePosts/operations"
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 
 const useStyles = makeStyles((theme)=>({
   root: {
@@ -19,7 +20,7 @@ const useStyles = makeStyles((theme)=>({
   }
 }))
 
-const RegisteredPostsDetail = () => {
+const RegisteredPostsDetail = (props) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const selector = useSelector((state)=>state);
@@ -68,6 +69,12 @@ const RegisteredPostsDetail = () => {
         <Box>
           <Paper>
             <Box p={1} >
+              <ArrowBackIosIcon
+                onClick={()=>dispatch(push({
+                  pathname: "/mypage",
+                  state: { selectedTab: 0}
+                }))}
+              />
               <Typography component="h3">
                 <Box fontSize="1.5rem" fontWeight="fontWeightBold">
                   書籍情報

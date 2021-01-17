@@ -9,6 +9,7 @@ import { getDateString,isNonEmptyArray } from "../helpers"
 import { getCompletedPosts } from "../reducks/posts/selectors"
 import { deletePost } from "../reducks/posts/operations"
 import { push } from "connected-react-router";
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 
 const useStyles = makeStyles((theme)=>({
   root: {
@@ -47,6 +48,12 @@ const CompletedPostsDetail = () => {
       <Box>
         <Paper>
           <Box p={1} >
+            <ArrowBackIosIcon
+              onClick={()=>dispatch(push({
+                pathname: "/mypage",
+                state: { selectedTab: 1}
+              }))}
+            />
             <Typography component="h3">
               <Box fontSize="1.5rem" fontWeight="fontWeightBold">
                 書籍情報
