@@ -1,16 +1,22 @@
 import { createMuiTheme } from '@material-ui/core/styles';
-
-// Pick colors on https://material.io/resources/color/#!/
+import { green,red } from '@material-ui/core/colors';
 
 export const theme = createMuiTheme({
+  props: {
+    MuiTextField: {
+        variant: "filled"
+    }
+  },
   palette: {
     primary: {
-      light: '#4FBAFC',
-      main: '#4FBAFC',
-      dark: '#4FBAFC',
+      light: green["100"],
+      main: green["500"],
+      dark: green["900"],
     },
     secondary: {
-      main: "#EF0F0E",
+      light: red["100"],
+      main: red["500"],
+      dark: red["900"],
     },
     grey: {
       50: "#fafafa",
@@ -27,11 +33,22 @@ export const theme = createMuiTheme({
       A200: "#aaaaaa",
       A400: "#303030",
       A700: "#616161"
+    },
+    background: {
+      default: green[100]
     }
   },
   typography: {
+    body1: {
+      color: "rgba(0,0,0,.75)",
+    },
     button: {
-      textTransform: "none",
+      textTransform: "none"
+    }
+  },
+  mixins: {
+    toolbar: {
+        minHeight: 40
     }
   }
 });
