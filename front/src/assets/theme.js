@@ -9,14 +9,12 @@ export const theme = createMuiTheme({
   },
   palette: {
     primary: {
-      light: green["100"],
-      main: green["500"],
-      dark: green["900"],
+      light: green[200],
+      main: green[900]
     },
     secondary: {
-      light: red["100"],
-      main: red["500"],
-      dark: red["900"],
+      light: red[100],
+      main: red[800],
     },
     grey: {
       50: "#fafafa",
@@ -35,7 +33,7 @@ export const theme = createMuiTheme({
       A700: "#616161"
     },
     background: {
-      default: green[100]
+      default: "#EAF7FF"
     }
   },
   typography: {
