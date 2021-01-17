@@ -1,21 +1,27 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
 import Image from "react-image-resizer";
+import {
+  Box,
+  Card,
+  CardContent,
+  Typography
+} from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
-    height: 200,
+    height: 100,
   },
   details: {
-    flex: 1
+    flex: 1,
+  },
+  cardContent: {
+    padding: theme.spacing(1)
   },
   cover: {
-    width: 100,
-    heiht: 200,
+    width: 75,
+    heiht: 100,
   }
 }));
 

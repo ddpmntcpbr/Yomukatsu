@@ -5,11 +5,14 @@ import {makeStyles} from "@material-ui/styles";
 const useStyles = makeStyles((theme)=>({
   "button": {
     backgroundColor: theme.palette.secondary.main,
+    borderColor: theme.palette.secondary.main,
     color: "white",
-    fontSize: 16,
+    fontWeight: 700,
     height: 48,
-    marginButton: 16,
-    width: 256
+    width: 256,
+    '&:hover': {
+      background: theme.palette.secondary.light,
+   },
   }
 }))
 

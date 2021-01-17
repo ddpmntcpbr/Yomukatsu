@@ -5,27 +5,27 @@ import { Header } from './components/Header'
 import { ResponsiveBottomNavigation } from './components/ResponsiveBottomNavigation';
 import { Loading } from "./components/UIkit"
 import "./assets/reset.css"
-import backGroundImage from "./assets/img/src/sheep.png"
+import CssBaseline from '@material-ui/core/CssBaseline'
 
 const useStyles = makeStyles((theme)=>({
-  root: {
-    padding: "96px 0",
-    backgroundImage: `url(${backGroundImage})`
+  main: {
+    padding: "56px 0 60px 0",
   }
 }))
 const App = () => {
   const classes = useStyles();
 
   return (
-    <>
+    <div className={classes.root}>
+      <CssBaseline />
       <Loading>
         <Header />
-        <main className={classes.root}>
+        <main className={classes.main}>
           <Router />
         </main>
         <ResponsiveBottomNavigation />
       </Loading>
-   </>
+   </div>
   )
 }
 

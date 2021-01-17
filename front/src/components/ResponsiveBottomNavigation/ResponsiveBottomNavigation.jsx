@@ -21,9 +21,9 @@ const useStyles = makeStyles((theme)=>({
     textAlign: 'center',
   },
   root: {
-    [theme.breakpoints.up('md')]: {
-      display: 'none',
-    },
+    // [theme.breakpoints.up('md')]: {
+    //   display: 'none',
+    // },
   },
   button: {
     maxWidth: '100%', // ボタンが横一杯に広がって欲しくない時はコメントアウト
