@@ -4,6 +4,7 @@ import {
   CompletedPostsDetail,
   CompletedPostsList,
   PostEdit,
+  PostsList,
   PostUpdatePage,
   ReadingPostsDetail,
   RegisteredPostsDetail,
@@ -27,6 +28,7 @@ const Router = () => {
         <Route exact path={"/registered/posts"} component={RegisteredPostsList} />
         <Route exaxt path={"/registered/posts/:id"} component={RegisteredPostsDetail} />
         <Route exact path={"/posts/edit"} component={PostEdit} />
+        <Route exact path={"/mypage"} component={PostsList} />
       </Auth>
     </Switch>
   );
