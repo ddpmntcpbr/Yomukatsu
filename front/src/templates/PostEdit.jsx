@@ -13,10 +13,6 @@ const useStyles = makeStyles((theme)=>({
   paper: {
     backgroundColor: theme.palette.grey[100]
   },
-  subTitleTypography: {
-    color: theme.palette.grey["700"],
-    fontSize: "1.5rem",
-  },
   searchField: {
     display: "flex",
   }
@@ -86,10 +82,12 @@ const PostEdit = () => {
   return (
     <Container maxWidth="md">
       <Box component={Paper} p={2} className={classes.paper}>
-        <Typography variant="h3" className={classes.subTitleTypography}>
-          書籍登録
+        <Typography component="h1">
+          <Box fontWeight="fontWeightBold">
+            書籍登録
+          </Box>
         </Typography>
-        <Box className={classes.searchField}>
+        <Box className={classes.searchField} mb={2}>
           <TextInput
             fullWidth={true} label={"タイトル / 著者名 で 検索"} multiline={false} required={true}
             onChange={inputQuery} rows={1} type={"text"}
@@ -104,8 +102,10 @@ const PostEdit = () => {
         />
         <BookCard title={title} author={author} image={image} />
         <Box style={{height:24}}/>
-        <Typography variant="h3" className={classes.subTitleTypography}>
-          メンタルマップ
+        <Typography component="h2">
+          <Box fontWeight="fontWeightBold">
+            メンタルマップ
+          </Box>
         </Typography>
         <SetMapArea mapItems={mapItems} setMapItems={setMapItems}  />
 

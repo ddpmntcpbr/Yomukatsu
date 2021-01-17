@@ -3,8 +3,9 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Box,Container,Typography } from "@material-ui/core"
 import { makeStyles } from "@material-ui/styles";
 import { getRegisteredPosts } from "../reducks/posts/selectors"
-import { BookCard } from "../components/UIkit"
+import { SmallBookCard } from "../components/UIkit"
 import { push } from "connected-react-router";
+import { formatDateString } from "../helpers"
 
 const useStyles = makeStyles((theme)=>({
   root: {
@@ -25,10 +26,10 @@ const RegisteredPostsList = () => {
             key={post.id}
             onClick={()=>dispatch(push("/registered/posts/" + String(post.id)))}
           >
-            <BookCard
+            <SmallBookCard
               title={post.title}
-              author={post.author}
               image={post.image}
+              created_at={formatDateString(post.created_at)}
             />
           </Box>
         ))

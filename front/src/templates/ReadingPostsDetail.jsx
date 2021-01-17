@@ -14,9 +14,7 @@ import { CreatedMapItemsList } from "../components/Posts"
 
 const useStyles = makeStyles((theme)=>({
   root: {
-    backgroundColor: theme.palette.grey[100]
-  },
-  mapItem: {
+    backgroundColor: theme.palette.grey[200]
   }
 }))
 
@@ -69,79 +67,72 @@ const ReadingPostsDetail = () => {
   return (
     <Container maxWidth="md">
       {isNonEmptyArray(post) ?
-        <Box>
-          <Paper className={classes.root}>
-            <Box p={1} >
-              <Typography component="h3">
-                <Box fontSize="1.5rem" fontWeight="fontWeightBold">
-                  現在読書中の書籍
-                </Box>
-              </Typography>
-              <Divider />
-              <Box my={3}>
-                <BookCard title={post.title} author={post.author} image={post.image} />
-              </Box>
-
-              <Typography component="h3">
-                <Box fontSize="1.5rem" fontWeight="fontWeightBold">
-                  メンタルマップ
-                </Box>
-              </Typography>
-              <Divider />
-
-              <CreatedMapItemsList postId={post.id} postItems={postItems} setPostItems={setPostItems} />
-
-              <Box>
-                <Box display="flex" justifyContent="center" my={4}>
-                  <SecondaryButton
-                    label="完読した!"
-                    onClick={handleUpdatePostStatusDialogOpen}
-                  />
-                </Box>
-                <Box display="flex" justifyContent="center">
-                  <Box my={1}>
-                    <Button
-                      variant="contained"
-                      color="default"
-                      startIcon={<EditIcon />}
-                      onClick={()=>dispatch(updatePostItems(post.id,[...initialPostItems],[...postItems]))}
-                    >
-                      変更を保存
-                    </Button>
-                  </Box>
-                  <Box m={1}>
-                    <Button
-                      variant="outlined"
-                      color="default"
-                      startIcon={<DeleteIcon />}
-                      onClick={handleDeletePostClickOpen}
-                    >
-                      削除
-                    </Button>
-                  </Box>
-                </Box>
-
-                <QuestionDialog
-                  open={updatePostStatusOpen}
-                  handleClose={handleUpdatePostStatusDialogClose}
-                  handleEvent={handleUpdatePostStatus}
-                  title="完読にしてよろしいですか？"
-                  contentText="一度完読にしたアイテムは、元には戻せません"
-                />
-
-                <QuestionDialog
-                  open={deletePostDialogOpen}
-                  handleClose={handleDeletePostDialogClose}
-                  handleEvent={handleDeletePost}
-                  title="本当に削除よろしいですか？"
-                  contentText="一度削除したアイテムは、元には戻せません"
-                />
-              </Box>
-              <TwitterShareButton url={process.env.REACT_APP_BASE_URL + "/share/posts/" + post.id + "?" + getDateString()} title={"今から『"+ post.title +"』を読みます！\n\n#yomukatsu\n\n"}>
-                <TwitterIcon size={64} round />
-              </TwitterShareButton>
+        <Box component={Paper} className={classes.root}>
+          <Box p={1} >
+            <Typography component="h1">
+                現在読書中の書籍
+            </Typography>
+            <Box my={3}>
+              <BookCard title={post.title} author={post.author} image={post.image} />
             </Box>
-          </Paper>
+
+            <Typography component="h2">
+                メンタルマップ
+            </Typography>
+            <Divider />
+
+            <CreatedMapItemsList postId={post.id} postItems={postItems} setPostItems={setPostItems} />
+
+            <Box>
+              <Box display="flex" justifyContent="center" my={4}>
+                <SecondaryButton
+                  label="完読した!"
+                  onClick={handleUpdatePostStatusDialogOpen}
+                />
+              </Box>
+              <Box display="flex" justifyContent="center">
+                <Box my={1}>
+                  <Button
+                    variant="contained"
+                    color="default"
+                    startIcon={<EditIcon />}
+                    onClick={()=>dispatch(updatePostItems(post.id,[...initialPostItems],[...postItems]))}
+                  >
+                    変更を保存
+                  </Button>
+                </Box>
+                <Box m={1}>
+                  <Button
+                    variant="outlined"
+                    color="default"
+                    startIcon={<DeleteIcon />}
+                    onClick={handleDeletePostClickOpen}
+                  >
+                    削除
+                  </Button>
+                </Box>
+              </Box>
+
+              <QuestionDialog
+                open={updatePostStatusOpen}
+                handleClose={handleUpdatePostStatusDialogClose}
+                handleEvent={handleUpdatePostStatus}
+                title="完読にしてよろしいですか？"
+                contentText="一度完読にしたアイテムは、元には戻せません"
+              />
+
+              <QuestionDialog
+                open={deletePostDialogOpen}
+                handleClose={handleDeletePostDialogClose}
+                handleEvent={handleDeletePost}
+                title="本当に削除よろしいですか？"
+                contentText="一度削除したアイテムは、元には戻せません"
+              />
+            </Box>
+            <TwitterShareButton url={process.env.REACT_APP_BASE_URL + "/share/posts/" + post.id + "?" + getDateString()} title={"今から『"+ post.title +"』を読みます！\n\n#yomukatsu\n\n"}>
+              <TwitterIcon size={64} round />
+            </TwitterShareButton>
+          </Box>
         </Box>
       :
         <Typography>現在読書中の書籍はありません</Typography>
