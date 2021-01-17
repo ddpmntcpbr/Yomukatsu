@@ -43,10 +43,7 @@ const BookCard = (props) => {
               {props.title}
             </Box>
             <Box fontSize="0.70rem">
-               著者: {props.author}
-            </Box>
-            <Box fontSize="0.70rem">
-               登録日: {props.author}
+               登録日: {props.created_at}
             </Box>
           </Typography>
         </CardContent>
