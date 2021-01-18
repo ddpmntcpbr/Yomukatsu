@@ -12,6 +12,11 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
     height: 100,
+    cursor: "pointer",
+    transition: "0.2s",
+    '&:hover': {
+      backgroundColor: theme.palette.grey[200],
+    }
   },
   details: {
     flex: 1,
