@@ -5,7 +5,7 @@ import SearchIcon from "@material-ui/icons/Search";
 import {makeStyles} from "@material-ui/styles";
 import axios from "axios";
 import {PostEditDialog,SearchResultDialog,SetMapArea} from "../components/Posts";
-import {Container,Box,Typography,Paper} from "@material-ui/core";
+import {Box,Typography,Paper} from "@material-ui/core";
 import {saveReadingPost,saveRegisteredPost} from "../reducks/posts/operations";
 import {useDispatch} from "react-redux";
 
@@ -80,7 +80,7 @@ const PostEdit = () => {
   },[dispatch,title,url,author,image,mapItems])
 
   return (
-    <Container maxWidth="md">
+    <div>
       <Box component={Paper} p={2} className={classes.paper}>
         <Typography component="h1">
           <Box fontWeight="fontWeightBold">
@@ -125,7 +125,7 @@ const PostEdit = () => {
         title="書籍を読書中アイテムとしてセットしますか？"
         contentText="読書中の切り替えは後からでも変更できます"
       />
-    </Container>
+    </div>
   );
 };
 

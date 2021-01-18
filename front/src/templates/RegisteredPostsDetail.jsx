@@ -1,6 +1,6 @@
 import React, { useEffect,useState,useCallback } from "react";
 import { useSelector, useDispatch } from 'react-redux'
-import { Box,Button,Card,CardContent,Container,Paper,Typography,Divider } from "@material-ui/core"
+import { Box,Button,Card,CardContent,Paper,Typography,Divider } from "@material-ui/core"
 import { makeStyles } from "@material-ui/styles";
 import { BookCard,SecondaryButton,QuestionDialog } from "../components/UIkit"
 import { deletePost, exchangeRegisteredAndReadingPost,updateStatusToCompleted } from "../reducks/posts/operations"
@@ -64,7 +64,7 @@ const RegisteredPostsDetail = (props) => {
   },[dispatch,handleDeletePostDialogClose,post])
 
   return (
-    <Container maxWidth="md" >
+    <Box>
       {isNonEmptyArray(post) ?
         <Box>
           <Paper>
@@ -172,7 +172,7 @@ const RegisteredPostsDetail = (props) => {
       :
         <></>
       }
-    </Container>
+    </Box>
   )
 }
 

@@ -1,6 +1,5 @@
 import React from 'react';
-import Container from '@material-ui/core/Container';
-import Typography from '@material-ui/core/Typography';
+import { Box,Typography } from '@material-ui/core';
 import { TwitterLoginButton } from "../components/UIkit";
 import { TwitterShareButton,TwitterIcon } from 'react-share';
 import {useDispatch} from 'react-redux';
@@ -53,7 +52,7 @@ const TopPage = () => {
   // },[])
 
   return (
-    <Container>
+    <Box>
       <Helmet
         meta={[
           {name: "twitter:card", content: "summary"},
@@ -93,7 +92,7 @@ const TopPage = () => {
         onClick={()=>dispatch(signInGuestUser())}
       />
       {/* <Typography>{usersCount}</Typography> */}
-    </Container>
+    </Box>
   );
 };
 

@@ -1,6 +1,6 @@
 import React, { useState,useCallback,useEffect } from "react";
 import { useSelector, useDispatch } from 'react-redux'
-import { Box,Button,Container,Paper,Typography,Divider } from "@material-ui/core"
+import { Box,Button,Paper,Typography,Divider } from "@material-ui/core"
 import { makeStyles } from "@material-ui/styles";
 import { BookCard,SecondaryButton,QuestionDialog } from "../components/UIkit"
 import { deletePost,updateStatusToCompleted,updatePostItems } from "../reducks/posts/operations"
@@ -65,7 +65,7 @@ const ReadingPostsDetail = () => {
 
 
   return (
-    <Container maxWidth="md">
+    <Box>
       {isNonEmptyArray(post) ?
         <Box component={Paper} className={classes.root}>
           <Box p={1} >
@@ -137,7 +137,7 @@ const ReadingPostsDetail = () => {
       :
         <Typography>現在読書中の書籍はありません</Typography>
       }
-    </Container>
+    </Box>
   )
 }
 

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { makeStyles } from "@material-ui/styles";
-import { Container,Paper,Tab,Tabs } from '@material-ui/core';
+import { Box,Paper,Tab,Tabs } from '@material-ui/core';
 import { TabPanel } from "../components/UIkit";
 import { RegisteredPostsList,CompletedPostsList } from "../components/Posts"
 // import { useHistory,useLocation } from "react-router-dom"
@@ -21,7 +21,7 @@ const PostsList = () => {
   };
 
   return (
-    <Container maxWidth="sm" className={classes.root}>
+    <Box className={classes.root}>
       <Paper>
         <Tabs value={selectedTab} variant="fullWidth" onChange={handleChange}>
           <Tab label="読書中" />
@@ -34,7 +34,7 @@ const PostsList = () => {
           <CompletedPostsList />
         </TabPanel>
       </Paper>
-    </Container>
+    </Box>
   )
 }
 

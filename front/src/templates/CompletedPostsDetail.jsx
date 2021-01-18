@@ -1,6 +1,6 @@
 import React, { useState,useCallback } from "react";
 import { useSelector,useDispatch } from 'react-redux'
-import { Box,Button,Card,CardContent,Container,Paper,Typography,Divider } from "@material-ui/core"
+import { Box,Button,Card,CardContent,Paper,Typography,Divider } from "@material-ui/core"
 import { makeStyles } from "@material-ui/styles";
 import { BookCard,QuestionDialog } from "../components/UIkit"
 import {TwitterShareButton,TwitterIcon} from "react-share";
@@ -43,7 +43,7 @@ const CompletedPostsDetail = () => {
   },[dispatch,handleDeletePostDialogClose,post])
 
   return (
-    <Container maxWidth="md" >
+    <Box>
       {isNonEmptyArray(post) ?
       <Box>
         <Paper>
@@ -117,7 +117,7 @@ const CompletedPostsDetail = () => {
     :
       <></>
     }
-    </Container>
+    </Box>
   )
 }
 

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from 'react-redux';
-import { Box,Container,Paper,Typography,Divider } from "@material-ui/core";
+import { Box,Paper,Typography,Divider } from "@material-ui/core";
 // import { makeStyles } from "@material-ui/styles";
 import { BookCard,SecondaryButton } from "../components/UIkit"
 import { Helmet } from "react-helmet";
@@ -31,7 +31,7 @@ const SharePostsPage = () => {
   },[dispatch,id])
 
   return (
-    <Container maxWidth="md" >
+    <Box>
       {isNonEmptyArray(post) ?
       <Box>
         <Helmet
@@ -70,7 +70,7 @@ const SharePostsPage = () => {
     :
       <></>
     }
-    </Container>
+    </Box>
   )
 }
 

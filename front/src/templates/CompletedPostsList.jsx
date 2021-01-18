@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from 'react-redux'
-import { Box,Container,Typography } from "@material-ui/core"
+import { Box,Typography } from "@material-ui/core"
 import { makeStyles } from "@material-ui/styles";
 import { getCompletedPosts } from "../reducks/posts/selectors"
 import { BookCard } from "../components/UIkit"
@@ -18,7 +18,7 @@ const CompletedPostsList = () => {
   const posts = getCompletedPosts(selector);
 
   return (
-    <Container maxWidth="md" className={classes.root}>
+    <Box maxWidth="md" className={classes.root}>
       {posts.length > 0 ? (
         posts.map(post => (
           <Box
@@ -35,7 +35,7 @@ const CompletedPostsList = () => {
       ) : (
         <Typography>読書中アイテムなし</Typography>
       )}
-    </Container>
+    </Box>
   )
 }
 

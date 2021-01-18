@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from 'react-redux'
-import { Box,Container,Typography } from "@material-ui/core"
+import { Box,Typography } from "@material-ui/core"
 import { makeStyles } from "@material-ui/styles";
 import { getRegisteredPosts } from "../reducks/posts/selectors"
 import { SmallBookCard } from "../components/UIkit"
@@ -19,7 +19,7 @@ const RegisteredPostsList = () => {
   const posts = getRegisteredPosts(selector);
 
   return (
-    <Container maxWidth="md" className={classes.root}>
+    <Box className={classes.root}>
       {posts.length > 0 ? (
         posts.map(post => (
           <Box
@@ -36,7 +36,7 @@ const RegisteredPostsList = () => {
       ) : (
         <Typography>読書中アイテムなし</Typography>
       )}
-    </Container>
+    </Box>
   )
 }
 

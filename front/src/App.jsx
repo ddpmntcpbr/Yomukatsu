@@ -6,6 +6,7 @@ import { ResponsiveBottomNavigation } from './components/ResponsiveBottomNavigat
 import { Loading } from "./components/UIkit"
 import "./assets/reset.css"
 import CssBaseline from '@material-ui/core/CssBaseline'
+import {Container} from "@material-ui/core";
 
 const useStyles = makeStyles((theme)=>({
   main: {
@@ -21,7 +22,9 @@ const App = () => {
       <Loading>
         <Header />
         <main className={classes.main}>
-          <Router />
+          <Container maxWidth="sm">
+            <Router />
+          </Container>
         </main>
         <ResponsiveBottomNavigation />
       </Loading>
