@@ -39,7 +39,7 @@ const CompletedPostsDetail = () => {
   const handleDeletePost = useCallback(()=>{
     dispatch(deletePost(post.id))
     handleDeletePostDialogClose()
-    dispatch(push("/completed/posts"))
+    dispatch(push("/posts/list"))
   },[dispatch,handleDeletePostDialogClose,post])
 
   return (

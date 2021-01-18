@@ -5,7 +5,6 @@ import { makeStyles } from "@material-ui/styles";
 import { BookCard,SecondaryButton,QuestionDialog } from "../components/UIkit"
 import { deletePost,updateStatusToCompleted,updatePostItems } from "../reducks/posts/operations"
 import {TwitterShareButton,TwitterIcon} from "react-share";
-import { push } from "connected-react-router";
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import { getDateString,isNonEmptyArray } from "../helpers"
@@ -47,7 +46,6 @@ const ReadingPostsDetail = () => {
   const handleUpdatePostStatus = useCallback(()=>{
     dispatch(updateStatusToCompleted(post))
     handleUpdatePostStatusDialogClose()
-    dispatch(push("/completed/posts"))
   },[dispatch,handleUpdatePostStatusDialogClose,post])
 
   const handleDeletePostClickOpen = useCallback(() => {

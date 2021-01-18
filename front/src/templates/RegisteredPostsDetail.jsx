@@ -46,7 +46,6 @@ const RegisteredPostsDetail = (props) => {
   const handleUpdatePostStatus = useCallback(()=>{
     dispatch(updateStatusToCompleted(post))
     handleUpdatePostStatusDialogClose()
-    dispatch(push("/completed/posts"))
   },[dispatch,handleUpdatePostStatusDialogClose,post])
 
   const handleDeletePostClickOpen = useCallback(() => {
