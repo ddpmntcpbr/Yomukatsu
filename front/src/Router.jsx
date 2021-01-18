@@ -28,7 +28,7 @@ const Router = () => {
         <Route exact path={"/registered/posts"} component={RegisteredPostsList} />
         <Route exaxt path={"/registered/posts/:id"} component={RegisteredPostsDetail} />
         <Route exact path={"/posts/edit"} component={PostEdit} />
-        <Route exact path={"/mypage"} component={PostsList} />
+        <Route exact path={"/posts/list"} component={PostsList} />
       </Auth>
     </Switch>
   );
