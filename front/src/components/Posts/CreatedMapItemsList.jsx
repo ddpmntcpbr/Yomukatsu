@@ -2,7 +2,7 @@ import React, {useCallback, useEffect, useState} from 'react';
 import {TextInput} from "../UIkit";
 import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from '@material-ui/icons/Delete';
-import Paper from '@material-ui/core/Paper';
+import { Card,CardContent,Typography } from '@material-ui/core';
 import {makeStyles} from "@material-ui/styles";
 import { Box,Button } from "@material-ui/core"
 import Grid from '@material-ui/core/Grid';
@@ -16,9 +16,6 @@ const useStyles = makeStyles((theme)=>({
   iconCell: {
     height: 32,
     width: 32,
-  },
-  postItemPaper: {
-    padding: theme.spacing(1)
   },
   inputPostItemArea: {
     display: "flex",
@@ -96,9 +93,13 @@ const CreatedMapItemsList = (props) => {
             item.content !== "" && (
               <Grid container spacing={3} key={i} alignItems="center" justify="center">
                 <Grid item xs={10}>
-                  <Paper className={classes.mapItemPaper} onClick={() => editPostItem(i,item.content)}>
-                    {item.content}
-                  </Paper>
+                  <Card variant="outlined" onClick={() => editPostItem(i,item.content)}>
+                    <CardContent>
+                      <Typography component="p">
+                        {item.content}
+                      </Typography>
+                    </CardContent>
+                  </Card>
                 </Grid>
                 <Grid item xs={2}>
                   <IconButton className={classes.iconCell} onClick={() => deletePostItem(i)}>
