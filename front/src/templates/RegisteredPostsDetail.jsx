@@ -15,9 +15,12 @@ import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import { formatDateString } from "../helpers"
 
 const useStyles = makeStyles((theme)=>({
-  root: {
-  },
-  mapItem: {
+  goBack: {
+    cursor: "pointer",
+    transition: "0.2s",
+    '&:hover': {
+      backgroundColor: theme.palette.grey[200],
+    }
   }
 }))
 
@@ -69,12 +72,16 @@ const RegisteredPostsDetail = (props) => {
         <Box>
           <Paper>
             <Box p={1} >
-              <ArrowBackIosIcon
-                onClick={()=>dispatch(push({
-                  pathname: "/posts/list",
-                  state: { selectedTab: 0}
-                }))}
-              />
+              <Box my={1} display="flex">
+                <Box
+                  p={1} display="flex" className={classes.goBack}
+                  onClick={()=>dispatch(push("/posts/list"))}
+                >
+                  <ArrowBackIosIcon/>
+                  <Typography>登録リストに戻る</Typography>
+                </Box>
+                <Box/>
+              </Box>
               <Typography component="h3">
                 <Box fontSize="1.5rem" fontWeight="fontWeightBold">
                   書籍情報
