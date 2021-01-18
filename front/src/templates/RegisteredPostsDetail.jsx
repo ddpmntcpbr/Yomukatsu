@@ -12,6 +12,7 @@ import { getDateString,isNonEmptyArray } from "../helpers"
 import { getRegisteredPosts } from "../reducks/posts/selectors"
 import { fetchSharePost } from "../reducks/sharePosts/operations"
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
+import { formatDateString } from "../helpers"
 
 const useStyles = makeStyles((theme)=>({
   root: {
@@ -81,7 +82,12 @@ const RegisteredPostsDetail = (props) => {
               </Typography>
               <Divider />
               <Box my={3}>
-                <BookCard title={post.title} author={post.author} image={post.image} />
+                <BookCard
+                  title={post.title}
+                  author={post.author}
+                  image={post.image}
+                  created_at={formatDateString(post.created_at)}
+                />
               </Box>
 
               <Typography component="h3">

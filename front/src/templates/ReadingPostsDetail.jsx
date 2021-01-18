@@ -10,6 +10,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import { getDateString,isNonEmptyArray } from "../helpers"
 import { getReadingPosts } from "../reducks/posts/selectors"
 import { CreatedMapItemsList } from "../components/Posts"
+import { formatDateString } from "../helpers"
 
 const useStyles = makeStyles((theme)=>({
   root: {
@@ -71,7 +72,12 @@ const ReadingPostsDetail = () => {
                 現在読書中の書籍
             </Typography>
             <Box my={3}>
-              <BookCard title={post.title} author={post.author} image={post.image} />
+              <BookCard
+                title={post.title}
+                author={post.author}
+                image={post.image}
+                created_at={formatDateString(post.created_at)}
+              />
             </Box>
 
             <Typography component="h2">

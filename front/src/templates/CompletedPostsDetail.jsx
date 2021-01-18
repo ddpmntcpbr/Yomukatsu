@@ -10,6 +10,7 @@ import { getCompletedPosts } from "../reducks/posts/selectors"
 import { deletePost } from "../reducks/posts/operations"
 import { push } from "connected-react-router";
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
+import { formatDateString } from "../helpers"
 
 const useStyles = makeStyles((theme)=>({
   root: {
@@ -61,7 +62,12 @@ const CompletedPostsDetail = () => {
             </Typography>
             <Divider />
             <Box my={3}>
-              <BookCard title={post.title} author={post.author} image={post.image} />
+              <BookCard
+                title={post.title}
+                author={post.author}
+                image={post.image}
+                created_at={formatDateString(post.created_at)}
+              />
             </Box>
 
             <Typography component="h3">

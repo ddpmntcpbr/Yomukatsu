@@ -49,7 +49,7 @@ const PostEdit = () => {
         setSearchResults(response.data.items)
         setSearchModalOpen(true)
       })
-      .catch(error => {
+      .catch((error) => {
         console.log(error)
       });
     }
@@ -100,7 +100,20 @@ const PostEdit = () => {
           open={searchModalOpen} searchResults={searchResults} handleClose={handleSearchModalClose}
           setTitle={setTitle} setAuthor={setAuthor} setImage={setImage} setUrl={setUrl}
         />
-        <BookCard title={title} author={author} image={image} />
+
+        {title ? (
+          <BookCard
+            title={title}
+            author={author}
+            image={image}
+          />
+        ):(
+          <Typography>
+            登録したい書籍を検索してください。
+          </Typography>
+        )}
+
+
         <Box style={{height:24}}/>
         <Typography component="h2">
           <Box fontWeight="fontWeightBold">
