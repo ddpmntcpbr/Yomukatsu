@@ -187,8 +187,9 @@ export const saveRegisteredPost = (title,url,author,image,mapItems) => {
       'uid': localStorage.getItem('uid'),
     }})
     .then((response) => {
+      const postId = response.data.id
       dispatch(fetchPosts())
-      dispatch(push("/registered/posts"))
+      dispatch(push("/registered/posts/" + postId))
     })
     .catch((error) => {
       console.log("error",error)
@@ -261,8 +262,9 @@ export const updateStatusToCompleted = (prevData) =>{
       'uid': localStorage.getItem('uid'),
     }})
     .then((response) => {
+      const postId = response.data.id
       dispatch(fetchPosts())
-      dispatch(push("/completed/posts"))
+      dispatch(push("/completed/posts/" + postId))
     })
     .catch((error) => {
       console.log("error",error)

@@ -50,7 +50,7 @@ const CompletedPostsDetail = () => {
           <Box p={1} >
             <ArrowBackIosIcon
               onClick={()=>dispatch(push({
-                pathname: "/mypage",
+                pathname: "/posts/list",
                 state: { selectedTab: 1}
               }))}
             />
