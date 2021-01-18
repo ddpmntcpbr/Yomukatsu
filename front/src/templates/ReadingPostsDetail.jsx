@@ -11,6 +11,7 @@ import { getDateString,isNonEmptyArray } from "../helpers"
 import { getReadingPosts } from "../reducks/posts/selectors"
 import { CreatedMapItemsList } from "../components/Posts"
 import { formatDateString } from "../helpers"
+import { push } from "connected-react-router"
 
 const useStyles = makeStyles((theme)=>({
   root: {
@@ -139,7 +140,13 @@ const ReadingPostsDetail = () => {
           </Box>
         </Box>
       :
+      <Box>
         <Typography>現在読書中の書籍はありません</Typography>
+        <SecondaryButton
+          label="新規登録する"
+          onClick={()=>dispatch(push("/posts/edit"))}
+        />
+      </Box>
       }
     </Box>
   )
