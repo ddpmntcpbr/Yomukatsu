@@ -45,9 +45,11 @@ const BookCard = (props) => {
             <Box fontSize="0.70rem">
                著者: {props.author}
             </Box>
-            <Box fontSize="0.70rem">
-               登録日: {props.author}
-            </Box>
+            { props.created_at && (
+              <Box fontSize="0.70rem">
+                登録日: {props.created_at}
+              </Box>
+            )}
           </Typography>
         </CardContent>
       </Box>
