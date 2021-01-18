@@ -38,8 +38,10 @@ const ResponsiveBottomNavigation = () => {
 const currentActiveBottomNavigationAction = (pathname) => {
   switch (true) {
     case /^(?=.*reading)(?=.*posts)/.test(pathname): return 0;
+    case /^(?=.*posts)(?=.*list)/.test(pathname): return 1;
     case /^(?=.*registered)(?=.*posts)/.test(pathname): return 1;
-    case /^(?=.*completed)(?=.*posts)/.test(pathname): return 2;
+    case /^(?=.*completed)(?=.*posts)/.test(pathname): return 1;
+    case /edit/.test(pathname): return 2;
     case /help/.test(pathname): return 3;
     default: return -1;
    }
@@ -53,25 +55,25 @@ const currentActiveBottomNavigationAction = (pathname) => {
         className={classes.root}
       >
         <BottomNavigationAction
-          label={"ホーム"}
+          label={"読書中"}
           className={classes.button}
           icon={<HomeIcon/>}
           onClick={()=>dispatch(push("/reading/posts"))}
         />
         <BottomNavigationAction
-          label={"登録中"}
-          className={classes.button}
-          icon={<BookmarkBorderIcon/>}
-          onClick={()=>dispatch(push("/registered/posts"))}
-        />
-        <BottomNavigationAction
-          label={"完読済"}
+          label={"登録リスト"}
           className={classes.button}
           icon={<BookmarksIcon/>}
-          onClick={()=>dispatch(push("/completed/posts"))}
+          onClick={()=>dispatch(push("/posts/list"))}
         />
         <BottomNavigationAction
-          label={"ヒント"}
+          label={"新規"}
+          className={classes.button}
+          icon={<AddIcon/>}
+          onClick={()=>dispatch(push("/posts/edit"))}
+        />
+        <BottomNavigationAction
+          label={"ヘルプ"}
           className={classes.button}
           icon={<HelpIcon/>}
           onClick={()=>dispatch(push("/help"))}
