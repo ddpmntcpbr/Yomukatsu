@@ -2,13 +2,10 @@ import React from 'react';
 import {Route, Switch} from "react-router";
 import {
   CompletedPostsDetail,
-  CompletedPostsList,
   PostEdit,
   PostsList,
-  PostUpdatePage,
   ReadingPostsDetail,
   RegisteredPostsDetail,
-  RegisteredPostsList,
   SharePostsPage,
   TopPage}
 from "./templates";
@@ -22,10 +19,7 @@ const Router = () => {
 
       <Auth>
         <Route exact path={"/completed/posts/:id"} component={CompletedPostsDetail} />
-        <Route exact path={"/completed/posts"} component={CompletedPostsList} />
         <Route exact path={"/reading/posts"} component={ReadingPostsDetail} />
-        <Route exact path={"/reading/posts/update"} component={PostUpdatePage} />
-        <Route exact path={"/registered/posts"} component={RegisteredPostsList} />
         <Route exaxt path={"/registered/posts/:id"} component={RegisteredPostsDetail} />
         <Route exact path={"/posts/edit"} component={PostEdit} />
         <Route exact path={"/posts/list"} component={PostsList} />
