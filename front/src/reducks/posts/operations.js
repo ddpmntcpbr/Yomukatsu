@@ -44,6 +44,7 @@ export const deletePost = (id) => {
     }})
     .then((response) => {
       dispatch(fetchPosts())
+      dispatch(push("/posts/list"))
     })
     .catch((error) => {
       console.log("error",error)

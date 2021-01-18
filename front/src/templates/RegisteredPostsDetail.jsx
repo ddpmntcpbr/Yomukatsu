@@ -63,7 +63,6 @@ const RegisteredPostsDetail = (props) => {
   const handleDeletePost = useCallback(()=>{
     dispatch(deletePost(post.id))
     handleDeletePostDialogClose()
-    dispatch(push("/registered/posts"))
   },[dispatch,handleDeletePostDialogClose,post])
 
   return (
