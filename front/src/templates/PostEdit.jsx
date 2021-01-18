@@ -5,17 +5,13 @@ import SearchIcon from "@material-ui/icons/Search";
 import {makeStyles} from "@material-ui/styles";
 import axios from "axios";
 import {PostEditDialog,SearchResultDialog,SetMapArea} from "../components/Posts";
-import {Container,Box,Typography,Paper} from "@material-ui/core";
+import {Box,Typography,Paper} from "@material-ui/core";
 import {saveReadingPost,saveRegisteredPost} from "../reducks/posts/operations";
 import {useDispatch} from "react-redux";
 
 const useStyles = makeStyles((theme)=>({
   paper: {
     backgroundColor: theme.palette.grey[100]
-  },
-  subTitleTypography: {
-    color: theme.palette.grey["700"],
-    fontSize: "1.5rem",
   },
   searchField: {
     display: "flex",
@@ -53,7 +49,7 @@ const PostEdit = () => {
         setSearchResults(response.data.items)
         setSearchModalOpen(true)
       })
-      .catch(error => {
+      .catch((error) => {
         console.log(error)
       });
     }
@@ -84,12 +80,14 @@ const PostEdit = () => {
   },[dispatch,title,url,author,image,mapItems])
 
   return (
-    <Container maxWidth="md">
+    <div>
       <Box component={Paper} p={2} className={classes.paper}>
-        <Typography variant="h3" className={classes.subTitleTypography}>
-          書籍登録
+        <Typography component="h1">
+          <Box fontWeight="fontWeightBold">
+            書籍登録
+          </Box>
         </Typography>
-        <Box className={classes.searchField}>
+        <Box className={classes.searchField} mb={2}>
           <TextInput
             fullWidth={true} label={"タイトル / 著者名 で 検索"} multiline={false} required={true}
             onChange={inputQuery} rows={1} type={"text"}
@@ -102,10 +100,25 @@ const PostEdit = () => {
           open={searchModalOpen} searchResults={searchResults} handleClose={handleSearchModalClose}
           setTitle={setTitle} setAuthor={setAuthor} setImage={setImage} setUrl={setUrl}
         />
-        <BookCard title={title} author={author} image={image} />
+
+        {title ? (
+          <BookCard
+            title={title}
+            author={author}
+            image={image}
+          />
+        ):(
+          <Typography>
+            登録したい書籍を検索してください。
+          </Typography>
+        )}
+
+
         <Box style={{height:24}}/>
-        <Typography variant="h3" className={classes.subTitleTypography}>
-          メンタルマップ
+        <Typography component="h2">
+          <Box fontWeight="fontWeightBold">
+            メンタルマップ
+          </Box>
         </Typography>
         <SetMapArea mapItems={mapItems} setMapItems={setMapItems}  />
 
@@ -125,7 +138,7 @@ const PostEdit = () => {
         title="書籍を読書中アイテムとしてセットしますか？"
         contentText="読書中の切り替えは後からでも変更できます"
       />
-    </Container>
+    </div>
   );
 };
 

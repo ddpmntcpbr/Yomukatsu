@@ -22,3 +22,12 @@ export const getDateString = () => {
                       ("00" + (nowDate.getSeconds())).slice(-2);
   return dateString
 }
+
+export const formatDateString = (argTime) => {
+  const year = argTime.slice(0,4)
+  const month = argTime.slice(5,7).replace(/^0+/, '')
+  const day = argTime.slice(8,10).replace(/^0+/, '')
+  const hour = argTime.slice(11,13).replace(/^0+/, '')
+  const minute = argTime.slice(14,16).replace(/^0+/, '')
+  return year + "/" + month + "/" + day + " " + hour + ":" + minute
+}

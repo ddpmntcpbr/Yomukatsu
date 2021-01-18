@@ -12,6 +12,11 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
     height: 100,
+    cursor: "pointer",
+    transition: "0.2s",
+    '&:hover': {
+      backgroundColor: theme.palette.grey[200],
+    }
   },
   details: {
     flex: 1,
@@ -43,13 +48,8 @@ const BookCard = (props) => {
               {props.title}
             </Box>
             <Box fontSize="0.70rem">
-               著者: {props.author}
+               登録日: {props.created_at}
             </Box>
-            { props.created_at && (
-              <Box fontSize="0.70rem">
-                登録日: {props.created_at}
-              </Box>
-            )}
           </Typography>
         </CardContent>
       </Box>

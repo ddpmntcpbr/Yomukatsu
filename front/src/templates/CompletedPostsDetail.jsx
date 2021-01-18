@@ -1,6 +1,6 @@
 import React, { useState,useCallback } from "react";
 import { useSelector,useDispatch } from 'react-redux'
-import { Box,Button,Card,CardContent,Container,Paper,Typography,Divider } from "@material-ui/core"
+import { Box,Button,Card,CardContent,Paper,Typography,Divider } from "@material-ui/core"
 import { makeStyles } from "@material-ui/styles";
 import { BookCard,QuestionDialog } from "../components/UIkit"
 import {TwitterShareButton,TwitterIcon} from "react-share";
@@ -9,11 +9,16 @@ import { getDateString,isNonEmptyArray } from "../helpers"
 import { getCompletedPosts } from "../reducks/posts/selectors"
 import { deletePost } from "../reducks/posts/operations"
 import { push } from "connected-react-router";
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
+import { formatDateString } from "../helpers"
 
 const useStyles = makeStyles((theme)=>({
-  root: {
-  },
-  mapItem: {
+  goBack: {
+    cursor: "pointer",
+    transition: "0.2s",
+    '&:hover': {
+      backgroundColor: theme.palette.grey[200],
+    }
   }
 }))
 
@@ -38,15 +43,26 @@ const CompletedPostsDetail = () => {
   const handleDeletePost = useCallback(()=>{
     dispatch(deletePost(post.id))
     handleDeletePostDialogClose()
-    dispatch(push("/completed/posts"))
+    dispatch(push("/posts/list"))
   },[dispatch,handleDeletePostDialogClose,post])
 
   return (
-    <Container maxWidth="md" >
+    <Box>
       {isNonEmptyArray(post) ?
       <Box>
         <Paper>
-          <Box p={1} >
+          <Box p={1}>
+            <Box my={1} display="flex">
+              <Box
+                p={1} display="flex" className={classes.goBack}
+                onClick={()=>dispatch(push("/posts/list"))}
+              >
+                <ArrowBackIosIcon/>
+                <Typography>登録リストに戻る</Typography>
+              </Box>
+              <Box/>
+            </Box>
+
             <Typography component="h3">
               <Box fontSize="1.5rem" fontWeight="fontWeightBold">
                 書籍情報
@@ -54,7 +70,12 @@ const CompletedPostsDetail = () => {
             </Typography>
             <Divider />
             <Box my={3}>
-              <BookCard title={post.title} author={post.author} image={post.image} />
+              <BookCard
+                title={post.title}
+                author={post.author}
+                image={post.image}
+                created_at={formatDateString(post.created_at)}
+              />
             </Box>
 
             <Typography component="h3">
@@ -110,7 +131,7 @@ const CompletedPostsDetail = () => {
     :
       <></>
     }
-    </Container>
+    </Box>
   )
 }
 

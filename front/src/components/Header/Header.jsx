@@ -15,6 +15,9 @@ const useStyles = makeStyles((theme)=>({
     flexGrow: 1,
     zIndex: 9999,
   },
+  headerLogo: {
+    maxHeight: 40
+  },
   menuBar: {
     backgroundColor: theme.palette.primary.main,
   },
@@ -23,11 +26,9 @@ const useStyles = makeStyles((theme)=>({
     width: "100%"
   },
   iconButtons: {
-    margin: "0 0 0 auto"
+    margin: "0 0 0 auto",
   },
-  headerTypography: {
-    fontSize:32
-  }
+
 }));
 
 const Header = () => {
@@ -48,14 +49,14 @@ const Header = () => {
       <AppBar position="fixed" className={classes.menuBar}>
         <Toolbar className={classes.toolBar}>
           <img
-            src={logo} alt="Logo" width="200px"
+            src={logo} alt="Logo" className={classes.headerLogo}
             onClick={()=>dispatch(push("/"))}
           />
-          <div className={classes.iconButtons}>
-            <IconButton onClick={(event) => handleDrawerToggle(event)}>
-              <MenuIcon />
+          <Box className={classes.iconButtons}>
+            <IconButton style={{ padding: "8px" }} onClick={(event) => handleDrawerToggle(event)}>
+              <MenuIcon style={{ fontSize: 24 }} />
             </IconButton>
-          </div>
+          </Box>
         </Toolbar>
       </AppBar>
       <ClosableDrawer open={open} onClose={handleDrawerToggle}/>

@@ -1,6 +1,6 @@
 import React, { useEffect,useState,useCallback } from "react";
 import { useSelector, useDispatch } from 'react-redux'
-import { Box,Button,Card,CardContent,Container,Paper,Typography,Divider } from "@material-ui/core"
+import { Box,Button,Card,CardContent,Paper,Typography,Divider } from "@material-ui/core"
 import { makeStyles } from "@material-ui/styles";
 import { BookCard,SecondaryButton,QuestionDialog } from "../components/UIkit"
 import { deletePost, exchangeRegisteredAndReadingPost,updateStatusToCompleted } from "../reducks/posts/operations"
@@ -11,15 +11,20 @@ import EditIcon from '@material-ui/icons/Edit';
 import { getDateString,isNonEmptyArray } from "../helpers"
 import { getRegisteredPosts } from "../reducks/posts/selectors"
 import { fetchSharePost } from "../reducks/sharePosts/operations"
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
+import { formatDateString } from "../helpers"
 
 const useStyles = makeStyles((theme)=>({
-  root: {
-  },
-  mapItem: {
+  goBack: {
+    cursor: "pointer",
+    transition: "0.2s",
+    '&:hover': {
+      backgroundColor: theme.palette.grey[200],
+    }
   }
 }))
 
-const RegisteredPostsDetail = () => {
+const RegisteredPostsDetail = (props) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const selector = useSelector((state)=>state);
@@ -45,7 +50,6 @@ const RegisteredPostsDetail = () => {
   const handleUpdatePostStatus = useCallback(()=>{
     dispatch(updateStatusToCompleted(post))
     handleUpdatePostStatusDialogClose()
-    dispatch(push("/completed/posts"))
   },[dispatch,handleUpdatePostStatusDialogClose,post])
 
   const handleDeletePostClickOpen = useCallback(() => {
@@ -63,11 +67,21 @@ const RegisteredPostsDetail = () => {
   },[dispatch,handleDeletePostDialogClose,post])
 
   return (
-    <Container maxWidth="md" >
+    <Box>
       {isNonEmptyArray(post) ?
         <Box>
           <Paper>
             <Box p={1} >
+              <Box my={1} display="flex">
+                <Box
+                  p={1} display="flex" className={classes.goBack}
+                  onClick={()=>dispatch(push("/posts/list"))}
+                >
+                  <ArrowBackIosIcon/>
+                  <Typography>登録リストに戻る</Typography>
+                </Box>
+                <Box/>
+              </Box>
               <Typography component="h3">
                 <Box fontSize="1.5rem" fontWeight="fontWeightBold">
                   書籍情報
@@ -75,7 +89,12 @@ const RegisteredPostsDetail = () => {
               </Typography>
               <Divider />
               <Box my={3}>
-                <BookCard title={post.title} author={post.author} image={post.image} />
+                <BookCard
+                  title={post.title}
+                  author={post.author}
+                  image={post.image}
+                  created_at={formatDateString(post.created_at)}
+                />
               </Box>
 
               <Typography component="h3">
@@ -165,7 +184,7 @@ const RegisteredPostsDetail = () => {
       :
         <></>
       }
-    </Container>
+    </Box>
   )
 }
 

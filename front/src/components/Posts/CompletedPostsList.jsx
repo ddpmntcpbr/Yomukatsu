@@ -1,39 +1,40 @@
 import React from "react";
 import { useSelector, useDispatch } from 'react-redux'
-import { Box,Typography } from "@material-ui/core"
-import { makeStyles } from "@material-ui/styles";
-import { getCompletedPosts } from "../reducks/posts/selectors"
-import { BookCard } from "../components/UIkit"
+// import { makeStyles } from "@material-ui/styles";
+import { getCompletedPosts } from "../../reducks/posts/selectors"
+import { SmallBookCard } from "../UIkit"
 import { push } from "connected-react-router";
+import { formatDateString } from "../../helpers"
+import { Box,Typography} from '@material-ui/core';
 
-const useStyles = makeStyles((theme)=>({
-  root: {
-  }
-}))
+// const useStyles = makeStyles((theme)=>({
+//   root: {
+//   }
+// }))
 
 const CompletedPostsList = () => {
-  const classes = useStyles();
+  // const classes = useStyles();
   const dispatch = useDispatch();
   const selector = useSelector((state)=>state);
   const posts = getCompletedPosts(selector);
 
   return (
-    <Box maxWidth="md" className={classes.root}>
+    <Box>
       {posts.length > 0 ? (
         posts.map(post => (
           <Box
             key={post.id}
             onClick={()=>dispatch(push("/completed/posts/" + String(post.id)))}
           >
-            <BookCard
+            <SmallBookCard
               title={post.title}
-              author={post.author}
               image={post.image}
+              created_at={formatDateString(post.created_at)}
             />
           </Box>
         ))
       ) : (
-        <Typography>読書中アイテムなし</Typography>
+        <Typography>完読書籍はありません</Typography>
       )}
     </Box>
   )
