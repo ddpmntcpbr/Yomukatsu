@@ -24,8 +24,8 @@ const PostsList = () => {
     <Box className={classes.root}>
       <Paper>
         <Tabs value={selectedTab} variant="fullWidth" onChange={handleChange}>
-          <Tab label="読書中" />
-          <Tab label="完読リスト" />
+          <Tab label="登録のみ" />
+          <Tab label="完読済み" />
         </Tabs>
         <TabPanel value={selectedTab} index={0}>
           <RegisteredPostsList />

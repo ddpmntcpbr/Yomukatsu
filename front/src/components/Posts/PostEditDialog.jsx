@@ -16,10 +16,10 @@ const PostEditDialog = (props) => {
         </DialogContent>
         <DialogActions>
           <Button variant="outlined" color="primary" onClick={props.handleSaveReadingPost} autoFocus>
-            読書中にセット
+            さっそく読み始める
           </Button>
           <Button variant="outlined" color="primary" onClick={props.handleSaveRegisteredPost}>
-            登録のみ
+            登録だけ行う
           </Button>
         </DialogActions>
       </Dialog>

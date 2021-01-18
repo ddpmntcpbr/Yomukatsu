@@ -5,7 +5,7 @@ import SearchIcon from "@material-ui/icons/Search";
 import {makeStyles} from "@material-ui/styles";
 import axios from "axios";
 import {PostEditDialog,SearchResultDialog,SetMapArea} from "../components/Posts";
-import {Box,Typography,Paper} from "@material-ui/core";
+import {Box,Grid,Typography,Paper} from "@material-ui/core";
 import {saveReadingPost,saveRegisteredPost} from "../reducks/posts/operations";
 import {useDispatch} from "react-redux";
 
@@ -88,13 +88,21 @@ const PostEdit = () => {
           </Box>
         </Typography>
         <Box className={classes.searchField} mb={2}>
-          <TextInput
-            fullWidth={true} label={"タイトル / 著者名 で 検索"} multiline={false} required={true}
-            onChange={inputQuery} rows={1} type={"text"}
-          />
-          <IconButton onClick={() => handleClickSearchIcon()}>
-            <SearchIcon/>
-          </IconButton>
+          <Grid container>
+            <Grid item xs={10}>
+              <TextInput
+                fullWidth={true} label={"タイトル / 著者名 で 検索"} multiline={false} required={true}
+                onChange={inputQuery} rows={1} type={"text"}
+              />
+            </Grid>
+            <Grid item xs={2}>
+              <Box  textAlign="center">
+                <IconButton onClick={() => handleClickSearchIcon()}>
+                  <SearchIcon/>
+                </IconButton>
+              </Box>
+            </Grid>
+          </Grid>
         </Box>
         <SearchResultDialog
           open={searchModalOpen} searchResults={searchResults} handleClose={handleSearchModalClose}
@@ -135,8 +143,8 @@ const PostEdit = () => {
         handleClose={handleSaveModalClose}
         handleSaveReadingPost={handleSaveReadingPost}
         handleSaveRegisteredPost={handleSaveRegisteredPost}
-        title="書籍を読書中アイテムとしてセットしますか？"
-        contentText="読書中の切り替えは後からでも変更できます"
+        title="さっそく読み始めますか？"
+        contentText="読書中の設定は後からでも変更できます"
       />
     </div>
   );

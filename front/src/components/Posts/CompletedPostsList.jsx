@@ -34,7 +34,9 @@ const CompletedPostsList = () => {
           </Box>
         ))
       ) : (
-        <Typography>完読書籍はありません</Typography>
+        <Box textAlign="center">
+          <Typography>完読した書籍はありません</Typography>
+        </Box>
       )}
     </Box>
   )
