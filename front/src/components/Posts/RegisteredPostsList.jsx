@@ -36,7 +36,7 @@ const RegisteredPostsList = () => {
         ))
       ) : (
         <Box textAlign="center">
-          <Typography>登録書籍はありません</Typography>
+          <Typography>未読の書籍はありません</Typography>
         </Box>
       )}
     </Box>
