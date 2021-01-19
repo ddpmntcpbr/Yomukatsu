@@ -12,6 +12,9 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import { QuestionDialog } from "../UIkit"
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import EditIcon from '@material-ui/icons/Edit';
 
 const useStyles = makeStyles((theme)=>({
   itemContent:{
@@ -31,6 +34,16 @@ const useStyles = makeStyles((theme)=>({
   inputButton: {
     display: "flex",
     justifyContent: "space-between"
+  },
+  menu:{
+    padding: 0
+  },
+  menuItem:{
+    padding: theme.spacing(1)
+  },
+  menuItemTypography: {
+    fontSize: "0.8rem",
+    marginLeft: theme.spacing(1)
   }
 }))
 
@@ -129,35 +142,45 @@ const CreatedMapItem = (props) => {
           </Paper>
         </Grid>
         <Grid item xs={1}>
-          {/* <Box textAlign="center" p={0}>
-            <IconButton onClick={() => props.deletePostItem(props.i)} style={{padding: 0}}>
-              <MoreVertIcon className={classes.iconCell}/>
-            </IconButton>
-          </Box> */}
           <Box textAlign="center" p={0}>
             <IconButton onClick={handleClick} style={{padding: 0}}>
               <MoreVertIcon className={classes.iconCell}/>
             </IconButton>
             <Menu
-              id="simple-menu"
+              id="customized-menu"
               anchorEl={anchorEl}
               keepMounted
               open={Boolean(anchorEl)}
               onClose={handleClose}
+              className={classes.menu}
             >
               <MenuItem
                 onClick={()=>{
                   props.editPostItem(props.i,props.item.content);
                   handleClose();
-                }}>
-                編集
+                }}
+                className={classes.menuItem}
+              >
+                <Box display="flex" justifyContent="center">
+                  <EditIcon  fontSize="small"/>
+                  <Typography className={classes.menuItemTypography}>
+                    編集
+                  </Typography>
+                </Box>
               </MenuItem>
               <MenuItem
                 onClick={()=>{
                   handleDeletePostItemDialogOpen()
                   handleClose()
-                }}>
-                削除
+                }}
+                className={classes.menuItem}
+              >
+                <Box display="flex" justifyContent="center">
+                  <DeleteIcon  fontSize="small"/>
+                  <Typography className={classes.menuItemTypography}>
+                    削除
+                  </Typography>
+                </Box>
               </MenuItem>
             </Menu>
           </Box>
