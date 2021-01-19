@@ -9,6 +9,7 @@ import Grid from '@material-ui/core/Grid';
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import { CreatedMapItem } from "./index"
 
 const useStyles = makeStyles((theme)=>({
   itemContent:{
@@ -37,7 +38,8 @@ const CreatedMapItemsList = (props) => {
 
   const [index, setIndex] = useState(-1),
         [postItem, setPostItem] = useState(""),
-        [inputFormOpen, setInputFormOpen] = useState(false)
+        [inputFormOpen, setInputFormOpen] = useState(false),
+        [anchorEl, setAnchorEl] = useState(null);
 
   useEffect(()=>{
     setIndex(props.postItems.length)
@@ -71,46 +73,27 @@ const CreatedMapItemsList = (props) => {
         setIndex(newPostItems.length)
         setPostItem("")
       }
-      // console.log(props.postItems)
-      // dispatch(updatePostItems(props.postId,props.postItems))
       handleInputFormClose()
     }
   };
 
-  const editPostItem = (index,content) => {
+  const editPostItem = useCallback((index,content) => {
     handleInputFormOpen()
     setIndex(index);
     setPostItem(content);
-    // console.log(props.postItems)
-    // dispatch(updatePostItems(props.postId,props.postItems))
-  }
+  })
 
-  const deletePostItem = (deleteIndex) => {
+  const deletePostItem = useCallback((deleteIndex) => {
     const newPostItems = props.postItems.filter((item,i) => i !== deleteIndex);
     props.setPostItems(newPostItems);
-  }
+  })
 
   return (
     <Box>
       { props.postItems.length > 0 && (
           props.postItems.map((item,i) => (
             item.content !== "" && (
-              <Grid container spacing={1} key={i} alignItems="center" justify="center">
-                <Grid item xs={11}>
-                  <Paper variant="outlined" onClick={() => editPostItem(i,item.content)}>
-                    <Typography component="p" className={classes.itemContent}>
-                      {item.content}
-                    </Typography>
-                  </Paper>
-                </Grid>
-                <Grid item xs={1}>
-                  <Box textAlign="center" p={0}>
-                    <IconButton onClick={() => deletePostItem(i)} style={{padding: 0}}>
-                      <MoreVertIcon className={classes.iconCell}/>
-                    </IconButton>
-                  </Box>
-                </Grid>
-              </Grid>
+              <CreatedMapItem key={i} i={i} item={item} editPostItem={editPostItem} deletePostItem={deletePostItem} />
             )
           ))
       )}
