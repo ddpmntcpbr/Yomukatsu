@@ -1,14 +1,9 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import {TextInput} from "../UIkit";
-import IconButton from "@material-ui/core/IconButton";
-import DeleteIcon from '@material-ui/icons/Delete';
-import { Paper,Typography } from '@material-ui/core';
 import {makeStyles} from "@material-ui/styles";
 import { Box,Button } from "@material-ui/core"
-import Grid from '@material-ui/core/Grid';
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { CreatedMapItem } from "./index"
 
 const useStyles = makeStyles((theme)=>({
@@ -34,12 +29,10 @@ const useStyles = makeStyles((theme)=>({
 
 const CreatedMapItemsList = (props) => {
   const classes = useStyles();
-  // const dispatch = useDispatch();
 
   const [index, setIndex] = useState(-1),
         [postItem, setPostItem] = useState(""),
-        [inputFormOpen, setInputFormOpen] = useState(false),
-        [anchorEl, setAnchorEl] = useState(null);
+        [inputFormOpen, setInputFormOpen] = useState(false)
 
   useEffect(()=>{
     setIndex(props.postItems.length)
@@ -81,12 +74,12 @@ const CreatedMapItemsList = (props) => {
     handleInputFormOpen()
     setIndex(index);
     setPostItem(content);
-  })
+  },[setIndex,setPostItem])
 
   const deletePostItem = useCallback((deleteIndex) => {
     const newPostItems = props.postItems.filter((item,i) => i !== deleteIndex);
     props.setPostItems(newPostItems);
-  })
+  },[props])
 
   return (
     <Box>

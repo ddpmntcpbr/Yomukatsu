@@ -1,19 +1,14 @@
-import React, {useCallback, useEffect, useState} from 'react';
-import {TextInput} from "../UIkit";
+import React, {useCallback, useState} from 'react';
 import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from '@material-ui/icons/Delete';
 import { Paper,Typography } from '@material-ui/core';
 import {makeStyles} from "@material-ui/styles";
-import { Box,Button } from "@material-ui/core"
+import { Box } from "@material-ui/core"
 import Grid from '@material-ui/core/Grid';
-import AddIcon from '@material-ui/icons/Add';
-import RemoveIcon from '@material-ui/icons/Remove';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import { QuestionDialog } from "../UIkit"
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
 import EditIcon from '@material-ui/icons/Edit';
 
 const useStyles = makeStyles((theme)=>({
@@ -52,64 +47,6 @@ const CreatedMapItem = (props) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [deletePostItemDialogOpen, setDeletePostItemDialogOpen] = useState(false);
 
-  // const dispatch = useDispatch();
-
-  // const [index, setIndex] = useState(-1),
-  //       [postItem, setPostItem] = useState(""),
-  //       [inputFormOpen, setInputFormOpen] = useState(false),
-  //       [anchorEl, setAnchorEl] = useState(null);
-
-  // useEffect(()=>{
-  //   setIndex(props.postItems.length)
-  // },[props])
-
-  // const inputPostItem = useCallback((event)=>{
-  //   setPostItem(event.target.value)
-  // },[setPostItem]);
-
-  // const handleInputFormOpen = () => {
-  //   setInputFormOpen(true);
-  // };
-
-  // const handleInputFormClose = () => {
-  //   setPostItem("")
-  //   setInputFormOpen(false);
-  // };
-
-  // const addPostItem = (index, postItem) => {
-  //   if (postItem === "") {
-  //     return false
-  //   } else {
-  //     if (index === props.postItems.length) {
-  //       props.setPostItems(prevState => [...prevState, {content:postItem}])
-  //       setIndex(index + 1)
-  //       setPostItem("")
-  //     } else {
-  //       const newPostItems = props.postItems
-  //       newPostItems[index]["content"] = postItem
-  //       props.setPostItems(newPostItems)
-  //       setIndex(newPostItems.length)
-  //       setPostItem("")
-  //     }
-  //     // console.log(props.postItems)
-  //     // dispatch(updatePostItems(props.postId,props.postItems))
-  //     handleInputFormClose()
-  //   }
-  // };
-
-  // const editPostItem = (index,content) => {
-  //   handleInputFormOpen()
-  //   setIndex(index);
-  //   setPostItem(content);
-  //   // console.log(props.postItems)
-  //   // dispatch(updatePostItems(props.postId,props.postItems))
-  // }
-
-  // const deletePostItem = (deleteIndex) => {
-  //   const newPostItems = props.postItems.filter((item,i) => i !== deleteIndex);
-  //   props.setPostItems(newPostItems);
-  // }
-
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -117,11 +54,6 @@ const CreatedMapItem = (props) => {
   const handleClose = () => {
     setAnchorEl(null);
   };
-
-  // const handleDeletePostItem = (i) => {
-  //   props.deletePostItem(i)
-  //   handleClose()
-  // }
 
   const handleDeletePostItemDialogOpen = useCallback(() => {
     setDeletePostItemDialogOpen(true);
@@ -135,7 +67,7 @@ const CreatedMapItem = (props) => {
     <div>
       <Grid container spacing={1} alignItems="center" justify="center">
         <Grid item xs={11}>
-          <Paper variant="outlined" onClick={() => props.editPostItem(props.i,props.item.content)}>
+          <Paper variant="outlined">
             <Typography component="p" className={classes.itemContent}>
               {props.item.content}
             </Typography>

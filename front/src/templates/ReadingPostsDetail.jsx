@@ -1,6 +1,6 @@
 import React, { useState,useCallback,useEffect } from "react";
 import { useSelector, useDispatch } from 'react-redux'
-import { Box,Button,Paper,Typography,Divider } from "@material-ui/core"
+import { Box,Button,Paper,Typography } from "@material-ui/core"
 import { makeStyles } from "@material-ui/styles";
 import { BookCard,SecondaryButton,QuestionDialog } from "../components/UIkit"
 import { deletePost,updateStatusToCompleted,updatePostItems } from "../reducks/posts/operations"
