@@ -68,11 +68,11 @@ const ReadingPostsDetail = () => {
     <Box>
       {isNonEmptyArray(post) ?
         <Box component={Paper} className={classes.root}>
-          <Box p={1} >
+          <Box p={1}>
             <Typography component="h1">
                 現在読書中の書籍
             </Typography>
-            <Box my={3}>
+            <Box mb={4}>
               <BookCard
                 title={post.title}
                 author={post.author}
@@ -81,10 +81,11 @@ const ReadingPostsDetail = () => {
               />
             </Box>
 
-            <Typography component="h2">
-                メンタルマップ
-            </Typography>
-            <Divider />
+            <Box mb={1}>
+              <Typography component="h2">
+                  メンタルマップ
+              </Typography>
+            </Box>
 
             <CreatedMapItemsList postId={post.id} postItems={postItems} setPostItems={setPostItems} />
 

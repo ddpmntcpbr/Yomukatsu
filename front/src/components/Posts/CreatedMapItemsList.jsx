@@ -2,20 +2,24 @@ import React, {useCallback, useEffect, useState} from 'react';
 import {TextInput} from "../UIkit";
 import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from '@material-ui/icons/Delete';
-import { Card,CardContent,Typography } from '@material-ui/core';
+import { Paper,Typography } from '@material-ui/core';
 import {makeStyles} from "@material-ui/styles";
 import { Box,Button } from "@material-ui/core"
 import Grid from '@material-ui/core/Grid';
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
 
 const useStyles = makeStyles((theme)=>({
+  itemContent:{
+    fontSize: "0.8rem",
+    padding: theme.spacing(1)
+  },
   checkIcon: {
     float: "right"
   },
   iconCell: {
-    height: 32,
-    width: 32,
+    fontSize: "1rem",
   },
   inputPostItemArea: {
     display: "flex",
@@ -87,24 +91,24 @@ const CreatedMapItemsList = (props) => {
   }
 
   return (
-    <Box my={2}>
+    <Box>
       { props.postItems.length > 0 && (
           props.postItems.map((item,i) => (
             item.content !== "" && (
-              <Grid container spacing={3} key={i} alignItems="center" justify="center">
-                <Grid item xs={10}>
-                  <Card variant="outlined" onClick={() => editPostItem(i,item.content)}>
-                    <CardContent>
-                      <Typography component="p">
-                        {item.content}
-                      </Typography>
-                    </CardContent>
-                  </Card>
+              <Grid container spacing={1} key={i} alignItems="center" justify="center">
+                <Grid item xs={11}>
+                  <Paper variant="outlined" onClick={() => editPostItem(i,item.content)}>
+                    <Typography component="p" className={classes.itemContent}>
+                      {item.content}
+                    </Typography>
+                  </Paper>
                 </Grid>
-                <Grid item xs={2}>
-                  <IconButton className={classes.iconCell} onClick={() => deletePostItem(i)}>
-                    <DeleteIcon />
-                  </IconButton>
+                <Grid item xs={1}>
+                  <Box textAlign="center" p={0}>
+                    <IconButton onClick={() => deletePostItem(i)} style={{padding: 0}}>
+                      <MoreVertIcon className={classes.iconCell}/>
+                    </IconButton>
+                  </Box>
                 </Grid>
               </Grid>
             )
