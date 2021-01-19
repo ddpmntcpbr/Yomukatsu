@@ -1,5 +1,6 @@
 export {default as CompletedBookDetail} from "./CompletedBookDetail"
 export {default as CompletedPostsList} from "./CompletedPostsList"
+export {default as CreatedMapItem} from "./CreatedMapItem"
 export {default as CreatedMapItemsList} from "./CreatedMapItemsList"
 export {default as MapItemCard} from "./MapItemCard"
 export {default as PostEditDialog} from "./PostEditDialog"
