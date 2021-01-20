@@ -9,7 +9,7 @@ const useStyles = makeStyles((theme)=>({
     color: "white",
     fontWeight: 700,
     height: 48,
-    width: 256,
+    width: "10em",
     '&:hover': {
       background: theme.palette.secondary.light,
    },
