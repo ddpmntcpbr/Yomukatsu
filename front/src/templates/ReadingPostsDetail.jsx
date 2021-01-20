@@ -14,7 +14,7 @@ import { push } from "connected-react-router"
 
 const useStyles = makeStyles((theme)=>({
   root: {
-    backgroundColor: theme.palette.grey[200]
+    backgroundColor: theme.palette.grey[100]
   }
 }))
 
