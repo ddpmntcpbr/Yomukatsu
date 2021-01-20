@@ -204,7 +204,6 @@ export const saveRegisteredPost = (title,url,author,image,postItems) => {
 // postItemsを更新
 export const updatePostItems = (id,initialPostItems,editedPostItems) => {
   return async (dispatch) => {
-
     const initialPostItemsIds = initialPostItems.map((item,index) => {
       return item["id"]
     })

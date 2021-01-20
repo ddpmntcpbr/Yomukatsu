@@ -3,10 +3,9 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Box,Button,Paper,Typography } from "@material-ui/core"
 import { makeStyles } from "@material-ui/styles";
 import { BookCard,SecondaryButton,QuestionDialog } from "../components/UIkit"
-import { deletePost,updateStatusToCompleted,updatePostItems } from "../reducks/posts/operations"
+import { deletePost,updateStatusToCompleted } from "../reducks/posts/operations"
 import {TwitterShareButton,TwitterIcon} from "react-share";
 import DeleteIcon from '@material-ui/icons/Delete';
-import EditIcon from '@material-ui/icons/Edit';
 import { getDateString,isNonEmptyArray } from "../helpers"
 import { getReadingPosts } from "../reducks/posts/selectors"
 import { CreatedPostItemsList } from "../components/Posts"
@@ -29,13 +28,6 @@ const ReadingPostsDetail = () => {
   const [deletePostDialogOpen, setDeletePostDialogOpen] = useState(false);
   const [initialPostItems, setinitialPostItems] = useState([]);
   const [postItems, setPostItems] = useState([]);
-
-  useEffect(()=>{
-    if(isNonEmptyArray(post)){
-      setinitialPostItems(post.post_items)
-      setPostItems(post.post_items);
-    }
-  },[setinitialPostItems,setPostItems,post])
 
   const handleUpdatePostStatusDialogOpen = useCallback(() => {
     setUpdatePostStatusOpen(true);
@@ -63,6 +55,18 @@ const ReadingPostsDetail = () => {
     handleDeletePostDialogClose()
   },[dispatch,handleDeletePostDialogClose,post])
 
+  useEffect(()=>{
+    if(isNonEmptyArray(post)){
+      setinitialPostItems(post.post_items)
+      setPostItems(post.post_items);
+    }
+  },[setinitialPostItems,setPostItems,post])
+
+  // const handleUpdatePostItems = useCallback(()=> {
+  //   console.log("handleUpdatePostItemsのpostItems",postItems)
+  //   // console.log(post.id,[...initialPostItems],[...postItems])
+  //   dispatch(updatePostItems(post.id,[...initialPostItems],[...postItems]))
+  // },[dispatch,post,initialPostItems,postItems])
 
   return (
     <Box>
@@ -87,7 +91,12 @@ const ReadingPostsDetail = () => {
               </Typography>
             </Box>
 
-            <CreatedPostItemsList postId={post.id} postItems={postItems} setPostItems={setPostItems} />
+            <CreatedPostItemsList
+              postId={post.id}
+              initialPostItems={initialPostItems}
+              postItems={postItems}
+              setPostItems={setPostItems}
+            />
 
             <Box>
               <Box display="flex" justifyContent="center" my={4}>
@@ -97,16 +106,6 @@ const ReadingPostsDetail = () => {
                 />
               </Box>
               <Box display="flex" justifyContent="center">
-                <Box my={1}>
-                  <Button
-                    variant="contained"
-                    color="default"
-                    startIcon={<EditIcon />}
-                    onClick={()=>dispatch(updatePostItems(post.id,[...initialPostItems],[...postItems]))}
-                  >
-                    変更を保存
-                  </Button>
-                </Box>
                 <Box m={1}>
                   <Button
                     variant="outlined"

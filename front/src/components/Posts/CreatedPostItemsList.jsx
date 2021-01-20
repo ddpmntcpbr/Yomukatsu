@@ -1,10 +1,12 @@
 import React, {useCallback, useEffect, useState} from 'react';
+import { useDispatch } from 'react-redux'
 import {TextInput} from "../UIkit";
 import {makeStyles} from "@material-ui/styles";
 import { Box,Button } from "@material-ui/core"
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
 import { CreatedPostItem } from "./index"
+import { updatePostItems } from "../../reducks/posts/operations"
 
 const useStyles = makeStyles((theme)=>({
   itemContent:{
@@ -29,6 +31,7 @@ const useStyles = makeStyles((theme)=>({
 
 const CreatedPostItemsList = (props) => {
   const classes = useStyles();
+  const dispatch = useDispatch();
 
   const [index, setIndex] = useState(-1),
         [postItem, setPostItem] = useState(""),
@@ -51,21 +54,24 @@ const CreatedPostItemsList = (props) => {
     setInputFormOpen(false);
   };
 
-  const addPostItem = (index, postItem) => {
+  const addPostItem = async (index, postItem) => {
     if (postItem === "") {
       return false
     } else {
+      let newPostItems = []
       if (index === props.postItems.length) {
-        props.setPostItems(prevState => [...prevState, {content:postItem}])
+        newPostItems = [...props.postItems,{content:postItem}]
+        props.setPostItems(newPostItems)
         setIndex(index + 1)
         setPostItem("")
       } else {
-        const newPostItems = props.postItems
+        newPostItems = props.postItems
         newPostItems[index]["content"] = postItem
         props.setPostItems(newPostItems)
         setIndex(newPostItems.length)
         setPostItem("")
       }
+      dispatch(updatePostItems(props.postId,[...props.initialPostItems],[...newPostItems]))
       handleInputFormClose()
     }
   };
@@ -78,8 +84,9 @@ const CreatedPostItemsList = (props) => {
 
   const deletePostItem = useCallback((deleteIndex) => {
     const newPostItems = props.postItems.filter((item,i) => i !== deleteIndex);
+    dispatch(updatePostItems(props.postId,[...props.initialPostItems],[...newPostItems]))
     props.setPostItems(newPostItems);
-  },[props])
+  },[dispatch,props])
 
   return (
     <Box>
