@@ -9,7 +9,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import { getDateString,isNonEmptyArray } from "../helpers"
 import { getReadingPosts } from "../reducks/posts/selectors"
-import { CreatedMapItemsList } from "../components/Posts"
+import { CreatedPostItemsList } from "../components/Posts"
 import { formatDateString } from "../helpers"
 import { push } from "connected-react-router"
 
@@ -87,7 +87,7 @@ const ReadingPostsDetail = () => {
               </Typography>
             </Box>
 
-            <CreatedMapItemsList postId={post.id} postItems={postItems} setPostItems={setPostItems} />
+            <CreatedPostItemsList postId={post.id} postItems={postItems} setPostItems={setPostItems} />
 
             <Box>
               <Box display="flex" justifyContent="center" my={4}>

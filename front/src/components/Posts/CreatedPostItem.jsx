@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme)=>({
   }
 }))
 
-const CreatedMapItem = (props) => {
+const CreatedPostItem = (props) => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [deletePostItemDialogOpen, setDeletePostItemDialogOpen] = useState(false);
@@ -132,4 +132,4 @@ const CreatedMapItem = (props) => {
   )
 }
 
-export default CreatedMapItem
+export default CreatedPostItem
