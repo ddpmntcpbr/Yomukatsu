@@ -84,7 +84,7 @@ const PostEdit = () => {
     <Box mb={2}>
       <Box component={Paper} p={2} className={classes.paper}>
         <Typography component="h1">
-          <Box fontWeight="fontWeightBold" fontSize="1.5rem" mb={4} textAlign="center">
+          <Box fontWeight="fontWeightBold" fontSize="1.5rem" mb={2} textAlign="center">
             新規登録
           </Box>
         </Typography>
