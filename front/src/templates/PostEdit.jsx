@@ -4,7 +4,7 @@ import IconButton from "@material-ui/core/IconButton";
 import SearchIcon from "@material-ui/icons/Search";
 import {makeStyles} from "@material-ui/styles";
 import axios from "axios";
-import {PostEditDialog,SearchResultDialog,SetMapArea} from "../components/Posts";
+import {PostEditDialog,SearchResultDialog,EditPostItemsList} from "../components/Posts";
 import {Box,Grid,Typography,Paper} from "@material-ui/core";
 import {saveReadingPost,saveRegisteredPost} from "../reducks/posts/operations";
 import {useDispatch} from "react-redux";
@@ -30,7 +30,7 @@ const PostEdit = () => {
   const [author, setAuthor] = useState("");
   const [image, setImage] = useState("");
   const [url,setUrl] = useState("#");
-  const [mapItems, setMapItems] = useState([]);
+  const [postItems, setPostItems] = useState([]);
 
   const inputQuery = useCallback((event) => {
     setQuery(event.target.value)
@@ -72,22 +72,28 @@ const PostEdit = () => {
   };
 
   const handleSaveReadingPost = useCallback(() => {
-    dispatch(saveReadingPost(title,url,author,image,mapItems))
-  },[dispatch,title,url,author,image,mapItems])
+    console.log(title,url,author,image,postItems)
+    dispatch(saveReadingPost(title,url,author,image,postItems))
+  },[dispatch,title,url,author,image,postItems])
 
   const handleSaveRegisteredPost = useCallback(() => {
-    dispatch(saveRegisteredPost(title,url,author,image,mapItems))
-  },[dispatch,title,url,author,image,mapItems])
+    dispatch(saveRegisteredPost(title,url,author,image,postItems))
+  },[dispatch,title,url,author,image,postItems])
 
   return (
-    <div>
+    <Box mb={2}>
       <Box component={Paper} p={2} className={classes.paper}>
         <Typography component="h1">
-          <Box fontWeight="fontWeightBold">
-            書籍登録
+          <Box fontWeight="fontWeightBold" fontSize="1.5rem" mb={2} textAlign="center">
+            新規登録
           </Box>
         </Typography>
-        <Box className={classes.searchField} mb={2}>
+        <Typography component="h2">
+          <Box fontSize="1.2rem">
+            書籍検索
+          </Box>
+        </Typography>
+        <Box className={classes.searchField} mb={1}>
           <Grid container>
             <Grid item xs={10}>
               <TextInput
@@ -116,21 +122,20 @@ const PostEdit = () => {
             image={image}
           />
         ):(
-          <Typography>
+          <Box fontSize="0.8rem" style={{height: 150}}>
             登録したい書籍を検索してください。
-          </Typography>
+          </Box>
         )}
 
-
-        <Box style={{height:24}}/>
         <Typography component="h2">
-          <Box fontWeight="fontWeightBold">
+          <Box fontSize="1.2rem" mt={4}>
             メンタルマップ
           </Box>
         </Typography>
-        <SetMapArea mapItems={mapItems} setMapItems={setMapItems}  />
 
-        <Box textAlign="center" mt={8}>
+        <EditPostItemsList postItems={postItems} setPostItems={setPostItems}  />
+
+        <Box textAlign="center" mt={4}>
           <SecondaryButton
             label="登録!"
             onClick={handleSaveModalOpen}
@@ -146,7 +151,7 @@ const PostEdit = () => {
         title="さっそく読み始めますか？"
         contentText="読書中の設定は後からでも変更できます"
       />
-    </div>
+    </Box>
   );
 };
 

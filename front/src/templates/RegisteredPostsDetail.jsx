@@ -1,30 +1,33 @@
 import React, { useEffect,useState,useCallback } from "react";
 import { useSelector, useDispatch } from 'react-redux'
-import { Box,Button,Card,CardContent,Paper,Typography,Divider } from "@material-ui/core"
+import { Box,Button,Paper,Typography } from "@material-ui/core"
 import { makeStyles } from "@material-ui/styles";
 import { BookCard,SecondaryButton,QuestionDialog } from "../components/UIkit"
 import { deletePost, exchangeRegisteredAndReadingPost,updateStatusToCompleted } from "../reducks/posts/operations"
 import {TwitterShareButton,TwitterIcon} from "react-share";
 import { push } from "connected-react-router";
 import DeleteIcon from '@material-ui/icons/Delete';
-import EditIcon from '@material-ui/icons/Edit';
 import { getDateString,isNonEmptyArray } from "../helpers"
 import { getRegisteredPosts } from "../reducks/posts/selectors"
-import { fetchSharePost } from "../reducks/sharePosts/operations"
+// import { fetchSharePost } from "../reducks/sharePosts/operations"
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import { formatDateString } from "../helpers"
+import { CreatedPostItemsList } from "../components/Posts"
 
 const useStyles = makeStyles((theme)=>({
+  root: {
+    backgroundColor: theme.palette.grey[100]
+  },
   goBack: {
     cursor: "pointer",
     transition: "0.2s",
     '&:hover': {
-      backgroundColor: theme.palette.grey[200],
+      backgroundColor: theme.palette.grey[300],
     }
   }
 }))
 
-const RegisteredPostsDetail = (props) => {
+const RegisteredPostsDetail = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const selector = useSelector((state)=>state);
@@ -34,10 +37,8 @@ const RegisteredPostsDetail = (props) => {
   const post = posts.find((v) => v.id===Number(id))
   const [updatePostStatusOpen, setUpdatePostStatusOpen] = useState(false);
   const [deletePostDialogOpen, setDeletePostDialogOpen] = useState(false);
-
-  useEffect(()=>{
-    dispatch(fetchSharePost(id))
-  },[dispatch,id])
+  const [initialPostItems, setinitialPostItems] = useState([]);
+  const [postItems, setPostItems] = useState([]);
 
   const handleUpdatePostStatusDialogOpen = useCallback(() => {
     setUpdatePostStatusOpen(true);
@@ -65,11 +66,18 @@ const RegisteredPostsDetail = (props) => {
     handleDeletePostDialogClose()
   },[dispatch,handleDeletePostDialogClose,post])
 
+  useEffect(()=>{
+    if(isNonEmptyArray(post)){
+      // dispatch(fetchSharePost(id))
+      setinitialPostItems(post.post_items)
+      setPostItems(post.post_items);
+    }
+  },[dispatch,setinitialPostItems,setPostItems,post,id])
+
   return (
-    <Box>
+    <Box mb={2}>
       {isNonEmptyArray(post) ?
-        <Box>
-          <Paper>
+        <Box component={Paper} className={classes.root}>
             <Box p={1} >
               <Box my={1} display="flex">
                 <Box
@@ -81,13 +89,12 @@ const RegisteredPostsDetail = (props) => {
                 </Box>
                 <Box/>
               </Box>
-              <Typography component="h3">
-                <Box fontSize="1.5rem" fontWeight="fontWeightBold">
-                  書籍情報
-                </Box>
-              </Typography>
-              <Divider />
-              <Box my={3}>
+              <Typography component="h2">
+              <Box fontSize="1rem">
+                書籍情報
+              </Box>
+            </Typography>
+              <Box mb={4}>
                 <BookCard
                   title={post.title}
                   author={post.author}
@@ -96,89 +103,70 @@ const RegisteredPostsDetail = (props) => {
                 />
               </Box>
 
-              <Typography component="h3">
-                <Box fontSize="1.5rem" fontWeight="fontWeightBold">
-                  メンタルマップ
-                </Box>
-              </Typography>
-              <Divider />
+              <Typography component="h2">
+              <Box fontSize="1rem">
+                メンタルマップ
+              </Box>
+            </Typography>
 
-              <Box>
-                {isNonEmptyArray(post.post_items) ? post.post_items.map(mapItem => (
-                  <Box key={mapItem.id} my={2} >
-                    <Card className={classes.mapItem} variant="outlined">
-                      <CardContent>
-                        <Typography component="p">
-                          {mapItem.content}
-                        </Typography>
-                      </CardContent>
-                    </Card>
-                  </Box>
-                )) :
-                  <Typography>マップアイテムがありません</Typography>
-                }
+            <CreatedPostItemsList
+              postId={post.id}
+              initialPostItems={initialPostItems}
+              postItems={postItems}
+              setPostItems={setPostItems}
+            />
+
+            <Box>
+              <Box display="flex" justifyContent="space-between" my={4}>
+                <Box>
+                  <SecondaryButton
+                    label="読書中にセット"
+                    onClick={() => dispatch(exchangeRegisteredAndReadingPost(id))}
+                    width={256}
+                  />
+                </Box>
+                <Box>
+                  <SecondaryButton
+                    label="完読した!"
+                    onClick={handleUpdatePostStatusDialogOpen}
+                  />
+                </Box>
+              </Box>
+              <Box display="flex" justifyContent="center">
+                <Box m={1}>
+                  <Button
+                    variant="outlined"
+                    color="default"
+                    startIcon={<DeleteIcon />}
+                    onClick={handleDeletePostClickOpen}
+                  >
+                    削除
+                  </Button>
+                </Box>
               </Box>
 
-              <Box>
-                <Box my={4}>
-                  <Box>
-                    <SecondaryButton
-                      label="カレントブックに登録"
-                      onClick={() => dispatch(exchangeRegisteredAndReadingPost(id))}
-                    />
-                  </Box>
-                  <Box>
-                    <SecondaryButton
-                      label="完読した!"
-                      onClick={handleUpdatePostStatusDialogOpen}
-                    />
-                  </Box>
-                  <Box>
-                    <SecondaryButton
-                      label="Share"
-                      onClick={()=>dispatch(push("/share/posts/" + id))}
-                    />
-                  </Box>
-                </Box>
-                <Box display="flex" justifyContent="center">
-                  <Box my={1}>
-                    <Button variant="contained" color="default" startIcon={<EditIcon />}>
-                      編集
-                    </Button>
-                  </Box>
-                  <Box m={1}>
-                    <Button
-                      variant="outlined"
-                      color="default"
-                      startIcon={<DeleteIcon />}
-                      onClick={handleDeletePostClickOpen}
-                    >
-                      削除
-                    </Button>
-                  </Box>
-                </Box>
+              <QuestionDialog
+                open={updatePostStatusOpen}
+                handleClose={handleUpdatePostStatusDialogClose}
+                handleEvent={handleUpdatePostStatus}
+                title="完読にしてよろしいですか？"
+                contentText="一度完読にしたアイテムは、元には戻せません"
+              />
 
-                <QuestionDialog
-                  open={updatePostStatusOpen}
-                  handleClose={handleUpdatePostStatusDialogClose}
-                  handleEvent={handleUpdatePostStatus}
-                  title="完読にしてよろしいですか？"
-                  contentText="一度完読にしたアイテムは、元には戻せません"
-                />
-
-                <QuestionDialog
-                  open={deletePostDialogOpen}
-                  handleClose={handleDeletePostDialogClose}
-                  handleEvent={handleDeletePost}
-                  title="本当に削除よろしいですか？"
-                  contentText="一度削除したアイテムは、元には戻せません"
-                />
-              </Box>
-              <TwitterShareButton url={process.env.REACT_APP_BASE_URL + "/share/posts/" + post.id + "?" + getDateString()} title={"今から『"+ post.title +"』を読みます！\n\n#yomukatsu\n\n"}>
-                <TwitterIcon size={64} round />
-              </TwitterShareButton>
+              <QuestionDialog
+                open={deletePostDialogOpen}
+                handleClose={handleDeletePostDialogClose}
+                handleEvent={handleDeletePost}
+                title="本当に削除よろしいですか？"
+                contentText="一度削除したアイテムは、元には戻せません"
+              />
             </Box>
-          </Paper>
+
+            <TwitterShareButton url={process.env.REACT_APP_BASE_URL + "/share/posts/" + post.id + "?" + getDateString()} title={"今から『"+ post.title +"』を読みます！\n\n#yomukatsu\n\n"}>
+              <TwitterIcon size={64} round />
+            </TwitterShareButton>
+
+          </Box>
         </Box>
       :
         <></>

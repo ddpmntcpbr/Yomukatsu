@@ -3,19 +3,18 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Box,Button,Paper,Typography } from "@material-ui/core"
 import { makeStyles } from "@material-ui/styles";
 import { BookCard,SecondaryButton,QuestionDialog } from "../components/UIkit"
-import { deletePost,updateStatusToCompleted,updatePostItems } from "../reducks/posts/operations"
+import { deletePost,updateStatusToCompleted } from "../reducks/posts/operations"
 import {TwitterShareButton,TwitterIcon} from "react-share";
 import DeleteIcon from '@material-ui/icons/Delete';
-import EditIcon from '@material-ui/icons/Edit';
 import { getDateString,isNonEmptyArray } from "../helpers"
 import { getReadingPosts } from "../reducks/posts/selectors"
-import { CreatedMapItemsList } from "../components/Posts"
+import { CreatedPostItemsList } from "../components/Posts"
 import { formatDateString } from "../helpers"
 import { push } from "connected-react-router"
 
 const useStyles = makeStyles((theme)=>({
   root: {
-    backgroundColor: theme.palette.grey[200]
+    backgroundColor: theme.palette.grey[100]
   }
 }))
 
@@ -29,13 +28,6 @@ const ReadingPostsDetail = () => {
   const [deletePostDialogOpen, setDeletePostDialogOpen] = useState(false);
   const [initialPostItems, setinitialPostItems] = useState([]);
   const [postItems, setPostItems] = useState([]);
-
-  useEffect(()=>{
-    if(isNonEmptyArray(post)){
-      setinitialPostItems(post.post_items)
-      setPostItems(post.post_items);
-    }
-  },[setinitialPostItems,setPostItems,post])
 
   const handleUpdatePostStatusDialogOpen = useCallback(() => {
     setUpdatePostStatusOpen(true);
@@ -63,14 +55,27 @@ const ReadingPostsDetail = () => {
     handleDeletePostDialogClose()
   },[dispatch,handleDeletePostDialogClose,post])
 
+  useEffect(()=>{
+    if(isNonEmptyArray(post)){
+      setinitialPostItems(post.post_items)
+      setPostItems(post.post_items);
+    }
+  },[setinitialPostItems,setPostItems,post])
 
   return (
-    <Box>
+    <Box mb={2}>
       {isNonEmptyArray(post) ?
         <Box component={Paper} className={classes.root}>
           <Box p={1}>
             <Typography component="h1">
+              <Box fontWeight="fontWeightBold" fontSize="1.5rem" mb={2} textAlign="center">
                 現在読書中の書籍
+              </Box>
+            </Typography>
+            <Typography component="h2">
+              <Box fontSize="1rem">
+                書籍情報
+              </Box>
             </Typography>
             <Box mb={4}>
               <BookCard
@@ -81,13 +86,18 @@ const ReadingPostsDetail = () => {
               />
             </Box>
 
-            <Box mb={1}>
-              <Typography component="h2">
-                  メンタルマップ
-              </Typography>
-            </Box>
+            <Typography component="h2">
+              <Box fontSize="1rem">
+                メンタルマップ
+              </Box>
+            </Typography>
 
-            <CreatedMapItemsList postId={post.id} postItems={postItems} setPostItems={setPostItems} />
+            <CreatedPostItemsList
+              postId={post.id}
+              initialPostItems={initialPostItems}
+              postItems={postItems}
+              setPostItems={setPostItems}
+            />
 
             <Box>
               <Box display="flex" justifyContent="center" my={4}>
@@ -97,16 +107,6 @@ const ReadingPostsDetail = () => {
                 />
               </Box>
               <Box display="flex" justifyContent="center">
-                <Box my={1}>
-                  <Button
-                    variant="contained"
-                    color="default"
-                    startIcon={<EditIcon />}
-                    onClick={()=>dispatch(updatePostItems(post.id,[...initialPostItems],[...postItems]))}
-                  >
-                    変更を保存
-                  </Button>
-                </Box>
                 <Box m={1}>
                   <Button
                     variant="outlined"
@@ -141,8 +141,10 @@ const ReadingPostsDetail = () => {
           </Box>
         </Box>
       :
-      <Box>
-        <Typography>現在読書中の書籍はありません</Typography>
+      <Box textAlign="center">
+        <Box p={2}>
+          <Typography>現在読書中の書籍はありません</Typography>
+        </Box>
         <SecondaryButton
           label="新規登録する"
           onClick={()=>dispatch(push("/posts/edit"))}

@@ -112,13 +112,13 @@ export const initialFetchPosts = () => {
 }
 
 // reading posts として書籍情報を新規登録
-export const saveReadingPost = (title,url,author,image,mapItems) => {
+export const saveReadingPost = (title,url,author,image,postItems) => {
   return async (dispatch) => {
     dispatch(showLoadingAction("カレントブックとして登録中..."))
 
     const post_items_attributes = []
-    mapItems.map((mapItem) => (
-      post_items_attributes.push({"content":mapItem.mapItem})
+    postItems.map((postItem) => (
+      post_items_attributes.push({"content":postItem.content})
     ))
 
     const data = {
@@ -161,14 +161,14 @@ export const saveReadingPost = (title,url,author,image,mapItems) => {
 }
 
 // registered posts として書籍情報を新規登録
-export const saveRegisteredPost = (title,url,author,image,mapItems) => {
+export const saveRegisteredPost = (title,url,author,image,postItems) => {
   return async (dispatch) => {
     dispatch(showLoadingAction("書籍登録中..."))
 
     const post_items_attributes = []
 
-    mapItems.map((mapItem) => (
-      post_items_attributes.push({"content":mapItem.mapItem})
+    postItems.map((postItem) => (
+      post_items_attributes.push({"content":postItem.content})
     ))
 
     const data = {
@@ -204,7 +204,6 @@ export const saveRegisteredPost = (title,url,author,image,mapItems) => {
 // postItemsを更新
 export const updatePostItems = (id,initialPostItems,editedPostItems) => {
   return async (dispatch) => {
-
     const initialPostItemsIds = initialPostItems.map((item,index) => {
       return item["id"]
     })

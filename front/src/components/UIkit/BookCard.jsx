@@ -11,7 +11,7 @@ import {
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
-    height: 100,
+    height: 150,
   },
   details: {
     flex: 1,
@@ -20,8 +20,8 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(1)
   },
   cover: {
-    width: 75,
-    heiht: 100,
+    width: 100,
+    heiht: 150,
   }
 }));
 
@@ -32,14 +32,14 @@ const BookCard = (props) => {
     <Card className={classes.root} variant="outlined">
       <Image
         src={props.image}
-        width={75}
-        height={100}
+        width={100}
+        height={150}
       />
 
       <Box className={classes.details}>
         <CardContent className={classes.cardContent}>
           <Typography component="h6">
-            <Box fontSize="0.85rem" mb={2}>
+            <Box fontSize="0.8rem" mb={1} fontWeight="fontWeightBold">
               {props.title}
             </Box>
             <Box fontSize="0.70rem">

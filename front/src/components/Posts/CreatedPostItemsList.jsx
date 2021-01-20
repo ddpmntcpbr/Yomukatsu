@@ -1,10 +1,12 @@
 import React, {useCallback, useEffect, useState} from 'react';
+import { useDispatch } from 'react-redux'
 import {TextInput} from "../UIkit";
 import {makeStyles} from "@material-ui/styles";
 import { Box,Button } from "@material-ui/core"
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
-import { CreatedMapItem } from "./index"
+import { CreatedPostItem } from "./index"
+import { updatePostItems } from "../../reducks/posts/operations"
 
 const useStyles = makeStyles((theme)=>({
   itemContent:{
@@ -27,8 +29,9 @@ const useStyles = makeStyles((theme)=>({
   }
 }))
 
-const CreatedMapItemsList = (props) => {
+const CreatedPostItemsList = (props) => {
   const classes = useStyles();
+  const dispatch = useDispatch();
 
   const [index, setIndex] = useState(-1),
         [postItem, setPostItem] = useState(""),
@@ -51,21 +54,24 @@ const CreatedMapItemsList = (props) => {
     setInputFormOpen(false);
   };
 
-  const addPostItem = (index, postItem) => {
+  const addPostItem = async (index, postItem) => {
     if (postItem === "") {
       return false
     } else {
+      let newPostItems = []
       if (index === props.postItems.length) {
-        props.setPostItems(prevState => [...prevState, {content:postItem}])
+        newPostItems = [...props.postItems,{content:postItem}]
+        props.setPostItems(newPostItems)
         setIndex(index + 1)
         setPostItem("")
       } else {
-        const newPostItems = props.postItems
+        newPostItems = props.postItems
         newPostItems[index]["content"] = postItem
         props.setPostItems(newPostItems)
         setIndex(newPostItems.length)
         setPostItem("")
       }
+      dispatch(updatePostItems(props.postId,[...props.initialPostItems],[...newPostItems]))
       handleInputFormClose()
     }
   };
@@ -78,15 +84,16 @@ const CreatedMapItemsList = (props) => {
 
   const deletePostItem = useCallback((deleteIndex) => {
     const newPostItems = props.postItems.filter((item,i) => i !== deleteIndex);
+    dispatch(updatePostItems(props.postId,[...props.initialPostItems],[...newPostItems]))
     props.setPostItems(newPostItems);
-  },[props])
+  },[dispatch,props])
 
   return (
     <Box>
       { props.postItems.length > 0 && (
           props.postItems.map((item,i) => (
             item.content !== "" && (
-              <CreatedMapItem key={i} i={i} item={item} editPostItem={editPostItem} deletePostItem={deletePostItem} />
+              <CreatedPostItem key={i} i={i} item={item} editPostItem={editPostItem} deletePostItem={deletePostItem} />
             )
           ))
       )}
@@ -144,4 +151,4 @@ const CreatedMapItemsList = (props) => {
   )
 }
 
-export default CreatedMapItemsList
+export default CreatedPostItemsList

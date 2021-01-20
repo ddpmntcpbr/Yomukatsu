@@ -1,23 +1,27 @@
-import React, { useState,useCallback } from "react";
-import { useSelector,useDispatch } from 'react-redux'
-import { Box,Button,Card,CardContent,Paper,Typography,Divider } from "@material-ui/core"
+import React, { useEffect,useState,useCallback } from "react";
+import { useSelector, useDispatch } from 'react-redux'
+import { Box,Button,Paper,Typography } from "@material-ui/core"
 import { makeStyles } from "@material-ui/styles";
 import { BookCard,QuestionDialog } from "../components/UIkit"
+import { deletePost } from "../reducks/posts/operations"
 import {TwitterShareButton,TwitterIcon} from "react-share";
+import { push } from "connected-react-router";
 import DeleteIcon from '@material-ui/icons/Delete';
 import { getDateString,isNonEmptyArray } from "../helpers"
 import { getCompletedPosts } from "../reducks/posts/selectors"
-import { deletePost } from "../reducks/posts/operations"
-import { push } from "connected-react-router";
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import { formatDateString } from "../helpers"
+import { CreatedPostItemsList } from "../components/Posts"
 
 const useStyles = makeStyles((theme)=>({
+  root: {
+    backgroundColor: theme.palette.grey[100]
+  },
   goBack: {
     cursor: "pointer",
     transition: "0.2s",
     '&:hover': {
-      backgroundColor: theme.palette.grey[200],
+      backgroundColor: theme.palette.grey[300],
     }
   }
 }))
@@ -28,9 +32,11 @@ const CompletedPostsDetail = () => {
   const selector = useSelector((state)=>state);
   const posts = getCompletedPosts(selector);
   const path = selector.router.location.pathname;
-  const id = Number(path.split("/completed/posts/")[1]);
-  const post = posts.find((v) => v.id===id)
+  const id = path.split("/completed/posts/")[1];
+  const post = posts.find((v) => v.id===Number(id))
   const [deletePostDialogOpen, setDeletePostDialogOpen] = useState(false);
+  const [initialPostItems, setinitialPostItems] = useState([]);
+  const [postItems, setPostItems] = useState([]);
 
   const handleDeletePostClickOpen = useCallback(() => {
     setDeletePostDialogOpen(true);
@@ -45,59 +51,56 @@ const CompletedPostsDetail = () => {
     handleDeletePostDialogClose()
   },[dispatch,handleDeletePostDialogClose,post])
 
-  return (
-    <Box>
-      {isNonEmptyArray(post) ?
-      <Box>
-        <Paper>
-          <Box p={1}>
-            <Box my={1} display="flex">
-              <Box
-                p={1} display="flex" className={classes.goBack}
-                onClick={()=>dispatch(push("/posts/list"))}
-              >
-                <ArrowBackIosIcon/>
-                <Typography>登録リストに戻る</Typography>
-              </Box>
-              <Box/>
-            </Box>
+  useEffect(()=>{
+    if(isNonEmptyArray(post)){
+      // dispatch(fetchSharePost(id))
+      setinitialPostItems(post.post_items)
+      setPostItems(post.post_items);
+    }
+  },[dispatch,setinitialPostItems,setPostItems,post,id])
 
-            <Typography component="h3">
-              <Box fontSize="1.5rem" fontWeight="fontWeightBold">
+  return (
+    <Box mb={2}>
+      {isNonEmptyArray(post) ?
+        <Box component={Paper} className={classes.root}>
+            <Box p={1} >
+              <Box my={1} display="flex">
+                <Box
+                  p={1} display="flex" className={classes.goBack}
+                  onClick={()=>dispatch(push("/posts/list"))}
+                >
+                  <ArrowBackIosIcon/>
+                  <Typography>登録リストに戻る</Typography>
+                </Box>
+                <Box/>
+              </Box>
+              <Typography component="h2">
+              <Box fontSize="1rem">
                 書籍情報
               </Box>
             </Typography>
-            <Divider />
-            <Box my={3}>
-              <BookCard
-                title={post.title}
-                author={post.author}
-                image={post.image}
-                created_at={formatDateString(post.created_at)}
-              />
-            </Box>
+              <Box mb={4}>
+                <BookCard
+                  title={post.title}
+                  author={post.author}
+                  image={post.image}
+                  created_at={formatDateString(post.created_at)}
+                />
+              </Box>
 
-            <Typography component="h3">
-              <Box fontSize="1.5rem" fontWeight="fontWeightBold">
+              <Typography component="h2">
+              <Box fontSize="1rem">
                 メンタルマップ
               </Box>
             </Typography>
-            <Divider />
-            <Box>
-              {isNonEmptyArray(post.post_items) ? post.post_items.map(mapItem => (
-                <Box key={mapItem.id} my={2} >
-                  <Card className={classes.mapItem} variant="outlined">
-                    <CardContent>
-                      <Typography component="p">
-                        {mapItem.content}
-                      </Typography>
-                    </CardContent>
-                  </Card>
-                </Box>
-              )) :
-                <Typography>マップアイテムがありません</Typography>
-              }
-            </Box>
+
+            <CreatedPostItemsList
+              postId={post.id}
+              initialPostItems={initialPostItems}
+              postItems={postItems}
+              setPostItems={setPostItems}
+            />
+
             <Box>
               <Box display="flex" justifyContent="center">
                 <Box m={1}>
@@ -112,24 +115,24 @@ const CompletedPostsDetail = () => {
                 </Box>
               </Box>
 
-            <QuestionDialog
+              <QuestionDialog
                 open={deletePostDialogOpen}
                 handleClose={handleDeletePostDialogClose}
                 handleEvent={handleDeletePost}
                 title="本当に削除よろしいですか？"
                 contentText="一度削除したアイテムは、元には戻せません"
               />
-
             </Box>
-            <TwitterShareButton url={process.env.REACT_APP_BASE_URL + "/share/posts/" + post.id + "?" + getDateString()} title={`『`+ post.title +`』を完読しました！\n\n#yomukatsu\n\n`}>
+
+            <TwitterShareButton url={process.env.REACT_APP_BASE_URL + "/share/posts/" + post.id + "?" + getDateString()} title={"『"+ post.title +"』を完読しました！\n\n#yomukatsu\n\n"}>
               <TwitterIcon size={64} round />
             </TwitterShareButton>
+
           </Box>
-        </Paper>
-      </Box>
-    :
-      <></>
-    }
+        </Box>
+      :
+        <></>
+      }
     </Box>
   )
 }

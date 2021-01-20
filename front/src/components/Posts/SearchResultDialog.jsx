@@ -27,6 +27,7 @@ const SearchResultDialog = (props) => {
       onClose={props.handleClose}
       aria-labelledby="alert-dialog-title"
       aria-describedby="alert-dialog-description"
+      style={{maxHeight: "90%"}}
     >
       <DialogTitle id="alert-dialog-title">{"検索結果"}</DialogTitle>
       <DialogContent>
