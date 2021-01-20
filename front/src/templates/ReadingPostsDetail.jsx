@@ -69,7 +69,7 @@ const ReadingPostsDetail = () => {
   // },[dispatch,post,initialPostItems,postItems])
 
   return (
-    <Box>
+    <Box mb={2}>
       {isNonEmptyArray(post) ?
         <Box component={Paper} className={classes.root}>
           <Box p={1}>
