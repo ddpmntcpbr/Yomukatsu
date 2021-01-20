@@ -62,12 +62,6 @@ const ReadingPostsDetail = () => {
     }
   },[setinitialPostItems,setPostItems,post])
 
-  // const handleUpdatePostItems = useCallback(()=> {
-  //   console.log("handleUpdatePostItemsのpostItems",postItems)
-  //   // console.log(post.id,[...initialPostItems],[...postItems])
-  //   dispatch(updatePostItems(post.id,[...initialPostItems],[...postItems]))
-  // },[dispatch,post,initialPostItems,postItems])
-
   return (
     <Box mb={2}>
       {isNonEmptyArray(post) ?
