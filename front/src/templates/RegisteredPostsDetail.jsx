@@ -9,7 +9,7 @@ import { push } from "connected-react-router";
 import DeleteIcon from '@material-ui/icons/Delete';
 import { getDateString,isNonEmptyArray } from "../helpers"
 import { getRegisteredPosts } from "../reducks/posts/selectors"
-import { fetchSharePost } from "../reducks/sharePosts/operations"
+// import { fetchSharePost } from "../reducks/sharePosts/operations"
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import { formatDateString } from "../helpers"
 import { CreatedPostItemsList } from "../components/Posts"
@@ -68,7 +68,7 @@ const RegisteredPostsDetail = () => {
 
   useEffect(()=>{
     if(isNonEmptyArray(post)){
-      dispatch(fetchSharePost(id))
+      // dispatch(fetchSharePost(id))
       setinitialPostItems(post.post_items)
       setPostItems(post.post_items);
     }
