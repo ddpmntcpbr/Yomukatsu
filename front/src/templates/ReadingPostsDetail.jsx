@@ -68,7 +68,14 @@ const ReadingPostsDetail = () => {
         <Box component={Paper} className={classes.root}>
           <Box p={1}>
             <Typography component="h1">
+              <Box fontWeight="fontWeightBold" fontSize="1.5rem" mb={2} textAlign="center">
                 現在読書中の書籍
+              </Box>
+            </Typography>
+            <Typography component="h2">
+              <Box fontSize="1rem">
+                書籍情報
+              </Box>
             </Typography>
             <Box mb={4}>
               <BookCard
@@ -79,11 +86,11 @@ const ReadingPostsDetail = () => {
               />
             </Box>
 
-            <Box mb={1}>
-              <Typography component="h2">
-                  メンタルマップ
-              </Typography>
-            </Box>
+            <Typography component="h2">
+              <Box fontSize="1rem">
+                メンタルマップ
+              </Box>
+            </Typography>
 
             <CreatedPostItemsList
               postId={post.id}
