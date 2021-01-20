@@ -4,7 +4,7 @@ import {makeStyles} from "@material-ui/styles";
 import { Box,Button } from "@material-ui/core"
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
-import { CreatedPostItem } from "./index"
+import { EditPostItem } from "./index"
 
 const useStyles = makeStyles((theme)=>({
   itemContent:{
@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme)=>({
   }
 }))
 
-const SetMapArea = (props) => {
+const EditPostItemsList = (props) => {
   const classes = useStyles();
 
   const [index, setIndex] = useState(0),
@@ -82,7 +82,7 @@ const SetMapArea = (props) => {
       { props.postItems.length > 0 && (
           props.postItems.map((item,i) => (
             item.content !== "" && (
-              <CreatedPostItem key={i} i={i} item={item} editPostItem={editPostItem} deletePostItem={deletePostItem} />
+              <EditPostItem key={i} i={i} item={item} editPostItem={editPostItem} deletePostItem={deletePostItem} />
             )
           ))
       )}
@@ -140,4 +140,4 @@ const SetMapArea = (props) => {
   )
 }
 
-export default SetMapArea
+export default EditPostItemsList

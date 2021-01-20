@@ -4,7 +4,7 @@ import IconButton from "@material-ui/core/IconButton";
 import SearchIcon from "@material-ui/icons/Search";
 import {makeStyles} from "@material-ui/styles";
 import axios from "axios";
-import {PostEditDialog,SearchResultDialog,SetMapArea} from "../components/Posts";
+import {PostEditDialog,SearchResultDialog,EditPostItemsList} from "../components/Posts";
 import {Box,Grid,Typography,Paper} from "@material-ui/core";
 import {saveReadingPost,saveRegisteredPost} from "../reducks/posts/operations";
 import {useDispatch} from "react-redux";
@@ -132,7 +132,8 @@ const PostEdit = () => {
             メンタルマップ
           </Box>
         </Typography>
-        <SetMapArea postItems={postItems} setPostItems={setPostItems}  />
+
+        <EditPostItemsList postItems={postItems} setPostItems={setPostItems}  />
 
         <Box textAlign="center" mt={4}>
           <SecondaryButton
