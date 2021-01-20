@@ -141,8 +141,10 @@ const ReadingPostsDetail = () => {
           </Box>
         </Box>
       :
-      <Box>
-        <Typography>現在読書中の書籍はありません</Typography>
+      <Box textAlign="center">
+        <Box p={2}>
+          <Typography>現在読書中の書籍はありません</Typography>
+        </Box>
         <SecondaryButton
           label="新規登録する"
           onClick={()=>dispatch(push("/posts/edit"))}
