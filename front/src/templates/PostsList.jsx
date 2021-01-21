@@ -7,6 +7,7 @@ import { RegisteredPostsList,CompletedPostsList } from "../components/Posts"
 
 const useStyles = makeStyles((theme)=>({
   root: {
+    backgroundColor: theme.palette.grey[100]
   }
 }))
 
@@ -21,8 +22,8 @@ const PostsList = () => {
   };
 
   return (
-    <Box className={classes.root}>
-      <Paper>
+    <Box mb={2}>
+      <Paper className={classes.root} >
         <Tabs value={selectedTab} variant="fullWidth" onChange={handleChange}>
           <Tab label="登録のみ" />
           <Tab label="完読済み" />
