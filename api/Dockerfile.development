@@ -3,7 +3,8 @@ RUN apt-get update -qq && apt-get -y install \
     build-essential \
     libpq-dev \
     nodejs \
-    graphviz
+    graphviz \
+    imagemagick
 RUN mkdir /myapp
 WORKDIR /myapp
 COPY Gemfile /myapp/Gemfile
