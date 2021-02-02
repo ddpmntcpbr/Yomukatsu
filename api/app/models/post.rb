@@ -6,6 +6,7 @@ class Post < ApplicationRecord
   validates :title, presence: true
   enum status: { reading: "reading", registered: "registered", completed: "completed" }
   validate :up_to_one_reading_status_post_per_user, on: :create
+  mount_uploader :twitter_card_image, ImageUploader
 
   private
 
