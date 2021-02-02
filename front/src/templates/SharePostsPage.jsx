@@ -8,7 +8,6 @@ import { isNonEmptyArray } from "../helpers"
 import { getSharePosts } from "../reducks/sharePosts/selectors"
 import { fetchSharePost } from "../reducks/sharePosts/operations";
 import { push } from "connected-react-router";
-import {TwitterShareButton,TwitterIcon} from "react-share";
 
 
 // const useStyles = makeStyles((theme)=>({
@@ -36,9 +35,9 @@ const SharePostsPage = () => {
       <Box>
         <Helmet
           meta={[
-            {name: "twitter:card", content: "summary"},
-            {name: "twitter:image", content: post.image},
-            {name: "twitter:title", content: "Yomukatsu!"},
+            {name: "twitter:card", content: "summary_large_image"},
+            {name: "twitter:image", content: post.twitter_card_image.url},
+            {name: "twitter:title", content: "積読解消アプリ Yomukatsu!"},
             {name: "twitter:description", content: post.title},
           ]}
         />
@@ -62,9 +61,6 @@ const SharePostsPage = () => {
               <SecondaryButton label="このアプリは?" onClick={() => dispatch(push("/"))}/>
             </Box>
           </Box>
-          <TwitterShareButton url={process.env.REACT_APP_BASE_URL + path} title={"今から『"+ post.title +"』を読みます！\n#yomukatsu"}>
-                <TwitterIcon size={64} round />
-              </TwitterShareButton>
         </Paper>
       </Box>
     :
