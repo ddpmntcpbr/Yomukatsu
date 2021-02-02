@@ -12,7 +12,9 @@ class Api::V1::PostsController < Api::V1::ApiController
   end
 
   def create
-    post = current_user.posts.create!(post_params)
+    post = current_user.posts.new(post_params)
+    post.remote_twitter_card_image_url = post_params[:image]
+    post.save!
     render json: post
   end
 
@@ -31,6 +33,6 @@ class Api::V1::PostsController < Api::V1::ApiController
   private
 
     def post_params
-      params.require(:post).permit(:title, :url, :author, :image, :status, post_items_attributes: [:id, :content, :_destroy])
+      params.require(:post).permit(:title, :url, :author, :image, :twitter_card_image, :status, post_items_attributes: [:id, :content, :_destroy])
     end
 end
