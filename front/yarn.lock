@@ -9368,6 +9368,11 @@ react-helmet@6.1.0:
     react-fast-compare "^3.1.1"
     react-side-effect "^2.1.0"
 
+react-image-file-resizer@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/react-image-file-resizer/-/react-image-file-resizer-0.4.0.tgz#041881bd38f9031f051b49f08fbd36ec226c84b4"
+  integrity sha512-no0m3/YfgT+WxWwDynM4OwruUas3FrokE9QHkANuPL8Ihk8SK/ienHE3l+WW1fFouYoVSNMgvDtQYoQknvVavg==
+
 react-image-resizer@^1.3.0:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/react-image-resizer/-/react-image-resizer-1.3.0.tgz#99e25bb94ab2fe888c26538c5d764abd2b4e2a93"

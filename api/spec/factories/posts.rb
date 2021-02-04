@@ -1,9 +1,9 @@
 FactoryBot.define do
   factory :post do
     title { Faker::Lorem.word }
-    url { Faker::Internet.url(host: "amazon.co.jp") }
+    url { Faker::Internet.url(host: "books.google.com") }
     author { Faker::Name.name }
-    image { Faker::Internet.url(host: "m.media-amazon.com/images") }
+    image { "https://books.google.com/books/content?id=k-IeBAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api" }
     user
     status { "registered" }
 
