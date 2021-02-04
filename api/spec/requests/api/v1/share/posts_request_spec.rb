@@ -13,7 +13,7 @@ RSpec.describe "Api::V1::Share::Posts", type: :request do
         subject
         res = JSON.parse(response.body)
         expect(res.length).to eq 5
-        expect(res[0].keys).to eq ["id", "title", "url", "author", "image"]
+        expect(res[0].keys).to eq ["id", "title", "url", "author", "image","twitter_card_image"]
         expect(response).to have_http_status(:ok)
       end
     end
@@ -39,7 +39,7 @@ RSpec.describe "Api::V1::Share::Posts", type: :request do
       it "post の中身を取得できる" do
         subject
         res = JSON.parse(response.body)
-        expect(res.keys).to eq ["id", "title", "url", "author", "image"]
+        expect(res.keys).to eq ["id", "title", "url", "author", "image","twitter_card_image"]
         expect(response).to have_http_status(:ok)
       end
     end
