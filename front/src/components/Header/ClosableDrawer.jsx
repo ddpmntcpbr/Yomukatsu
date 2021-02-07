@@ -5,9 +5,7 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import {makeStyles} from "@material-ui/styles";
-import AddCircleIcon from "@material-ui/icons/AddCircle";
-import HistoryIcon from "@material-ui/icons/History";
-import PersonIcon from "@material-ui/icons/Person";
+import AppsIcon from '@material-ui/icons/Apps';
 import ExitToAppIcon from "@material-ui/icons/ExitToApp"
 import { useDispatch } from "react-redux";
 import { push } from "connected-react-router";
@@ -36,12 +34,6 @@ const ClosableDrawer = (props) => {
   const {container} = props;
   const dispatch = useDispatch();
 
-  // const [keyword, setKeyword] = useState("");
-
-  // const inputKeyword = useCallback((event)=>{
-  //   setKeyword(event.target.value)
-  // },[setKeyword]);
-
   const selectMenu = (event, path) => {
     dispatch(push(path));
     props.onClose(event)
@@ -53,9 +45,7 @@ const ClosableDrawer = (props) => {
   }
 
   const menus = [
-    {func: selectMenu, label: "トップ", icon: <AddCircleIcon/>, id: "register", value: "/"},
-    {func: selectMenu, label: "マイページ", icon: <HistoryIcon/>, id: "history", value: "/mypage"},
-    {func: selectMenu, label: "POST登録", icon: <PersonIcon/>, id: "profile", value: "/posts/edit"},
+    {func: selectMenu, label: "Yomukatsuとは?", icon: <AppsIcon/>, id: "register", value: "/"},
   ];
 
   return (
