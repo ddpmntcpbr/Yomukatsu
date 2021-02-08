@@ -7,6 +7,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import {makeStyles} from "@material-ui/styles";
 import AppsIcon from '@material-ui/icons/Apps';
 import ExitToAppIcon from "@material-ui/icons/ExitToApp"
+import AttachFileIcon from '@material-ui/icons/AttachFile';
 import { useDispatch } from "react-redux";
 import { push } from "connected-react-router";
 import {signOut} from "../../reducks/users/operations";
@@ -46,6 +47,7 @@ const ClosableDrawer = (props) => {
 
   const menus = [
     {func: selectMenu, label: "Yomukatsuとは?", icon: <AppsIcon/>, id: "register", value: "/"},
+    {func: selectMenu, label: "初心者ガイド", icon: <AttachFileIcon/>, id: "intro", value: "/intro"},
   ];
 
   return (
