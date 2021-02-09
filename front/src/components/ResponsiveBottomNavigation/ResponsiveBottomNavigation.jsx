@@ -3,8 +3,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import HelpIcon from '@material-ui/icons/Help';
-import HomeIcon from '@material-ui/icons/Home';
 import BookmarksIcon from '@material-ui/icons/Bookmarks';
+import BookmarkBorderIcon from '@material-ui/icons/BookmarkBorder';
 import {useLocation} from 'react-router-dom';
 import { push } from "connected-react-router";
 import { useDispatch } from 'react-redux';
@@ -57,7 +57,7 @@ const currentActiveBottomNavigationAction = (pathname) => {
         <BottomNavigationAction
           label={"読書中"}
           className={classes.button}
-          icon={<HomeIcon/>}
+          icon={<BookmarkBorderIcon/>}
           onClick={()=>dispatch(push("/reading/posts"))}
         />
         <BottomNavigationAction

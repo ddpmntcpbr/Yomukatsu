@@ -6,7 +6,9 @@ import { ResponsiveBottomNavigation } from './components/ResponsiveBottomNavigat
 import { Loading } from "./components/UIkit"
 import "./assets/reset.css"
 import CssBaseline from '@material-ui/core/CssBaseline'
-import {Container} from "@material-ui/core";
+import { Container } from "@material-ui/core";
+import { useSelector } from 'react-redux';
+import { getSignedIn } from "./reducks/users/selectors"
 
 const useStyles = makeStyles((theme)=>({
   main: {
@@ -15,6 +17,8 @@ const useStyles = makeStyles((theme)=>({
 }))
 const App = () => {
   const classes = useStyles();
+  const selector = useSelector((state)=>state);
+  const isSignedIn = getSignedIn(selector);
 
   return (
     <div className={classes.root}>
@@ -26,7 +30,9 @@ const App = () => {
             <Router />
           </Container>
         </main>
-        <ResponsiveBottomNavigation />
+        {isSignedIn &&
+          <ResponsiveBottomNavigation />
+        }
       </Loading>
    </div>
   )
