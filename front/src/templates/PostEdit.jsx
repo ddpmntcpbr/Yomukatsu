@@ -4,8 +4,12 @@ import IconButton from "@material-ui/core/IconButton";
 import SearchIcon from "@material-ui/icons/Search";
 import {makeStyles} from "@material-ui/styles";
 import axios from "axios";
-import {PostEditDialog,SearchResultDialog,EditPostItemsList} from "../components/Posts";
-import {Box,Grid,Typography,Paper} from "@material-ui/core";
+import {  PostEditDialog,
+          PostItemEditHintDialog,
+          SearchResultDialog,
+          EditPostItemsList,
+        } from "../components/Posts";
+import {Box,Button,Grid,Typography,Paper} from "@material-ui/core";
 import {saveReadingPost,saveRegisteredPost} from "../reducks/posts/operations";
 import {useDispatch} from "react-redux";
 
@@ -25,6 +29,7 @@ const PostEdit = () => {
   const [query, setQuery] = useState("")
   const [searchModalOpen, setSearchModalOpen] = useState(false);
   const [saveModalOpen, setSaveModalOpen] = useState(false);
+  const [HintModalOpen, setHintModalOpen] = useState(false);
   const [searchResults, setSearchResults] = useState([]);
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
@@ -66,6 +71,14 @@ const PostEdit = () => {
   const handleSaveModalClose = useCallback(() => {
     setSaveModalOpen(false)
   }, [setSaveModalOpen]);
+
+  const handleHintModalOpen = useCallback(() => {
+    setHintModalOpen(true)
+  }, [setHintModalOpen]);
+
+  const handleHintModalClose = useCallback(() => {
+    setHintModalOpen(false)
+  }, [setHintModalOpen]);
 
   const handleClickSearchIcon = () => {
     getSearchBooks(query)
@@ -127,11 +140,14 @@ const PostEdit = () => {
           </Box>
         )}
 
-        <Typography component="h2">
-          <Box fontSize="1.2rem" mt={4}>
+        <Box display="flex" justifyContent="space-between" mt={4} py={2}>
+          <Box fontSize="1.2rem">
             メンタルマップ
           </Box>
-        </Typography>
+          <Button variant="outlined" size="small" color="primary" onClick={()=>handleHintModalOpen()}>
+            マップ作成ヒントを表示
+          </Button>
+        </Box>
 
         <EditPostItemsList postItems={postItems} setPostItems={setPostItems}  />
 
@@ -151,6 +167,13 @@ const PostEdit = () => {
         title="さっそく読み始めますか？"
         contentText="読書中の設定は後からでも変更できます"
       />
+
+      <PostItemEditHintDialog
+        open={HintModalOpen}
+        handleClose={handleHintModalClose}
+      />
+
+
     </Box>
   );
 };
