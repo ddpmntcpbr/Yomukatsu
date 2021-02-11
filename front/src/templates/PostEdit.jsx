@@ -107,7 +107,7 @@ const PostEdit = () => {
           </Box>
         </Typography>
         <Box className={classes.searchField} mb={1}>
-          <Grid container>
+          <Grid container alignItems="center">
             <Grid item xs={10}>
               <TextInput
                 fullWidth={true} label={"タイトル / 著者名 で 検索"} multiline={false} required={true}
