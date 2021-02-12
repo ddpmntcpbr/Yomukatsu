@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme)=>({
     backgroundColor: theme.palette.grey[100]
   },
   title: {
-    fontSize: "1.5rem",
+    fontSize: "1.4rem",
     fontWeight: "bold",
     color: theme.palette.grey[900],
     marginTop: theme.spacing(2)
@@ -71,16 +71,16 @@ const TopPage = () => {
         <Box textAlign="center" fontSize="2.0rem" fontWeight="bold">
           積読解消アプリ「Yomukatsu!」
         </Box>
-        <Box textAlign="center" fontSize="1rem">
+        <Box textAlign="center" fontSize="1rem" my={1}>
           読書メンタルマップを使って積読を解消しよう！
         </Box>
         <img src={topPageImage} width="100%"/>
 
-        <Box className={classes.title} component="h2">
+        <Box className={classes.title} component="h2" mt={10}>
           新規登録/ログイン(無料)
         </Box>
         <Divider/>
-        <Box className={classes.content} component="h6" textAlign="center" py={2}>
+        <Box className={classes.content} component="h6" textAlign="center">
           <Box py={2}>
             <Box>
               ↓かんたん！5秒で無料登録！↓
@@ -104,7 +104,7 @@ const TopPage = () => {
           </Box>
         </Box>
 
-        <Box py={2}>
+        <Box py={4}>
           <Box className={classes.title} component="h2">
             Yomukatsu使い方(字幕動画版)
           </Box>
@@ -114,7 +114,7 @@ const TopPage = () => {
           </Box>
         </Box>
 
-        <Box py={2}>
+        <Box py={4}>
           <Box className={classes.title} component="h2">
             Yomukatsuとは？
           </Box>
@@ -145,7 +145,7 @@ const TopPage = () => {
           </Box>
         </Box>
 
-        <Box py={2}>
+        <Box py={4}>
           <Box className={classes.title} component="h2">
             Yomukatsuでできること
           </Box>
@@ -216,7 +216,7 @@ const TopPage = () => {
             </Box>
           </Box>
 
-          <Box component="h6" textAlign="center" py={2}>
+          <Box component="h6" textAlign="center" py={4}>
             <Box className={classes.subTitle}>
               まずはワンタップで無料登録♪
             </Box>

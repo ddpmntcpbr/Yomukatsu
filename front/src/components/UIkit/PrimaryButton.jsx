@@ -9,7 +9,7 @@ const useStyles = makeStyles((theme)=>({
     fontSize: 16,
     height: 48,
     marginButton: 16,
-    width: 300
+    width: 256
   }
 }))
 
