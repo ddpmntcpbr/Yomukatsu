@@ -9,14 +9,15 @@ const useStyles = makeStyles((theme) =>({
     backgroundColor: "#55acee",
     height: 48,
     width: 300,
-    textTransform: "none"
+    textTransform: "none",
+    color: "#fff",
   },
   iconStyle: {
     fontSize: 28,
   },
   "typographyStyle": {
     paddingLeft: 8,
-    fontSize: 18,
+    fontSize: 16,
     color: "#fff",
   }
 }))
