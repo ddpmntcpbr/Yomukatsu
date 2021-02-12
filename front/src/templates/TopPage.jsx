@@ -38,6 +38,18 @@ const useStyles = makeStyles((theme)=>({
   subContent: {
     fontSize: "0.8rem",
     color: theme.palette.grey[800]
+  },
+  youtube: {
+    position: "relative",
+    width: "100%",
+    paddingTop: "56.25%",
+    "& iframe": {
+      position: "absolute",
+      top: 0,
+      right: 0,
+      width: "100%",
+      height: "100%"
+    }
   }
 }))
 
@@ -62,12 +74,7 @@ const TopPage = () => {
         <Box textAlign="center" fontSize="1rem">
           読書メンタルマップを使って積読を解消しよう！
         </Box>
-        <Image
-          src={topPageImage}
-          width={480}
-          height={370}
-          style={{margin: "auto"}}
-        />
+        <img src={topPageImage} width="100%"/>
 
         <Box className={classes.title} component="h2">
           新規登録/ログイン(無料)
@@ -102,7 +109,7 @@ const TopPage = () => {
             Yomukatsu使い方(字幕動画版)
           </Box>
           <Divider/>
-          <Box className={classes.content} component="h6" textAlign="center" mt={2}>
+          <Box className={classes.youtube} textAlign="center" mt={2}>
             <iframe width="480" height="270" src="https://www.youtube.com/embed/qBvS3Ilp_3o" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen title="tutorial"></iframe>
           </Box>
         </Box>
@@ -130,12 +137,7 @@ const TopPage = () => {
             </Box>
             を繰り返すことで完読までモチベーションを維持する、という読書法です。
             <Box mt={4}>
-              <Image
-                src={postEditScreenShotImage}
-                width={500}
-                height={385}
-                style={{margin: "auto"}}
-              />
+              <img src={postEditScreenShotImage} width="100%"/>
               <Box fontSize="0.8rem" textAlign="center">
                 読書メンタルマップ作成イメージ
               </Box>
