@@ -72,12 +72,13 @@ const TopPage = () => {
           積読解消アプリ「Yomukatsu!」
         </Box>
         <Box textAlign="center" fontSize="1rem" my={1}>
-          読書メンタルマップを使って積読を解消しよう！
+          「読書メンタルマップ術」を使って<br/>
+          積読を解消しよう！
         </Box>
         <img src={topPageImage} alt="topPageImage" width="100%"/>
 
         <Box className={classes.title} component="h2" mt={10}>
-          新規登録/ログイン(無料)
+          新規登録/ログイン
         </Box>
         <Divider/>
         <Box className={classes.content} component="h6" textAlign="center">
@@ -106,7 +107,7 @@ const TopPage = () => {
 
         <Box py={4}>
           <Box className={classes.title} component="h2">
-            Yomukatsu使い方(字幕動画版)
+            Yomukatsu使い方(字幕動画)
           </Box>
           <Divider/>
           <Box className={classes.youtube} textAlign="center" mt={2}>
