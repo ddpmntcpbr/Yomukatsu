@@ -8,16 +8,16 @@ const useStyles = makeStyles((theme) =>({
   "button": {
     backgroundColor: "#55acee",
     height: 48,
-    width: 300,
+    width: 256,
     textTransform: "none",
     color: "#fff",
   },
   iconStyle: {
-    fontSize: 28,
+    fontSize: 24,
   },
   "typographyStyle": {
-    paddingLeft: 8,
-    fontSize: 16,
+    paddingLeft: 4,
+    fontSize: "1rem",
     color: "#fff",
   }
 }))
