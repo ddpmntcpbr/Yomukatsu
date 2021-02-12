@@ -74,7 +74,7 @@ const TopPage = () => {
         <Box textAlign="center" fontSize="1rem" my={1}>
           読書メンタルマップを使って積読を解消しよう！
         </Box>
-        <img src={topPageImage} width="100%"/>
+        <img src={topPageImage} alt="topPageImage" width="100%"/>
 
         <Box className={classes.title} component="h2" mt={10}>
           新規登録/ログイン(無料)
@@ -137,7 +137,7 @@ const TopPage = () => {
             </Box>
             を繰り返すことで完読までモチベーションを維持する、という読書法です。
             <Box mt={4}>
-              <img src={postEditScreenShotImage} width="100%"/>
+              <img src={postEditScreenShotImage} alt="postEditScreenShotImage" width="100%"/>
               <Box fontSize="0.8rem" textAlign="center">
                 読書メンタルマップ作成イメージ
               </Box>
