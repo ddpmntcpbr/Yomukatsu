@@ -40,7 +40,7 @@ const PostItemEditHintDialog = (props) => {
         <Box>
           <DialogTitle>
             <Box className={classes.dialogTitle}>
-              マップ作成のヒント
+              ヒント
             </Box>
           </DialogTitle>
         </Box>
