@@ -7,17 +7,18 @@ import Typography from '@material-ui/core/Typography';
 const useStyles = makeStyles((theme) =>({
   "button": {
     backgroundColor: "#55acee",
-    color: "#fff",
     height: 48,
     width: 300,
-    textTransform: "none"
+    textTransform: "none",
+    color: "#fff",
   },
   iconStyle: {
-    fontSize: 28
+    fontSize: 28,
   },
   "typographyStyle": {
     paddingLeft: 8,
-    fontSize: 18
+    fontSize: 16,
+    color: "#fff",
   }
 }))
 
