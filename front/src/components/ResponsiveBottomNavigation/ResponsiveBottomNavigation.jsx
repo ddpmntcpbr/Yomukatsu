@@ -2,13 +2,13 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
-import HelpIcon from '@material-ui/icons/Help';
 import BookmarksIcon from '@material-ui/icons/Bookmarks';
 import BookmarkBorderIcon from '@material-ui/icons/BookmarkBorder';
 import {useLocation} from 'react-router-dom';
 import { push } from "connected-react-router";
 import { useDispatch } from 'react-redux';
 import AddIcon from '@material-ui/icons/Add';
+import SettingsIcon from '@material-ui/icons/Settings';
 
 const useStyles = makeStyles((theme)=>({
   wrapper:{
@@ -73,10 +73,10 @@ const currentActiveBottomNavigationAction = (pathname) => {
           onClick={()=>dispatch(push("/posts/edit"))}
         />
         <BottomNavigationAction
-          label={"ヘルプ"}
+          label={"設定"}
           className={classes.button}
-          icon={<HelpIcon/>}
-          onClick={()=>dispatch(push("/help"))}
+          icon={<SettingsIcon/>}
+          onClick={()=>dispatch(push("/setting"))}
         />
       </BottomNavigation>
   </div>
