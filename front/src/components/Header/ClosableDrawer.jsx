@@ -47,7 +47,7 @@ const ClosableDrawer = (props) => {
 
   const menus = [
     {func: selectMenu, label: "Yomukatsuとは?", icon: <AppsIcon/>, id: "register", value: "/"},
-    {func: selectMenu, label: "初心者ガイド", icon: <AttachFileIcon/>, id: "intro", value: "/intro"},
+    {func: selectMenu, label: "アプリの使い方", icon: <AttachFileIcon/>, id: "intro", value: "/intro"},
   ];
 
   return (
