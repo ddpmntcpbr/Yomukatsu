@@ -1,3 +1,4 @@
+export {default as Agreement} from './Agreement'
 export {default as CompletedPostsDetail} from './CompletedPostsDetail'
 export {default as CompletedPostsList} from './CompletedPostsList'
 export {default as PostEdit} from './PostEdit'
