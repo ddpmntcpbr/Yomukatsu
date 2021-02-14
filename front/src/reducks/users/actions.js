@@ -7,6 +7,7 @@ export const signInAction = (userState) => {
       role: userState.role,
       uid: userState.uid,
       username: userState.username,
+      userNickname: userState.userNickname,
       image: userState.image
     }
   }
@@ -21,6 +22,7 @@ export const signOutAction = () => {
       role: "",
       uid: "",
       username: "",
+      userNickname: "",
       image: ""
     }
   }

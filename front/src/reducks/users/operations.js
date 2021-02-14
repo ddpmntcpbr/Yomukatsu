@@ -23,12 +23,14 @@ export const listenAuthState = () => {
       })
       .then((response) => {
         const userData = response.data.data
+        console.log(userData)
 
         dispatch(signInAction({
           isSignedIn: true,
           image: userData.image,
           uid: userData.id,
           username: userData.name,
+          userNickname: userData.nickname
         }))
       })
       .catch((error) => {
