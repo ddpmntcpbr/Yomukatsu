@@ -64,7 +64,7 @@ const Setting = () => {
             <Box className={classes.userImage}>
               <img src={userImage} alt="userImage" width="48px" height="48px"/>
             </Box>
-            <Box ml={4} fontSize="1.2rem" fontWeight="bold">
+            <Box ml={4} fontSize="1.0rem" fontWeight="bold">
               {userName + "@" + userNickname}
             </Box>
           </Box>
@@ -89,12 +89,23 @@ const Setting = () => {
             </ListItemIcon>
             <Typography variant="inherit">利用規約</Typography>
           </MenuItem>
-          <MenuItem className={classes.menuItem} onClick={()=>handleClickOpen()}>
-            <ListItemIcon>
-              <MailIcon fontSize="small" />
-            </ListItemIcon>
-            <Typography variant="inherit">お問い合わせ</Typography>
-          </MenuItem>
+
+          {(userName==="ゲストユーザー" && userNickname==="guest_user")
+            ?
+            <MenuItem className={classes.menuItem} onClick={()=>alert("ゲストユーザーではお問い合わせフォームをご利用いただけません。Twitterアカウントでログインをお願いします。")}>
+              <ListItemIcon>
+                <MailIcon fontSize="small" />
+              </ListItemIcon>
+              <Typography variant="inherit">お問い合わせ</Typography>
+            </MenuItem>
+            :
+            <MenuItem className={classes.menuItem} onClick={()=>handleClickOpen()}>
+              <ListItemIcon>
+                <MailIcon fontSize="small" />
+              </ListItemIcon>
+              <Typography variant="inherit">お問い合わせ</Typography>
+            </MenuItem>
+          }
           <MenuItem className={classes.menuItem} onClick={()=>window.open("https://twitter.com/ddpmntcpbr")}>
             <ListItemIcon>
               <TwitterIcon fontSize="small" />
@@ -109,7 +120,9 @@ const Setting = () => {
           </MenuItem>
         </MenuList>
       </Box>
-      <FormDialog open={open} handleClose={handleClose} />
+      {!(userName==="ゲストユーザー" && userNickname==="guest_user") &&
+        <FormDialog open={open} handleClose={handleClose} />
+      }
     </Box>
   );
 };
