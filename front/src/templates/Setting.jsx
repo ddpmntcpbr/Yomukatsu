@@ -11,9 +11,10 @@ import TwitterIcon from '@material-ui/icons/Twitter';
 import GitHubIcon from '@material-ui/icons/GitHub';
 import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
 import AttachFileIcon from "@material-ui/icons/AttachFile"
-import { getUserName,getUserImage} from "../reducks/users/selectors"
+import { getUserName,getUserImage,getUserNickname} from "../reducks/users/selectors"
 import { signOut } from "../reducks/users/operations";
 import { SecondaryButton } from "../components/UIkit";
+import { FormDialog } from "../components/Setting"
 
 const useStyles = makeStyles((theme)=>({
   paper: {
@@ -41,6 +42,16 @@ const Setting = () => {
   const selector = useSelector((state)=>state);
   const userName = getUserName(selector)
   const userImage = getUserImage(selector)
+  const userNickname = getUserNickname(selector)
+  const [open, setOpen] = useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true)
+  };
+
+  const handleClose = useCallback(() => {
+    setOpen(false)
+  }, [setOpen]);
 
   return (
     <Box mb={2}>
@@ -54,7 +65,7 @@ const Setting = () => {
               <img src={userImage} alt="userImage" width="48px" height="48px"/>
             </Box>
             <Box ml={4} fontSize="1.2rem" fontWeight="bold">
-              {userName}
+              {userName + "@" + userNickname}
             </Box>
           </Box>
           <Box textAlign="center">
@@ -78,7 +89,7 @@ const Setting = () => {
             </ListItemIcon>
             <Typography variant="inherit">利用規約</Typography>
           </MenuItem>
-          <MenuItem className={classes.menuItem} onClick={()=>console.log("お問い合わせ")}>
+          <MenuItem className={classes.menuItem} onClick={()=>handleClickOpen()}>
             <ListItemIcon>
               <MailIcon fontSize="small" />
             </ListItemIcon>
@@ -98,6 +109,7 @@ const Setting = () => {
           </MenuItem>
         </MenuList>
       </Box>
+      <FormDialog open={open} handleClose={handleClose} />
     </Box>
   );
 };
