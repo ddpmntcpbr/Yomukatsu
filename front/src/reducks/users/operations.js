@@ -23,7 +23,6 @@ export const listenAuthState = () => {
       })
       .then((response) => {
         const userData = response.data.data
-        console.log(userData)
 
         dispatch(signInAction({
           isSignedIn: true,
