@@ -22,6 +22,7 @@ const initialState = {
     role:  "",
     uid: "",
     username: "",
+    userNickname: "",
     image: ""
   }
 };

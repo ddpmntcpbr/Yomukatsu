@@ -90,7 +90,7 @@ const TopPage = () => {
               label={"Twitter ログイン / 新規登録"}
               onClick={() => dispatch(signIn())}
             />
-            <Box py={1}>
+            <Box py={1} fontSize="0.8rem">
               ※勝手にツイートすることはありません
             </Box>
           </Box>

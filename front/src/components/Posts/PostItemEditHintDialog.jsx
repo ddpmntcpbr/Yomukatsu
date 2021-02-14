@@ -13,7 +13,6 @@ import Link from '@material-ui/core/Link';
 const useStyles = makeStyles((theme)=>({
   dialogTitle:{
     fontSize: "1.5rem",
-    paddingTop: theme.spacing(1)
   },
   title: {
     fontWeight: "bold",
@@ -35,23 +34,21 @@ const PostItemEditHintDialog = (props) => {
     <Dialog
       open={props.open}
       onClose={props.handleClose}
-      style={{maxHeight: "95%"}}
+      style={{maxHeight: "90%"}}
     >
-      <Box display="flex" justifyContent="space-between" alignItems="center">
-        <Box>
-          <DialogTitle>
-            <Box className={classes.dialogTitle}>
-              ヒント
-            </Box>
-          </DialogTitle>
+      <DialogTitle>
+        <Box display="flex" justifyContent="space-between" alignItems="center">
+          <Box className={classes.dialogTitle}>
+            ヒント
+          </Box>
+          <Box>
+            <IconButton onClick={()=>props.handleClose()}>
+              <CloseIcon />
+            </IconButton>
+          </Box>
         </Box>
-        <Box mx={2}>
-          <IconButton onClick={()=>props.handleClose()}>
-            <CloseIcon />
-          </IconButton>
-        </Box>
-      </Box>
-
+      </DialogTitle>
+      <Divider/>
       <DialogContent>
           <Box>
             <Box className={classes.title}>

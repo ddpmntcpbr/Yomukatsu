@@ -29,6 +29,7 @@ export const listenAuthState = () => {
           image: userData.image,
           uid: userData.id,
           username: userData.name,
+          userNickname: userData.nickname
         }))
       })
       .catch((error) => {
