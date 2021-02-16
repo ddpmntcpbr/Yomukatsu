@@ -1,5 +1,5 @@
 class Api::V1::PostsController < Api::V1::ApiController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, only: [:index, :show, :create, :update, :destroy]
 
   def index
     posts = current_user.posts.order(created_at: :desc)
@@ -28,6 +28,10 @@ class Api::V1::PostsController < Api::V1::ApiController
     @post = current_user.posts.find(params[:id])
     @post.destroy!
     render json: {}, status: :ok
+  end
+
+  def post_count
+    render json: Post.count
   end
 
   private

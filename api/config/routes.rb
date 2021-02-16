@@ -27,6 +27,7 @@ Rails.application.routes.draw do
       get "users/currentuser"
       get :health_check, to: "health_check#index"
       get :users_count, to: "users_count#index"
+      get :posts_count, to: "posts#post_count"
     end
   end
 end

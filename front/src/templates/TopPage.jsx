@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box,Divider,Paper } from '@material-ui/core';
+import { Box,Button,Divider,Paper } from '@material-ui/core';
 import { TwitterLoginButton } from "../components/UIkit";
 import {useDispatch} from 'react-redux';
 import {signIn,signInGuestUser} from "../reducks/users/operations";
@@ -14,7 +14,7 @@ import favoImage from "../assets/img/src/favo.png";
 import ideaImage from "../assets/img/src/idea.png";
 import researchImage from "../assets/img/src/research.png";
 import terminalImage from "../assets/img/src/terminal.png";
-
+import axios from "axios"
 
 const useStyles = makeStyles((theme)=>({
   paper: {
@@ -53,12 +53,34 @@ const useStyles = makeStyles((theme)=>({
   }
 }))
 
+const userCount = () => {
+  axios.get(process.env.REACT_APP_API_V1_URL + '/users_count')
+  .then((response) => {
+    console.log("User.count",response.data)
+  })
+  .catch((error) => {
+    console.log(error)
+  })
+}
+
+const postCount = () => {
+  axios.get(process.env.REACT_APP_API_V1_URL + '/posts_count')
+  .then((response) => {
+    console.log("Post.count",response.data)
+  })
+  .catch((error) => {
+    console.log(error)
+  })
+}
+
 const TopPage = () => {
   const classes = useStyles()
   const dispatch = useDispatch()
 
   return (
     <Box >
+      <Button onClick={userCount}>User count</Button>
+      <Button onClick={postCount}>Post count</Button>
       <Helmet
         meta={[
           {name: "twitter:card", content: "summary"},
