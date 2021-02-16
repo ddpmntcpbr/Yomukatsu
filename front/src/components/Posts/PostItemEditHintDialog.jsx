@@ -8,7 +8,6 @@ import  { Box,
         } from  '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
-import Link from '@material-ui/core/Link';
 
 const useStyles = makeStyles((theme)=>({
   dialogTitle:{
@@ -71,11 +70,7 @@ const PostItemEditHintDialog = (props) => {
             <Box className={classes.content}>
               思い切って、先にレビューを読んでしまうのも有効な手段です。<br/>
               <br/>
-              小説であればネタバレは避けたいですが、ビジネス書のような情報収集が目的の読書であれば、他人のレビューは、モチベーションを得る重要なヒントになり得ます。<br/>
-              <br/>
-              Amazon: <Link href="https://www.amazon.co.jp" target="_blank" rel="noopener">https://www.amazon.co.jp</Link><br/>
-              楽天ブックス: <Link href="https://books.rakuten.co.jp" target="_blank" rel="noopener">https://books.rakuten.co.jp</Link><br/>
-              Google Book: <Link href="https://books.google.co.jp" target="_blank" rel="noopener">https://books.google.co.jp</Link>
+              小説であればネタバレは避けたいですが、ビジネス書のような情報収集が目的の読書であれば、他人のレビューは、モチベーションを得る重要なヒントになり得ます
             </Box>
           </Box>
 

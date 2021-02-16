@@ -1,18 +1,19 @@
 import React, { useEffect,useState,useCallback } from "react";
 import { useSelector, useDispatch } from 'react-redux'
-import { Box,Button,Paper,Typography } from "@material-ui/core"
+import { Box,Button,Divider,Paper } from "@material-ui/core"
 import { makeStyles } from "@material-ui/styles";
-import { BookCard,SecondaryButton,QuestionDialog } from "../components/UIkit"
+import { BookCard,QuestionDialog } from "../components/UIkit"
 import { deletePost, exchangeRegisteredAndReadingPost,updateStatusToCompleted } from "../reducks/posts/operations"
 import {TwitterShareButton,TwitterIcon} from "react-share";
 import { push } from "connected-react-router";
 import DeleteIcon from '@material-ui/icons/Delete';
 import { getDateString,isNonEmptyArray } from "../helpers"
 import { getRegisteredPosts } from "../reducks/posts/selectors"
-// import { fetchSharePost } from "../reducks/sharePosts/operations"
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import { formatDateString } from "../helpers"
-import { CreatedPostItemsList } from "../components/Posts"
+import { CreatedPostItemsList,ECSiteLinkButtonList } from "../components/Posts"
+import DoneIcon from '@material-ui/icons/Done';
+import BookmarksIcon from '@material-ui/icons/Bookmarks';
 
 const useStyles = makeStyles((theme)=>({
   root: {
@@ -24,6 +25,9 @@ const useStyles = makeStyles((theme)=>({
     '&:hover': {
       backgroundColor: theme.palette.grey[300],
     }
+  },
+  completedButton:{
+    fontWeight: "bold"
   }
 }))
 
@@ -68,7 +72,6 @@ const RegisteredPostsDetail = () => {
 
   useEffect(()=>{
     if(isNonEmptyArray(post)){
-      // dispatch(fetchSharePost(id))
       setinitialPostItems(post.post_items)
       setPostItems(post.post_items);
     }
@@ -79,35 +82,41 @@ const RegisteredPostsDetail = () => {
       {isNonEmptyArray(post) ?
         <Box component={Paper} className={classes.root}>
             <Box p={1} >
-              <Box my={1} display="flex">
-                <Box
-                  p={1} display="flex" className={classes.goBack}
-                  onClick={()=>dispatch(push("/posts/list"))}
-                >
-                  <ArrowBackIosIcon/>
-                  <Typography>登録リストに戻る</Typography>
+              <Box display="flex" justifyContent="space-between" alignItems="center" mb={2}>
+                <Box display="flex" justifyContent="flex-start" onClick={()=>dispatch(push("/posts/list"))}>
+                  <Box>
+                    <ArrowBackIosIcon fontSize="small"/>
+                  </Box>
+                  <Box component="h2" fontSize="1rem">
+                    登録リストに戻る
+                  </Box>
                 </Box>
-                <Box/>
-              </Box>
-              <Typography component="h2">
-              <Box fontSize="1rem">
-                書籍情報
-              </Box>
-            </Typography>
-              <Box mb={4}>
-                <BookCard
-                  title={post.title}
-                  author={post.author}
-                  image={post.image}
-                  created_at={formatDateString(post.created_at)}
-                />
+              <Box mr={2}>
+                <TwitterShareButton url={process.env.REACT_APP_BASE_URL + "/share/posts/" + post.id + "?" + getDateString()} title={"今から『"+ post.title +"』を読みます！\n\n#yomukatsu\n\n"}>
+                  <TwitterIcon size={48} round />
+                </TwitterShareButton>
               </Box>
 
-              <Typography component="h2">
-              <Box fontSize="1rem">
-                メンタルマップ
-              </Box>
-            </Typography>
+            </Box>
+
+            <Box mb={1}>
+              <BookCard
+                title={post.title}
+                author={post.author}
+                image={post.image}
+                created_at={formatDateString(post.created_at)}
+              />
+            </Box>
+
+            <ECSiteLinkButtonList title={post.title} url={post.url} />
+
+            <Box my={4}>
+              <Divider/>
+            </Box>
+
+            <Box component="h2" fontWeight="fontWeightBold" fontSize="1.2rem">
+              メンタルマップ
+            </Box>
 
             <CreatedPostItemsList
               postId={post.id}
@@ -115,34 +124,44 @@ const RegisteredPostsDetail = () => {
               postItems={postItems}
               setPostItems={setPostItems}
             />
+            <Box my={4}>
+              <Divider/>
+            </Box>
 
-            <Box>
-              <Box display="flex" justifyContent="space-between" my={4}>
-                <Box>
-                  <SecondaryButton
-                    label="読書中にセット"
-                    onClick={() => dispatch(exchangeRegisteredAndReadingPost(id))}
-                    width={256}
-                  />
-                </Box>
-                <Box>
-                  <SecondaryButton
-                    label="完読した!"
-                    onClick={handleUpdatePostStatusDialogOpen}
-                  />
-                </Box>
+            <Box display="flex" justifyContent="center" mb={2}>
+              <Box>
+                <Button
+                  variant="outlined"
+                  color="primary"
+                  startIcon={<BookmarksIcon/>}
+                  onClick={() => dispatch(exchangeRegisteredAndReadingPost(id))}
+                >
+                  読書開始書籍にセット
+                </Button>
               </Box>
-              <Box display="flex" justifyContent="center">
-                <Box m={1}>
-                  <Button
-                    variant="outlined"
-                    color="default"
-                    startIcon={<DeleteIcon />}
-                    onClick={handleDeletePostClickOpen}
-                  >
-                    削除
-                  </Button>
-                </Box>
+            </Box>
+
+            <Box display="flex" justifyContent="center" mb={4}>
+              <Box mx={1}>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  startIcon={<DoneIcon/>}
+                  onClick={handleUpdatePostStatusDialogOpen}
+                  className={classes.completedButton}
+                >
+                  完読した!
+                </Button>
+              </Box>
+              <Box mx={1}>
+                <Button
+                  variant="contained"
+                  color="default"
+                  startIcon={<DeleteIcon />}
+                  onClick={handleDeletePostClickOpen}
+                >
+                  削除
+                </Button>
               </Box>
 
               <QuestionDialog
@@ -161,11 +180,6 @@ const RegisteredPostsDetail = () => {
                 contentText="一度削除したアイテムは、元には戻せません"
               />
             </Box>
-
-            <TwitterShareButton url={process.env.REACT_APP_BASE_URL + "/share/posts/" + post.id + "?" + getDateString()} title={"今から『"+ post.title +"』を読みます！\n\n#yomukatsu\n\n"}>
-              <TwitterIcon size={64} round />
-            </TwitterShareButton>
-
           </Box>
         </Box>
       :
