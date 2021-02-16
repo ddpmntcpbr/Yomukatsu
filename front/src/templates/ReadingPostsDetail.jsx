@@ -132,23 +132,23 @@ const ReadingPostsDetail = () => {
                   削除
                 </Button>
               </Box>
-
-              <QuestionDialog
-                open={updatePostStatusOpen}
-                handleClose={handleUpdatePostStatusDialogClose}
-                handleEvent={handleUpdatePostStatus}
-                title="完読にしてよろしいですか？"
-                contentText="一度完読にしたアイテムは、元には戻せません"
-              />
-
-              <QuestionDialog
-                open={deletePostDialogOpen}
-                handleClose={handleDeletePostDialogClose}
-                handleEvent={handleDeletePost}
-                title="本当に削除よろしいですか？"
-                contentText="一度削除したアイテムは、元には戻せません"
-              />
             </Box>
+
+            <QuestionDialog
+              open={updatePostStatusOpen}
+              handleClose={handleUpdatePostStatusDialogClose}
+              handleEvent={handleUpdatePostStatus}
+              title="完読にしてよろしいですか？"
+              contentText="一度完読にしたアイテムは、元には戻せません"
+            />
+
+            <QuestionDialog
+              open={deletePostDialogOpen}
+              handleClose={handleDeletePostDialogClose}
+              handleEvent={handleDeletePost}
+              title="本当に削除よろしいですか？"
+              contentText="一度削除したアイテムは、元には戻せません"
+            />
           </Box>
         </Box>
       :
