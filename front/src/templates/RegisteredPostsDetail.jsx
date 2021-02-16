@@ -1,8 +1,8 @@
 import React, { useEffect,useState,useCallback } from "react";
 import { useSelector, useDispatch } from 'react-redux'
-import { Box,Button,Divider,Paper,Typography } from "@material-ui/core"
+import { Box,Button,Divider,Paper } from "@material-ui/core"
 import { makeStyles } from "@material-ui/styles";
-import { BookCard,SecondaryButton,QuestionDialog } from "../components/UIkit"
+import { BookCard,QuestionDialog } from "../components/UIkit"
 import { deletePost, exchangeRegisteredAndReadingPost,updateStatusToCompleted } from "../reducks/posts/operations"
 import {TwitterShareButton,TwitterIcon} from "react-share";
 import { push } from "connected-react-router";

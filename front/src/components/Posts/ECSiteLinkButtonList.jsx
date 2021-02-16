@@ -1,7 +1,6 @@
 import React from "react"
-import { useDispatch } from 'react-redux'
 import { makeStyles } from "@material-ui/styles";
-import { Box,Button,Grid } from "@material-ui/core"
+import { Button,Grid } from "@material-ui/core"
 
 const useStyles = makeStyles(()=>({
   googleBooksButton:{
@@ -23,14 +22,13 @@ const useStyles = makeStyles(()=>({
 
 const ECSiteLinkButtonList = (props) => {
   const classes = useStyles();
-  const dispatch = useDispatch();
 
   return (
     <Grid container spacing={1}>
       <Grid item xs={4}>
         <Button
           variant="contained"
-          fullWidth="true"
+          fullWidth={true}
           onClick={() => window.open(props.url)}
           className={classes.googleBooksButton}
         >
@@ -41,7 +39,7 @@ const ECSiteLinkButtonList = (props) => {
       <Grid item xs={4}>
         <Button
           variant="contained"
-          fullWidth="true"
+          fullWidth={true}
           onClick={() => window.open("https://www.amazon.co.jp/s?k="+ props.title +"&__mk_ja_JP=%E3%82%AB%E3%82%BF%E3%82%AB%E3%83%8A&ref=nb_sb_noss")}
           className={classes.amazonButton}
         >
@@ -52,7 +50,7 @@ const ECSiteLinkButtonList = (props) => {
       <Grid item xs={4}>
         <Button
           variant="contained"
-          fullWidth="true"
+          fullWidth={true}
           onClick={() => window.open("https://books.rakuten.co.jp/search?sitem=" + props.title + "&l-id=pc-search-box&x=29&y=15")}
           className={classes.rakutenButton}
         >

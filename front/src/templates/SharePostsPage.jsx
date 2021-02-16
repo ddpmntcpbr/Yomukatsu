@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from 'react-redux';
-import { Button,Box,Paper,Typography,Divider } from "@material-ui/core";
+import { Button,Box,Paper,Divider } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
-import { BookCard,PrimaryButton } from "../components/UIkit"
+import { BookCard } from "../components/UIkit"
 import { Helmet } from "react-helmet";
 import { isNonEmptyArray } from "../helpers"
 import { getSharePosts } from "../reducks/sharePosts/selectors"
@@ -77,7 +77,7 @@ const SharePostsPage = () => {
             <Box my={2}>
               <Button
                 variant="contained"
-                fullWidth="true"
+                fullWidth={true}
                 onClick={() => window.open(post.url)}
                 className={classes.googleBooksButton}
               >
@@ -88,7 +88,7 @@ const SharePostsPage = () => {
             <Box my={2}>
               <Button
                 variant="contained"
-                fullWidth="true"
+                fullWidth={true}
                 onClick={() => window.open("https://www.amazon.co.jp/s?k="+ post.title +"&__mk_ja_JP=%E3%82%AB%E3%82%BF%E3%82%AB%E3%83%8A&ref=nb_sb_noss")}
                 className={classes.amazonButton}
               >
@@ -99,7 +99,7 @@ const SharePostsPage = () => {
             <Box my={2}>
               <Button
                 variant="contained"
-                fullWidth="true"
+                fullWidth={true}
                 onClick={() => window.open("https://books.rakuten.co.jp/search?sitem=" + post.title + "&l-id=pc-search-box&x=29&y=15")}
                 className={classes.rakutenButton}
               >
@@ -110,7 +110,7 @@ const SharePostsPage = () => {
 
           <Box mt={6}>
               <Button
-                fullWidth="true"
+                fullWidth={true}
                 className={classes.appButton}
                 onClick={() => dispatch(push("/"))}
               >
