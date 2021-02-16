@@ -4,7 +4,8 @@ import IconButton from "@material-ui/core/IconButton";
 import SearchIcon from "@material-ui/icons/Search";
 import {makeStyles} from "@material-ui/styles";
 import axios from "axios";
-import {  PostEditDialog,
+import {  ECSiteLinkButtonList,
+          PostEditDialog,
           PostItemEditHintDialog,
           SearchResultDialog,
           EditPostItemsList,
@@ -129,11 +130,12 @@ const PostEdit = () => {
         />
 
         {title ? (
-          <BookCard
-            title={title}
-            author={author}
-            image={image}
-          />
+          <Box>
+            <BookCard title={title} author={author} image={image}/>
+            <Box my={1}>
+              <ECSiteLinkButtonList title={title} url={url}/>
+            </Box>
+          </Box>
         ):(
           <Box fontSize="0.8rem" style={{height: 150}}>
             登録したい書籍を検索してください。
@@ -145,7 +147,7 @@ const PostEdit = () => {
             メンタルマップ
           </Box>
           <Button variant="outlined" size="small" color="primary" onClick={()=>handleHintModalOpen()}>
-            マップ作成ヒントを表示
+            ヒントを表示
           </Button>
         </Box>
 
@@ -171,6 +173,8 @@ const PostEdit = () => {
       <PostItemEditHintDialog
         open={HintModalOpen}
         handleClose={handleHintModalClose}
+        title={title}
+        url={url}
       />
 
 
