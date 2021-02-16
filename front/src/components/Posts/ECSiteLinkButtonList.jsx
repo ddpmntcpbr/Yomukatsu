@@ -1,10 +1,9 @@
 import React from "react"
 import { useDispatch } from 'react-redux'
 import { makeStyles } from "@material-ui/styles";
-import { Button,Grid } from "@material-ui/core"
-import { push } from "connected-react-router"
+import { Box,Button,Grid } from "@material-ui/core"
 
-const useStyles = makeStyles((theme)=>({
+const useStyles = makeStyles(()=>({
   googleBooksButton:{
     fontWeight: "bold",
     color:"white",
@@ -27,7 +26,7 @@ const ECSiteLinkButtonList = (props) => {
   const dispatch = useDispatch();
 
   return (
-    <Grid container>
+    <Grid container spacing={1}>
       <Grid item xs={4}>
         <Button
           variant="contained"
