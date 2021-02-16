@@ -70,7 +70,7 @@ const ReadingPostsDetail = () => {
     <Box mb={2}>
       {isNonEmptyArray(post) ?
         <Box component={Paper} className={classes.root}>
-          <Box p={1}>
+          <Box p={2}>
             <Box display="flex" justifyContent="space-between" alignItems="center" mb={2}>
               <Box component="h2" fontWeight="fontWeightBold" fontSize="1.2rem">
                 現在読書中の書籍
@@ -114,7 +114,7 @@ const ReadingPostsDetail = () => {
               <Box mx={1}>
                 <Button
                   variant="contained"
-                  color="secondary"
+                  color="primary"
                   startIcon={<DoneIcon/>}
                   onClick={handleUpdatePostStatusDialogOpen}
                   className={classes.completedButton}

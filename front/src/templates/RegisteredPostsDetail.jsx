@@ -132,7 +132,7 @@ const RegisteredPostsDetail = () => {
               <Box>
                 <Button
                   variant="outlined"
-                  color="secondary"
+                  color="primary"
                   startIcon={<BookmarksIcon/>}
                   onClick={() => dispatch(exchangeRegisteredAndReadingPost(id))}
                 >
@@ -145,7 +145,7 @@ const RegisteredPostsDetail = () => {
               <Box mx={1}>
                 <Button
                   variant="contained"
-                  color="secondary"
+                  color="primary"
                   startIcon={<DoneIcon/>}
                   onClick={handleUpdatePostStatusDialogOpen}
                   className={classes.completedButton}

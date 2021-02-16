@@ -10,7 +10,7 @@ import {  ECSiteLinkButtonList,
           SearchResultDialog,
           EditPostItemsList,
         } from "../components/Posts";
-import {Box,Button,Grid,Typography,Paper} from "@material-ui/core";
+import {Box,Button,Divider,Grid,Paper} from "@material-ui/core";
 import {saveReadingPost,saveRegisteredPost} from "../reducks/posts/operations";
 import {useDispatch} from "react-redux";
 
@@ -97,16 +97,9 @@ const PostEdit = () => {
   return (
     <Box mb={2}>
       <Box component={Paper} p={2} className={classes.paper}>
-        <Typography component="h1">
-          <Box fontWeight="fontWeightBold" fontSize="1.5rem" mb={2} textAlign="center">
-            新規登録
-          </Box>
-        </Typography>
-        <Typography component="h2">
-          <Box fontSize="1.2rem">
-            書籍検索
-          </Box>
-        </Typography>
+        <Box component="h2" fontWeight="fontWeightBold" fontSize="1.2rem" py={2}>
+          新規登録
+        </Box>
         <Box className={classes.searchField} mb={1}>
           <Grid container alignItems="center">
             <Grid item xs={10}>
@@ -141,9 +134,11 @@ const PostEdit = () => {
             登録したい書籍を検索してください。
           </Box>
         )}
-
+        <Box my={4}>
+          <Divider/>
+        </Box>
         <Box display="flex" justifyContent="space-between" mt={4} py={2}>
-          <Box fontSize="1.2rem">
+          <Box component="h2" fontWeight="fontWeightBold" fontSize="1.2rem">
             メンタルマップ
           </Box>
           <Button variant="outlined" size="small" color="primary" onClick={()=>handleHintModalOpen()}>
@@ -152,6 +147,10 @@ const PostEdit = () => {
         </Box>
 
         <EditPostItemsList postItems={postItems} setPostItems={setPostItems}  />
+
+        <Box my={4}>
+          <Divider/>
+        </Box>
 
         <Box textAlign="center" mt={4}>
           <SecondaryButton
