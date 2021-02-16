@@ -49,6 +49,15 @@ export const signIn = () => {
 
   return async (dispatch) => {
     dispatch(showLoadingAction("Sign in..."))
+
+    if (localStorage.getItem('auth_token')) {
+      // Local Storageの初期化
+      localStorage.clear()
+
+      // Store Userの初期化
+      dispatch(signOutAction());
+      await _sleep(1000)
+    }
     await _sleep(1000)
     // TwitterAPIのエンドポイントへリダイレクト
     const authOriginUrl = process.env.REACT_APP_BASE_URL.match(/^https?:\/{2,}(.*?)(?:\/|\?|#|$)/)[1]
@@ -63,6 +72,15 @@ export const signInGuestUser = () => {
 
   return async (dispatch) => {
     dispatch(showLoadingAction("Sign-in as guest user..."))
+
+    if (localStorage.getItem('auth_token')) {
+      // Local Storageの初期化
+      localStorage.clear()
+
+      // Store Userの初期化
+      dispatch(signOutAction());
+      await _sleep(1000)
+    }
 
     const apiUrl = process.env.REACT_APP_API_V1_URL + "/auth/sign_in"
 
