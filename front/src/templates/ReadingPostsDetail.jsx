@@ -8,7 +8,7 @@ import {TwitterShareButton,TwitterIcon} from "react-share";
 import DeleteIcon from '@material-ui/icons/Delete';
 import { getDateString,isNonEmptyArray } from "../helpers"
 import { getReadingPosts } from "../reducks/posts/selectors"
-import { CreatedPostItemsList } from "../components/Posts"
+import { CreatedPostItemsList,ECSiteLinkButtonList } from "../components/Posts"
 import { formatDateString } from "../helpers"
 import { push } from "connected-react-router"
 
@@ -77,13 +77,17 @@ const ReadingPostsDetail = () => {
                 書籍情報
               </Box>
             </Typography>
-            <Box mb={4}>
+            <Box mb={1}>
               <BookCard
                 title={post.title}
                 author={post.author}
                 image={post.image}
                 created_at={formatDateString(post.created_at)}
               />
+            </Box>
+
+            <Box mb={6}>
+              <ECSiteLinkButtonList title={post.title} url={post.url} />
             </Box>
 
             <Typography component="h2">

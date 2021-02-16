@@ -11,7 +11,7 @@ import { getDateString,isNonEmptyArray } from "../helpers"
 import { getCompletedPosts } from "../reducks/posts/selectors"
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import { formatDateString } from "../helpers"
-import { CreatedPostItemsList } from "../components/Posts"
+import { CreatedPostItemsList,ECSiteLinkButtonList } from "../components/Posts"
 
 const useStyles = makeStyles((theme)=>({
   root: {
@@ -79,13 +79,17 @@ const CompletedPostsDetail = () => {
                 書籍情報
               </Box>
             </Typography>
-              <Box mb={4}>
+              <Box mb={1}>
                 <BookCard
                   title={post.title}
                   author={post.author}
                   image={post.image}
                   created_at={formatDateString(post.created_at)}
                 />
+              </Box>
+
+              <Box mb={6}>
+                <ECSiteLinkButtonList title={post.title} url={post.url} />
               </Box>
 
               <Typography component="h2">
