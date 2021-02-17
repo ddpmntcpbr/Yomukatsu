@@ -6,6 +6,7 @@ import {
 } from 'redux';
 import {connectRouter, routerMiddleware} from "connected-react-router";
 import {LoadingReducer} from '../loading/reducers';
+import {NotificationReducer} from '../notification/reducers';
 import {SharePostsReducer} from "../sharePosts/reducers";
 import {PostsReducer} from "../posts/reducers";
 import {UsersReducer} from "../users/reducers";
@@ -17,6 +18,7 @@ export default function createStore(history) {
   return reduxCreateStore(
     combineReducers({
       loading: LoadingReducer,
+      notification: NotificationReducer,
       router: connectRouter(history),
       sharePosts: SharePostsReducer,
       posts: PostsReducer,

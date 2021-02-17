@@ -5,6 +5,12 @@ const initialState = {
     text: ""
   },
 
+  notification: {
+    isOpen: false,
+    variant: 'success',
+    message: '',
+  },
+
   posts: {
     isFetching: false,
     reading: [],
