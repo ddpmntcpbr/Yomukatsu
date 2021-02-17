@@ -21,6 +21,10 @@ const variantIcon = {
 };
 
 const useStyles = makeStyles((theme)=>({
+  snackbarContent:{
+    height: 40,
+    padding: "0 8px 0 8px"
+  },
   success: {
     backgroundColor: green[600],
   },
@@ -34,27 +38,28 @@ const useStyles = makeStyles((theme)=>({
     backgroundColor: amber[700],
   },
   icon: {
-    fontSize: 20,
+    fontSize: "1rem",
+    fontWeight: "bold"
   },
   iconVariant: {
     opacity: 0.9,
-    marginRight: theme.spacing.unit,
+    marginRight: theme.spacing(1),
   },
   message: {
     display: 'flex',
     alignItems: 'center',
+    fontSize: "1rem",
+    fontWeight: "bold"
   },
 }))
 
 const NotificationSnackbar = (props) => {
-  // const { classes, className, message, onClose, variant, ...other } = props;
   const classes = useStyles()
   const Icon = variantIcon[props.variant];
 
-  
   return (
     <SnackbarContent
-      className={classes[props.variant]}
+      className={classNames(classes[props.variant], classes.snackbarContent)}
       aria-describedby="client-snackbar"
       message={
         <span className={classes.message}>

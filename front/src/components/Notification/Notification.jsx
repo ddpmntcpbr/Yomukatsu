@@ -1,4 +1,5 @@
 import React from "react"
+import { makeStyles } from "@material-ui/styles";
 import {useDispatch} from 'react-redux';
 import Snackbar from '@material-ui/core/Snackbar';
 import {NotificationSnackbar} from "./index"
@@ -9,7 +10,14 @@ import {getNotificationIsOpen,
         getNotificationMessage
       } from "../../reducks/notification/selectors"
 
+const useStyles = makeStyles((theme)=>({
+  snackbar: {
+    height: 110
+  }
+}))
+
 const Notification = () => {
+  const classes = useStyles()
   const dispatch = useDispatch()
   const selector = useSelector((state)=>state);
   const isOpen = getNotificationIsOpen(selector)
@@ -23,8 +31,9 @@ const Notification = () => {
         horizontal: 'right',
       }}
       open={isOpen}
-      autoHideDuration={3000}
+      autoHideDuration={100000}
       onClose={()=>dispatch(closeNotificationAction())}
+      className={classes.snackbar}
     >
       <NotificationSnackbar
         onClose={()=>dispatch(closeNotificationAction())}

@@ -13,7 +13,7 @@ import { getSignedIn } from "./reducks/users/selectors"
 
 const useStyles = makeStyles((theme)=>({
   main: {
-    padding: "56px 0 60px 0",
+    padding: "90px 0 90px 0",
   }
 }))
 const App = () => {
