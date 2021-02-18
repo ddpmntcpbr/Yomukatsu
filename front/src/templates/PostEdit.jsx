@@ -86,7 +86,6 @@ const PostEdit = () => {
   };
 
   const handleSaveReadingPost = useCallback(() => {
-    console.log(title,url,author,image,postItems)
     dispatch(saveReadingPost(title,url,author,image,postItems))
   },[dispatch,title,url,author,image,postItems])
 
