@@ -286,7 +286,7 @@ export const updateStatusToCompleted = (prevData) =>{
       const postId = response.data.id
       dispatch(fetchPosts())
       dispatch(push("/completed/posts/" + postId))
-      notificationContent = {variant:"success",message:'完読おめでとうございます！Twitterでシェアしましょう！'}
+      notificationContent = {variant:"success",message:'完読！Twitterでシェアしよう！'}
     })
     .catch((error) => {
       console.log("error",error)

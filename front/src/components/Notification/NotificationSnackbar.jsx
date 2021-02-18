@@ -22,7 +22,6 @@ const variantIcon = {
 
 const useStyles = makeStyles((theme)=>({
   snackbarContent:{
-    height: 40,
     padding: "0 8px 0 8px"
   },
   success: {
