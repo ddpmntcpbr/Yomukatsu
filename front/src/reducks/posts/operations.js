@@ -1,6 +1,7 @@
 import axios from "axios";
 import { push } from "connected-react-router";
 import {hideLoadingAction, showLoadingAction} from "../loading/actions";
+import {setNotificationAction} from "../notification/actions";
 import {_sleep} from "../../helpers"
 import {
   fetchPostsFailureAction,
@@ -8,6 +9,8 @@ import {
   startFetchingPostsAction
 } from "./actions";
 import _ from 'lodash';
+
+let notificationContent = {}
 
 export const exchangeRegisteredAndReadingPost = (id) => {
   return async (dispatch) => {
@@ -19,16 +22,20 @@ export const exchangeRegisteredAndReadingPost = (id) => {
       'client': localStorage.getItem('client_id'),
       'uid': localStorage.getItem('uid'),
     }})
-    .then((response) => {
+    .then(() => {
       dispatch(fetchPosts())
       dispatch(push("/reading/posts"))
+      notificationContent = {variant:"success",message:"書籍を読書中にセットしました"}
     })
     .catch((error) => {
       console.log("error",error)
+      notificationContent = {variant:"error",message:"書籍情報を変更に失敗しました"}
     })
 
     await _sleep(1000)
     dispatch(hideLoadingAction())
+    await _sleep(300)
+    dispatch(setNotificationAction(...Object.values(notificationContent)))
   }
 }
 
@@ -42,15 +49,19 @@ export const deletePost = (id) => {
       'client': localStorage.getItem('client_id'),
       'uid': localStorage.getItem('uid'),
     }})
-    .then((response) => {
+    .then(() => {
       dispatch(fetchPosts())
       dispatch(push("/posts/list"))
+      notificationContent = {variant:"success",message:"書籍を削除しました"}
     })
     .catch((error) => {
       console.log("error",error)
+      notificationContent = {variant:"error",message:"削除に失敗しました"}
     })
     await _sleep(1000);
     dispatch(hideLoadingAction())
+    await _sleep(300)
+    dispatch(setNotificationAction(...Object.values(notificationContent)))
   }
 }
 
@@ -114,7 +125,7 @@ export const initialFetchPosts = () => {
 // reading posts として書籍情報を新規登録
 export const saveReadingPost = (title,url,author,image,postItems) => {
   return async (dispatch) => {
-    dispatch(showLoadingAction("カレントブックとして登録中..."))
+    dispatch(showLoadingAction("書籍登録中..."))
 
     const post_items_attributes = []
     postItems.map((postItem) => (
@@ -146,17 +157,22 @@ export const saveReadingPost = (title,url,author,image,postItems) => {
       .then(() => {
         dispatch(fetchPosts())
         dispatch(push("/reading/posts"))
+        notificationContent = {variant:"success",message:"新規登録に成功しました"}
       })
       .catch((error) => {
         console.log("error",error)
+        notificationContent = {variant:"error",message:"新規登録に失敗しました"}
       })
     })
     .catch((error) => {
       console.log("error",error)
+      notificationContent = {variant:"error",message:"新規登録に失敗しました"}
     })
 
-    await _sleep(2000);
+    await _sleep(2500);
     dispatch(hideLoadingAction())
+    await _sleep(300)
+    dispatch(setNotificationAction(...Object.values(notificationContent)))
   }
 }
 
@@ -164,7 +180,6 @@ export const saveReadingPost = (title,url,author,image,postItems) => {
 export const saveRegisteredPost = (title,url,author,image,postItems) => {
   return async (dispatch) => {
     dispatch(showLoadingAction("書籍登録中..."))
-
     const post_items_attributes = []
 
     postItems.map((postItem) => (
@@ -191,13 +206,16 @@ export const saveRegisteredPost = (title,url,author,image,postItems) => {
       const postId = response.data.id
       dispatch(fetchPosts())
       dispatch(push("/registered/posts/" + postId))
+      notificationContent = {variant:"success",message:"新規登録に成功しました"}
     })
     .catch((error) => {
       console.log("error",error)
+      notificationContent = {variant:"error",message:"新規登録に失敗しました"}
     })
-
-    await _sleep(1000);
+    await _sleep(2500);
     dispatch(hideLoadingAction())
+    await _sleep(300)
+    dispatch(setNotificationAction(...Object.values(notificationContent)))
   }
 }
 
@@ -234,12 +252,15 @@ export const updatePostItems = (id,initialPostItems,editedPostItems) => {
       'client': localStorage.getItem('client_id'),
       'uid': localStorage.getItem('uid'),
     }})
-    .then((response) => {
+    .then(() => {
       dispatch(fetchPosts())
+      notificationContent = {variant:"success",message:"マップアイテムを更新しました"}
     })
     .catch((error) => {
       console.log("error",error)
+      notificationContent = {variant:"error",message:"更新に失敗しました"}
     })
+    dispatch(setNotificationAction(...Object.values(notificationContent)))
   }
 }
 
@@ -265,11 +286,15 @@ export const updateStatusToCompleted = (prevData) =>{
       const postId = response.data.id
       dispatch(fetchPosts())
       dispatch(push("/completed/posts/" + postId))
+      notificationContent = {variant:"success",message:'完読おめでとうございます！Twitterでシェアしましょう！'}
     })
     .catch((error) => {
       console.log("error",error)
+      notificationContent = {variant:"error",message:"更新に失敗しました"}
     })
     await _sleep(1000);
     dispatch(hideLoadingAction())
+    await _sleep(300)
+    dispatch(setNotificationAction(...Object.values(notificationContent)))
   }
 }
