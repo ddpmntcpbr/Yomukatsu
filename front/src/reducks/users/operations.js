@@ -4,6 +4,9 @@ import axios from "axios"
 import {hideLoadingAction, showLoadingAction} from "../loading/actions";
 // import { hideLoading, showLoading } from "../loading/operations";
 import {_sleep} from "../../helpers"
+import {setNotificationAction} from "../notification/actions";
+
+let notificationContent = {}
 
 export const listenAuthState = () => {
   return async (dispatch) => {
@@ -32,13 +35,11 @@ export const listenAuthState = () => {
           userNickname: userData.nickname
         }))
       })
-      .catch((error) => {
-        console.log(error)
+      .catch(() => {
+        dispatch(setNotificationAction("error","ログインに失敗しました"))
       })
-
     // LocalStorageに認証情報が含まれていない場合
     } else {
-      console.log("LocalStorageに認証情報が含まれていません")
       dispatch(push("/"))
     }
   }
@@ -62,9 +63,6 @@ export const signIn = () => {
     // TwitterAPIのエンドポイントへリダイレクト
     const authOriginUrl = process.env.REACT_APP_BASE_URL.match(/^https?:\/{2,}(.*?)(?:\/|\?|#|$)/)[1]
     window.location.href = process.env.REACT_APP_API_V1_URL + '/auth/twitter?auth_origin_url=' + authOriginUrl;
-
-    // 失敗したら、SignIn画面へリダイレクト
-    dispatch(push("/"));
   }
 }
 
@@ -95,26 +93,32 @@ export const signInGuestUser = () => {
       localStorage.setItem('client_id', response.headers["client"]);
       localStorage.setItem('uid', response.headers["uid"]);
       dispatch(push("/reading/posts"))
+      notificationContent = {variant:"success",message:"ゲストログインしました"}
     })
     .catch((error) => {
       console.log("error",error)
+      notificationContent = {variant:"error",message:"ログインに失敗しました"}
     })
 
     await _sleep(1000);
     dispatch(hideLoadingAction())
+    await _sleep(300)
+    dispatch(setNotificationAction(...Object.values(notificationContent)))
   }
 }
 
 export const signOut = () => {
   return async (dispatch) => {
     dispatch(showLoadingAction("Sign out..."))
+    dispatch(push("/"));
     // Local Storageの初期化
     localStorage.clear()
 
     // Store Userの初期化
     dispatch(signOutAction());
     await _sleep(1000)
-    dispatch(push("/"));
     dispatch(hideLoadingAction())
+    await _sleep(300)
+    dispatch(setNotificationAction("success","ログアウトしました"))
   }
 }

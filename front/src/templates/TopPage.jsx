@@ -15,6 +15,7 @@ import ideaImage from "../assets/img/src/idea.png";
 import researchImage from "../assets/img/src/research.png";
 import terminalImage from "../assets/img/src/terminal.png";
 import axios from "axios"
+import { setNotificationAction } from "../reducks/notification/actions"
 
 const useStyles = makeStyles((theme)=>({
   paper: {
@@ -79,8 +80,9 @@ const TopPage = () => {
 
   return (
     <Box >
-      <Button onClick={userCount}>User count</Button>
-      <Button onClick={postCount}>Post count</Button>
+      <Button variant="contained" onClick={userCount}>User count</Button>
+      <Button variant="contained" onClick={postCount}>Post count</Button>
+      <Button variant="contained" onClick={()=>dispatch(setNotificationAction("success","通知！！！"))}>通知ボタン</Button>
       <Helmet
         meta={[
           {name: "twitter:card", content: "summary"},

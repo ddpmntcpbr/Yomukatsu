@@ -2,6 +2,7 @@ import React from 'react'
 import Router from './Router'
 import { makeStyles } from "@material-ui/styles";
 import { Header } from './components/Header'
+import { Notification } from './components/Notification'
 import { ResponsiveBottomNavigation } from './components/ResponsiveBottomNavigation';
 import { Loading } from "./components/UIkit"
 import "./assets/reset.css"
@@ -27,6 +28,7 @@ const App = () => {
         <Header />
         <main className={classes.main}>
           <Container maxWidth="sm">
+            <Notification/>
             <Router />
           </Container>
         </main>
