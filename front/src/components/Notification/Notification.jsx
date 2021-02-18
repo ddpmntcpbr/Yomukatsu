@@ -12,7 +12,7 @@ import {getNotificationIsOpen,
 
 const useStyles = makeStyles((theme)=>({
   snackbar: {
-    height: 110
+    height: 45
   }
 }))
 
@@ -31,7 +31,7 @@ const Notification = () => {
         horizontal: 'right',
       }}
       open={isOpen}
-      autoHideDuration={100000}
+      autoHideDuration={3000}
       onClose={()=>dispatch(closeNotificationAction())}
       className={classes.snackbar}
     >
