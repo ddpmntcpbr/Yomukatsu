@@ -15,6 +15,7 @@ import { getUserName,getUserImage,getUserNickname} from "../reducks/users/select
 import { signOut } from "../reducks/users/operations";
 import { SecondaryButton } from "../components/UIkit";
 import { FormDialog } from "../components/Setting"
+import { setNotificationAction } from "../reducks/notification/actions"
 
 const useStyles = makeStyles((theme)=>({
   paper: {
@@ -92,7 +93,7 @@ const Setting = () => {
 
           {(userName==="ゲストユーザー" && userNickname==="guest_user")
             ?
-            <MenuItem className={classes.menuItem} onClick={()=>alert("ゲストユーザーではお問い合わせフォームをご利用いただけません。Twitterアカウントでログインをお願いします。")}>
+            <MenuItem className={classes.menuItem} onClick={()=>dispatch(setNotificationAction("error","ゲストユーザーではご利用できません"))}>
               <ListItemIcon>
                 <MailIcon fontSize="small" />
               </ListItemIcon>
