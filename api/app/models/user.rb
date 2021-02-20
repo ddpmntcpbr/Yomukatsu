@@ -9,5 +9,5 @@ class User < ActiveRecord::Base
          :omniauthable, omniauth_providers: [:twitter]
   include DeviseTokenAuth::Concerns::User
 
-  has_many :posts
+  has_many :posts, dependent: :destroy
 end

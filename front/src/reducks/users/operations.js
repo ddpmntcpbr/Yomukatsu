@@ -122,3 +122,32 @@ export const signOut = () => {
     dispatch(setNotificationAction("success","ログアウトしました"))
   }
 }
+
+export const deleteUser = () => {
+  return async (dispatch) => {
+    dispatch(showLoadingAction("ユーザー情報を削除しています"))
+
+    const apiUrl = process.env.REACT_APP_API_V1_URL + "/auth"
+    const params =  { 'access-token': localStorage.getItem('auth_token'),
+                      'client': localStorage.getItem('client_id'),
+                      'uid': localStorage.getItem('uid')
+                    }
+
+    await axios.delete(apiUrl,{data:params})
+    .then(() => {
+      dispatch(push("/"));
+      localStorage.clear()
+      dispatch(signOutAction());
+      notificationContent = {variant:"success",message:'正常に退会が完了しました'}
+    })
+    .catch((error) => {
+      console.log("error",error)
+      notificationContent = {variant:"error",message:"退会に失敗しました"}
+    })
+
+    await _sleep(1000)
+    dispatch(hideLoadingAction())
+    await _sleep(300)
+    dispatch(setNotificationAction(...Object.values(notificationContent)))
+  }
+}
