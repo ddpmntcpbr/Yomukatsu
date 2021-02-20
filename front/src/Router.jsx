@@ -18,11 +18,11 @@ const Router = () => {
     <Switch>
       <Route exact path={"/"} component={TopPage} />
       <Route exact path={"/share/posts/:id"} component={SharePostsPage} />
+      <Route exact path={"/agreement"} component={Agreement} />
 
       <Auth>
         <Route exact path={"/completed/posts/:id"} component={CompletedPostsDetail} />
         <Route exact path={"/reading/posts"} component={ReadingPostsDetail} />
-        <Route exact path={"/agreement"} component={Agreement} />
         <Route exact path={"/setting"} component={Setting} />
         <Route exaxt path={"/registered/posts/:id"} component={RegisteredPostsDetail} />
         <Route exact path={"/posts/edit"} component={PostEdit} />
