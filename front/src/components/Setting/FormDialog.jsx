@@ -37,7 +37,7 @@ const FormDialog = (props) => {
       method: 'POST',
       body: JSON.stringify(payload)
     }).then(() => {
-      dispatch(setNotificationAction("success","送信が完了しました！しばらくお待ちください"))
+      dispatch(setNotificationAction("success","送信が完了しました"))
       setEmail("")
       setDescription("")
       return props.handleClose()
