@@ -16,6 +16,9 @@ import researchImage from "../assets/img/src/research.png";
 import terminalImage from "../assets/img/src/terminal.png";
 import axios from "axios"
 import { setNotificationAction } from "../reducks/notification/actions"
+import { push } from "connected-react-router";
+import administratorIcon from "../assets/img/src/administratorIcon.png"
+import CopyrightIcon from '@material-ui/icons/Copyright';
 
 const useStyles = makeStyles((theme)=>({
   paper: {
@@ -50,6 +53,19 @@ const useStyles = makeStyles((theme)=>({
       right: 0,
       width: "100%",
       height: "100%"
+    }
+  },
+  administratorIcon:{
+    "& img":{
+      borderRadius: "50%"
+    }
+  },
+  footerLink: {
+    fontSize: "0.8rem",
+    color: theme.palette.primary.main,
+    '&:hover':{
+      cursor: "pointer",
+      borderBottom: "1px solid"
     }
   }
 }))
@@ -256,6 +272,32 @@ const TopPage = () => {
                 label="ゲストログイン"
                 onClick={()=>dispatch(signInGuestUser())}
               />
+            </Box>
+          </Box>
+          <Divider />
+          <Box display="flex" justifyContent="center" alignItems="center" mt={4} >
+            <Box>
+              <CopyrightIcon style={{ fontSize: "0.8rem",verticalAlign: -1 }}/>
+            </Box>
+            <Box fontSize="0.8rem" ml={1}>
+              2021 辻野翔陽
+            </Box>
+          </Box>
+          <Box display="flex" justifyContent="center" alignItems="center">
+            <Box className={classes.administratorIcon}>
+              <img src={administratorIcon} alt="administratorIcon" width="30px" height="30px"/>
+            </Box>
+            <Box ml={1} fontSize="0.8rem">
+              運営者:
+            </Box>
+            <Box className={classes.footerLink} onClick={()=>window.open("https://twitter.com/ddpmntcpbr")}>
+              @ddpmntcpbr
+            </Box>
+            <Box mx={1} fontSize="0.8rem">
+              /
+            </Box>
+            <Box className={classes.footerLink} onClick={()=>dispatch(push("/agreement"))}>
+              利用規約
             </Box>
           </Box>
         </Box>
