@@ -47,7 +47,7 @@ const useStyles = makeStyles((theme)=>({
   message: {
     display: 'flex',
     alignItems: 'center',
-    fontSize: "1rem",
+    fontSize: "0.8rem",
     fontWeight: "bold"
   },
 }))
