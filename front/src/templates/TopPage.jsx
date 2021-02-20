@@ -16,6 +16,8 @@ import researchImage from "../assets/img/src/research.png";
 import terminalImage from "../assets/img/src/terminal.png";
 import axios from "axios"
 import { setNotificationAction } from "../reducks/notification/actions"
+import { push } from "connected-react-router";
+import administratorIcon from "../assets/img/src/administratorIcon.png"
 
 const useStyles = makeStyles((theme)=>({
   paper: {
@@ -50,6 +52,18 @@ const useStyles = makeStyles((theme)=>({
       right: 0,
       width: "100%",
       height: "100%"
+    }
+  },
+  administratorIcon:{
+    "& img":{
+      borderRadius: "50%"
+    }
+  },
+  footerLink: {
+    color: theme.palette.primary.main,
+    '&:hover':{
+      cursor: "pointer",
+      borderBottom: "1px solid"
     }
   }
 }))
@@ -256,6 +270,24 @@ const TopPage = () => {
                 label="ゲストログイン"
                 onClick={()=>dispatch(signInGuestUser())}
               />
+            </Box>
+          </Box>
+          <Divider />
+          <Box display="flex" mt={4} justifyContent="center" alignItems="center">
+            <Box className={classes.administratorIcon}>
+              <img src={administratorIcon} alt="administratorIcon" width="48px" height="48px"/>
+            </Box>
+            <Box ml={2}>
+              運営者:
+            </Box>
+            <Box className={classes.footerLink} onClick={()=>window.open("https://twitter.com/ddpmntcpbr")}>
+              @ddpmntcpbr
+            </Box>
+            <Box mx={1}>
+              /
+            </Box>
+            <Box className={classes.footerLink} onClick={()=>dispatch(push("/agreement"))}>
+              利用規約
             </Box>
           </Box>
         </Box>
