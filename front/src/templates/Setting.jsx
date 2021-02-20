@@ -13,9 +13,11 @@ import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
 import AttachFileIcon from "@material-ui/icons/AttachFile"
 import { getUserName,getUserImage,getUserNickname} from "../reducks/users/selectors"
 import { signOut } from "../reducks/users/operations";
-import { SecondaryButton } from "../components/UIkit";
+import { SecondaryButton,QuestionDialog } from "../components/UIkit";
 import { FormDialog } from "../components/Setting"
 import { setNotificationAction } from "../reducks/notification/actions"
+import { deleteUser }  from "../reducks/users/operations"
+import ClearAllIcon from '@material-ui/icons/ClearAll';
 
 const useStyles = makeStyles((theme)=>({
   paper: {
@@ -44,15 +46,29 @@ const Setting = () => {
   const userName = getUserName(selector)
   const userImage = getUserImage(selector)
   const userNickname = getUserNickname(selector)
-  const [open, setOpen] = useState(false);
+  const [formDialogOpen, setFormDialogOpen] = useState(false);
+  const [userDeleteDialogOpen, setUserDeleteDialogOpen] = useState(false);
 
-  const handleClickOpen = () => {
-    setOpen(true)
+  const handleFormDialogOpen = () => {
+    setFormDialogOpen(true)
   };
 
-  const handleClose = useCallback(() => {
-    setOpen(false)
-  }, [setOpen]);
+  const handleFormDialogClose = useCallback(() => {
+    setFormDialogOpen(false)
+  }, [setFormDialogOpen]);
+
+  const handleUserDeleteDialogOpen = () => {
+    setUserDeleteDialogOpen(true)
+  };
+
+  const handleUserDeleteDialogClose = useCallback(() => {
+    setUserDeleteDialogOpen(false)
+  }, [setUserDeleteDialogOpen]);
+
+  const handleUserDelete = useCallback(()=>{
+    dispatch(deleteUser())
+    setUserDeleteDialogOpen(false)
+  },[dispatch,setUserDeleteDialogOpen])
 
   return (
     <Box mb={2}>
@@ -100,7 +116,7 @@ const Setting = () => {
               <Typography variant="inherit">お問い合わせ</Typography>
             </MenuItem>
             :
-            <MenuItem className={classes.menuItem} onClick={()=>handleClickOpen()}>
+            <MenuItem className={classes.menuItem} onClick={()=>handleFormDialogOpen()}>
               <ListItemIcon>
                 <MailIcon fontSize="small" />
               </ListItemIcon>
@@ -119,10 +135,38 @@ const Setting = () => {
             </ListItemIcon>
             <Typography variant="inherit">Github ソースコード</Typography>
           </MenuItem>
+          {(userName==="ゲストユーザー" && userNickname==="guest_user")
+            ?
+            <MenuItem className={classes.menuItem} onClick={()=>dispatch(setNotificationAction("error","ゲストユーザーではご利用できません"))}>
+              <ListItemIcon>
+                <ClearAllIcon fontSize="small" />
+              </ListItemIcon>
+              <Typography variant="inherit">Yomukatsuから退会</Typography>
+            </MenuItem>
+            :
+            <MenuItem className={classes.menuItem} onClick={()=>handleUserDeleteDialogOpen()}>
+            <ListItemIcon>
+              <ClearAllIcon fontSize="small" />
+            </ListItemIcon>
+            <Typography variant="inherit">Yomukatsuから退会</Typography>
+          </MenuItem>
+          }
         </MenuList>
       </Box>
       {!(userName==="ゲストユーザー" && userNickname==="guest_user") &&
-        <FormDialog open={open} handleClose={handleClose} />
+      <div>
+        <FormDialog
+          open={formDialogOpen}
+          handleClose={handleFormDialogClose}
+        />
+        <QuestionDialog
+          open={userDeleteDialogOpen}
+          handleEvent={handleUserDelete}
+          handleClose={handleUserDeleteDialogClose}
+          title="本当に退会しますか？"
+          contentText="一度退会をしますと、登録した書籍情報も全て削除されます"
+        />
+      </div>
       }
     </Box>
   );
