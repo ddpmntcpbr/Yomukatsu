@@ -25,6 +25,15 @@ const FormDialog = (props) => {
       dispatch(setNotificationAction("error","入力フォームが空欄です"))
       return props.handleClose()
     }
+
+    // Emailチェック用正規表現パターン
+    const reg = /^[A-Za-z0-9]{1}[A-Za-z0-9_.-]*@{1}[A-Za-z0-9_.-]{1,}\.[A-Za-z0-9]{1,}$/;
+
+    if(!reg.test(email)){
+      dispatch(setNotificationAction("error","不正なメールアドレスです"))
+      return props.handleClose()
+    }
+
     const payload = {
       text: 'お問い合わせがありました\n' +
             'お名前: ' + userName + '\n' +
