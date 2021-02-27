@@ -63,6 +63,7 @@ const FormDialog = (props) => {
       open={props.open}
       onClose={props.handleClose}
       aria-labelledby="form-dialog-title"
+      style={{maxHeight: "90%"}}
     >
       <DialogTitle id="form-dialog-title">お問い合せフォーム</DialogTitle>
       <DialogContent>
