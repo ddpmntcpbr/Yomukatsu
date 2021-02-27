@@ -8,7 +8,8 @@ import { isNonEmptyArray } from "../helpers"
 import { getSharePosts } from "../reducks/sharePosts/selectors"
 import { fetchSharePost } from "../reducks/sharePosts/operations";
 import { push } from "connected-react-router";
-
+import { listenAuthState } from "../reducks/users/operations";
+import { getSignedIn } from "../reducks/users/selectors";
 
 const useStyles = makeStyles((theme)=>({
   paper: {
@@ -42,13 +43,17 @@ const SharePostsPage = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const selector = useSelector((state)=>state);
+  const isSignedIn = getSignedIn(selector);
   const post = getSharePosts(selector);
   const path = selector.router.location.pathname;
   const id = Number(path.split("/share/posts/")[1]);
 
   useEffect(()=>{
     dispatch(fetchSharePost(id))
-  },[dispatch,id])
+    if (!isSignedIn && localStorage.getItem('auth_token')) {
+      dispatch(listenAuthState())
+    }
+  },[isSignedIn,dispatch,id])
 
   return (
     <Box>

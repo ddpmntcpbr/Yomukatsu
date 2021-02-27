@@ -1,8 +1,8 @@
-import React from 'react';
+import React,{useEffect} from 'react';
+import { useSelector, useDispatch } from "react-redux";
 import { Box,Button,Divider,Paper } from '@material-ui/core';
 import { TwitterLoginButton } from "../components/UIkit";
-import {useDispatch} from 'react-redux';
-import {signIn,signInGuestUser} from "../reducks/users/operations";
+import {listenAuthState, signIn,signInGuestUser} from "../reducks/users/operations";
 import topPageImage from "../assets/img/src/top.png";
 import {PrimaryButton} from "../components/UIkit";
 import { Helmet } from "react-helmet";
@@ -15,10 +15,10 @@ import ideaImage from "../assets/img/src/idea.png";
 import researchImage from "../assets/img/src/research.png";
 import terminalImage from "../assets/img/src/terminal.png";
 import axios from "axios"
-import { setNotificationAction } from "../reducks/notification/actions"
 import { push } from "connected-react-router";
 import administratorIcon from "../assets/img/src/administratorIcon.png"
 import CopyrightIcon from '@material-ui/icons/Copyright';
+import { getSignedIn } from "../reducks/users/selectors";
 
 const useStyles = makeStyles((theme)=>({
   paper: {
@@ -70,35 +70,42 @@ const useStyles = makeStyles((theme)=>({
   }
 }))
 
-const userCount = () => {
-  axios.get(process.env.REACT_APP_API_V1_URL + '/users_count')
-  .then((response) => {
-    console.log("User.count",response.data)
-  })
-  .catch((error) => {
-    console.log(error)
-  })
-}
-
-const postCount = () => {
-  axios.get(process.env.REACT_APP_API_V1_URL + '/posts_count')
-  .then((response) => {
-    console.log("Post.count",response.data)
-  })
-  .catch((error) => {
-    console.log(error)
-  })
-}
-
 const TopPage = () => {
   const classes = useStyles()
   const dispatch = useDispatch()
+  const selector = useSelector((state) => state);
+  const isSignedIn = getSignedIn(selector);
+
+  const userCount = () => {
+    axios.get(process.env.REACT_APP_API_V1_URL + '/users_count')
+    .then((response) => {
+      console.log("User.count",response.data)
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+  }
+
+  const postCount = () => {
+    axios.get(process.env.REACT_APP_API_V1_URL + '/posts_count')
+    .then((response) => {
+      console.log("Post.count",response.data)
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+  }
+
+  useEffect(() => {
+    if (!isSignedIn && localStorage.getItem('auth_token')) {
+      dispatch(listenAuthState())
+    }
+  },[isSignedIn,dispatch])
 
   return (
     <Box >
       <Button variant="contained" onClick={userCount}>User count</Button>
       <Button variant="contained" onClick={postCount}>Post count</Button>
-      <Button variant="contained" onClick={()=>dispatch(setNotificationAction("success","通知！！！"))}>通知ボタン</Button>
       <Helmet
         meta={[
           {name: "twitter:card", content: "summary"},

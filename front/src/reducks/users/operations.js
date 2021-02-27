@@ -40,6 +40,7 @@ export const listenAuthState = () => {
       })
     // LocalStorageに認証情報が含まれていない場合
     } else {
+      dispatch(setNotificationAction("error","認証情報が見つかりません"))
       dispatch(push("/"))
     }
   }
