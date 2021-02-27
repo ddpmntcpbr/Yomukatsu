@@ -9,6 +9,7 @@ import {MuiThemeProvider} from "@material-ui/core";
 import {theme} from "./assets/theme"
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import { ScrollToTop } from "./components/ScrollToTop"
 
 const history = History.createBrowserHistory();
 export const store = createStore(history);
@@ -17,6 +18,7 @@ render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
       <MuiThemeProvider theme={theme}>
+        <ScrollToTop />
         <App />
       </MuiThemeProvider>
     </ConnectedRouter>
