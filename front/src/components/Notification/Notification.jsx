@@ -12,7 +12,7 @@ import {getNotificationIsOpen,
 
 const useStyles = makeStyles((theme)=>({
   snackbar: {
-    height: 45
+    height: 80
   }
 }))
 
