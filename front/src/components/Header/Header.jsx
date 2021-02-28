@@ -1,6 +1,4 @@
 import React,{useCallback,useState} from 'react';
-import { useSelector } from 'react-redux';
-import { getSignedIn } from "../../reducks/users/selectors"
 import {makeStyles} from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -36,8 +34,6 @@ const useStyles = makeStyles((theme)=>({
 const Header = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const selector = useSelector((state)=>state);
-  const isSignedIn = getSignedIn(selector);
 
   const [open, setOpen] = useState(false);
 
