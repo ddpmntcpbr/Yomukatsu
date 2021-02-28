@@ -56,13 +56,13 @@ const Header = () => {
             src={logo} alt="Logo" className={classes.headerLogo}
             onClick={()=>dispatch(push("/"))}
           />
-          {isSignedIn &&
-            <Box className={classes.iconButtons}>
-              <IconButton style={{ padding: "8px" }} onClick={(event) => handleDrawerToggle(event)}>
-                <MenuIcon style={{ fontSize: 24, color: "#ffffff" }} />
-              </IconButton>
-            </Box>
-          }
+
+          <Box className={classes.iconButtons}>
+            <IconButton style={{ padding: "8px" }} onClick={(event) => handleDrawerToggle(event)}>
+              <MenuIcon style={{ fontSize: 24, color: "#ffffff" }} />
+            </IconButton>
+          </Box>
+
         </Toolbar>
       </AppBar>
       <ClosableDrawer open={open} onClose={handleDrawerToggle}/>
