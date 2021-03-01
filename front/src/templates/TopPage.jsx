@@ -252,8 +252,10 @@ const TopPage = () => {
                 登録した書籍をTwitterでシェア！
               </Box>
               <Box className={classes.subContent} component="h6" mt={2}>
-                読書仲間で「いいね」を送り合って、モチベを高めよう！<br/>
-                (※ メンタルマップの中身は公開されません)
+                読書仲間で「いいね」を送り合って、モチベを高めよう！
+                <Box style={{color: "red"}}>
+                  (※ メンタルマップの中身が公開されることはありません)
+                </Box>
               </Box>
               <Image
                 src={favoImage}
