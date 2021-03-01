@@ -3,6 +3,7 @@ import {Route, Switch} from "react-router";
 import {
   Agreement,
   CompletedPostsDetail,
+  IntroductionPage,
   PostEdit,
   PostsList,
   ReadingPostsDetail,
@@ -19,6 +20,7 @@ const Router = () => {
       <Route exact path={"/"} component={TopPage} />
       <Route exact path={"/share/posts/:id"} component={SharePostsPage} />
       <Route exact path={"/agreement"} component={Agreement} />
+      <Route exact path={"/intro"} component={IntroductionPage} />
 
       <Auth>
         <Route exact path={"/completed/posts/:id"} component={CompletedPostsDetail} />
