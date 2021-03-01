@@ -1,24 +1,21 @@
 import React,{useEffect} from 'react';
 import { useSelector, useDispatch } from "react-redux";
-import { Box,Button,Divider,Paper } from '@material-ui/core';
-import { TwitterLoginButton } from "../components/UIkit";
-import {listenAuthState, signIn,signInGuestUser} from "../reducks/users/operations";
-import topPageImage from "../assets/img/src/top.png";
-import {PrimaryButton} from "../components/UIkit";
-import { Helmet } from "react-helmet";
 import { makeStyles } from "@material-ui/styles";
-import Image from "react-image-resizer";
-import womanImage from "../assets/img/src/woman.png";
-import postEditScreenShotImage from "../assets/img/src/postEditScreenShot.png";
-import favoImage from "../assets/img/src/favo.png";
-import ideaImage from "../assets/img/src/idea.png";
-import researchImage from "../assets/img/src/research.png";
-import terminalImage from "../assets/img/src/terminal.png";
-import axios from "axios"
-import { push } from "connected-react-router";
-import administratorIcon from "../assets/img/src/administratorIcon.png"
-import CopyrightIcon from '@material-ui/icons/Copyright';
+import { Box,Divider,Paper } from '@material-ui/core';
+import { listenAuthState } from "../reducks/users/operations";
 import { getSignedIn } from "../reducks/users/selectors";
+import intro1 from "../assets/img/src/intro1.png";
+import intro2 from "../assets/img/src/intro2.png";
+import intro3 from "../assets/img/src/intro3.png";
+import intro4 from "../assets/img/src/intro4.png";
+import intro5 from "../assets/img/src/intro5.png";
+import intro6 from "../assets/img/src/intro6.png";
+import intro7 from "../assets/img/src/intro7.png";
+import intro8 from "../assets/img/src/intro8.png";
+import intro9 from "../assets/img/src/intro9.png";
+import intro10 from "../assets/img/src/intro10.png";
+import intro11 from "../assets/img/src/intro11.png";
+import intro12 from "../assets/img/src/intro12.png";
 
 const useStyles = makeStyles((theme)=>({
   paper: {
@@ -30,43 +27,16 @@ const useStyles = makeStyles((theme)=>({
     color: theme.palette.grey[900],
     marginTop: theme.spacing(2)
   },
-  subTitle: {
-    fontSize: "1.2rem",
-    fontWeight: "bold",
-    color: theme.palette.grey[800]
-  },
   content: {
     fontSize: "1rem",
     color: theme.palette.grey[800]
   },
-  subContent: {
-    fontSize: "0.8rem",
-    color: theme.palette.grey[800]
-  },
-  youtube: {
-    position: "relative",
-    width: "100%",
-    paddingTop: "56.25%",
-    "& iframe": {
-      position: "absolute",
-      top: 0,
-      right: 0,
-      width: "100%",
-      height: "100%"
-    }
-  },
-  administratorIcon:{
-    "& img":{
-      borderRadius: "50%"
-    }
-  },
-  footerLink: {
-    fontSize: "0.8rem",
-    color: theme.palette.primary.main,
-    '&:hover':{
-      cursor: "pointer",
-      borderBottom: "1px solid"
-    }
+  image: {
+    width: "80%",
+    margin: "0 auto",
+    marginTop: theme.spacing(4),
+    marginBottom: theme.spacing(4),
+    textAlign: "center"
   }
 }))
 
@@ -75,26 +45,6 @@ const IntroductionPage = () => {
   const dispatch = useDispatch()
   const selector = useSelector((state) => state);
   const isSignedIn = getSignedIn(selector);
-
-  const userCount = () => {
-    axios.get(process.env.REACT_APP_API_V1_URL + '/users_count')
-    .then((response) => {
-      console.log("User.count",response.data)
-    })
-    .catch((error) => {
-      console.log(error)
-    })
-  }
-
-  const postCount = () => {
-    axios.get(process.env.REACT_APP_API_V1_URL + '/posts_count')
-    .then((response) => {
-      console.log("Post.count",response.data)
-    })
-    .catch((error) => {
-      console.log(error)
-    })
-  }
 
   useEffect(() => {
     if (!isSignedIn && localStorage.getItem('auth_token')) {
@@ -118,12 +68,14 @@ const IntroductionPage = () => {
             キーワード検索から書籍を選び、ヒントを参考にしながら"読書メンタルマップ"を作成しましょう<br/>
             <br/>
             "読書メンタルマップ"は、書籍登録後からでもいつでも更新できますので、最初はあまり深く考えなくてOKです
-            <Image
-              src={womanImage}
-              width={200}
-              height={200}
-              style={{margin: "auto"}}
-            />
+            <Box className={classes.image}>
+              <img src={intro1} alt="intro1"/>
+              <Box py={1}>書籍をセットして、</Box>
+            </Box>
+            <Box className={classes.image}>
+              <img src={intro2} alt="intro2"/>
+              <Box py={1}>メンタルマップを作成!</Box>
+            </Box>
           </Box>
         </Box>
 
@@ -133,18 +85,18 @@ const IntroductionPage = () => {
           </Box>
           <Divider/>
           <Box className={classes.content} component="h6" mt={2}>
-            新規作成を押すと、「読書中にセット」「登録のみ」の２つを選ぶことができます。<br/>
-            <br/>
+            新規作成を押すと、「読書中にセット」「登録のみ」の２つを選ぶことができます。
+            <Box className={classes.image}>
+              <img src={intro3} alt="intro3"/>
+            </Box>
             すぐに読み始める場合は「読書中にセット」を選び、後々で読む予定ならば「登録のみ」を
             選んでください
-            <Image
-              src={womanImage}
-              width={200}
-              height={200}
-              style={{margin: "auto"}}
-            />
-            Yomukatsuでは、作成した書籍情報は全部で 3つ の登録状態を持ちます
+            <Box className={classes.image}>
+              <img src={intro4} alt="intro4"/>
+              <Box py={1}>書籍を登録!</Box>
+            </Box>
           </Box>
+          Yomukatsuでは、書籍情報は3つの登録状態を持ちます
           <Box fontWeight="bold" my={4}>
             1. 「読書中」: 現在読書中の書籍。全体でひとつだけ設定できる<br/><br/>
             2. 「登録中」: 登録はしているが、まだ読み終わってはいない状態の書籍。いくつも登録できる<br/><br/>
@@ -153,12 +105,14 @@ const IntroductionPage = () => {
           <Box className={classes.content} component="h6" mt={2}>
             「読書中」アイテムと「登録中」アイテムの入れ替えは、登録リストからいつでもできます
           </Box>
-          <Image
-            src={womanImage}
-            width={200}
-            height={200}
-            style={{margin: "auto"}}
-          />
+          <Box className={classes.image}>
+            <img src={intro5} alt="intro5"/>
+            <Box py={1}>ページ下部の「登録リスト」から、書籍をクリック</Box>
+          </Box>
+          <Box className={classes.image}>
+            <img src={intro6} alt="intro6"/>
+            <Box py={1}>「読書開始書籍にセット」をクリックすることで、この書籍を「読書中」と入れ替えられる</Box>
+          </Box>
         </Box>
 
         <Box py={4}>
@@ -172,49 +126,46 @@ const IntroductionPage = () => {
             「ちょっと飽きてきちゃったなー」というときこそ、読書メンタルマップの出番！自作したマップを読み返してモチベーションを高めましょう<br/>
             <br/>
             また、一度中断した書籍を再び読み始めるときのモチベーションフックとしても活用できます！
-            <Image
-              src={womanImage}
-              width={200}
-              height={200}
-              style={{margin: "auto"}}
-            />
-            読書中アイテムのメンタルマップを読み返す！本を読みながら新しいマップ項目が思いついたら、どんどん追加してこう
+            <Box className={classes.image}>
+              <img src={intro7} alt="intro7"/>
+              <Box py={1}>本を読みながら新しいマップ項目が思いついたら、どんどん追加していこう</Box>
+            </Box>
           </Box>
         </Box>
 
         <Box py={4}>
           <Box className={classes.title} component="h2">
-            4. 読み終わったら「完読した！」ボタンをクリック！Twitterでシェアしよう！
+            4. 読み終わったら「完読した！」ボタンをクリック！Twitterでシェアしよう
           </Box>
           <Divider/>
           <Box className={classes.content} component="h6" mt={2}>
-            完読ボタンを押すことで、書籍を「完読済み」にすることができます。<br/>
-            <br/>
-            <Image
-              src={womanImage}
-              width={200}
-              height={200}
-              style={{margin: "auto"}}
-            />
-            Twitterボタンで完読をシェアし、読書仲間からのいいねをもらいましょう！<br/>
-            <br/>
-            <Image
-              src={womanImage}
-              width={200}
-              height={200}
-              style={{margin: "auto"}}
-            />
-            ※Twitterシェアされるのは書籍そのものの情報だけであり、メンタルマップの中身は他人に公開されることはありません
-            <Image
-              src={womanImage}
-              width={200}
-              height={200}
-              style={{margin: "auto"}}
-            />
-            シェアされるページ
+            完読ボタンを押すことで、書籍を「完読済み」にすることができます。
+            <Box className={classes.image}>
+              <img src={intro8} alt="intro8"/>
+              <Box py={1}>OKをクリックすると</Box>
+            </Box>
+            <Box className={classes.image}>
+              <img src={intro9} alt="intro9"/>
+              <Box py={1}>書籍が「完読済み」リストへ移動!</Box>
+            </Box>
+            Twitterボタンで完読をシェアし、読書仲間からのいいねをもらいましょう！
+            <Box className={classes.image}>
+              <img src={intro10} alt="intro10"/>
+              <Box py={1}>ツイート内容はデフォルトから変更することも可能</Box>
+            </Box>
+            <Box className={classes.image}>
+              <img src={intro11} alt="intro11"/>
+              <Box py={1}>タイムライン表示イメージ</Box>
+            </Box>
+            <Box style={{color: "red"}}>
+              ※Twitterシェアされるのは書籍そのものの情報だけであり、メンタルマップの中身が他人に公開されることはありません
+            </Box>
+            <Box className={classes.image}>
+              <img src={intro12} alt="intro12"/>
+              <Box py={1}>実際にシェアされるページ。メンタルマップの中身は公開されませんので、気軽につぶやこう！</Box>
+            </Box>
           </Box>
         </Box>
-
       </Box>
     </Box>
   );
