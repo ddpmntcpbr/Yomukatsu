@@ -104,210 +104,117 @@ const IntroductionPage = () => {
 
   return (
     <Box >
-      <Button variant="contained" onClick={userCount}>User count</Button>
-      <Button variant="contained" onClick={postCount}>Post count</Button>
-      <Helmet
-        meta={[
-          {name: "twitter:card", content: "summary"},
-          {name: "twitter:image", content: "https://www.book.yomukatsu.com/static/media/logo.e89c3802.png"},
-          {name: "twitter:title", content: "Yomukatsu"},
-          {name: "twitter:description", content: "積読解消サポート!"},
-        ]}
-      />
       <Box component={Paper} p={2} className={classes.paper}>
         <Box textAlign="center" fontSize="2.0rem" fontWeight="bold">
-          積読解消アプリ「Yomukatsu!」
-        </Box>
-        <Box textAlign="center" fontSize="1rem" my={1}>
-          「読書メンタルマップ術」を使って<br/>
-          積読を解消しよう！
-        </Box>
-        <img src={topPageImage} alt="topPageImage" width="100%"/>
-
-        <Box className={classes.title} component="h2" mt={10}>
-          新規登録/ログイン
-        </Box>
-        <Divider/>
-        <Box className={classes.content} component="h6" textAlign="center">
-          <Box py={2}>
-            <Box>
-              ↓かんたん！5秒で無料登録！↓
-            </Box>
-            <TwitterLoginButton
-              label={"Twitter ログイン / 新規登録"}
-              onClick={() => dispatch(signIn())}
-            />
-            <Box py={1} fontSize="0.8rem">
-              ※勝手にツイートすることはありません
-            </Box>
-          </Box>
-          <Box py={2}>
-            <Box>
-             ↓お試しはコチラ(ユーザー登録無し)↓
-            </Box>
-            <PrimaryButton
-              label="ゲストログイン"
-              onClick={()=>dispatch(signInGuestUser())}
-            />
-          </Box>
+          アプリの使い方
         </Box>
 
         <Box py={4}>
           <Box className={classes.title} component="h2">
-            Yomukatsu使い方(字幕動画)
-          </Box>
-          <Divider/>
-          <Box className={classes.youtube} textAlign="center" mt={2}>
-            <iframe width="480" height="270" src="https://www.youtube.com/embed/qBvS3Ilp_3o" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen title="tutorial"></iframe>
-          </Box>
-        </Box>
-
-        <Box py={4}>
-          <Box className={classes.title} component="h2">
-            Yomukatsuとは？
+            1. 書籍を新規登録をしよう！
           </Box>
           <Divider/>
           <Box className={classes.content} component="h6" mt={2}>
-            PCやスマホで簡単に「読書メンタルマップ術」を実践することで、<br/>
-            ユーザーの積読解消をサポートするアプリです。
+            キーワード検索から書籍を選び、ヒントを参考にしながら"読書メンタルマップ"を作成しましょう<br/>
+            <br/>
+            "読書メンタルマップ"は、書籍登録後からでもいつでも更新できますので、最初はあまり深く考えなくてOKです
             <Image
               src={womanImage}
               width={200}
               height={200}
               style={{margin: "auto"}}
             />
-            「読書メンタルマップ術」とは、ハーバード大学ショーンエーカー氏が<br/>
-            提唱している積読解消術です。読破したい対象の書籍に対して、<br/>
-
-            <Box fontWeight="bold" my={4}>
-              1. その本について興味があること、それを知って得られるメリットを文章に書き出す<br/>
-              2. 読んでいる途中で飽きてきたら、それを読み返す<br/>
-            </Box>
-            を繰り返すことで完読までモチベーションを維持する、という読書法です。
-            <Box mt={4}>
-              <img src={postEditScreenShotImage} alt="postEditScreenShotImage" width="100%"/>
-              <Box fontSize="0.8rem" textAlign="center">
-                読書メンタルマップ作成イメージ
-              </Box>
-            </Box>
           </Box>
         </Box>
 
         <Box py={4}>
           <Box className={classes.title} component="h2">
-            Yomukatsuでできること
+            2. 「読書中」にセットしよう！
           </Box>
           <Divider/>
-          <Box textAlign="center">
-            <Box mt={4}>
-              <Box className={classes.subTitle} component="h3">
-                PCやスマホから、ペーパーレスでお手軽利用！
-              </Box>
-              <Box className={classes.subContent} component="h6" mt={2}>
-                通勤中など、紙やペンが手元にない状態であっても、<br/>
-                読書メンタルマップの作成・管理ができます
-              </Box>
-              <Image
-                src={terminalImage}
-                width={200}
-                height={200}
-                style={{margin: "auto"}}
-              />
-            </Box>
-
-            <Box mt={10}>
-              <Box className={classes.subTitle} component="h3">
-                マップ作成をサポートするヒント機能！
-              </Box>
-              <Box className={classes.subContent} component="h6" mt={2}>
-                「どうやってマップを作ったらいいか分からない・・・」という方向けの、<br/>
-                充実したヒント機能！
-              </Box>
-              <Image
-                src={ideaImage}
-                width={200}
-                height={200}
-                style={{margin: "auto"}}
-              />
-            </Box>
-
-            <Box mt={10}>
-              <Box className={classes.subTitle} component="h3">
-                読書遍歴をログとして記録！
-              </Box>
-              <Box className={classes.subContent} component="h6" mt={2}>
-                読破してきた書籍がログとして貯まることで、達成感が味わえます
-              </Box>
-
-              <Image
-                src={researchImage}
-                width={200}
-                height={200}
-                style={{margin: "auto"}}
-              />
-            </Box>
-
-            <Box mt={10}>
-              <Box className={classes.subTitle} component="h3">
-                登録した書籍をTwitterでシェア！
-              </Box>
-              <Box className={classes.subContent} component="h6" mt={2}>
-                読書仲間で「いいね」を送り合って、モチベを高めよう！<br/>
-                (※ メンタルマップの中身は公開されません)
-              </Box>
-              <Image
-                src={favoImage}
-                width={200}
-                height={200}
-                style={{margin: "auto"}}
-              />
-            </Box>
+          <Box className={classes.content} component="h6" mt={2}>
+            新規作成を押すと、「読書中にセット」「登録のみ」の２つを選ぶことができます。<br/>
+            <br/>
+            すぐに読み始める場合は「読書中にセット」を選び、後々で読む予定ならば「登録のみ」を
+            選んでください
+            <Image
+              src={womanImage}
+              width={200}
+              height={200}
+              style={{margin: "auto"}}
+            />
+            Yomukatsuでは、作成した書籍情報は全部で 3つ の登録状態を持ちます
           </Box>
+          <Box fontWeight="bold" my={4}>
+            1. 「読書中」: 現在読書中の書籍。全体でひとつだけ設定できる<br/><br/>
+            2. 「登録中」: 登録はしているが、まだ読み終わってはいない状態の書籍。いくつも登録できる<br/><br/>
+            3. 「完読済」: 読み終わった状態の書籍<br/><br/>
+          </Box>
+          <Box className={classes.content} component="h6" mt={2}>
+            「読書中」アイテムと「登録中」アイテムの入れ替えは、登録リストからいつでもできます
+          </Box>
+          <Image
+            src={womanImage}
+            width={200}
+            height={200}
+            style={{margin: "auto"}}
+          />
+        </Box>
 
-          <Box component="h6" textAlign="center" py={4}>
-            <Box className={classes.subTitle}>
-              まずはワンタップで無料登録♪
-            </Box>
-            <Box my={1}>
-              <TwitterLoginButton
-                label={"Twitter ログイン / 新規登録"}
-                onClick={() => dispatch(signIn())}
-              />
-            </Box>
-            <Box my={1}>
-              <PrimaryButton
-                label="ゲストログイン"
-                onClick={()=>dispatch(signInGuestUser())}
-              />
-            </Box>
+        <Box py={4}>
+          <Box className={classes.title} component="h2">
+            3. 読書中にセットした書籍を読もう！
           </Box>
-          <Divider />
-          <Box display="flex" justifyContent="center" alignItems="center" mt={4} >
-            <Box>
-              <CopyrightIcon style={{ fontSize: "0.8rem",verticalAlign: -1 }}/>
-            </Box>
-            <Box fontSize="0.8rem" ml={1}>
-              2021 辻野翔陽
-            </Box>
-          </Box>
-          <Box display="flex" justifyContent="center" alignItems="center">
-            <Box className={classes.administratorIcon}>
-              <img src={administratorIcon} alt="administratorIcon" width="30px" height="30px"/>
-            </Box>
-            <Box ml={1} fontSize="0.8rem">
-              運営者:
-            </Box>
-            <Box className={classes.footerLink} onClick={()=>window.open("https://twitter.com/ddpmntcpbr")}>
-              @ddpmntcpbr
-            </Box>
-            <Box mx={1} fontSize="0.8rem">
-              /
-            </Box>
-            <Box className={classes.footerLink} onClick={()=>dispatch(push("/agreement"))}>
-              利用規約
-            </Box>
+          <Divider/>
+          <Box className={classes.content} component="h6" mt={2}>
+            読書中にセットした本を読んでいきましょう。<br/>
+            <br/>
+            「ちょっと飽きてきちゃったなー」というときこそ、読書メンタルマップの出番！自作したマップを読み返してモチベーションを高めましょう<br/>
+            <br/>
+            また、一度中断した書籍を再び読み始めるときのモチベーションフックとしても活用できます！
+            <Image
+              src={womanImage}
+              width={200}
+              height={200}
+              style={{margin: "auto"}}
+            />
+            読書中アイテムのメンタルマップを読み返す！本を読みながら新しいマップ項目が思いついたら、どんどん追加してこう
           </Box>
         </Box>
+
+        <Box py={4}>
+          <Box className={classes.title} component="h2">
+            4. 読み終わったら「完読した！」ボタンをクリック！Twitterでシェアしよう！
+          </Box>
+          <Divider/>
+          <Box className={classes.content} component="h6" mt={2}>
+            完読ボタンを押すことで、書籍を「完読済み」にすることができます。<br/>
+            <br/>
+            <Image
+              src={womanImage}
+              width={200}
+              height={200}
+              style={{margin: "auto"}}
+            />
+            Twitterボタンで完読をシェアし、読書仲間からのいいねをもらいましょう！<br/>
+            <br/>
+            <Image
+              src={womanImage}
+              width={200}
+              height={200}
+              style={{margin: "auto"}}
+            />
+            ※Twitterシェアされるのは書籍そのものの情報だけであり、メンタルマップの中身は他人に公開されることはありません
+            <Image
+              src={womanImage}
+              width={200}
+              height={200}
+              style={{margin: "auto"}}
+            />
+            シェアされるページ
+          </Box>
+        </Box>
+
       </Box>
     </Box>
   );
