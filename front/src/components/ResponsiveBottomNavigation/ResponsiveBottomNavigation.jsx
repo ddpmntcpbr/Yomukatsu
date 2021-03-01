@@ -42,7 +42,7 @@ const currentActiveBottomNavigationAction = (pathname) => {
     case /^(?=.*registered)(?=.*posts)/.test(pathname): return 1;
     case /^(?=.*completed)(?=.*posts)/.test(pathname): return 1;
     case /edit/.test(pathname): return 2;
-    case /help/.test(pathname): return 3;
+    case /setting/.test(pathname): return 3;
     default: return -1;
    }
   }

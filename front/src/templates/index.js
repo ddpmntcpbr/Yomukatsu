@@ -1,6 +1,7 @@
 export {default as Agreement} from './Agreement'
 export {default as CompletedPostsDetail} from './CompletedPostsDetail'
 export {default as CompletedPostsList} from './CompletedPostsList'
+export {default as IntroductionPage} from './IntroductionPage'
 export {default as PostEdit} from './PostEdit'
 export {default as PostsList} from './PostsList'
 export {default as PostUpdatePage} from './PostUpdatePage'
