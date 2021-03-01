@@ -94,7 +94,7 @@ const Setting = () => {
         </Box>
         <Box px={2} mt={4}>アプリについて</Box>
         <MenuList>
-          <MenuItem className={classes.menuItem} onClick={()=>dispatch(push("/tutorial"))}>
+          <MenuItem className={classes.menuItem} onClick={()=>dispatch(push("/intro"))}>
             <ListItemIcon>
               <AttachFileIcon fontSize="small" />
             </ListItemIcon>
