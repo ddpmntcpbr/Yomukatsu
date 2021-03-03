@@ -1,13 +1,13 @@
 import axios from "axios";
-import { push } from "connected-react-router";
+import {push} from "connected-react-router";
 import {hideLoadingAction, showLoadingAction} from "../loading/actions";
-import {setNotificationAction} from "../notification/actions";
+import {setNotificationAction } from "../notification/actions";
+import {initializePostsListPaginationIndexAction,
+        switchTabIndexAction} from "../postListPage/actions";
 import {_sleep} from "../../helpers"
-import {
-  fetchPostsFailureAction,
-  fetchPostsAction,
-  startFetchingPostsAction
-} from "./actions";
+import {fetchPostsFailureAction,
+        fetchPostsAction,
+        startFetchingPostsAction} from "./actions";
 import _ from 'lodash';
 
 let notificationContent = {}
@@ -24,6 +24,7 @@ export const exchangeRegisteredAndReadingPost = (id) => {
     }})
     .then(() => {
       dispatch(fetchPosts())
+      dispatch(initializePostsListPaginationIndexAction())
       dispatch(push("/reading/posts"))
       notificationContent = {variant:"success",message:"書籍を読書中にセットしました"}
     })
@@ -51,6 +52,7 @@ export const deletePost = (id) => {
     }})
     .then(() => {
       dispatch(fetchPosts())
+      dispatch(initializePostsListPaginationIndexAction())
       dispatch(push("/posts/list"))
       notificationContent = {variant:"success",message:"書籍を削除しました"}
     })
@@ -205,6 +207,8 @@ export const saveRegisteredPost = (title,url,author,image,postItems) => {
     .then((response) => {
       const postId = response.data.id
       dispatch(fetchPosts())
+      dispatch(initializePostsListPaginationIndexAction())
+      dispatch(switchTabIndexAction(0))
       dispatch(push("/registered/posts/" + postId))
       notificationContent = {variant:"success",message:"新規登録に成功しました"}
     })
@@ -264,7 +268,7 @@ export const updatePostItems = (id,initialPostItems,editedPostItems) => {
   }
 }
 
-// reading post を registered post に変更
+// reading post を completed post に変更
 export const updateStatusToCompleted = (prevData) =>{
   return async (dispatch) => {
     dispatch(showLoadingAction("完読書籍として登録中..."))
@@ -285,6 +289,8 @@ export const updateStatusToCompleted = (prevData) =>{
     .then((response) => {
       const postId = response.data.id
       dispatch(fetchPosts())
+      dispatch(initializePostsListPaginationIndexAction())
+      dispatch(switchTabIndexAction(1))
       dispatch(push("/completed/posts/" + postId))
       notificationContent = {variant:"success",message:'完読！Twitterでシェアしよう！'}
     })
