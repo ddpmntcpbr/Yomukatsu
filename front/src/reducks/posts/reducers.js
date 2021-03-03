@@ -45,13 +45,11 @@ export const PostsReducer = (state = initialState.posts, action) => {
       return {
         ...state,
         isFetching: true,
-        list: []
       };
     case Actions.FETCH_POSTS_FAILURE:
       return {
         ...state,
         isFetching: false,
-        list: [],
         error: action.error
       };
     default:

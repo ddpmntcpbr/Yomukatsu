@@ -7,8 +7,9 @@ import {
 import {connectRouter, routerMiddleware} from "connected-react-router";
 import {LoadingReducer} from '../loading/reducers';
 import {NotificationReducer} from '../notification/reducers';
-import {SharePostsReducer} from "../sharePosts/reducers";
+import {postListPageReducer} from "../postListPage/reducers";
 import {PostsReducer} from "../posts/reducers";
+import {SharePostsReducer} from "../sharePosts/reducers";
 import {UsersReducer} from "../users/reducers";
 import thunk from "redux-thunk";
 
@@ -20,8 +21,9 @@ export default function createStore(history) {
       loading: LoadingReducer,
       notification: NotificationReducer,
       router: connectRouter(history),
-      sharePosts: SharePostsReducer,
+      postListPage: postListPageReducer,
       posts: PostsReducer,
+      sharePosts: SharePostsReducer,
       users: UsersReducer,
     }),
     composeEnhancers(

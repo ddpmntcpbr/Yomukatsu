@@ -11,12 +11,17 @@ const initialState = {
     message: '',
   },
 
+  postListPage: {
+    tabIndex: 0, // 0: 登録済みリスト, 1:完読リスト
+    registeredPostsListPaginationIndex: 1,
+    completedPostsListPaginationIndex: 1,
+  },
+
   posts: {
     isFetching: false,
     reading: [],
     registered: [],
     completed: [],
-    share: []
   },
 
   sharePosts: {
