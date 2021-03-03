@@ -3,6 +3,11 @@ import initialState from '../store/initialState';
 
 export const postListPageReducer = (state = initialState.postListPage, action)  => {
     switch (action.type) {
+        case Actions.INITIALIZE_POSTS_LIST_PAGINASTION_INDEX:
+            return {
+                ...state,
+                ...action.payload
+            };
         case Actions.SWITCH_COMPLETED_POSTS_LIST_PAGINASTION_INDEX:
             return {
                 ...state,

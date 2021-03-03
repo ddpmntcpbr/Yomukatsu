@@ -1,3 +1,14 @@
+export const INITIALIZE_POSTS_LIST_PAGINASTION_INDEX = "INITIALIZE_POSTS_LIST_PAGINASTION_INDEX";
+export const initializePostsListPaginationIndexAction = () => {
+    return {
+        type: "INITIALIZE_POSTS_LIST_PAGINASTION_INDEX",
+        payload: {
+          completedPostsListPaginationIndex: 1,
+          registeredPostsListPaginationIndex: 1
+        }
+    }
+};
+
 export const SWITCH_COMPLETED_POSTS_LIST_PAGINASTION_INDEX = "SWITCH_COMPLETED_POSTS_LIST_PAGINASTION_INDEX";
 export const switchCompletedPostsListPaginationIndexAction = (index) => {
     return {
