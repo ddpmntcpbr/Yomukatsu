@@ -16,7 +16,6 @@ const initialState = {
     reading: [],
     registered: [],
     completed: [],
-    share: []
   },
 
   sharePosts: {
