@@ -13,7 +13,8 @@ const initialState = {
 
   postListPage: {
     tabIndex: 0, // 0: 登録済みリスト, 1:完読リスト
-    paginationIndex: 1
+    registerdPostsListPaginationIndex: 1,
+    completedPostsLIstPaginationIndex: 1,
   },
 
   posts: {
