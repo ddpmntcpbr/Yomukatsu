@@ -1,27 +1,22 @@
 import React from "react";
 import { useSelector, useDispatch } from 'react-redux'
-// import { makeStyles } from "@material-ui/styles";
 import { getRegisteredPosts } from "../../reducks/posts/selectors"
 import { SmallBookCard } from "../UIkit"
 import { push } from "connected-react-router";
 import { formatDateString } from "../../helpers"
 import { Box,Typography} from '@material-ui/core';
 import Pagination from '@material-ui/lab/Pagination';
-
-// const useStyles = makeStyles((theme)=>({
-//   root: {
-//   }
-// }))
+import { switchRegisteredPostsListPaginationIndexAction } from "../../reducks/postListPage/actions"
+import { getRegisteredPostsListPaginationIndex } from "../../reducks/postListPage/selectors"
 
 const RegisteredPostsList = () => {
-  // const classes = useStyles();
   const dispatch = useDispatch();
   const selector = useSelector((state)=>state);
   const posts = getRegisteredPosts(selector);
-  const [page, setPage] = React.useState(1);
+  const paginationIndex = getRegisteredPostsListPaginationIndex(selector)
 
-  const handleChange = (event, value) => {
-    setPage(value);
+  const handlePaginationIndexChange = (event, index) => {
+    dispatch(switchRegisteredPostsListPaginationIndexAction(index))
   };
 
   return (
@@ -30,8 +25,8 @@ const RegisteredPostsList = () => {
          <Box mb={1} display="flex" justifyContent="center">
           <Pagination
             count={Math.ceil(posts.length/5)}
-            page={page}
-            onChange={handleChange}
+            page={paginationIndex}
+            onChange={handlePaginationIndexChange}
             color="standard"
           />
         </Box>
@@ -39,7 +34,7 @@ const RegisteredPostsList = () => {
 
       {posts.length > 0 ? (
         posts.map((post,i) => (
-          Math.floor(i/5+1) === page && (
+          Math.floor(i/5+1) === paginationIndex && (
             <Box
               key={post.id}
               onClick={()=>dispatch(push("/registered/posts/" + String(post.id)))}
