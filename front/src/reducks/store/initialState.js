@@ -11,6 +11,11 @@ const initialState = {
     message: '',
   },
 
+  postListPage: {
+    tab: 0, // 0: 登録済みリスト, 1:完読リスト
+    pagination: 1
+  },
+
   posts: {
     isFetching: false,
     reading: [],

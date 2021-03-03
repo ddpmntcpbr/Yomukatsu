@@ -21,6 +21,7 @@ const PostsList = () => {
     setSelectedTab(newSelectedTab)
   };
 
+  console.log(selectedTab)
   return (
     <Box mb={2}>
       <Paper className={classes.root} >
