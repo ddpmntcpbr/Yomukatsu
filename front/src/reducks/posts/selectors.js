@@ -1,4 +1,4 @@
-import {createSelector} from "reselect";
+import { createSelector } from "reselect";
 
 const postsSelector = (state) => state.posts;
 
@@ -9,15 +9,15 @@ const postsSelector = (state) => state.posts;
 
 export const getReadingPosts = createSelector(
   [postsSelector],
-  state => state.reading
-)
+  (state) => state.reading
+);
 
 export const getRegisteredPosts = createSelector(
   [postsSelector],
-  state => state.registered
-)
+  (state) => state.registered
+);
 
 export const getCompletedPosts = createSelector(
   [postsSelector],
-  state => state.completed
-)
+  (state) => state.completed
+);

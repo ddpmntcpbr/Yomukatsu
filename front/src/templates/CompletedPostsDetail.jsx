@@ -1,84 +1,106 @@
-import React, { useEffect,useState,useCallback } from "react";
-import { useSelector, useDispatch } from 'react-redux'
-import { Box,Button,Divider,Paper } from "@material-ui/core"
+import React, { useEffect, useState, useCallback } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { Box, Button, Divider, Paper } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
-import { BookCard,QuestionDialog } from "../components/UIkit"
-import { deletePost } from "../reducks/posts/operations"
-import {TwitterShareButton,TwitterIcon} from "react-share";
+import { BookCard, QuestionDialog } from "../components/UIkit";
+import { deletePost } from "../reducks/posts/operations";
+import { TwitterShareButton, TwitterIcon } from "react-share";
 import { push } from "connected-react-router";
-import DeleteIcon from '@material-ui/icons/Delete';
-import { getDateString,isNonEmptyArray } from "../helpers"
-import { getCompletedPosts } from "../reducks/posts/selectors"
-import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
-import { formatDateString } from "../helpers"
-import { CreatedPostItemsList,ECSiteLinkButtonList } from "../components/Posts"
+import DeleteIcon from "@material-ui/icons/Delete";
+import { getDateString, isNonEmptyArray } from "../helpers";
+import { getCompletedPosts } from "../reducks/posts/selectors";
+import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
+import { formatDateString } from "../helpers";
+import {
+  CreatedPostItemsList,
+  ECSiteLinkButtonList,
+} from "../components/Posts";
 
-const useStyles = makeStyles((theme)=>({
+const useStyles = makeStyles((theme) => ({
   root: {
-    backgroundColor: theme.palette.grey[100]
+    backgroundColor: theme.palette.grey[100],
   },
   goBack: {
     cursor: "pointer",
     transition: "0.2s",
-    '&:hover': {
+    "&:hover": {
       backgroundColor: theme.palette.grey[300],
-    }
-  }
-}))
+    },
+  },
+}));
 
 const CompletedPostsDetail = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const selector = useSelector((state)=>state);
+  const selector = useSelector((state) => state);
   const posts = getCompletedPosts(selector);
   const path = selector.router.location.pathname;
   const id = path.split("/completed/posts/")[1];
-  const post = posts.find((v) => v.id===Number(id))
+  const post = posts.find((v) => v.id === Number(id));
   const [deletePostDialogOpen, setDeletePostDialogOpen] = useState(false);
   const [initialPostItems, setinitialPostItems] = useState([]);
   const [postItems, setPostItems] = useState([]);
 
   const handleDeletePostClickOpen = useCallback(() => {
     setDeletePostDialogOpen(true);
-  }, [setDeletePostDialogOpen])
-
-  const handleDeletePostDialogClose = useCallback(() => {
-    setDeletePostDialogOpen(false)
   }, [setDeletePostDialogOpen]);
 
-  const handleDeletePost = useCallback(()=>{
-    dispatch(deletePost(post.id))
-    handleDeletePostDialogClose()
-  },[dispatch,handleDeletePostDialogClose,post])
+  const handleDeletePostDialogClose = useCallback(() => {
+    setDeletePostDialogOpen(false);
+  }, [setDeletePostDialogOpen]);
 
-  useEffect(()=>{
-    if(isNonEmptyArray(post)){
+  const handleDeletePost = useCallback(() => {
+    dispatch(deletePost(post.id));
+    handleDeletePostDialogClose();
+  }, [dispatch, handleDeletePostDialogClose, post]);
+
+  useEffect(() => {
+    if (isNonEmptyArray(post)) {
       // dispatch(fetchSharePost(id))
-      setinitialPostItems(post.post_items)
+      setinitialPostItems(post.post_items);
       setPostItems(post.post_items);
     }
-  },[dispatch,setinitialPostItems,setPostItems,post,id])
+  }, [dispatch, setinitialPostItems, setPostItems, post, id]);
 
   return (
     <Box mb={2}>
-      {isNonEmptyArray(post) ?
+      {isNonEmptyArray(post) ? (
         <Box component={Paper} className={classes.root}>
-            <Box p={1} >
-              <Box display="flex" justifyContent="space-between" alignItems="center" mb={2}>
-                <Box display="flex" justifyContent="flex-start" onClick={()=>dispatch(push("/posts/list"))}>
-                  <Box>
-                    <ArrowBackIosIcon fontSize="small"/>
-                  </Box>
-                  <Box component="h2" fontSize="1rem">
-                    登録リストに戻る
-                  </Box>
+          <Box p={1}>
+            <Box
+              display="flex"
+              justifyContent="space-between"
+              alignItems="center"
+              mb={2}
+            >
+              <Box
+                display="flex"
+                justifyContent="flex-start"
+                onClick={() => dispatch(push("/posts/list"))}
+              >
+                <Box>
+                  <ArrowBackIosIcon fontSize="small" />
                 </Box>
+                <Box component="h2" fontSize="1rem">
+                  登録リストに戻る
+                </Box>
+              </Box>
               <Box mr={2}>
-                <TwitterShareButton url={process.env.REACT_APP_BASE_URL + "/share/posts/" + post.id + "?" + getDateString()} title={"『"+ post.title +"』を読破しました！\n\n#yomukatsu\n\n"}>
+                <TwitterShareButton
+                  url={
+                    process.env.REACT_APP_BASE_URL +
+                    "/share/posts/" +
+                    post.id +
+                    "?" +
+                    getDateString()
+                  }
+                  title={
+                    "『" + post.title + "』を読破しました！\n\n#yomukatsu\n\n"
+                  }
+                >
                   <TwitterIcon size={48} round />
                 </TwitterShareButton>
               </Box>
-
             </Box>
 
             <Box mb={1}>
@@ -93,7 +115,7 @@ const CompletedPostsDetail = () => {
             <ECSiteLinkButtonList title={post.title} url={post.url} />
 
             <Box my={4}>
-              <Divider/>
+              <Divider />
             </Box>
 
             <Box component="h2" fontWeight="fontWeightBold" fontSize="1.2rem">
@@ -107,7 +129,7 @@ const CompletedPostsDetail = () => {
               setPostItems={setPostItems}
             />
             <Box my={4}>
-              <Divider/>
+              <Divider />
             </Box>
 
             <Box display="flex" justifyContent="center" mb={4}>
@@ -132,11 +154,11 @@ const CompletedPostsDetail = () => {
             </Box>
           </Box>
         </Box>
-      :
+      ) : (
         <></>
-      }
+      )}
     </Box>
-  )
-}
+  );
+};
 
-export default CompletedPostsDetail
+export default CompletedPostsDetail;

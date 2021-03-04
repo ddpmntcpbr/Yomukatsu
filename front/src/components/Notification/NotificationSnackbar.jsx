@@ -1,17 +1,17 @@
-import React from "react"
-import classNames from 'classnames';
+import React from "react";
+import classNames from "classnames";
 import { makeStyles } from "@material-ui/styles";
-import CheckCircleIcon from '@material-ui/icons/CheckCircle';
-import ErrorIcon from '@material-ui/icons/Error';
-import InfoIcon from '@material-ui/icons/Info';
-import CloseIcon from '@material-ui/icons/Close';
-import red from '@material-ui/core/colors/red';
-import green from '@material-ui/core/colors/green';
-import amber from '@material-ui/core/colors/amber';
-import indigo from '@material-ui/core/colors/indigo';
-import IconButton from '@material-ui/core/IconButton';
-import SnackbarContent from '@material-ui/core/SnackbarContent';
-import WarningIcon from '@material-ui/icons/Warning';
+import CheckCircleIcon from "@material-ui/icons/CheckCircle";
+import ErrorIcon from "@material-ui/icons/Error";
+import InfoIcon from "@material-ui/icons/Info";
+import CloseIcon from "@material-ui/icons/Close";
+import red from "@material-ui/core/colors/red";
+import green from "@material-ui/core/colors/green";
+import amber from "@material-ui/core/colors/amber";
+import indigo from "@material-ui/core/colors/indigo";
+import IconButton from "@material-ui/core/IconButton";
+import SnackbarContent from "@material-ui/core/SnackbarContent";
+import WarningIcon from "@material-ui/icons/Warning";
 
 const variantIcon = {
   success: CheckCircleIcon,
@@ -20,9 +20,9 @@ const variantIcon = {
   info: InfoIcon,
 };
 
-const useStyles = makeStyles((theme)=>({
-  snackbarContent:{
-    padding: "0 8px 0 8px"
+const useStyles = makeStyles((theme) => ({
+  snackbarContent: {
+    padding: "0 8px 0 8px",
   },
   success: {
     backgroundColor: green[600],
@@ -38,22 +38,22 @@ const useStyles = makeStyles((theme)=>({
   },
   icon: {
     fontSize: "1rem",
-    fontWeight: "bold"
+    fontWeight: "bold",
   },
   iconVariant: {
     opacity: 0.9,
     marginRight: theme.spacing(1),
   },
   message: {
-    display: 'flex',
-    alignItems: 'center',
+    display: "flex",
+    alignItems: "center",
     fontSize: "0.8rem",
-    fontWeight: "bold"
+    fontWeight: "bold",
   },
-}))
+}));
 
 const NotificationSnackbar = (props) => {
-  const classes = useStyles()
+  const classes = useStyles();
   const Icon = variantIcon[props.variant];
 
   return (
@@ -74,9 +74,9 @@ const NotificationSnackbar = (props) => {
           onClick={props.onClose}
         >
           <CloseIcon className={classes.icon} />
-        </IconButton>
+        </IconButton>,
       ]}
     />
-  )
-}
-export default NotificationSnackbar
+  );
+};
+export default NotificationSnackbar;

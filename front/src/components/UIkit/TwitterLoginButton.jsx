@@ -1,11 +1,11 @@
 import React from "react";
 import Button from "@material-ui/core/Button";
-import {makeStyles} from "@material-ui/styles";
-import TwitterIcon from '@material-ui/icons/Twitter';
-import Typography from '@material-ui/core/Typography';
+import { makeStyles } from "@material-ui/styles";
+import TwitterIcon from "@material-ui/icons/Twitter";
+import Typography from "@material-ui/core/Typography";
 
-const useStyles = makeStyles((theme) =>({
-  "button": {
+const useStyles = makeStyles((theme) => ({
+  button: {
     backgroundColor: "#55acee",
     height: 48,
     width: 256,
@@ -15,25 +15,26 @@ const useStyles = makeStyles((theme) =>({
   iconStyle: {
     fontSize: 24,
   },
-  "typographyStyle": {
+  typographyStyle: {
     paddingLeft: 4,
     fontSize: "1rem",
     color: "#fff",
-  }
-}))
+  },
+}));
 
 const TwitterLoginButton = (props) => {
-
   const classes = useStyles();
 
-  return(
-    <Button className={classes.button} variant="contained" onClick={() => props.onClick()}>
-        <TwitterIcon className={classes.iconStyle}/>
-        <Typography className={classes.typographyStyle}>
-          {props.label}
-        </Typography>
+  return (
+    <Button
+      className={classes.button}
+      variant="contained"
+      onClick={() => props.onClick()}
+    >
+      <TwitterIcon className={classes.iconStyle} />
+      <Typography className={classes.typographyStyle}>{props.label}</Typography>
     </Button>
-  )
-}
+  );
+};
 
-export default TwitterLoginButton
+export default TwitterLoginButton;

@@ -1,44 +1,51 @@
-import React, { useEffect,useState,useCallback } from "react";
-import { useSelector, useDispatch } from 'react-redux'
-import { Box,Button,Divider,Paper } from "@material-ui/core"
+import React, { useEffect, useState, useCallback } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { Box, Button, Divider, Paper } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
-import { BookCard,QuestionDialog } from "../components/UIkit"
-import { deletePost, exchangeRegisteredAndReadingPost,updateStatusToCompleted } from "../reducks/posts/operations"
-import {TwitterShareButton,TwitterIcon} from "react-share";
+import { BookCard, QuestionDialog } from "../components/UIkit";
+import {
+  deletePost,
+  exchangeRegisteredAndReadingPost,
+  updateStatusToCompleted,
+} from "../reducks/posts/operations";
+import { TwitterShareButton, TwitterIcon } from "react-share";
 import { push } from "connected-react-router";
-import DeleteIcon from '@material-ui/icons/Delete';
-import { getDateString,isNonEmptyArray } from "../helpers"
-import { getRegisteredPosts } from "../reducks/posts/selectors"
-import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
-import { formatDateString } from "../helpers"
-import { CreatedPostItemsList,ECSiteLinkButtonList } from "../components/Posts"
-import DoneIcon from '@material-ui/icons/Done';
-import BookmarksIcon from '@material-ui/icons/Bookmarks';
+import DeleteIcon from "@material-ui/icons/Delete";
+import { getDateString, isNonEmptyArray } from "../helpers";
+import { getRegisteredPosts } from "../reducks/posts/selectors";
+import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
+import { formatDateString } from "../helpers";
+import {
+  CreatedPostItemsList,
+  ECSiteLinkButtonList,
+} from "../components/Posts";
+import DoneIcon from "@material-ui/icons/Done";
+import BookmarksIcon from "@material-ui/icons/Bookmarks";
 
-const useStyles = makeStyles((theme)=>({
+const useStyles = makeStyles((theme) => ({
   root: {
-    backgroundColor: theme.palette.grey[100]
+    backgroundColor: theme.palette.grey[100],
   },
   goBack: {
     cursor: "pointer",
     transition: "0.2s",
-    '&:hover': {
+    "&:hover": {
       backgroundColor: theme.palette.grey[300],
-    }
+    },
   },
-  completedButton:{
-    fontWeight: "bold"
-  }
-}))
+  completedButton: {
+    fontWeight: "bold",
+  },
+}));
 
 const RegisteredPostsDetail = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const selector = useSelector((state)=>state);
+  const selector = useSelector((state) => state);
   const posts = getRegisteredPosts(selector);
   const path = selector.router.location.pathname;
   const id = path.split("/registered/posts/")[1];
-  const post = posts.find((v) => v.id===Number(id))
+  const post = posts.find((v) => v.id === Number(id));
   const [updatePostStatusOpen, setUpdatePostStatusOpen] = useState(false);
   const [deletePostDialogOpen, setDeletePostDialogOpen] = useState(false);
   const [initialPostItems, setinitialPostItems] = useState([]);
@@ -46,57 +53,76 @@ const RegisteredPostsDetail = () => {
 
   const handleUpdatePostStatusDialogOpen = useCallback(() => {
     setUpdatePostStatusOpen(true);
-  }, [setUpdatePostStatusOpen])
-
-  const handleUpdatePostStatusDialogClose = useCallback(() => {
-    setUpdatePostStatusOpen(false)
   }, [setUpdatePostStatusOpen]);
 
-  const handleUpdatePostStatus = useCallback(()=>{
-    dispatch(updateStatusToCompleted(post))
-    handleUpdatePostStatusDialogClose()
-  },[dispatch,handleUpdatePostStatusDialogClose,post])
+  const handleUpdatePostStatusDialogClose = useCallback(() => {
+    setUpdatePostStatusOpen(false);
+  }, [setUpdatePostStatusOpen]);
+
+  const handleUpdatePostStatus = useCallback(() => {
+    dispatch(updateStatusToCompleted(post));
+    handleUpdatePostStatusDialogClose();
+  }, [dispatch, handleUpdatePostStatusDialogClose, post]);
 
   const handleDeletePostClickOpen = useCallback(() => {
     setDeletePostDialogOpen(true);
-  }, [setDeletePostDialogOpen])
-
-  const handleDeletePostDialogClose = useCallback(() => {
-    setDeletePostDialogOpen(false)
   }, [setDeletePostDialogOpen]);
 
-  const handleDeletePost = useCallback(()=>{
-    dispatch(deletePost(post.id))
-    handleDeletePostDialogClose()
-  },[dispatch,handleDeletePostDialogClose,post])
+  const handleDeletePostDialogClose = useCallback(() => {
+    setDeletePostDialogOpen(false);
+  }, [setDeletePostDialogOpen]);
 
-  useEffect(()=>{
-    if(isNonEmptyArray(post)){
-      setinitialPostItems(post.post_items)
+  const handleDeletePost = useCallback(() => {
+    dispatch(deletePost(post.id));
+    handleDeletePostDialogClose();
+  }, [dispatch, handleDeletePostDialogClose, post]);
+
+  useEffect(() => {
+    if (isNonEmptyArray(post)) {
+      setinitialPostItems(post.post_items);
       setPostItems(post.post_items);
     }
-  },[dispatch,setinitialPostItems,setPostItems,post,id])
+  }, [dispatch, setinitialPostItems, setPostItems, post, id]);
 
   return (
     <Box mb={2}>
-      {isNonEmptyArray(post) ?
+      {isNonEmptyArray(post) ? (
         <Box component={Paper} className={classes.root}>
-            <Box p={1} >
-              <Box display="flex" justifyContent="space-between" alignItems="center" mb={2}>
-                <Box display="flex" justifyContent="flex-start" onClick={()=>dispatch(push("/posts/list"))}>
-                  <Box>
-                    <ArrowBackIosIcon fontSize="small"/>
-                  </Box>
-                  <Box component="h2" fontSize="1rem">
-                    登録リストに戻る
-                  </Box>
+          <Box p={1}>
+            <Box
+              display="flex"
+              justifyContent="space-between"
+              alignItems="center"
+              mb={2}
+            >
+              <Box
+                display="flex"
+                justifyContent="flex-start"
+                onClick={() => dispatch(push("/posts/list"))}
+              >
+                <Box>
+                  <ArrowBackIosIcon fontSize="small" />
                 </Box>
+                <Box component="h2" fontSize="1rem">
+                  登録リストに戻る
+                </Box>
+              </Box>
               <Box mr={2}>
-                <TwitterShareButton url={process.env.REACT_APP_BASE_URL + "/share/posts/" + post.id + "?" + getDateString()} title={"今から『"+ post.title +"』を読みます！\n\n#yomukatsu\n\n"}>
+                <TwitterShareButton
+                  url={
+                    process.env.REACT_APP_BASE_URL +
+                    "/share/posts/" +
+                    post.id +
+                    "?" +
+                    getDateString()
+                  }
+                  title={
+                    "今から『" + post.title + "』を読みます！\n\n#yomukatsu\n\n"
+                  }
+                >
                   <TwitterIcon size={48} round />
                 </TwitterShareButton>
               </Box>
-
             </Box>
 
             <Box mb={1}>
@@ -111,7 +137,7 @@ const RegisteredPostsDetail = () => {
             <ECSiteLinkButtonList title={post.title} url={post.url} />
 
             <Box my={4}>
-              <Divider/>
+              <Divider />
             </Box>
 
             <Box component="h2" fontWeight="fontWeightBold" fontSize="1.2rem">
@@ -125,7 +151,7 @@ const RegisteredPostsDetail = () => {
               setPostItems={setPostItems}
             />
             <Box my={4}>
-              <Divider/>
+              <Divider />
             </Box>
 
             <Box display="flex" justifyContent="center" mb={2}>
@@ -133,7 +159,7 @@ const RegisteredPostsDetail = () => {
                 <Button
                   variant="outlined"
                   color="primary"
-                  startIcon={<BookmarksIcon/>}
+                  startIcon={<BookmarksIcon />}
                   onClick={() => dispatch(exchangeRegisteredAndReadingPost(id))}
                 >
                   読書開始書籍にセット
@@ -146,7 +172,7 @@ const RegisteredPostsDetail = () => {
                 <Button
                   variant="contained"
                   color="primary"
-                  startIcon={<DoneIcon/>}
+                  startIcon={<DoneIcon />}
                   onClick={handleUpdatePostStatusDialogOpen}
                   className={classes.completedButton}
                 >
@@ -182,11 +208,11 @@ const RegisteredPostsDetail = () => {
             </Box>
           </Box>
         </Box>
-      :
+      ) : (
         <></>
-      }
+      )}
     </Box>
-  )
-}
+  );
+};
 
-export default RegisteredPostsDetail
+export default RegisteredPostsDetail;

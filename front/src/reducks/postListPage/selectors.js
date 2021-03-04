@@ -3,16 +3,16 @@ import { createSelector } from "reselect";
 const postListPageSelector = (state) => state.postListPage;
 
 export const getCompletedPostsListPaginationIndex = createSelector(
-    [postListPageSelector],
-    state => state.completedPostsListPaginationIndex
+  [postListPageSelector],
+  (state) => state.completedPostsListPaginationIndex
 );
 
 export const getTabIndex = createSelector(
-    [postListPageSelector],
-    state => state.tabIndex
+  [postListPageSelector],
+  (state) => state.tabIndex
 );
 
 export const getRegisteredPostsListPaginationIndex = createSelector(
-    [postListPageSelector],
-    state => state.registeredPostsListPaginationIndex
+  [postListPageSelector],
+  (state) => state.registeredPostsListPaginationIndex
 );
