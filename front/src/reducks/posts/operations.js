@@ -1,11 +1,11 @@
 import axios from 'axios'
 import { push } from 'connected-react-router'
+import _ from 'lodash'
+import { _sleep } from '../../helpers'
 import { hideLoadingAction, showLoadingAction } from '../loading/actions'
 import { setNotificationAction } from '../notification/actions'
 import { initializePostsListPaginationIndexAction, switchTabIndexAction } from '../postListPage/actions'
-import { _sleep } from '../../helpers'
 import { fetchPostsFailureAction, fetchPostsAction, startFetchingPostsAction } from './actions'
-import _ from 'lodash'
 
 let notificationContent = {}
 

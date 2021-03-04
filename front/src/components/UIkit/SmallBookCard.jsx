@@ -1,7 +1,7 @@
-import React from 'react'
-import { makeStyles } from '@material-ui/core/styles'
-import Image from 'react-image-resizer'
 import { Box, Card, CardContent, Typography } from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles'
+import React from 'react'
+import Image from 'react-image-resizer'
 
 const useStyles = makeStyles((theme) => ({
   root: {

@@ -1,5 +1,5 @@
-import * as Actions from './actions'
 import initialState from '../store/initialState'
+import * as Actions from './actions'
 
 export const SharePostsReducer = (state = initialState.sharePosts, action) => {
   switch (action.type) {

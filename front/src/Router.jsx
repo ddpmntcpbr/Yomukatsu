@@ -1,3 +1,4 @@
+import Auth from 'Auth'
 import React from 'react'
 import { Route, Switch } from 'react-router'
 import {
@@ -11,8 +12,7 @@ import {
   Setting,
   SharePostsPage,
   TopPage,
-} from './templates'
-import Auth from './Auth'
+} from 'templates'
 
 const Router = () => {
   return (

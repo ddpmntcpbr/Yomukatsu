@@ -1,14 +1,14 @@
-import React from 'react'
-import { makeStyles } from '@material-ui/core/styles'
 import BottomNavigation from '@material-ui/core/BottomNavigation'
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction'
-import BookmarksIcon from '@material-ui/icons/Bookmarks'
-import BookmarkBorderIcon from '@material-ui/icons/BookmarkBorder'
-import { useLocation } from 'react-router-dom'
-import { push } from 'connected-react-router'
-import { useDispatch } from 'react-redux'
+import { makeStyles } from '@material-ui/core/styles'
 import AddIcon from '@material-ui/icons/Add'
+import BookmarkBorderIcon from '@material-ui/icons/BookmarkBorder'
+import BookmarksIcon from '@material-ui/icons/Bookmarks'
 import SettingsIcon from '@material-ui/icons/Settings'
+import { push } from 'connected-react-router'
+import React from 'react'
+import { useDispatch } from 'react-redux'
+import { useLocation } from 'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
   wrapper: {

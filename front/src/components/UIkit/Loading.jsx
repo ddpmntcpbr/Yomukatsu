@@ -1,8 +1,8 @@
-import React from 'react'
 import CircularProgress from '@material-ui/core/CircularProgress'
-import { useSelector } from 'react-redux'
-import { getLoadingState, getLoadingText } from '../../reducks/loading/selectors'
 import { makeStyles } from '@material-ui/styles'
+import React from 'react'
+import { useSelector } from 'react-redux'
+import { getLoadingState, getLoadingText } from 'reducks/loading/selectors'
 
 const useStyles = makeStyles((theme) => ({
   root: {

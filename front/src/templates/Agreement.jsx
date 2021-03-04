@@ -1,9 +1,9 @@
+import { Box, List, ListItem, Typography, Paper } from '@material-ui/core'
+import { makeStyles } from '@material-ui/styles'
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { makeStyles } from '@material-ui/styles'
-import { Box, List, ListItem, Typography, Paper } from '@material-ui/core'
-import { listenAuthState } from '../reducks/users/operations'
-import { getSignedIn } from '../reducks/users/selectors'
+import { listenAuthState } from 'reducks/users/operations'
+import { getSignedIn } from 'reducks/users/selectors'
 
 const useStyles = makeStyles((theme) => ({
   paper: {

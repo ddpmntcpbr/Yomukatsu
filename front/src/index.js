@@ -1,15 +1,15 @@
-import React from 'react'
-// import ReactDOM from 'react-dom';
-import { render } from 'react-snapshot'
-import { Provider } from 'react-redux'
-import createStore from './reducks/store/store'
+import { MuiThemeProvider } from '@material-ui/core'
 import { ConnectedRouter } from 'connected-react-router'
 import * as History from 'history'
-import { MuiThemeProvider } from '@material-ui/core'
-import { theme } from './assets/theme'
+import React from 'react'
+// import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux'
+import { render } from 'react-snapshot'
 import App from './App'
-import * as serviceWorker from './serviceWorker'
+import { theme } from './assets/theme'
 import { ScrollToTop } from './components/ScrollToTop'
+import createStore from './reducks/store/store'
+import * as serviceWorker from './serviceWorker'
 
 const history = History.createBrowserHistory()
 export const store = createStore(history)

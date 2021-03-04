@@ -1,5 +1,5 @@
-import React from 'react'
 import { Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@material-ui/core'
+import React from 'react'
 
 const QuestionDialog = (props) => {
   return (

@@ -1,9 +1,9 @@
+import queryString from 'query-string'
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { getSignedIn } from './reducks/users/selectors'
-import { listenAuthState } from './reducks/users/operations'
 import { initialFetchPosts } from './reducks/posts/operations'
-import queryString from 'query-string'
+import { listenAuthState } from './reducks/users/operations'
+import { getSignedIn } from './reducks/users/selectors'
 
 const Auth = ({ children }) => {
   const dispatch = useDispatch()

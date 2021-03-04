@@ -1,5 +1,5 @@
+import { BookCard } from 'components/UIkit'
 import React from 'react'
-import { BookCard } from '../UIkit'
 
 const SearchResultItem = (props) => {
   let title = 'title' in props.searchResult ? props.searchResult.title : 'No title'

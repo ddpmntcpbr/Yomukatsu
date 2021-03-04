@@ -1,12 +1,12 @@
-import React, { useCallback, useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
-import { TextInput } from '../UIkit'
-import { makeStyles } from '@material-ui/styles'
 import { Box, Button } from '@material-ui/core'
 import AddIcon from '@material-ui/icons/Add'
 import RemoveIcon from '@material-ui/icons/Remove'
-import { CreatedPostItem } from './index'
-import { updatePostItems } from '../../reducks/posts/operations'
+import { makeStyles } from '@material-ui/styles'
+import { CreatedPostItem } from 'components/Posts'
+import { TextInput } from 'components/UIkit'
+import React, { useCallback, useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { updatePostItems } from 'reducks/posts/operations'
 
 const useStyles = makeStyles((theme) => ({
   itemContent: {

@@ -1,10 +1,10 @@
-import { signInAction, signOutAction } from './actions'
-import { push } from 'connected-react-router'
 import axios from 'axios'
+import { push } from 'connected-react-router'
+import { _sleep } from '../../helpers'
 import { hideLoadingAction, showLoadingAction } from '../loading/actions'
 // import { hideLoading, showLoading } from "../loading/operations";
-import { _sleep } from '../../helpers'
 import { setNotificationAction } from '../notification/actions'
+import { signInAction, signOutAction } from './actions'
 
 let notificationContent = {}
 

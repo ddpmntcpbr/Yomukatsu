@@ -1,8 +1,8 @@
-import React from 'react'
-import { makeStyles } from '@material-ui/styles'
 import { Box, Dialog, DialogContent, DialogTitle, Divider } from '@material-ui/core'
 import IconButton from '@material-ui/core/IconButton'
 import CloseIcon from '@material-ui/icons/Close'
+import { makeStyles } from '@material-ui/styles'
+import React from 'react'
 
 const useStyles = makeStyles((theme) => ({
   dialogTitle: {

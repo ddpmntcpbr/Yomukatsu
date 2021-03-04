@@ -1,11 +1,11 @@
+import { Box, Paper, Tab, Tabs } from '@material-ui/core'
+import { makeStyles } from '@material-ui/styles'
+import { RegisteredPostsList, CompletedPostsList } from 'components/Posts'
+import { TabPanel } from 'components/UIkit'
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { makeStyles } from '@material-ui/styles'
-import { Box, Paper, Tab, Tabs } from '@material-ui/core'
-import { TabPanel } from '../components/UIkit'
-import { RegisteredPostsList, CompletedPostsList } from '../components/Posts'
-import { switchTabIndexAction } from '../reducks/postListPage/actions'
-import { getTabIndex } from '../reducks/postListPage/selectors'
+import { switchTabIndexAction } from 'reducks/postListPage/actions'
+import { getTabIndex } from 'reducks/postListPage/selectors'
 
 const useStyles = makeStyles((theme) => ({
   root: {

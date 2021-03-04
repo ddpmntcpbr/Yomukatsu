@@ -1,13 +1,13 @@
-import React from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { getCompletedPosts } from '../../reducks/posts/selectors'
-import { SmallBookCard } from '../UIkit'
-import { push } from 'connected-react-router'
-import { formatDateString } from '../../helpers'
 import { Box, Typography } from '@material-ui/core'
 import Pagination from '@material-ui/lab/Pagination'
-import { switchCompletedPostsListPaginationIndexAction } from '../../reducks/postListPage/actions'
-import { getCompletedPostsListPaginationIndex } from '../../reducks/postListPage/selectors'
+import { SmallBookCard } from 'components/UIkit'
+import { push } from 'connected-react-router'
+import { formatDateString } from 'helpers'
+import React from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { switchCompletedPostsListPaginationIndexAction } from 'reducks/postListPage/actions'
+import { getCompletedPostsListPaginationIndex } from 'reducks/postListPage/selectors'
+import { getCompletedPosts } from 'reducks/posts/selectors'
 
 const CompletedPostsList = () => {
   const dispatch = useDispatch()

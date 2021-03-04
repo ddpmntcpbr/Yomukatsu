@@ -1,5 +1,3 @@
-import React, { useState, useCallback } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
 import {
   Button,
   Dialog,
@@ -9,8 +7,10 @@ import {
   DialogContentText,
   TextField,
 } from '@material-ui/core'
-import { getUserName, getUserNickname } from '../../reducks/users/selectors'
-import { setNotificationAction } from '../../reducks/notification/actions'
+import React, { useState, useCallback } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { setNotificationAction } from 'reducks/notification/actions'
+import { getUserName, getUserNickname } from 'reducks/users/selectors'
 
 const FormDialog = (props) => {
   const dispatch = useDispatch()

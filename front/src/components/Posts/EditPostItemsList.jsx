@@ -1,10 +1,10 @@
-import React, { useCallback, useState } from 'react'
-import { TextInput } from '../UIkit'
-import { makeStyles } from '@material-ui/styles'
 import { Box, Button } from '@material-ui/core'
 import AddIcon from '@material-ui/icons/Add'
 import RemoveIcon from '@material-ui/icons/Remove'
-import { EditPostItem } from './index'
+import { makeStyles } from '@material-ui/styles'
+import { EditPostItem } from 'components/Posts'
+import { TextInput } from 'components/UIkit'
+import React, { useCallback, useState } from 'react'
 
 const useStyles = makeStyles((theme) => ({
   itemContent: {

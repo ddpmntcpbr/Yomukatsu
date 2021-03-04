@@ -1,5 +1,4 @@
-import React, { useState, useCallback } from 'react'
-import { BookCard, SecondaryButton, TextInput } from '../components/UIkit'
+import { Box, Button, Divider, Grid, Paper } from '@material-ui/core'
 import IconButton from '@material-ui/core/IconButton'
 import SearchIcon from '@material-ui/icons/Search'
 import { makeStyles } from '@material-ui/styles'
@@ -10,10 +9,11 @@ import {
   PostItemEditHintDialog,
   SearchResultDialog,
   EditPostItemsList,
-} from '../components/Posts'
-import { Box, Button, Divider, Grid, Paper } from '@material-ui/core'
-import { saveReadingPost, saveRegisteredPost } from '../reducks/posts/operations'
+} from 'components/Posts'
+import { BookCard, SecondaryButton, TextInput } from 'components/UIkit'
+import React, { useState, useCallback } from 'react'
 import { useDispatch } from 'react-redux'
+import { saveReadingPost, saveRegisteredPost } from 'reducks/posts/operations'
 
 const useStyles = makeStyles((theme) => ({
   paper: {

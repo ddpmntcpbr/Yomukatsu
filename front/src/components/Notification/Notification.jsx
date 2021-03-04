@@ -1,15 +1,11 @@
-import React from 'react'
-import { makeStyles } from '@material-ui/styles'
-import { useDispatch } from 'react-redux'
 import Snackbar from '@material-ui/core/Snackbar'
-import { NotificationSnackbar } from './index'
+import { makeStyles } from '@material-ui/styles'
+import React from 'react'
+import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
-import { closeNotificationAction } from '../../reducks/notification/actions'
-import {
-  getNotificationIsOpen,
-  getNotificationVariant,
-  getNotificationMessage,
-} from '../../reducks/notification/selectors'
+import { closeNotificationAction } from 'reducks/notification/actions'
+import { getNotificationIsOpen, getNotificationVariant, getNotificationMessage } from 'reducks/notification/selectors'
+import { NotificationSnackbar } from './index'
 
 const useStyles = makeStyles((theme) => ({
   snackbar: {
