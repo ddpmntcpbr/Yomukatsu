@@ -1,1 +1,1 @@
-export { default as ResponsiveBottomNavigation } from "./ResponsiveBottomNavigation";
+export { default as ResponsiveBottomNavigation } from './ResponsiveBottomNavigation'

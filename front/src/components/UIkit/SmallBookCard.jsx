@@ -1,15 +1,15 @@
-import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import Image from "react-image-resizer";
-import { Box, Card, CardContent, Typography } from "@material-ui/core";
+import { Box, Card, CardContent, Typography } from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles'
+import React from 'react'
+import Image from 'react-image-resizer'
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: "flex",
+    display: 'flex',
     height: 100,
-    cursor: "pointer",
-    transition: "0.2s",
-    "&:hover": {
+    cursor: 'pointer',
+    transition: '0.2s',
+    '&:hover': {
       backgroundColor: theme.palette.grey[200],
     },
   },
@@ -23,10 +23,10 @@ const useStyles = makeStyles((theme) => ({
     width: 75,
     heiht: 100,
   },
-}));
+}))
 
 const BookCard = (props) => {
-  const classes = useStyles();
+  const classes = useStyles()
 
   return (
     <Card className={classes.root} variant="outlined">
@@ -43,7 +43,7 @@ const BookCard = (props) => {
         </CardContent>
       </Box>
     </Card>
-  );
-};
+  )
+}
 
-export default BookCard;
+export default BookCard

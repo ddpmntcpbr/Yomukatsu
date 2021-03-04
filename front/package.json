@@ -41,10 +41,14 @@
     "build": "react-scripts build && cp _redirects build/",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint-fix": "eslint --fix './src/**/*.{js,jsx}' && prettier --write './src/**/*.{js,jsx}'"
+    "lint-fix": "eslint -c .eslintrc './src/**/*.{js,jsx}' --fix && prettier --write './src/**/*.{js,jsx}'"
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": [
+      "react-app",
+      "plugin:prettier/recommended",
+      "plugin:import/errors"
+    ]
   },
   "browserslist": {
     "production": [
@@ -59,6 +63,9 @@
     ]
   },
   "devDependencies": {
+    "eslint-config-prettier": "^8.1.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-prettier": "^3.3.1",
     "prettier": "^2.2.1",
     "prettier-eslint": "^12.0.0",
     "prettier-eslint-cli": "^5.0.0"

@@ -1,7 +1,7 @@
-export const SIGN_IN = "SIGN_IN";
+export const SIGN_IN = 'SIGN_IN'
 export const signInAction = (userState) => {
   return {
-    type: "SIGN_IN",
+    type: 'SIGN_IN',
     payload: {
       isSignedIn: true,
       role: userState.role,
@@ -10,20 +10,20 @@ export const signInAction = (userState) => {
       userNickname: userState.userNickname,
       image: userState.image,
     },
-  };
-};
+  }
+}
 
-export const SIGN_OUT = "SIGN_OUT";
+export const SIGN_OUT = 'SIGN_OUT'
 export const signOutAction = () => {
   return {
-    type: "SIGN_OUT",
+    type: 'SIGN_OUT',
     payload: {
       isSignedIn: false,
-      role: "",
-      uid: "",
-      username: "",
-      userNickname: "",
-      image: "",
+      role: '',
+      uid: '',
+      username: '',
+      userNickname: '',
+      image: '',
     },
-  };
-};
+  }
+}

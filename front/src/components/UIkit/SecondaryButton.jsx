@@ -1,33 +1,29 @@
-import React from "react";
-import Button from "@material-ui/core/Button";
-import { makeStyles } from "@material-ui/styles";
+import Button from '@material-ui/core/Button'
+import { makeStyles } from '@material-ui/styles'
+import React from 'react'
 
 const useStyles = makeStyles((theme) => ({
   button: {
     backgroundColor: theme.palette.secondary.main,
     borderColor: theme.palette.secondary.main,
-    color: "white",
+    color: 'white',
     fontWeight: 700,
     height: 48,
-    width: "10em",
-    "&:hover": {
+    width: '10em',
+    '&:hover': {
       background: theme.palette.secondary.light,
     },
   },
-}));
+}))
 
 const SecondaryButton = (props) => {
-  const classes = useStyles();
+  const classes = useStyles()
 
   return (
-    <Button
-      className={classes.button}
-      variant="outlined"
-      onClick={() => props.onClick()}
-    >
+    <Button className={classes.button} variant="outlined" onClick={() => props.onClick()}>
       {props.label}
     </Button>
-  );
-};
+  )
+}
 
-export default SecondaryButton;
+export default SecondaryButton

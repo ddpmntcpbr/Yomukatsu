@@ -6,13 +6,13 @@
 //   }
 // }
 
-export const FETCH_POSTS = "FETCH_POSTS";
+export const FETCH_POSTS = 'FETCH_POSTS'
 export const fetchPostsAction = (posts) => {
   return {
-    type: "FETCH_POSTS",
+    type: 'FETCH_POSTS',
     payload: posts,
-  };
-};
+  }
+}
 
 // export const FETCH_READING_POSTS = "FETCH_READING_POSTS";
 // export const fetchReadingPostsAction = (posts) => {
@@ -54,19 +54,19 @@ export const fetchPostsAction = (posts) => {
 //   }
 // }
 
-export const START_FETCHING_POSTS = "START_FETCHING_POSTS";
+export const START_FETCHING_POSTS = 'START_FETCHING_POSTS'
 export const startFetchingPostsAction = () => {
   return {
-    type: "START_FETCHING_POSTS",
-  };
-};
+    type: 'START_FETCHING_POSTS',
+  }
+}
 
-export const FETCH_POSTS_FAILURE = "FETCH_POSTS_FAILURE";
+export const FETCH_POSTS_FAILURE = 'FETCH_POSTS_FAILURE'
 export const fetchPostsFailureAction = (error) => {
   return {
-    type: "FETCH_POSTS_FAILURE",
+    type: 'FETCH_POSTS_FAILURE',
     payload: {
       error: error,
     },
-  };
-};
+  }
+}

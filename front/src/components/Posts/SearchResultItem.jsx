@@ -1,19 +1,15 @@
-import React from "react";
-import { BookCard } from "../UIkit";
+import { BookCard } from 'components/UIkit'
+import React from 'react'
 
 const SearchResultItem = (props) => {
-  let title =
-    "title" in props.searchResult ? props.searchResult.title : "No title";
-  let author =
-    "authors" in props.searchResult
-      ? props.searchResult.authors[0]
-      : "No author";
+  let title = 'title' in props.searchResult ? props.searchResult.title : 'No title'
+  let author = 'authors' in props.searchResult ? props.searchResult.authors[0] : 'No author'
   let image =
-    "imageLinks" in props.searchResult
+    'imageLinks' in props.searchResult
       ? props.searchResult.imageLinks.thumbnail
-      : "https://lh3.googleusercontent.com/proxy/OT0HbEcJ4HNmkzaUIptt_i9_Zu2XlKeqnT6svBmsr1ytaQewvUVBiTXAc7yfe3O_PqfEMnT8ix6g1G4CpHAvHJK3X_EkzilGE7NHhbM";
+      : 'https://lh3.googleusercontent.com/proxy/OT0HbEcJ4HNmkzaUIptt_i9_Zu2XlKeqnT6svBmsr1ytaQewvUVBiTXAc7yfe3O_PqfEMnT8ix6g1G4CpHAvHJK3X_EkzilGE7NHhbM'
 
-  return <BookCard title={title} author={author} image={image} />;
-};
+  return <BookCard title={title} author={author} image={image} />
+}
 
-export default SearchResultItem;
+export default SearchResultItem

@@ -1,115 +1,107 @@
-import React, { useState, useCallback } from "react";
-import { BookCard, SecondaryButton, TextInput } from "../components/UIkit";
-import IconButton from "@material-ui/core/IconButton";
-import SearchIcon from "@material-ui/icons/Search";
-import { makeStyles } from "@material-ui/styles";
-import axios from "axios";
+import { Box, Button, Divider, Grid, Paper } from '@material-ui/core'
+import IconButton from '@material-ui/core/IconButton'
+import SearchIcon from '@material-ui/icons/Search'
+import { makeStyles } from '@material-ui/styles'
+import axios from 'axios'
 import {
   ECSiteLinkButtonList,
   PostEditDialog,
   PostItemEditHintDialog,
   SearchResultDialog,
   EditPostItemsList,
-} from "../components/Posts";
-import { Box, Button, Divider, Grid, Paper } from "@material-ui/core";
-import {
-  saveReadingPost,
-  saveRegisteredPost,
-} from "../reducks/posts/operations";
-import { useDispatch } from "react-redux";
+} from 'components/Posts'
+import { BookCard, SecondaryButton, TextInput } from 'components/UIkit'
+import React, { useState, useCallback } from 'react'
+import { useDispatch } from 'react-redux'
+import { saveReadingPost, saveRegisteredPost } from 'reducks/posts/operations'
 
 const useStyles = makeStyles((theme) => ({
   paper: {
     backgroundColor: theme.palette.grey[100],
   },
   searchField: {
-    display: "flex",
+    display: 'flex',
   },
-}));
+}))
 
 const PostEdit = () => {
-  const classes = useStyles();
-  const dispatch = useDispatch();
+  const classes = useStyles()
+  const dispatch = useDispatch()
 
-  const [query, setQuery] = useState("");
-  const [searchModalOpen, setSearchModalOpen] = useState(false);
-  const [saveModalOpen, setSaveModalOpen] = useState(false);
-  const [HintModalOpen, setHintModalOpen] = useState(false);
-  const [searchResults, setSearchResults] = useState([]);
-  const [title, setTitle] = useState("");
-  const [author, setAuthor] = useState("");
-  const [image, setImage] = useState("");
-  const [url, setUrl] = useState("#");
-  const [postItems, setPostItems] = useState([]);
+  const [query, setQuery] = useState('')
+  const [searchModalOpen, setSearchModalOpen] = useState(false)
+  const [saveModalOpen, setSaveModalOpen] = useState(false)
+  const [HintModalOpen, setHintModalOpen] = useState(false)
+  const [searchResults, setSearchResults] = useState([])
+  const [title, setTitle] = useState('')
+  const [author, setAuthor] = useState('')
+  const [image, setImage] = useState('')
+  const [url, setUrl] = useState('#')
+  const [postItems, setPostItems] = useState([])
 
   const inputQuery = useCallback(
     (event) => {
-      setQuery(event.target.value);
+      setQuery(event.target.value)
     },
     [setQuery]
-  );
+  )
 
   const getSearchBooks = (inputText) => {
-    const query = inputText.replace("　", "+").replace(" ", "+");
-    if (query === "") {
-      return false;
+    const query = inputText.replace('　', '+').replace(' ', '+')
+    if (query === '') {
+      return false
     } else {
-      const baseUrl = "https://www.googleapis.com/books/v1/volumes";
-      const params = "?q=" + query + "&maxResults=20&Country=JP";
+      const baseUrl = 'https://www.googleapis.com/books/v1/volumes'
+      const params = '?q=' + query + '&maxResults=20&Country=JP'
 
       axios
         .get(baseUrl + params)
         .then((response) => {
-          setSearchResults(response.data.items);
-          setSearchModalOpen(true);
+          setSearchResults(response.data.items)
+          setSearchModalOpen(true)
         })
         .catch((error) => {
-          console.log(error);
-        });
+          console.log(error)
+        })
     }
-  };
+  }
 
   const handleSearchModalClose = useCallback(() => {
-    setSearchModalOpen(false);
-  }, [setSearchModalOpen]);
+    setSearchModalOpen(false)
+  }, [setSearchModalOpen])
 
   const handleSaveModalOpen = useCallback(() => {
-    setSaveModalOpen(true);
-  }, [setSaveModalOpen]);
+    setSaveModalOpen(true)
+  }, [setSaveModalOpen])
 
   const handleSaveModalClose = useCallback(() => {
-    setSaveModalOpen(false);
-  }, [setSaveModalOpen]);
+    setSaveModalOpen(false)
+  }, [setSaveModalOpen])
 
   const handleHintModalOpen = useCallback(() => {
-    setHintModalOpen(true);
-  }, [setHintModalOpen]);
+    setHintModalOpen(true)
+  }, [setHintModalOpen])
 
   const handleHintModalClose = useCallback(() => {
-    setHintModalOpen(false);
-  }, [setHintModalOpen]);
+    setHintModalOpen(false)
+  }, [setHintModalOpen])
 
   const handleClickSearchIcon = () => {
-    getSearchBooks(query);
-  };
+    getSearchBooks(query)
+  }
 
   const handleSaveReadingPost = useCallback(() => {
-    dispatch(saveReadingPost(title, url, author, image, postItems));
-  }, [dispatch, title, url, author, image, postItems]);
+    dispatch(saveReadingPost(title, url, author, image, postItems))
+  }, [dispatch, title, url, author, image, postItems])
 
   const handleSaveRegisteredPost = useCallback(() => {
-    dispatch(saveRegisteredPost(title, url, author, image, postItems));
-  }, [dispatch, title, url, author, image, postItems]);
+    dispatch(saveRegisteredPost(title, url, author, image, postItems))
+  }, [dispatch, title, url, author, image, postItems])
 
   return (
     <Box mb={2}>
       <Box component={Paper} p={2} className={classes.paper}>
-        <Box
-          component="h2"
-          fontWeight="fontWeightBold"
-          fontSize="1.2rem"
-          py={2}
-        >
+        <Box component="h2" fontWeight="fontWeightBold" fontSize="1.2rem" py={2}>
           新規登録
         </Box>
         <Box className={classes.searchField} mb={1}>
@@ -117,12 +109,12 @@ const PostEdit = () => {
             <Grid item xs={10}>
               <TextInput
                 fullWidth={true}
-                label={"タイトル / 著者名 で 検索"}
+                label={'タイトル / 著者名 で 検索'}
                 multiline={false}
                 required={true}
                 onChange={inputQuery}
                 rows={1}
-                type={"text"}
+                type={'text'}
               />
             </Grid>
             <Grid item xs={2}>
@@ -163,12 +155,7 @@ const PostEdit = () => {
           <Box component="h2" fontWeight="fontWeightBold" fontSize="1.2rem">
             メンタルマップ
           </Box>
-          <Button
-            variant="outlined"
-            size="small"
-            color="primary"
-            onClick={() => handleHintModalOpen()}
-          >
+          <Button variant="outlined" size="small" color="primary" onClick={() => handleHintModalOpen()}>
             ヒントを表示
           </Button>
         </Box>
@@ -193,14 +180,9 @@ const PostEdit = () => {
         contentText="読書中の設定は後からでも変更できます"
       />
 
-      <PostItemEditHintDialog
-        open={HintModalOpen}
-        handleClose={handleHintModalClose}
-        title={title}
-        url={url}
-      />
+      <PostItemEditHintDialog open={HintModalOpen} handleClose={handleHintModalClose} title={title} url={url} />
     </Box>
-  );
-};
+  )
+}
 
-export default PostEdit;
+export default PostEdit

@@ -1,68 +1,56 @@
-import React, { useState, useCallback } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import {
-  Box,
-  Button,
-  Card,
-  CardContent,
-  Container,
-  Paper,
-  Typography,
-  Divider,
-} from "@material-ui/core";
-import { makeStyles } from "@material-ui/styles";
-import { BookCard, SecondaryButton, QuestionDialog } from "../components/UIkit";
-import {
-  deletePost,
-  updateStatusToCompleted,
-} from "../reducks/posts/operations";
-import { TwitterShareButton, TwitterIcon } from "react-share";
-import { push } from "connected-react-router";
-import DeleteIcon from "@material-ui/icons/Delete";
-import EditIcon from "@material-ui/icons/Edit";
-import { getDateString, isNonEmptyArray } from "../helpers";
-import { getReadingPosts } from "../reducks/posts/selectors";
+import { Box, Button, Card, CardContent, Container, Paper, Typography, Divider } from '@material-ui/core'
+import DeleteIcon from '@material-ui/icons/Delete'
+import EditIcon from '@material-ui/icons/Edit'
+import { makeStyles } from '@material-ui/styles'
+import { BookCard, SecondaryButton, QuestionDialog } from 'components/UIkit'
+import { push } from 'connected-react-router'
+import { getDateString, isNonEmptyArray } from 'helpers'
+import React, { useState, useCallback } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { TwitterShareButton, TwitterIcon } from 'react-share'
+import { deletePost, updateStatusToCompleted } from 'reducks/posts/operations'
+import { getReadingPosts } from 'reducks/posts/selectors'
 
 const useStyles = makeStyles((theme) => ({
   root: {},
   mapItem: {},
-}));
+}))
 
 const PostUpdatePage = () => {
-  const classes = useStyles();
-  const dispatch = useDispatch();
-  const selector = useSelector((state) => state);
-  const posts = getReadingPosts(selector);
-  const post = posts[0];
-  const [updatePostStatusOpen, setUpdatePostStatusOpen] = useState(false);
-  const [deletePostDialogOpen, setDeletePostDialogOpen] = useState(false);
+  const classes = useStyles()
+  const dispatch = useDispatch()
+  const selector = useSelector((state) => state)
+  const posts = getReadingPosts(selector)
+  const post = posts[0]
+  const [updatePostStatusOpen, setUpdatePostStatusOpen] = useState(false)
+  const [deletePostDialogOpen, setDeletePostDialogOpen] = useState(false)
 
   const handleUpdatePostStatusDialogOpen = useCallback(() => {
-    setUpdatePostStatusOpen(true);
-  }, [setUpdatePostStatusOpen]);
+    setUpdatePostStatusOpen(true)
+  }, [setUpdatePostStatusOpen])
 
   const handleUpdatePostStatusDialogClose = useCallback(() => {
-    setUpdatePostStatusOpen(false);
-  }, [setUpdatePostStatusOpen]);
+    setUpdatePostStatusOpen(false)
+  }, [setUpdatePostStatusOpen])
 
   const handleUpdatePostStatus = useCallback(() => {
-    dispatch(updateStatusToCompleted(post));
-    handleUpdatePostStatusDialogClose();
-    dispatch(push("/completed/posts"));
-  }, [dispatch, handleUpdatePostStatusDialogClose, post]);
+    dispatch(updateStatusToCompleted(post))
+    handleUpdatePostStatusDialogClose()
+    dispatch(push('/completed/posts'))
+  }, [dispatch, handleUpdatePostStatusDialogClose, post])
 
   const handleDeletePostClickOpen = useCallback(() => {
-    setDeletePostDialogOpen(true);
-  }, [setDeletePostDialogOpen]);
+    setDeletePostDialogOpen(true)
+  }, [setDeletePostDialogOpen])
 
   const handleDeletePostDialogClose = useCallback(() => {
-    setDeletePostDialogOpen(false);
-  }, [setDeletePostDialogOpen]);
+    setDeletePostDialogOpen(false)
+  }, [setDeletePostDialogOpen])
 
   const handleDeletePost = useCallback(() => {
-    dispatch(deletePost(post.id));
-    handleDeletePostDialogClose();
-  }, [dispatch, handleDeletePostDialogClose, post]);
+    dispatch(deletePost(post.id))
+    handleDeletePostDialogClose()
+  }, [dispatch, handleDeletePostDialogClose, post])
 
   return (
     <Container maxWidth="md">
@@ -77,11 +65,7 @@ const PostUpdatePage = () => {
               </Typography>
               <Divider />
               <Box my={3}>
-                <BookCard
-                  title={post.title}
-                  author={post.author}
-                  image={post.image}
-                />
+                <BookCard title={post.title} author={post.author} image={post.image} />
               </Box>
 
               <Typography component="h3">
@@ -103,18 +87,11 @@ const PostUpdatePage = () => {
                 ))}
               <Box>
                 <Box display="flex" justifyContent="center" my={4}>
-                  <SecondaryButton
-                    label="完読した!"
-                    onClick={handleUpdatePostStatusDialogOpen}
-                  />
+                  <SecondaryButton label="完読した!" onClick={handleUpdatePostStatusDialogOpen} />
                 </Box>
                 <Box display="flex" justifyContent="center">
                   <Box my={1}>
-                    <Button
-                      variant="contained"
-                      color="default"
-                      startIcon={<EditIcon />}
-                    >
+                    <Button variant="contained" color="default" startIcon={<EditIcon />}>
                       編集
                     </Button>
                   </Box>
@@ -147,16 +124,8 @@ const PostUpdatePage = () => {
                 />
               </Box>
               <TwitterShareButton
-                url={
-                  process.env.REACT_APP_BASE_URL +
-                  "/share/posts/" +
-                  post.id +
-                  "?" +
-                  getDateString()
-                }
-                title={
-                  "今から『" + post.title + "』を読みます！\n\n#yomukatsu\n\n"
-                }
+                url={process.env.REACT_APP_BASE_URL + '/share/posts/' + post.id + '?' + getDateString()}
+                title={'今から『' + post.title + '』を読みます！\n\n#yomukatsu\n\n'}
               >
                 <TwitterIcon size={64} round />
               </TwitterShareButton>
@@ -167,7 +136,7 @@ const PostUpdatePage = () => {
         <Typography>現在読書中の書籍はありません</Typography>
       )}
     </Container>
-  );
-};
+  )
+}
 
-export default PostUpdatePage;
+export default PostUpdatePage

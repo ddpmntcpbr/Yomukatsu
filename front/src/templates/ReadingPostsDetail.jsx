@@ -1,103 +1,83 @@
-import React, { useState, useCallback, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { Box, Button, Divider, Paper, Typography } from "@material-ui/core";
-import { makeStyles } from "@material-ui/styles";
-import { BookCard, SecondaryButton, QuestionDialog } from "../components/UIkit";
-import {
-  deletePost,
-  updateStatusToCompleted,
-} from "../reducks/posts/operations";
-import { TwitterShareButton, TwitterIcon } from "react-share";
-import DeleteIcon from "@material-ui/icons/Delete";
-import { getDateString, isNonEmptyArray } from "../helpers";
-import { getReadingPosts } from "../reducks/posts/selectors";
-import {
-  CreatedPostItemsList,
-  ECSiteLinkButtonList,
-} from "../components/Posts";
-import { formatDateString } from "../helpers";
-import { push } from "connected-react-router";
-import DoneIcon from "@material-ui/icons/Done";
+import { Box, Button, Divider, Paper, Typography } from '@material-ui/core'
+import DeleteIcon from '@material-ui/icons/Delete'
+import DoneIcon from '@material-ui/icons/Done'
+import { makeStyles } from '@material-ui/styles'
+import { CreatedPostItemsList, ECSiteLinkButtonList } from 'components/Posts'
+import { BookCard, SecondaryButton, QuestionDialog } from 'components/UIkit'
+import { push } from 'connected-react-router'
+import { formatDateString, getDateString, isNonEmptyArray } from 'helpers'
+import React, { useState, useCallback, useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { TwitterShareButton, TwitterIcon } from 'react-share'
+import { deletePost, updateStatusToCompleted } from 'reducks/posts/operations'
+import { getReadingPosts } from 'reducks/posts/selectors'
 
 const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: theme.palette.grey[100],
   },
   completedButton: {
-    fontWeight: "bold",
+    fontWeight: 'bold',
   },
-}));
+}))
 
 const ReadingPostsDetail = () => {
-  const classes = useStyles();
-  const dispatch = useDispatch();
-  const selector = useSelector((state) => state);
-  const posts = getReadingPosts(selector);
-  const post = posts[0];
-  const [updatePostStatusOpen, setUpdatePostStatusOpen] = useState(false);
-  const [deletePostDialogOpen, setDeletePostDialogOpen] = useState(false);
-  const [initialPostItems, setinitialPostItems] = useState([]);
-  const [postItems, setPostItems] = useState([]);
+  const classes = useStyles()
+  const dispatch = useDispatch()
+  const selector = useSelector((state) => state)
+  const posts = getReadingPosts(selector)
+  const post = posts[0]
+  const [updatePostStatusOpen, setUpdatePostStatusOpen] = useState(false)
+  const [deletePostDialogOpen, setDeletePostDialogOpen] = useState(false)
+  const [initialPostItems, setinitialPostItems] = useState([])
+  const [postItems, setPostItems] = useState([])
 
   const handleUpdatePostStatusDialogOpen = useCallback(() => {
-    setUpdatePostStatusOpen(true);
-  }, [setUpdatePostStatusOpen]);
+    setUpdatePostStatusOpen(true)
+  }, [setUpdatePostStatusOpen])
 
   const handleUpdatePostStatusDialogClose = useCallback(() => {
-    setUpdatePostStatusOpen(false);
-  }, [setUpdatePostStatusOpen]);
+    setUpdatePostStatusOpen(false)
+  }, [setUpdatePostStatusOpen])
 
   const handleUpdatePostStatus = useCallback(() => {
-    dispatch(updateStatusToCompleted(post));
-    handleUpdatePostStatusDialogClose();
-  }, [dispatch, handleUpdatePostStatusDialogClose, post]);
+    dispatch(updateStatusToCompleted(post))
+    handleUpdatePostStatusDialogClose()
+  }, [dispatch, handleUpdatePostStatusDialogClose, post])
 
   const handleDeletePostClickOpen = useCallback(() => {
-    setDeletePostDialogOpen(true);
-  }, [setDeletePostDialogOpen]);
+    setDeletePostDialogOpen(true)
+  }, [setDeletePostDialogOpen])
 
   const handleDeletePostDialogClose = useCallback(() => {
-    setDeletePostDialogOpen(false);
-  }, [setDeletePostDialogOpen]);
+    setDeletePostDialogOpen(false)
+  }, [setDeletePostDialogOpen])
 
   const handleDeletePost = useCallback(() => {
-    dispatch(deletePost(post.id));
-    handleDeletePostDialogClose();
-  }, [dispatch, handleDeletePostDialogClose, post]);
+    dispatch(deletePost(post.id))
+    handleDeletePostDialogClose()
+  }, [dispatch, handleDeletePostDialogClose, post])
 
   useEffect(() => {
     if (isNonEmptyArray(post)) {
-      setinitialPostItems(post.post_items);
-      setPostItems(post.post_items);
+      setinitialPostItems(post.post_items)
+      setPostItems(post.post_items)
     }
-  }, [setinitialPostItems, setPostItems, post]);
+  }, [setinitialPostItems, setPostItems, post])
 
   return (
     <Box mb={2}>
       {isNonEmptyArray(post) ? (
         <Box component={Paper} className={classes.root}>
           <Box p={2}>
-            <Box
-              display="flex"
-              justifyContent="space-between"
-              alignItems="center"
-              mb={2}
-            >
+            <Box display="flex" justifyContent="space-between" alignItems="center" mb={2}>
               <Box component="h2" fontWeight="fontWeightBold" fontSize="1.2rem">
                 現在読書中の書籍
               </Box>
               <Box mr={2}>
                 <TwitterShareButton
-                  url={
-                    process.env.REACT_APP_BASE_URL +
-                    "/share/posts/" +
-                    post.id +
-                    "?" +
-                    getDateString()
-                  }
-                  title={
-                    "今から『" + post.title + "』を読みます！\n\n#yomukatsu\n\n"
-                  }
+                  url={process.env.REACT_APP_BASE_URL + '/share/posts/' + post.id + '?' + getDateString()}
+                  title={'今から『' + post.title + '』を読みます！\n\n#yomukatsu\n\n'}
                 >
                   <TwitterIcon size={48} round />
                 </TwitterShareButton>
@@ -177,14 +157,11 @@ const ReadingPostsDetail = () => {
           <Box p={2}>
             <Typography>現在読書中の書籍はありません</Typography>
           </Box>
-          <SecondaryButton
-            label="新規登録する"
-            onClick={() => dispatch(push("/posts/edit"))}
-          />
+          <SecondaryButton label="新規登録する" onClick={() => dispatch(push('/posts/edit'))} />
         </Box>
       )}
     </Box>
-  );
-};
+  )
+}
 
-export default ReadingPostsDetail;
+export default ReadingPostsDetail

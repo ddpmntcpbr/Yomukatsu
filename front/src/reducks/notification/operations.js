@@ -1,10 +1,10 @@
-import { setNotificationAction } from "./actions";
-import { _sleep } from "../../helpers";
+import { _sleep } from '../../helpers'
+import { setNotificationAction } from './actions'
 
 export const delaySetNotification = (variant, message, delayTime) => {
   return async (dispatch) => {
-    console.log("delaySetNotification");
-    await _sleep(delayTime);
-    dispatch(setNotificationAction(variant, message));
-  };
-};
+    console.log('delaySetNotification')
+    await _sleep(delayTime)
+    dispatch(setNotificationAction(variant, message))
+  }
+}

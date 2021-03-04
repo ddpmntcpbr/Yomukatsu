@@ -1,83 +1,71 @@
-import React, { useEffect, useState, useCallback } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { Box, Button, Divider, Paper } from "@material-ui/core";
-import { makeStyles } from "@material-ui/styles";
-import { BookCard, QuestionDialog } from "../components/UIkit";
-import { deletePost } from "../reducks/posts/operations";
-import { TwitterShareButton, TwitterIcon } from "react-share";
-import { push } from "connected-react-router";
-import DeleteIcon from "@material-ui/icons/Delete";
-import { getDateString, isNonEmptyArray } from "../helpers";
-import { getCompletedPosts } from "../reducks/posts/selectors";
-import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
-import { formatDateString } from "../helpers";
-import {
-  CreatedPostItemsList,
-  ECSiteLinkButtonList,
-} from "../components/Posts";
+import { Box, Button, Divider, Paper } from '@material-ui/core'
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos'
+import DeleteIcon from '@material-ui/icons/Delete'
+import { makeStyles } from '@material-ui/styles'
+import { CreatedPostItemsList, ECSiteLinkButtonList } from 'components/Posts'
+import { BookCard, QuestionDialog } from 'components/UIkit'
+import { push } from 'connected-react-router'
+import { getDateString, isNonEmptyArray } from 'helpers'
+import { formatDateString } from 'helpers'
+import React, { useEffect, useState, useCallback } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { TwitterShareButton, TwitterIcon } from 'react-share'
+import { deletePost } from 'reducks/posts/operations'
+import { getCompletedPosts } from 'reducks/posts/selectors'
 
 const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: theme.palette.grey[100],
   },
   goBack: {
-    cursor: "pointer",
-    transition: "0.2s",
-    "&:hover": {
+    cursor: 'pointer',
+    transition: '0.2s',
+    '&:hover': {
       backgroundColor: theme.palette.grey[300],
     },
   },
-}));
+}))
 
 const CompletedPostsDetail = () => {
-  const classes = useStyles();
-  const dispatch = useDispatch();
-  const selector = useSelector((state) => state);
-  const posts = getCompletedPosts(selector);
-  const path = selector.router.location.pathname;
-  const id = path.split("/completed/posts/")[1];
-  const post = posts.find((v) => v.id === Number(id));
-  const [deletePostDialogOpen, setDeletePostDialogOpen] = useState(false);
-  const [initialPostItems, setinitialPostItems] = useState([]);
-  const [postItems, setPostItems] = useState([]);
+  const classes = useStyles()
+  const dispatch = useDispatch()
+  const selector = useSelector((state) => state)
+  const posts = getCompletedPosts(selector)
+  const path = selector.router.location.pathname
+  const id = path.split('/completed/posts/')[1]
+  const post = posts.find((v) => v.id === Number(id))
+  const [deletePostDialogOpen, setDeletePostDialogOpen] = useState(false)
+  const [initialPostItems, setinitialPostItems] = useState([])
+  const [postItems, setPostItems] = useState([])
 
   const handleDeletePostClickOpen = useCallback(() => {
-    setDeletePostDialogOpen(true);
-  }, [setDeletePostDialogOpen]);
+    setDeletePostDialogOpen(true)
+  }, [setDeletePostDialogOpen])
 
   const handleDeletePostDialogClose = useCallback(() => {
-    setDeletePostDialogOpen(false);
-  }, [setDeletePostDialogOpen]);
+    setDeletePostDialogOpen(false)
+  }, [setDeletePostDialogOpen])
 
   const handleDeletePost = useCallback(() => {
-    dispatch(deletePost(post.id));
-    handleDeletePostDialogClose();
-  }, [dispatch, handleDeletePostDialogClose, post]);
+    dispatch(deletePost(post.id))
+    handleDeletePostDialogClose()
+  }, [dispatch, handleDeletePostDialogClose, post])
 
   useEffect(() => {
     if (isNonEmptyArray(post)) {
       // dispatch(fetchSharePost(id))
-      setinitialPostItems(post.post_items);
-      setPostItems(post.post_items);
+      setinitialPostItems(post.post_items)
+      setPostItems(post.post_items)
     }
-  }, [dispatch, setinitialPostItems, setPostItems, post, id]);
+  }, [dispatch, setinitialPostItems, setPostItems, post, id])
 
   return (
     <Box mb={2}>
       {isNonEmptyArray(post) ? (
         <Box component={Paper} className={classes.root}>
           <Box p={1}>
-            <Box
-              display="flex"
-              justifyContent="space-between"
-              alignItems="center"
-              mb={2}
-            >
-              <Box
-                display="flex"
-                justifyContent="flex-start"
-                onClick={() => dispatch(push("/posts/list"))}
-              >
+            <Box display="flex" justifyContent="space-between" alignItems="center" mb={2}>
+              <Box display="flex" justifyContent="flex-start" onClick={() => dispatch(push('/posts/list'))}>
                 <Box>
                   <ArrowBackIosIcon fontSize="small" />
                 </Box>
@@ -87,16 +75,8 @@ const CompletedPostsDetail = () => {
               </Box>
               <Box mr={2}>
                 <TwitterShareButton
-                  url={
-                    process.env.REACT_APP_BASE_URL +
-                    "/share/posts/" +
-                    post.id +
-                    "?" +
-                    getDateString()
-                  }
-                  title={
-                    "『" + post.title + "』を読破しました！\n\n#yomukatsu\n\n"
-                  }
+                  url={process.env.REACT_APP_BASE_URL + '/share/posts/' + post.id + '?' + getDateString()}
+                  title={'『' + post.title + '』を読破しました！\n\n#yomukatsu\n\n'}
                 >
                   <TwitterIcon size={48} round />
                 </TwitterShareButton>
@@ -158,7 +138,7 @@ const CompletedPostsDetail = () => {
         <></>
       )}
     </Box>
-  );
-};
+  )
+}
 
-export default CompletedPostsDetail;
+export default CompletedPostsDetail

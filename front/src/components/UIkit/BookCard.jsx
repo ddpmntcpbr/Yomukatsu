@@ -1,11 +1,11 @@
-import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import Image from "react-image-resizer";
-import { Box, Card, CardContent, Typography } from "@material-ui/core";
+import { Box, Card, CardContent, Typography } from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles'
+import React from 'react'
+import Image from 'react-image-resizer'
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: "flex",
+    display: 'flex',
     height: 150,
   },
   details: {
@@ -18,10 +18,10 @@ const useStyles = makeStyles((theme) => ({
     width: 100,
     heiht: 150,
   },
-}));
+}))
 
 const BookCard = (props) => {
-  const classes = useStyles();
+  const classes = useStyles()
 
   return (
     <Card className={classes.root} variant="outlined">
@@ -34,14 +34,12 @@ const BookCard = (props) => {
               {props.title}
             </Box>
             <Box fontSize="0.70rem">著者: {props.author}</Box>
-            {props.created_at && (
-              <Box fontSize="0.70rem">登録日: {props.created_at}</Box>
-            )}
+            {props.created_at && <Box fontSize="0.70rem">登録日: {props.created_at}</Box>}
           </Typography>
         </CardContent>
       </Box>
     </Card>
-  );
-};
+  )
+}
 
-export default BookCard;
+export default BookCard

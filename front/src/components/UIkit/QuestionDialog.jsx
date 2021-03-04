@@ -1,13 +1,5 @@
-import React from "react";
-import {
-  Box,
-  Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
-} from "@material-ui/core";
+import { Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@material-ui/core'
+import React from 'react'
 
 const QuestionDialog = (props) => {
   return (
@@ -18,25 +10,16 @@ const QuestionDialog = (props) => {
           <DialogContentText>{props.contentText}</DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button
-            variant="outlined"
-            color="primary"
-            onClick={props.handleEvent}
-          >
+          <Button variant="outlined" color="primary" onClick={props.handleEvent}>
             OK
           </Button>
-          <Button
-            variant="outlined"
-            color="primary"
-            onClick={props.handleClose}
-            autoFocus
-          >
+          <Button variant="outlined" color="primary" onClick={props.handleClose} autoFocus>
             Cancel
           </Button>
         </DialogActions>
       </Dialog>
     </Box>
-  );
-};
+  )
+}
 
-export default QuestionDialog;
+export default QuestionDialog
