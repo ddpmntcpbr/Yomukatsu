@@ -183,7 +183,7 @@ workflows:
       - rspec:
           requires:
             - bundle_dependencies
-      - prettier:
+      - lint:
           requires:
             - fetch_source_code
       - build_and_push_image_api:
