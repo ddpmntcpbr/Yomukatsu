@@ -122,7 +122,7 @@ jobs:
           command: |
             bundle exec rubocop
 
-  prettier:
+  lint:
     working_directory: ~/rails_react_docker
     docker:
       - image: circleci/node:12.18.0
@@ -140,7 +140,7 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "front/yarn.lock" }}
       - run:
-          command: yarn lint:prettier
+          command: yarn lint:check
           working_directory: front
 
 
