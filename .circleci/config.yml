@@ -132,7 +132,9 @@ jobs:
           keys:
           - v1-dependencies-{{ checksum "front/yarn.lock" }}
           - v1-dependencies-
-      - run: yarn
+      - run:
+          command: yarn install
+          working_directory: front
       - save_cache:
           paths:
             - node_modules
