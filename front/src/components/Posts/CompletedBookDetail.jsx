@@ -1,7 +1,7 @@
-import React from "react";
-import { Box, Paper, Typography } from "@material-ui/core";
-import { BookCard } from "../UIkit";
-import { MapItemCard } from "./index";
+import React from 'react'
+import { Box, Paper, Typography } from '@material-ui/core'
+import { BookCard } from '../UIkit'
+import { MapItemCard } from './index'
 
 const CompletedBookDetail = (props) => {
   return (
@@ -10,11 +10,7 @@ const CompletedBookDetail = (props) => {
         書籍情報
       </Typography>
       <Box>
-        <BookCard
-          title={props.title}
-          author={props.author}
-          image={props.image}
-        />
+        <BookCard title={props.title} author={props.author} image={props.image} />
       </Box>
 
       <Typography variant="h6" component="h3">
@@ -28,7 +24,7 @@ const CompletedBookDetail = (props) => {
           </Box>
         ))}
     </Paper>
-  );
-};
+  )
+}
 
-export default CompletedBookDetail;
+export default CompletedBookDetail

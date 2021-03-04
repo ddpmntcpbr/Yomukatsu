@@ -1,41 +1,31 @@
-import React from "react";
-import { makeStyles } from "@material-ui/styles";
-import {
-  Box,
-  Dialog,
-  DialogContent,
-  DialogTitle,
-  Divider,
-} from "@material-ui/core";
-import IconButton from "@material-ui/core/IconButton";
-import CloseIcon from "@material-ui/icons/Close";
+import React from 'react'
+import { makeStyles } from '@material-ui/styles'
+import { Box, Dialog, DialogContent, DialogTitle, Divider } from '@material-ui/core'
+import IconButton from '@material-ui/core/IconButton'
+import CloseIcon from '@material-ui/icons/Close'
 
 const useStyles = makeStyles((theme) => ({
   dialogTitle: {
-    fontSize: "1.5rem",
+    fontSize: '1.5rem',
   },
   title: {
-    fontWeight: "bold",
+    fontWeight: 'bold',
     color: theme.palette.grey[900],
-    fontSize: "1.2rem",
+    fontSize: '1.2rem',
     marginTop: theme.spacing(2),
   },
   content: {
     color: theme.palette.grey[800],
-    fontSize: "1rem",
+    fontSize: '1rem',
     padding: theme.spacing(1),
   },
-}));
+}))
 
 const PostItemEditHintDialog = (props) => {
-  const classes = useStyles();
+  const classes = useStyles()
 
   return (
-    <Dialog
-      open={props.open}
-      onClose={props.handleClose}
-      style={{ maxHeight: "90%" }}
-    >
+    <Dialog open={props.open} onClose={props.handleClose} style={{ maxHeight: '90%' }}>
       <DialogTitle>
         <Box display="flex" justifyContent="space-between" alignItems="center">
           <Box className={classes.dialogTitle}>ヒント</Box>
@@ -86,16 +76,14 @@ const PostItemEditHintDialog = (props) => {
             そういった自身の根本的な欲求は、行動する大きなモチベーションです。
             <br />
             <br />
-            <Box style={{ color: "red" }}>
+            <Box style={{ color: 'red' }}>
               Yomukatsuでは登録書籍をTwitterでシェアする機能がありますが、メンタルマップの中身は他人に公開されない仕様になっています。自分の気持ちに正直になりましょう！
             </Box>
           </Box>
         </Box>
 
         <Box>
-          <Box className={classes.title}>
-            4. 書籍を手に取ったきっかけを思い出そう
-          </Box>
+          <Box className={classes.title}>4. 書籍を手に取ったきっかけを思い出そう</Box>
           <Divider />
           <Box className={classes.content}>
             ・書店でたまたま見かけた
@@ -121,7 +109,7 @@ const PostItemEditHintDialog = (props) => {
         </Box>
       </DialogContent>
     </Dialog>
-  );
-};
+  )
+}
 
-export default PostItemEditHintDialog;
+export default PostItemEditHintDialog

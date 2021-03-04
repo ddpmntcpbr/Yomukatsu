@@ -1,12 +1,12 @@
-import React from "react";
-import TextField from "@material-ui/core/TextField";
+import React from 'react'
+import TextField from '@material-ui/core/TextField'
 
 const TextInput = (props) => {
   return (
     <TextField
       fullWidth={props.fullWidth}
       label={props.label}
-      margin={"dense"}
+      margin={'dense'}
       multiline={props.multiline}
       required={props.required}
       rows={props.rows}
@@ -14,7 +14,7 @@ const TextInput = (props) => {
       type={props.type}
       onChange={props.onChange}
     />
-  );
-};
+  )
+}
 
-export default TextInput;
+export default TextInput

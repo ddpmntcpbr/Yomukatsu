@@ -1,13 +1,13 @@
 const initialState = {
   loading: {
     state: false,
-    text: "",
+    text: '',
   },
 
   notification: {
     isOpen: false,
-    variant: "success",
-    message: "",
+    variant: 'success',
+    message: '',
   },
 
   postListPage: {
@@ -29,12 +29,12 @@ const initialState = {
 
   users: {
     isSignedIn: false,
-    role: "",
-    uid: "",
-    username: "",
-    userNickname: "",
-    image: "",
+    role: '',
+    uid: '',
+    username: '',
+    userNickname: '',
+    image: '',
   },
-};
+}
 
-export default initialState;
+export default initialState

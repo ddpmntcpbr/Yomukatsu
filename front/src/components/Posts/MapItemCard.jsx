@@ -1,13 +1,13 @@
-import React from "react";
-import { Card, CardContent, Typography } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import React from 'react'
+import { Card, CardContent, Typography } from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles((theme) => ({
   root: {},
-}));
+}))
 
 const MapItemCard = (props) => {
-  const classes = useStyles();
+  const classes = useStyles()
 
   return (
     <Card className={classes.root} variant="outlined">
@@ -15,7 +15,7 @@ const MapItemCard = (props) => {
         <Typography component="p">{props.content}</Typography>
       </CardContent>
     </Card>
-  );
-};
+  )
+}
 
-export default MapItemCard;
+export default MapItemCard

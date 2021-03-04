@@ -1,27 +1,23 @@
-import React, { useState, useCallback } from "react";
-import { makeStyles } from "@material-ui/styles";
-import { Box, Typography, Paper } from "@material-ui/core";
-import { useDispatch, useSelector } from "react-redux";
-import { push } from "connected-react-router";
-import MailIcon from "@material-ui/icons/Mail";
-import MenuList from "@material-ui/core/MenuList";
-import MenuItem from "@material-ui/core/MenuItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import TwitterIcon from "@material-ui/icons/Twitter";
-import GitHubIcon from "@material-ui/icons/GitHub";
-import LibraryBooksIcon from "@material-ui/icons/LibraryBooks";
-import AttachFileIcon from "@material-ui/icons/AttachFile";
-import {
-  getUserName,
-  getUserImage,
-  getUserNickname,
-} from "../reducks/users/selectors";
-import { signOut } from "../reducks/users/operations";
-import { SecondaryButton, QuestionDialog } from "../components/UIkit";
-import { FormDialog } from "../components/Setting";
-import { setNotificationAction } from "../reducks/notification/actions";
-import { deleteUser } from "../reducks/users/operations";
-import ClearAllIcon from "@material-ui/icons/ClearAll";
+import React, { useState, useCallback } from 'react'
+import { makeStyles } from '@material-ui/styles'
+import { Box, Typography, Paper } from '@material-ui/core'
+import { useDispatch, useSelector } from 'react-redux'
+import { push } from 'connected-react-router'
+import MailIcon from '@material-ui/icons/Mail'
+import MenuList from '@material-ui/core/MenuList'
+import MenuItem from '@material-ui/core/MenuItem'
+import ListItemIcon from '@material-ui/core/ListItemIcon'
+import TwitterIcon from '@material-ui/icons/Twitter'
+import GitHubIcon from '@material-ui/icons/GitHub'
+import LibraryBooksIcon from '@material-ui/icons/LibraryBooks'
+import AttachFileIcon from '@material-ui/icons/AttachFile'
+import { getUserName, getUserImage, getUserNickname } from '../reducks/users/selectors'
+import { signOut } from '../reducks/users/operations'
+import { SecondaryButton, QuestionDialog } from '../components/UIkit'
+import { FormDialog } from '../components/Setting'
+import { setNotificationAction } from '../reducks/notification/actions'
+import { deleteUser } from '../reducks/users/operations'
+import ClearAllIcon from '@material-ui/icons/ClearAll'
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -29,50 +25,50 @@ const useStyles = makeStyles((theme) => ({
     padding: 0,
   },
   title: {
-    fontSize: "1.2rem",
-    fontWeight: "bold",
+    fontSize: '1.2rem',
+    fontWeight: 'bold',
   },
   userImage: {
-    "& img": {
-      borderRadius: "50%",
+    '& img': {
+      borderRadius: '50%',
     },
   },
   menuItem: {
-    backgroundColor: "#fff",
+    backgroundColor: '#fff',
     height: 60,
   },
-}));
+}))
 
 const Setting = () => {
-  const classes = useStyles();
-  const dispatch = useDispatch();
-  const selector = useSelector((state) => state);
-  const userName = getUserName(selector);
-  const userImage = getUserImage(selector);
-  const userNickname = getUserNickname(selector);
-  const [formDialogOpen, setFormDialogOpen] = useState(false);
-  const [userDeleteDialogOpen, setUserDeleteDialogOpen] = useState(false);
+  const classes = useStyles()
+  const dispatch = useDispatch()
+  const selector = useSelector((state) => state)
+  const userName = getUserName(selector)
+  const userImage = getUserImage(selector)
+  const userNickname = getUserNickname(selector)
+  const [formDialogOpen, setFormDialogOpen] = useState(false)
+  const [userDeleteDialogOpen, setUserDeleteDialogOpen] = useState(false)
 
   const handleFormDialogOpen = () => {
-    setFormDialogOpen(true);
-  };
+    setFormDialogOpen(true)
+  }
 
   const handleFormDialogClose = useCallback(() => {
-    setFormDialogOpen(false);
-  }, [setFormDialogOpen]);
+    setFormDialogOpen(false)
+  }, [setFormDialogOpen])
 
   const handleUserDeleteDialogOpen = () => {
-    setUserDeleteDialogOpen(true);
-  };
+    setUserDeleteDialogOpen(true)
+  }
 
   const handleUserDeleteDialogClose = useCallback(() => {
-    setUserDeleteDialogOpen(false);
-  }, [setUserDeleteDialogOpen]);
+    setUserDeleteDialogOpen(false)
+  }, [setUserDeleteDialogOpen])
 
   const handleUserDelete = useCallback(() => {
-    dispatch(deleteUser());
-    setUserDeleteDialogOpen(false);
-  }, [dispatch, setUserDeleteDialogOpen]);
+    dispatch(deleteUser())
+    setUserDeleteDialogOpen(false)
+  }, [dispatch, setUserDeleteDialogOpen])
 
   return (
     <Box mb={2}>
@@ -84,50 +80,34 @@ const Setting = () => {
               <img src={userImage} alt="userImage" width="48px" height="48px" />
             </Box>
             <Box ml={4} fontSize="1.0rem" fontWeight="bold">
-              {userName + "@" + userNickname}
+              {userName + '@' + userNickname}
             </Box>
           </Box>
           <Box textAlign="center">
-            <SecondaryButton
-              label="ログアウト"
-              onClick={() => dispatch(signOut())}
-            />
+            <SecondaryButton label="ログアウト" onClick={() => dispatch(signOut())} />
           </Box>
         </Box>
         <Box px={2} mt={4}>
           アプリについて
         </Box>
         <MenuList>
-          <MenuItem
-            className={classes.menuItem}
-            onClick={() => dispatch(push("/intro"))}
-          >
+          <MenuItem className={classes.menuItem} onClick={() => dispatch(push('/intro'))}>
             <ListItemIcon>
               <AttachFileIcon fontSize="small" />
             </ListItemIcon>
             <Typography variant="inherit">アプリの使い方</Typography>
           </MenuItem>
-          <MenuItem
-            className={classes.menuItem}
-            onClick={() => dispatch(push("/agreement"))}
-          >
+          <MenuItem className={classes.menuItem} onClick={() => dispatch(push('/agreement'))}>
             <ListItemIcon>
               <LibraryBooksIcon fontSize="small" />
             </ListItemIcon>
             <Typography variant="inherit">利用規約</Typography>
           </MenuItem>
 
-          {userName === "ゲストユーザー" && userNickname === "guest_user" ? (
+          {userName === 'ゲストユーザー' && userNickname === 'guest_user' ? (
             <MenuItem
               className={classes.menuItem}
-              onClick={() =>
-                dispatch(
-                  setNotificationAction(
-                    "error",
-                    "ゲストユーザーではご利用できません"
-                  )
-                )
-              }
+              onClick={() => dispatch(setNotificationAction('error', 'ゲストユーザーではご利用できません'))}
             >
               <ListItemIcon>
                 <MailIcon fontSize="small" />
@@ -135,20 +115,14 @@ const Setting = () => {
               <Typography variant="inherit">お問い合わせ</Typography>
             </MenuItem>
           ) : (
-            <MenuItem
-              className={classes.menuItem}
-              onClick={() => handleFormDialogOpen()}
-            >
+            <MenuItem className={classes.menuItem} onClick={() => handleFormDialogOpen()}>
               <ListItemIcon>
                 <MailIcon fontSize="small" />
               </ListItemIcon>
               <Typography variant="inherit">お問い合わせ</Typography>
             </MenuItem>
           )}
-          <MenuItem
-            className={classes.menuItem}
-            onClick={() => window.open("https://twitter.com/ddpmntcpbr")}
-          >
+          <MenuItem className={classes.menuItem} onClick={() => window.open('https://twitter.com/ddpmntcpbr')}>
             <ListItemIcon>
               <TwitterIcon fontSize="small" />
             </ListItemIcon>
@@ -156,26 +130,17 @@ const Setting = () => {
           </MenuItem>
           <MenuItem
             className={classes.menuItem}
-            onClick={() =>
-              window.open("https://github.com/ddpmntcpbr/rails_react_docker")
-            }
+            onClick={() => window.open('https://github.com/ddpmntcpbr/rails_react_docker')}
           >
             <ListItemIcon>
               <GitHubIcon fontSize="small" />
             </ListItemIcon>
             <Typography variant="inherit">Github ソースコード</Typography>
           </MenuItem>
-          {userName === "ゲストユーザー" && userNickname === "guest_user" ? (
+          {userName === 'ゲストユーザー' && userNickname === 'guest_user' ? (
             <MenuItem
               className={classes.menuItem}
-              onClick={() =>
-                dispatch(
-                  setNotificationAction(
-                    "error",
-                    "ゲストユーザーではご利用できません"
-                  )
-                )
-              }
+              onClick={() => dispatch(setNotificationAction('error', 'ゲストユーザーではご利用できません'))}
             >
               <ListItemIcon>
                 <ClearAllIcon fontSize="small" />
@@ -183,10 +148,7 @@ const Setting = () => {
               <Typography variant="inherit">Yomukatsuから退会</Typography>
             </MenuItem>
           ) : (
-            <MenuItem
-              className={classes.menuItem}
-              onClick={() => handleUserDeleteDialogOpen()}
-            >
+            <MenuItem className={classes.menuItem} onClick={() => handleUserDeleteDialogOpen()}>
               <ListItemIcon>
                 <ClearAllIcon fontSize="small" />
               </ListItemIcon>
@@ -195,12 +157,9 @@ const Setting = () => {
           )}
         </MenuList>
       </Box>
-      {!(userName === "ゲストユーザー" && userNickname === "guest_user") && (
+      {!(userName === 'ゲストユーザー' && userNickname === 'guest_user') && (
         <div>
-          <FormDialog
-            open={formDialogOpen}
-            handleClose={handleFormDialogClose}
-          />
+          <FormDialog open={formDialogOpen} handleClose={handleFormDialogClose} />
           <QuestionDialog
             open={userDeleteDialogOpen}
             handleEvent={handleUserDelete}
@@ -211,7 +170,7 @@ const Setting = () => {
         </div>
       )}
     </Box>
-  );
-};
+  )
+}
 
-export default Setting;
+export default Setting

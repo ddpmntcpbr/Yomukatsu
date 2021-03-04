@@ -1,13 +1,7 @@
-import { createSelector } from "reselect";
+import { createSelector } from 'reselect'
 
-const loadingSelector = (state) => state.loading;
+const loadingSelector = (state) => state.loading
 
-export const getLoadingState = createSelector(
-  [loadingSelector],
-  (state) => state.state
-);
+export const getLoadingState = createSelector([loadingSelector], (state) => state.state)
 
-export const getLoadingText = createSelector(
-  [loadingSelector],
-  (state) => state.text
-);
+export const getLoadingText = createSelector([loadingSelector], (state) => state.text)

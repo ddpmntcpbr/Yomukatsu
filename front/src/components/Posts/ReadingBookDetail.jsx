@@ -1,33 +1,33 @@
-import React, { useCallback, useState } from "react";
-import { useDispatch } from "react-redux";
-import { Button, Box, Divider, Paper, Typography } from "@material-ui/core";
-import { BookCard } from "../UIkit";
-import { MapItemCard } from "./index";
-import { SecondaryButton, QuestionDialog } from "../UIkit";
-import DeleteIcon from "@material-ui/icons/Delete";
-import EditIcon from "@material-ui/icons/Edit";
-import { push } from "connected-react-router";
-import { updateStatusToCompleted } from "../../reducks/posts/operations";
-import { TwitterShareButton, TwitterIcon } from "react-share";
+import React, { useCallback, useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { Button, Box, Divider, Paper, Typography } from '@material-ui/core'
+import { BookCard } from '../UIkit'
+import { MapItemCard } from './index'
+import { SecondaryButton, QuestionDialog } from '../UIkit'
+import DeleteIcon from '@material-ui/icons/Delete'
+import EditIcon from '@material-ui/icons/Edit'
+import { push } from 'connected-react-router'
+import { updateStatusToCompleted } from '../../reducks/posts/operations'
+import { TwitterShareButton, TwitterIcon } from 'react-share'
 
 const ReadingBookDetail = (props) => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false)
 
   const handleClickOpen = useCallback(() => {
-    setOpen(true);
-  }, [setOpen]);
+    setOpen(true)
+  }, [setOpen])
 
   const handleClose = useCallback(() => {
-    setOpen(false);
-  }, [setOpen]);
+    setOpen(false)
+  }, [setOpen])
 
   const handleUpdateStatus = useCallback(() => {
-    dispatch(updateStatusToCompleted(props.post));
-    handleClose();
-    dispatch(push("/mypage"));
-  }, [dispatch, handleClose, props]);
+    dispatch(updateStatusToCompleted(props.post))
+    handleClose()
+    dispatch(push('/mypage'))
+  }, [dispatch, handleClose, props])
 
   return (
     <div>
@@ -40,11 +40,7 @@ const ReadingBookDetail = (props) => {
           </Typography>
           <Divider />
           <Box my={3}>
-            <BookCard
-              title={props.post.title}
-              author={props.post.author}
-              image={props.post.image}
-            />
+            <BookCard title={props.post.title} author={props.post.author} image={props.post.image} />
           </Box>
 
           <Typography component="h3">
@@ -60,7 +56,7 @@ const ReadingBookDetail = (props) => {
             </Box>
           ))}
 
-          {props.post.status === "reading" && (
+          {props.post.status === 'reading' && (
             <Box>
               <Box display="flex" justifyContent="center" my={4}>
                 <SecondaryButton label="完読した!" onClick={handleClickOpen} />
@@ -68,20 +64,12 @@ const ReadingBookDetail = (props) => {
 
               <Box display="flex" justifyContent="center">
                 <Box my={1}>
-                  <Button
-                    variant="contained"
-                    color="default"
-                    startIcon={<EditIcon />}
-                  >
+                  <Button variant="contained" color="default" startIcon={<EditIcon />}>
                     編集
                   </Button>
                 </Box>
                 <Box m={1}>
-                  <Button
-                    variant="outlined"
-                    color="default"
-                    startIcon={<DeleteIcon />}
-                  >
+                  <Button variant="outlined" color="default" startIcon={<DeleteIcon />}>
                     削除
                   </Button>
                 </Box>
@@ -96,16 +84,13 @@ const ReadingBookDetail = (props) => {
               />
             </Box>
           )}
-          <TwitterShareButton
-            url={"https://www.sambaiz.net"}
-            title={"タイトル"}
-          >
+          <TwitterShareButton url={'https://www.sambaiz.net'} title={'タイトル'}>
             <TwitterIcon size={64} round />
           </TwitterShareButton>
         </Box>
       </Paper>
     </div>
-  );
-};
+  )
+}
 
-export default ReadingBookDetail;
+export default ReadingBookDetail

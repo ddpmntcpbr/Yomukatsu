@@ -1,27 +1,27 @@
-import React, { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { makeStyles } from "@material-ui/styles";
-import { Box, List, ListItem, Typography, Paper } from "@material-ui/core";
-import { listenAuthState } from "../reducks/users/operations";
-import { getSignedIn } from "../reducks/users/selectors";
+import React, { useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { makeStyles } from '@material-ui/styles'
+import { Box, List, ListItem, Typography, Paper } from '@material-ui/core'
+import { listenAuthState } from '../reducks/users/operations'
+import { getSignedIn } from '../reducks/users/selectors'
 
 const useStyles = makeStyles((theme) => ({
   paper: {
     backgroundColor: theme.palette.grey[100],
   },
-}));
+}))
 
 const Agreement = () => {
-  const classes = useStyles();
-  const dispatch = useDispatch();
-  const selector = useSelector((state) => state);
-  const isSignedIn = getSignedIn(selector);
+  const classes = useStyles()
+  const dispatch = useDispatch()
+  const selector = useSelector((state) => state)
+  const isSignedIn = getSignedIn(selector)
 
   useEffect(() => {
-    if (!isSignedIn && localStorage.getItem("auth_token")) {
-      dispatch(listenAuthState());
+    if (!isSignedIn && localStorage.getItem('auth_token')) {
+      dispatch(listenAuthState())
     }
-  }, [isSignedIn, dispatch]);
+  }, [isSignedIn, dispatch])
 
   return (
     <Box mb={2}>
@@ -66,15 +66,11 @@ const Agreement = () => {
               当サービス提供者は，利用登録の申請者に以下の事由があると判断した場合，利用登録の申請を承認しないことがあり，その理由については一切の開示義務を負わないものとします。
               <br />
               <List>
-                <ListItem>
-                  （1）本規約に違反したことがある者からの申請である場合
-                </ListItem>
+                <ListItem>（1）本規約に違反したことがある者からの申請である場合</ListItem>
                 <ListItem>
                   （2）反社会的勢力等（暴力団，暴力団員，右翼団体，反社会的勢力，その他これに準ずる者を意味します。）である，または資金提供その他を通じて反社会的勢力等の維持，運営もしくは経営に協力もしくは関与する等反社会的勢力との何らかの交流もしくは関与を行っていると当サービス提供者が判断した場合
                 </ListItem>
-                <ListItem>
-                  （3）その他，当サービス提供者が利用登録を相当でないと判断した場合
-                </ListItem>
+                <ListItem>（3）その他，当サービス提供者が利用登録を相当でないと判断した場合</ListItem>
               </List>
             </Typography>
           </Box>
@@ -115,12 +111,8 @@ const Agreement = () => {
                 <ListItem>
                   （3）当サービス提供者のサーバーまたはネットワークの機能を破壊したり，妨害したりする行為
                 </ListItem>
-                <ListItem>
-                  （4）当サービス提供者のサービスの運営を妨害するおそれのある行為
-                </ListItem>
-                <ListItem>
-                  （5）他のユーザーに関する個人情報等を収集または蓄積する行為
-                </ListItem>
+                <ListItem>（4）当サービス提供者のサービスの運営を妨害するおそれのある行為</ListItem>
+                <ListItem>（5）他のユーザーに関する個人情報等を収集または蓄積する行為</ListItem>
                 <ListItem>（6）他のユーザーに成りすます行為</ListItem>
                 <ListItem>
                   （7）当サービス提供者のサービスに関連して，反社会的勢力に対して直接または間接に利益を供与する行為
@@ -135,9 +127,7 @@ const Agreement = () => {
                   （10）営業，宣伝，広告，勧誘，その他営利を目的とする行為（当サービス提供者の認めたものを除きます。），性行為やわいせつな行為を目的とする行為，面識のない異性との出会いや交際を目的とする行為，他のお客様に対する嫌がらせや誹謗中傷を目的とする行為，その他本サービスが予定している利用目的と異なる目的で本サービスを利用する行為
                 </ListItem>
                 <ListItem>（11）宗教活動または宗教団体への勧誘行為</ListItem>
-                <ListItem>
-                  （12）その他，当サービス提供者が不適切と判断する行為
-                </ListItem>
+                <ListItem>（12）その他，当サービス提供者が不適切と判断する行為</ListItem>
               </List>
             </Typography>
           </Box>
@@ -167,20 +157,14 @@ const Agreement = () => {
               ●当サービス提供者は，以下の場合には，事前の通知なく，投稿データを削除し，ユーザーに対して本サービスの全部もしくは一部の利用を制限しまたはユーザーとしての登録を抹消することができるものとします。
               <List>
                 <ListItem>○（1）本規約のいずれかの条項に違反した場合</ListItem>
-                <ListItem>
-                  ○（2）登録事項に虚偽の事実があることが判明した場合
-                </ListItem>
-                <ListItem>
-                  ○（3）破産，民事再生，会社更生または特別清算の手続開始決定等の申立がなされたとき
-                </ListItem>
+                <ListItem>○（2）登録事項に虚偽の事実があることが判明した場合</ListItem>
+                <ListItem>○（3）破産，民事再生，会社更生または特別清算の手続開始決定等の申立がなされたとき</ListItem>
                 <ListItem>○（4）1年間以上本サービスの利用がない場合</ListItem>
                 <ListItem>
                   ○（5）当サービス提供者からの問い合わせその他の回答を求める連絡に対して30日間以上応答がない場合
                 </ListItem>
                 <ListItem>○（6）第2条第2項各号に該当する場合</ListItem>
-                <ListItem>
-                  ○（7）その他，当サービス提供者が本サービスの利用を適当でないと判断した場合
-                </ListItem>
+                <ListItem>○（7）その他，当サービス提供者が本サービスの利用を適当でないと判断した場合</ListItem>
               </List>
               ●前項各号のいずれかに該当した場合，ユーザーは，当然に当サービス提供者に対する一切の債務について期限の利益を失い，その時点において負担する一切の債務を直ちに一括して弁済しなければなりません。
               <br />
@@ -264,9 +248,7 @@ const Agreement = () => {
           <Box>
             <Typography component="h6">
               <List>
-                <ListItem>
-                  ●本規約の解釈にあたっては，日本法を準拠法とします。
-                </ListItem>
+                <ListItem>●本規約の解釈にあたっては，日本法を準拠法とします。</ListItem>
                 <ListItem>
                   ●本サービスに関して紛争が生じた場合には，当サービス提供者の所在地を管轄する裁判所を専属的合意管轄とします。
                 </ListItem>
@@ -290,7 +272,7 @@ const Agreement = () => {
         <Box textAlign="center">以上</Box>
       </Box>
     </Box>
-  );
-};
+  )
+}
 
-export default Agreement;
+export default Agreement

@@ -1,23 +1,23 @@
-import React from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { getCompletedPosts } from "../../reducks/posts/selectors";
-import { SmallBookCard } from "../UIkit";
-import { push } from "connected-react-router";
-import { formatDateString } from "../../helpers";
-import { Box, Typography } from "@material-ui/core";
-import Pagination from "@material-ui/lab/Pagination";
-import { switchCompletedPostsListPaginationIndexAction } from "../../reducks/postListPage/actions";
-import { getCompletedPostsListPaginationIndex } from "../../reducks/postListPage/selectors";
+import React from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { getCompletedPosts } from '../../reducks/posts/selectors'
+import { SmallBookCard } from '../UIkit'
+import { push } from 'connected-react-router'
+import { formatDateString } from '../../helpers'
+import { Box, Typography } from '@material-ui/core'
+import Pagination from '@material-ui/lab/Pagination'
+import { switchCompletedPostsListPaginationIndexAction } from '../../reducks/postListPage/actions'
+import { getCompletedPostsListPaginationIndex } from '../../reducks/postListPage/selectors'
 
 const CompletedPostsList = () => {
-  const dispatch = useDispatch();
-  const selector = useSelector((state) => state);
-  const posts = getCompletedPosts(selector);
-  const paginationIndex = getCompletedPostsListPaginationIndex(selector);
+  const dispatch = useDispatch()
+  const selector = useSelector((state) => state)
+  const posts = getCompletedPosts(selector)
+  const paginationIndex = getCompletedPostsListPaginationIndex(selector)
 
   const handlePaginationIndexChange = (event, index) => {
-    dispatch(switchCompletedPostsListPaginationIndexAction(index));
-  };
+    dispatch(switchCompletedPostsListPaginationIndexAction(index))
+  }
 
   return (
     <Box>
@@ -36,17 +36,8 @@ const CompletedPostsList = () => {
         posts.map(
           (post, i) =>
             Math.floor(i / 5 + 1) === paginationIndex && (
-              <Box
-                key={post.id}
-                onClick={() =>
-                  dispatch(push("/completed/posts/" + String(post.id)))
-                }
-              >
-                <SmallBookCard
-                  title={post.title}
-                  image={post.image}
-                  created_at={formatDateString(post.created_at)}
-                />
+              <Box key={post.id} onClick={() => dispatch(push('/completed/posts/' + String(post.id)))}>
+                <SmallBookCard title={post.title} image={post.image} created_at={formatDateString(post.created_at)} />
               </Box>
             )
         )
@@ -56,7 +47,7 @@ const CompletedPostsList = () => {
         </Box>
       )}
     </Box>
-  );
-};
+  )
+}
 
-export default CompletedPostsList;
+export default CompletedPostsList

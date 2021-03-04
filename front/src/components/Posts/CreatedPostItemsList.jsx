@@ -1,129 +1,109 @@
-import React, { useCallback, useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { TextInput } from "../UIkit";
-import { makeStyles } from "@material-ui/styles";
-import { Box, Button } from "@material-ui/core";
-import AddIcon from "@material-ui/icons/Add";
-import RemoveIcon from "@material-ui/icons/Remove";
-import { CreatedPostItem } from "./index";
-import { updatePostItems } from "../../reducks/posts/operations";
+import React, { useCallback, useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { TextInput } from '../UIkit'
+import { makeStyles } from '@material-ui/styles'
+import { Box, Button } from '@material-ui/core'
+import AddIcon from '@material-ui/icons/Add'
+import RemoveIcon from '@material-ui/icons/Remove'
+import { CreatedPostItem } from './index'
+import { updatePostItems } from '../../reducks/posts/operations'
 
 const useStyles = makeStyles((theme) => ({
   itemContent: {
-    fontSize: "0.8rem",
+    fontSize: '0.8rem',
     padding: theme.spacing(1),
   },
   checkIcon: {
-    float: "right",
+    float: 'right',
   },
   iconCell: {
-    fontSize: "1rem",
+    fontSize: '1rem',
   },
   inputPostItemArea: {
-    display: "flex",
+    display: 'flex',
     padding: theme.spacing(1),
   },
   inputButton: {
-    display: "flex",
-    justifyContent: "space-between",
+    display: 'flex',
+    justifyContent: 'space-between',
   },
-}));
+}))
 
 const CreatedPostItemsList = (props) => {
-  const classes = useStyles();
-  const dispatch = useDispatch();
+  const classes = useStyles()
+  const dispatch = useDispatch()
 
   const [index, setIndex] = useState(-1),
-    [postItem, setPostItem] = useState(""),
-    [inputFormOpen, setInputFormOpen] = useState(false);
+    [postItem, setPostItem] = useState(''),
+    [inputFormOpen, setInputFormOpen] = useState(false)
 
   useEffect(() => {
-    setIndex(props.postItems.length);
-  }, [props]);
+    setIndex(props.postItems.length)
+  }, [props])
 
   const inputPostItem = useCallback(
     (event) => {
-      setPostItem(event.target.value);
+      setPostItem(event.target.value)
     },
     [setPostItem]
-  );
+  )
 
   const handleInputFormOpen = () => {
-    setInputFormOpen(true);
-  };
+    setInputFormOpen(true)
+  }
 
   const handleInputFormClose = () => {
-    setPostItem("");
-    setInputFormOpen(false);
-  };
+    setPostItem('')
+    setInputFormOpen(false)
+  }
 
   const addPostItem = async (index, postItem) => {
-    if (postItem === "") {
-      return false;
+    if (postItem === '') {
+      return false
     } else {
-      let newPostItems = [];
+      let newPostItems = []
       if (index === props.postItems.length) {
-        newPostItems = [...props.postItems, { content: postItem }];
-        props.setPostItems(newPostItems);
-        setIndex(index + 1);
-        setPostItem("");
+        newPostItems = [...props.postItems, { content: postItem }]
+        props.setPostItems(newPostItems)
+        setIndex(index + 1)
+        setPostItem('')
       } else {
-        newPostItems = props.postItems;
-        newPostItems[index]["content"] = postItem;
-        props.setPostItems(newPostItems);
-        setIndex(newPostItems.length);
-        setPostItem("");
+        newPostItems = props.postItems
+        newPostItems[index]['content'] = postItem
+        props.setPostItems(newPostItems)
+        setIndex(newPostItems.length)
+        setPostItem('')
       }
-      dispatch(
-        updatePostItems(
-          props.postId,
-          [...props.initialPostItems],
-          [...newPostItems]
-        )
-      );
-      handleInputFormClose();
+      dispatch(updatePostItems(props.postId, [...props.initialPostItems], [...newPostItems]))
+      handleInputFormClose()
     }
-  };
+  }
 
   const editPostItem = useCallback(
     (index, content) => {
-      handleInputFormOpen();
-      setIndex(index);
-      setPostItem(content);
+      handleInputFormOpen()
+      setIndex(index)
+      setPostItem(content)
     },
     [setIndex, setPostItem]
-  );
+  )
 
   const deletePostItem = useCallback(
     (deleteIndex) => {
-      const newPostItems = props.postItems.filter(
-        (item, i) => i !== deleteIndex
-      );
-      dispatch(
-        updatePostItems(
-          props.postId,
-          [...props.initialPostItems],
-          [...newPostItems]
-        )
-      );
-      props.setPostItems(newPostItems);
+      const newPostItems = props.postItems.filter((item, i) => i !== deleteIndex)
+      dispatch(updatePostItems(props.postId, [...props.initialPostItems], [...newPostItems]))
+      props.setPostItems(newPostItems)
     },
     [dispatch, props]
-  );
+  )
 
   return (
     <Box>
       {props.postItems.length > 0 &&
         props.postItems.map(
           (item, i) =>
-            item.content !== "" && (
-              <CreatedPostItem
-                key={i}
-                i={i}
-                item={item}
-                editPostItem={editPostItem}
-                deletePostItem={deletePostItem}
-              />
+            item.content !== '' && (
+              <CreatedPostItem key={i} i={i} item={item} editPostItem={editPostItem} deletePostItem={deletePostItem} />
             )
         )}
 
@@ -131,13 +111,13 @@ const CreatedPostItemsList = (props) => {
         <Box>
           <TextInput
             fullWidth={true}
-            label={"マップアイテムを入力"}
+            label={'マップアイテムを入力'}
             multiline={true}
             requires={true}
             onChange={inputPostItem}
             rows={3}
             value={postItem}
-            type={"text"}
+            type={'text'}
             autoFocus={true}
           />
           <Box className={classes.inputButton}>
@@ -165,18 +145,13 @@ const CreatedPostItemsList = (props) => {
         </Box>
       ) : (
         <Box textAlign="center" my={2}>
-          <Button
-            variant="outlined"
-            color="default"
-            startIcon={<AddIcon />}
-            onClick={() => handleInputFormOpen()}
-          >
+          <Button variant="outlined" color="default" startIcon={<AddIcon />} onClick={() => handleInputFormOpen()}>
             マップアイテムを追加
           </Button>
         </Box>
       )}
     </Box>
-  );
-};
+  )
+}
 
-export default CreatedPostItemsList;
+export default CreatedPostItemsList

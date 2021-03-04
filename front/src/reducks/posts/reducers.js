@@ -1,5 +1,5 @@
-import * as Actions from "./actions";
-import initialState from "../store/initialState";
+import * as Actions from './actions'
+import initialState from '../store/initialState'
 
 export const PostsReducer = (state = initialState.posts, action) => {
   switch (action.type) {
@@ -25,10 +25,10 @@ export const PostsReducer = (state = initialState.posts, action) => {
       return {
         ...state,
         isFetching: false,
-        reading: action.payload["reading"],
-        registered: action.payload["registered"],
-        completed: action.payload["completed"],
-      };
+        reading: action.payload['reading'],
+        registered: action.payload['registered'],
+        completed: action.payload['completed'],
+      }
     // case Actions.FETCH_REGISTERED_POSTS:
     //   return {
     //     ...state,
@@ -45,14 +45,14 @@ export const PostsReducer = (state = initialState.posts, action) => {
       return {
         ...state,
         isFetching: true,
-      };
+      }
     case Actions.FETCH_POSTS_FAILURE:
       return {
         ...state,
         isFetching: false,
         error: action.error,
-      };
+      }
     default:
-      return state;
+      return state
   }
-};
+}
