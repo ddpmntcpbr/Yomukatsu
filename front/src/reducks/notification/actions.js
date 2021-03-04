@@ -6,18 +6,18 @@ export const closeNotificationAction = () => {
       isOpen: false,
       variant: "success",
       message: "",
-    }
-  }
+    },
+  };
 };
 
 export const SET_NOTIFICATION = "SET_NOTIFICATION";
-export const setNotificationAction = (variant,message) => {
-    return {
-        type: "SET_NOTIFICATION",
-        payload: {
-            isOpen: true,
-            variant: variant,
-            message: message,
-        }
-    }
+export const setNotificationAction = (variant, message) => {
+  return {
+    type: "SET_NOTIFICATION",
+    payload: {
+      isOpen: true,
+      variant: variant,
+      message: message,
+    },
+  };
 };

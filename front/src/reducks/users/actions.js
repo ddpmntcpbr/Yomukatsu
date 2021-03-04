@@ -8,9 +8,9 @@ export const signInAction = (userState) => {
       uid: userState.uid,
       username: userState.username,
       userNickname: userState.userNickname,
-      image: userState.image
-    }
-  }
+      image: userState.image,
+    },
+  };
 };
 
 export const SIGN_OUT = "SIGN_OUT";
@@ -23,7 +23,7 @@ export const signOutAction = () => {
       uid: "",
       username: "",
       userNickname: "",
-      image: ""
-    }
-  }
-}
+      image: "",
+    },
+  };
+};

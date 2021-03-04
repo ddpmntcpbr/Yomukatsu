@@ -1,5 +1,5 @@
-import React from 'react';
-import {Route, Switch} from "react-router";
+import React from "react";
+import { Route, Switch } from "react-router";
 import {
   Agreement,
   CompletedPostsDetail,
@@ -10,9 +10,9 @@ import {
   RegisteredPostsDetail,
   Setting,
   SharePostsPage,
-  TopPage}
-from "./templates";
-import Auth from "./Auth"
+  TopPage,
+} from "./templates";
+import Auth from "./Auth";
 
 const Router = () => {
   return (
@@ -23,10 +23,18 @@ const Router = () => {
       <Route exact path={"/intro"} component={IntroductionPage} />
 
       <Auth>
-        <Route exact path={"/completed/posts/:id"} component={CompletedPostsDetail} />
+        <Route
+          exact
+          path={"/completed/posts/:id"}
+          component={CompletedPostsDetail}
+        />
         <Route exact path={"/reading/posts"} component={ReadingPostsDetail} />
         <Route exact path={"/setting"} component={Setting} />
-        <Route exaxt path={"/registered/posts/:id"} component={RegisteredPostsDetail} />
+        <Route
+          exaxt
+          path={"/registered/posts/:id"}
+          component={RegisteredPostsDetail}
+        />
         <Route exact path={"/posts/edit"} component={PostEdit} />
         <Route exact path={"/posts/list"} component={PostsList} />
       </Auth>
@@ -34,4 +42,4 @@ const Router = () => {
   );
 };
 
-export default Router
+export default Router;
