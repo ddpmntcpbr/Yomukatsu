@@ -1,28 +1,28 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Box, Button, Divider, Paper } from "@material-ui/core";
-import { TwitterLoginButton } from "../components/UIkit";
+import { TwitterLoginButton } from "components/UIkit";
 import {
   listenAuthState,
   signIn,
   signInGuestUser,
-} from "../reducks/users/operations";
-import topPageImage from "../assets/img/src/top.png";
-import { PrimaryButton } from "../components/UIkit";
+} from "reducks/users/operations";
+import topPageImage from "assets/img/src/top.png";
+import { PrimaryButton } from "components/UIkit";
 import { Helmet } from "react-helmet";
 import { makeStyles } from "@material-ui/styles";
 import Image from "react-image-resizer";
-import womanImage from "../assets/img/src/woman.png";
-import postEditScreenShotImage from "../assets/img/src/postEditScreenShot.png";
-import favoImage from "../assets/img/src/favo.png";
-import ideaImage from "../assets/img/src/idea.png";
-import researchImage from "../assets/img/src/research.png";
-import terminalImage from "../assets/img/src/terminal.png";
+import womanImage from "assets/img/src/woman.png";
+import postEditScreenShotImage from "assets/img/src/postEditScreenShot.png";
+import favoImage from "assets/img/src/favo.png";
+import ideaImage from "assets/img/src/idea.png";
+import researchImage from "assets/img/src/research.png";
+import terminalImage from "assets/img/src/terminal.png";
 import axios from "axios";
 import { push } from "connected-react-router";
-import administratorIcon from "../assets/img/src/administratorIcon.png";
+import administratorIcon from "assets/img/src/administratorIcon.png";
 import CopyrightIcon from "@material-ui/icons/Copyright";
-import { getSignedIn } from "../reducks/users/selectors";
+import { getSignedIn } from "reducks/users/selectors";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
