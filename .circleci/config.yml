@@ -122,6 +122,28 @@ jobs:
           command: |
             bundle exec rubocop
 
+  lint:
+    working_directory: ~/rails_react_docker
+    docker:
+      - image: circleci/node:12.18.0
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "front/yarn.lock" }}
+          - v1-dependencies-
+      - run:
+          command: yarn install
+          working_directory: front
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "front/yarn.lock" }}
+      - run:
+          command: yarn lint:check
+          working_directory: front
+
+
   build_and_push_image_api:
     machine:
       image: ubuntu-1604:201903-01
@@ -161,6 +183,9 @@ workflows:
       - rspec:
           requires:
             - bundle_dependencies
+      - lint:
+          requires:
+            - fetch_source_code
       - build_and_push_image_api:
           requires:
             - rubocop
