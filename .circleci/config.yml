@@ -15,6 +15,7 @@ executors:
         environment:
           MYSQL_USER: root
           MYSQL_ROOT_PASSWORD: password
+      - image: circleci/node:12.18.0
     working_directory: ~/rails_react_docker
 
 commands:
@@ -122,6 +123,23 @@ jobs:
           command: |
             bundle exec rubocop
 
+  prettier:
+    executor:
+      name: default_container:
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "yarn.lock" }}
+          - v1-dependencies-
+      - run: yarn
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "yarn.lock" }}
+      - run: yarn lint:prettier
+
+
   build_and_push_image_api:
     machine:
       image: ubuntu-1604:201903-01
@@ -161,6 +179,9 @@ workflows:
       - rspec:
           requires:
             - bundle_dependencies
+      - prettier:
+          requires:
+            - fetch_source_code
       - build_and_push_image_api:
           requires:
             - rubocop
