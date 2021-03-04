@@ -137,7 +137,9 @@ jobs:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "front/yarn.lock" }}
-      - run: "prettier --check './front/src/**/*.{js,jsx}'"
+      - run:
+          command: yarn lint:prettier
+          working_directory: front
 
 
   build_and_push_image_api:
