@@ -44,7 +44,11 @@
     "lint-fix": "eslint --fix './src/**/*.{js,jsx}' && prettier --write './src/**/*.{js,jsx}'"
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": [
+      "react-app",
+      "airbnb",
+      "plugin:prettier/recommended"
+    ]
   },
   "browserslist": {
     "production": [
