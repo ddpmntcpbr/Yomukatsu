@@ -123,7 +123,7 @@ jobs:
             bundle exec rubocop
 
   prettier:
-    working_directory: ~/rails_react_docker/front
+    working_directory: ~/front
     docker:
       - image: circleci/node:12.18.0
     steps:
