@@ -15,7 +15,6 @@ executors:
         environment:
           MYSQL_USER: root
           MYSQL_ROOT_PASSWORD: password
-      - image: circleci/node:12.18.0
     working_directory: ~/rails_react_docker
 
 commands:
@@ -124,8 +123,8 @@ jobs:
             bundle exec rubocop
 
   prettier:
-    executor:
-      name: default_container
+    image: circleci/node:12.18.0
+    working_directory: ~/rails_react_docker/front
     steps:
       - checkout
       - restore_cache:
