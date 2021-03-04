@@ -123,20 +123,20 @@ jobs:
             bundle exec rubocop
 
   prettier:
-    working_directory: ~/front
+    working_directory: ~/rails_react_docker
     docker:
       - image: circleci/node:12.18.0
     steps:
       - checkout
       - restore_cache:
           keys:
-          - v1-dependencies-{{ checksum "yarn.lock" }}
+          - v1-dependencies-{{ checksum "front/yarn.lock" }}
           - v1-dependencies-
       - run: yarn
       - save_cache:
           paths:
             - node_modules
-          key: v1-dependencies-{{ checksum "yarn.lock" }}
+          key: v1-dependencies-{{ checksum "front/yarn.lock" }}
       - run: yarn lint:prettier
 
 
