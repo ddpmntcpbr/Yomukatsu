@@ -32,6 +32,8 @@ const App = () => {
             <AdSense.Google
               client='ca-pub-6032367281994290'
               slot='3674056667'
+              style={{ display: 'block', height: 50 }}
+              format='fluid'
             />
             <Router />
           </Container>
