@@ -117,7 +117,7 @@ const TopPage = () => {
           </Grid>
         </Grid>
 
-        <Box py={4}>
+        {/* <Box py={4}>
           <Box className={classes.title} component="h2">
             Yomukatsu使い方(字幕動画)
           </Box>
@@ -133,7 +133,7 @@ const TopPage = () => {
               title="tutorial"
             ></iframe>
           </Box>
-        </Box>
+        </Box> */}
 
         <Box py={4}>
           <Box className={classes.title} component="h2">
