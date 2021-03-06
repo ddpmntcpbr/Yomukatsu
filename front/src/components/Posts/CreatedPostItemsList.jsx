@@ -9,20 +9,6 @@ import { useDispatch } from 'react-redux'
 import { updatePostItems } from 'reducks/posts/operations'
 
 const useStyles = makeStyles((theme) => ({
-  itemContent: {
-    fontSize: '0.8rem',
-    padding: theme.spacing(1),
-  },
-  checkIcon: {
-    float: 'right',
-  },
-  iconCell: {
-    fontSize: '1rem',
-  },
-  inputPostItemArea: {
-    display: 'flex',
-    padding: theme.spacing(1),
-  },
   inputButton: {
     display: 'flex',
     justifyContent: 'space-between',
