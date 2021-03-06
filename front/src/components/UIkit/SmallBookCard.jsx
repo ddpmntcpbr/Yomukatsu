@@ -1,4 +1,4 @@
-import { Box, Card, CardContent, Typography } from '@material-ui/core'
+import { Box, Card } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import React from 'react'
 import Image from 'react-image-resizer'
@@ -17,7 +17,11 @@ const useStyles = makeStyles((theme) => ({
     flex: 1,
   },
   cardContent: {
+    height: "100%",
     padding: theme.spacing(1),
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between"
   },
   cover: {
     width: 75,
@@ -31,16 +35,11 @@ const BookCard = (props) => {
   return (
     <Card className={classes.root} variant="outlined">
       <Image src={props.image} width={75} height={100} />
-
       <Box className={classes.details}>
-        <CardContent className={classes.cardContent}>
-          <Typography component="h6">
-            <Box fontSize="0.85rem" mb={2}>
-              {props.title}
-            </Box>
-            <Box fontSize="0.70rem">登録日: {props.created_at}</Box>
-          </Typography>
-        </CardContent>
+        <Box className={classes.cardContent}>
+          <Box fontSize="0.70rem">{props.title}</Box>
+          <Box fontSize="0.70rem">登録日: {props.created_at}</Box>
+        </Box>
       </Box>
     </Card>
   )
