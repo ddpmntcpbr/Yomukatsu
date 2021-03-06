@@ -33,12 +33,12 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '1.2rem',
     fontWeight: 'bold',
     color: theme.palette.grey[800],
-    height: "54px"
+    height: '54px',
   },
   content: {
     fontSize: '1rem',
     color: theme.palette.grey[800],
-    marginTop: theme.spacing(4)
+    marginTop: theme.spacing(4),
   },
   subContent: {
     fontSize: '0.8rem',
@@ -96,21 +96,23 @@ const TopPage = () => {
           { name: 'twitter:description', content: '積読解消サポート!' },
         ]}
       />
-      <img src={topPageImage} alt="topPageImage"/>
+      <img src={topPageImage} alt="topPageImage" />
       <Box component={Paper} p={2} className={classes.paper}>
         <Grid container className={classes.content} component="h6" spacing={1}>
           <Grid item xs={12} sm={6}>
             <Box textAlign="center">
               <TwitterLoginButton label={'Twitter ログイン / 新規登録'} onClick={() => dispatch(signIn())} />
               <Box py={1} fontSize="0.8rem">
-              勝手にツイートすることはありません
+                勝手にツイートすることはありません
               </Box>
             </Box>
           </Grid>
           <Grid item xs={12} sm={6}>
             <Box textAlign="center">
               <PrimaryButton label="ユーザー登録無しで利用" onClick={() => dispatch(signInGuestUser())} />
-              <Box py={1} fontSize="0.8rem">ゲストユーザーとしてログインします</Box>
+              <Box py={1} fontSize="0.8rem">
+                ゲストユーザーとしてログインします
+              </Box>
             </Box>
           </Grid>
         </Grid>
@@ -142,7 +144,8 @@ const TopPage = () => {
             PCやスマホで簡単に「読書メンタルマップ術」を実践することで、ユーザーの積読解消をサポートするアプリです。
             <Image src={womanImage} width={200} height={200} style={{ margin: 'auto' }} />
             「読書メンタルマップ術」とは、ハーバード大学ショーンエーカー氏が提唱している積読解消術です。
-            <br/><br/>
+            <br />
+            <br />
             読破したい対象の書籍に対して、
             <br />
             <Box fontWeight="bold" my={4}>
@@ -154,7 +157,7 @@ const TopPage = () => {
             </Box>
             を繰り返すことで完読までモチベーションを維持する、という読書法です。
             <Box mt={4}>
-              <Container maxWidth="xs" >
+              <Container maxWidth="xs">
                 <img src={postEditScreenShotImage} alt="postEditScreenShotImage" width="100%" />
                 <Box fontSize="0.8rem" textAlign="center">
                   読書メンタルマップ作成イメージ
@@ -183,15 +186,15 @@ const TopPage = () => {
                 </Box>
               </Grid>
               <Grid item xs={12} sm={6}>
-              <Box>
-                <Box className={classes.subTitle} component="h3">
-                  マップ作成をサポートするヒント機能！
+                <Box>
+                  <Box className={classes.subTitle} component="h3">
+                    マップ作成をサポートするヒント機能！
+                  </Box>
+                  <Image src={ideaImage} width={200} height={200} style={{ margin: 'auto' }} />
+                  <Box className={classes.subContent} component="h6" mt={2}>
+                    「どうやってマップを作ったらいいか分からない・・・」という方向けの充実したヒント機能！
+                  </Box>
                 </Box>
-                <Image src={ideaImage} width={200} height={200} style={{ margin: 'auto' }} />
-                <Box className={classes.subContent} component="h6" mt={2}>
-                  「どうやってマップを作ったらいいか分からない・・・」という方向けの充実したヒント機能！
-                </Box>
-              </Box>
               </Grid>
               <Grid item xs={12} sm={6}>
                 <Box className={classes.subTitle} component="h3">
@@ -209,7 +212,9 @@ const TopPage = () => {
                 <Image src={favoImage} width={200} height={200} style={{ margin: 'auto' }} />
                 <Box className={classes.subContent} component="h6" mt={2}>
                   読書仲間で「いいね」を送り合って、モチベを高めよう！
-                  <Box style={{ fontSize:"0.8rem", color: 'red' }}>(※ メンタルマップの中身が公開されることはありません)</Box>
+                  <Box style={{ fontSize: '0.8rem', color: 'red' }}>
+                    (※ メンタルマップの中身が公開されることはありません)
+                  </Box>
                 </Box>
               </Grid>
             </Grid>
@@ -217,19 +222,19 @@ const TopPage = () => {
           <Divider />
           <Box component="h6" textAlign="center" py={4} mb={2}>
             <Box className={classes.subTitle}>まずはワンタップで無料登録♪</Box>
-              <Grid container component="h6" spacing={1}>
-                <Grid item xs={12} sm={6}>
-                  <Box textAlign="center">
-                    <TwitterLoginButton label={'Twitter ログイン / 新規登録'} onClick={() => dispatch(signIn())} />
-                  </Box>
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <Box textAlign="center">
-                    <PrimaryButton label="ユーザー登録無しで利用" onClick={() => dispatch(signInGuestUser())} />
-                  </Box>
-                </Grid>
+            <Grid container component="h6" spacing={1}>
+              <Grid item xs={12} sm={6}>
+                <Box textAlign="center">
+                  <TwitterLoginButton label={'Twitter ログイン / 新規登録'} onClick={() => dispatch(signIn())} />
+                </Box>
               </Grid>
-            </Box>
+              <Grid item xs={12} sm={6}>
+                <Box textAlign="center">
+                  <PrimaryButton label="ユーザー登録無しで利用" onClick={() => dispatch(signInGuestUser())} />
+                </Box>
+              </Grid>
+            </Grid>
+          </Box>
           <Divider />
           <Box display="flex" justifyContent="center" alignItems="center" mt={4}>
             <Box>
