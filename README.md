@@ -11,9 +11,15 @@ URL: https://yomukatsu.com/
 
 ※ 推奨ブラウザはChrome、Safariになります
 
-解説記事( Qiita ): https://qiita.com/ddpmntcpbr/private/739dbb992b5ffac3fc2f
+### 解説記事( Qiita )
+URL: https://qiita.com/ddpmntcpbr/private/739dbb992b5ffac3fc2f
 
-開発者Twitter: https://twitter.com/ddpmntcpbr
+開発の背景から解説しています。
+
+### 開発者Twitter
+URL: https://twitter.com/ddpmntcpbr
+
+ご用の方はこちらまで！
 
 ## クラウドアーキテクチャー
 ![image](https://user-images.githubusercontent.com/56747224/110200543-dbf47e80-7ea1-11eb-8c91-227bd310faa9.png)
