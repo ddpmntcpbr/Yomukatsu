@@ -1,4 +1,4 @@
-import { Box, Button, Divider, Paper } from '@material-ui/core'
+import { Box, Divider, Paper } from '@material-ui/core'
 import CopyrightIcon from '@material-ui/icons/Copyright'
 import { makeStyles } from '@material-ui/styles'
 import administratorIcon from 'assets/img/src/administratorIcon.png'
@@ -9,7 +9,6 @@ import researchImage from 'assets/img/src/research.png'
 import terminalImage from 'assets/img/src/terminal.png'
 import topPageImage from 'assets/img/src/top.png'
 import womanImage from 'assets/img/src/woman.png'
-import axios from 'axios'
 import { TwitterLoginButton } from 'components/UIkit'
 import { PrimaryButton } from 'components/UIkit'
 import { push } from 'connected-react-router'
@@ -76,28 +75,6 @@ const TopPage = () => {
   const selector = useSelector((state) => state)
   const isSignedIn = getSignedIn(selector)
 
-  const userCount = () => {
-    axios
-      .get(process.env.REACT_APP_API_V1_URL + '/users_count')
-      .then((response) => {
-        console.log('User.count', response.data)
-      })
-      .catch((error) => {
-        console.log(error)
-      })
-  }
-
-  const postCount = () => {
-    axios
-      .get(process.env.REACT_APP_API_V1_URL + '/posts_count')
-      .then((response) => {
-        console.log('Post.count', response.data)
-      })
-      .catch((error) => {
-        console.log(error)
-      })
-  }
-
   useEffect(() => {
     if (!isSignedIn && localStorage.getItem('auth_token')) {
       dispatch(listenAuthState())
@@ -106,12 +83,6 @@ const TopPage = () => {
 
   return (
     <Box>
-      <Button variant="contained" onClick={userCount}>
-        User count
-      </Button>
-      <Button variant="contained" onClick={postCount}>
-        Post count
-      </Button>
       <Helmet
         meta={[
           { name: 'twitter:card', content: 'summary' },
