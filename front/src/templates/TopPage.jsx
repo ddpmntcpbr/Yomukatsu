@@ -119,7 +119,7 @@ const TopPage = () => {
 
         <Box py={4}>
           <Box className={classes.title} component="h2">
-            Yomukatsu使い方(字幕動画)
+            【3分動画】Yomukatsu使い方 字幕解説
           </Box>
           <Divider />
           <Box className={classes.youtube} textAlign="center" mt={2}>
