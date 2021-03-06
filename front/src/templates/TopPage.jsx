@@ -128,9 +128,10 @@ const TopPage = () => {
               width="1280"
               height="720"
               src="https://www.youtube.com/embed/XGzbGH1NvLk"
-              frameborder="0"
+              frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen
+              allowFullScreen
+              title="tutorial"
             ></iframe>
           </Box>
         </Box>
@@ -220,7 +221,7 @@ const TopPage = () => {
             </Grid>
           </Box>
           <Divider />
-          <Box component="h6" textAlign="center" py={4} mb={2}>
+          <Box textAlign="center" py={4} mb={2}>
             <Box className={classes.subTitle}>まずはワンタップで無料登録♪</Box>
             <Grid container component="h6" spacing={1}>
               <Grid item xs={12} sm={6}>
