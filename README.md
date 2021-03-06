@@ -18,7 +18,7 @@ URL: https://yomukatsu.com/
 ## クラウドアーキテクチャー
 ![image](https://user-images.githubusercontent.com/56747224/110200543-dbf47e80-7ea1-11eb-8c91-227bd310faa9.png)
 
-### 技術スタック一覧
+### 技術スタック概略(詳細後述)
 - **Backend:** Rails ( API mode / Rspec / rubocop) + Nginx ( upstream puma-socket )
 - **Frontend:** React ( create-react-app / Redux / Material-UI / eslint&prettier)
 - **Infra:** AWS ( ECS Fargate/ ECR / RDS / ALB / Route53 ), Netlify, Docker & docker-compose, Circle CI, Slack Incommig Webhook
@@ -91,7 +91,7 @@ URL: https://yomukatsu.com/
 
 フロントエンド(create-react-app)のホスティングで利用。Pre-rendering 機能を利用することで、通常SPAとなる create-react-app でも、OGP情報の保持(動的な Twitter Card 情報の保持)が可能
 
-##### CircleCI
+#### ``CircleCI``
 
 自動CI/CDパイプラインの構築に利用。
 
