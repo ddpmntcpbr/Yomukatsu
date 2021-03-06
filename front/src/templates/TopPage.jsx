@@ -117,23 +117,15 @@ const TopPage = () => {
           </Grid>
         </Grid>
 
-        {/* <Box py={4}>
+        <Box py={4}>
           <Box className={classes.title} component="h2">
             Yomukatsu使い方(字幕動画)
           </Box>
           <Divider />
-          <Box className={classes.youtube} textAlign="center" mt={2}>
-            <iframe
-              width="480"
-              height="270"
-              src="https://www.youtube.com/embed/qBvS3Ilp_3o"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-              title="tutorial"
-            ></iframe>
+          <Box className={classes.youtube} textAlign="center" mt={2}>rial"
+            <iframe width="1280" height="720" src="https://www.youtube.com/embed/XGzbGH1NvLk" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
           </Box>
-        </Box> */}
+        </Box>
 
         <Box py={4}>
           <Box className={classes.title} component="h2">
