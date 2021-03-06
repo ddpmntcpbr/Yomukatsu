@@ -17,11 +17,11 @@ const useStyles = makeStyles((theme) => ({
     flex: 1,
   },
   cardContent: {
-    height: "100%",
+    height: '100%',
     padding: theme.spacing(1),
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "space-between"
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
   },
   cover: {
     width: 75,
