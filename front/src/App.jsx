@@ -27,7 +27,7 @@ const App = () => {
       <Loading>
         <Header />
         <main className={classes.main}>
-          <Container maxWidth="sm">
+          <Container maxWidth="md">
             <Notification />
             <AdSense.Google
               client="ca-pub-6032367281994290"
