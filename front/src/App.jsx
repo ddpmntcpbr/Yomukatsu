@@ -7,7 +7,7 @@ import { ResponsiveBottomNavigation } from 'components/ResponsiveBottomNavigatio
 import { Loading } from 'components/UIkit'
 import 'assets/reset.css'
 import React from 'react'
-import AdSense from 'react-adsense';
+import AdSense from 'react-adsense'
 import { useSelector } from 'react-redux'
 import { getSignedIn } from 'reducks/users/selectors'
 
@@ -30,10 +30,10 @@ const App = () => {
           <Container maxWidth="sm">
             <Notification />
             <AdSense.Google
-              client='ca-pub-6032367281994290'
-              slot='3674056667'
+              client="ca-pub-6032367281994290"
+              slot="3674056667"
               style={{ display: 'block', height: 50 }}
-              format='fluid'
+              format="fluid"
             />
             <Router />
           </Container>
