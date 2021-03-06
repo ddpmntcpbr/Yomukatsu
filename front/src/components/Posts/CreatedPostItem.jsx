@@ -13,7 +13,6 @@ import React, { useCallback, useState } from 'react'
 
 const useStyles = makeStyles((theme) => ({
   itemContent: {
-    fontSize: '0.8rem',
     padding: theme.spacing(1),
   },
   checkIcon: {

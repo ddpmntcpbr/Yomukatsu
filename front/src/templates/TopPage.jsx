@@ -1,4 +1,4 @@
-import { Box, Divider, Paper } from '@material-ui/core'
+import { Box, Container, Divider, Grid, Paper } from '@material-ui/core'
 import CopyrightIcon from '@material-ui/icons/Copyright'
 import { makeStyles } from '@material-ui/styles'
 import administratorIcon from 'assets/img/src/administratorIcon.png'
@@ -33,10 +33,12 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '1.2rem',
     fontWeight: 'bold',
     color: theme.palette.grey[800],
+    height: '54px',
   },
   content: {
     fontSize: '1rem',
     color: theme.palette.grey[800],
+    marginTop: theme.spacing(4),
   },
   subContent: {
     fontSize: '0.8rem',
@@ -94,34 +96,26 @@ const TopPage = () => {
           { name: 'twitter:description', content: '積読解消サポート!' },
         ]}
       />
+      <img src={topPageImage} alt="topPageImage" />
       <Box component={Paper} p={2} className={classes.paper}>
-        <Box textAlign="center" fontSize="2.0rem" fontWeight="bold">
-          積読解消アプリ「Yomukatsu!」
-        </Box>
-        <Box textAlign="center" fontSize="1rem" my={1}>
-          「読書メンタルマップ術」を使って
-          <br />
-          積読を解消しよう！
-        </Box>
-        <img src={topPageImage} alt="topPageImage" width="100%" />
-
-        <Box className={classes.title} component="h2" mt={10}>
-          新規登録/ログイン
-        </Box>
-        <Divider />
-        <Box className={classes.content} component="h6" textAlign="center">
-          <Box py={2}>
-            <Box>↓かんたん！5秒で無料登録！↓</Box>
-            <TwitterLoginButton label={'Twitter ログイン / 新規登録'} onClick={() => dispatch(signIn())} />
-            <Box py={1} fontSize="0.8rem">
-              ※勝手にツイートすることはありません
+        <Grid container className={classes.content} component="h6" spacing={1}>
+          <Grid item xs={12} sm={6}>
+            <Box textAlign="center">
+              <TwitterLoginButton label={'Twitter ログイン / 新規登録'} onClick={() => dispatch(signIn())} />
+              <Box py={1} fontSize="0.8rem">
+                勝手にツイートすることはありません
+              </Box>
             </Box>
-          </Box>
-          <Box py={2}>
-            <Box>↓お試しはコチラ(ユーザー登録無し)↓</Box>
-            <PrimaryButton label="ゲストログイン" onClick={() => dispatch(signInGuestUser())} />
-          </Box>
-        </Box>
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <Box textAlign="center">
+              <PrimaryButton label="ユーザー登録無しで利用" onClick={() => dispatch(signInGuestUser())} />
+              <Box py={1} fontSize="0.8rem">
+                ゲストユーザーとしてログインします
+              </Box>
+            </Box>
+          </Grid>
+        </Grid>
 
         <Box py={4}>
           <Box className={classes.title} component="h2">
@@ -147,26 +141,28 @@ const TopPage = () => {
           </Box>
           <Divider />
           <Box className={classes.content} component="h6" mt={2}>
-            PCやスマホで簡単に「読書メンタルマップ術」を実践することで、
-            <br />
-            ユーザーの積読解消をサポートするアプリです。
+            PCやスマホで簡単に「読書メンタルマップ術」を実践することで、ユーザーの積読解消をサポートするアプリです。
             <Image src={womanImage} width={200} height={200} style={{ margin: 'auto' }} />
-            「読書メンタルマップ術」とは、ハーバード大学ショーンエーカー氏が
+            「読書メンタルマップ術」とは、ハーバード大学ショーンエーカー氏が提唱している積読解消術です。
             <br />
-            提唱している積読解消術です。読破したい対象の書籍に対して、
+            <br />
+            読破したい対象の書籍に対して、
             <br />
             <Box fontWeight="bold" my={4}>
               1. その本について興味があること、それを知って得られるメリットを文章に書き出す
+              <br />
               <br />
               2. 読んでいる途中で飽きてきたら、それを読み返す
               <br />
             </Box>
             を繰り返すことで完読までモチベーションを維持する、という読書法です。
             <Box mt={4}>
-              <img src={postEditScreenShotImage} alt="postEditScreenShotImage" width="100%" />
-              <Box fontSize="0.8rem" textAlign="center">
-                読書メンタルマップ作成イメージ
-              </Box>
+              <Container maxWidth="xs">
+                <img src={postEditScreenShotImage} alt="postEditScreenShotImage" width="100%" />
+                <Box fontSize="0.8rem" textAlign="center">
+                  読書メンタルマップ作成イメージ
+                </Box>
+              </Container>
             </Box>
           </Box>
         </Box>
@@ -176,62 +172,68 @@ const TopPage = () => {
             Yomukatsuでできること
           </Box>
           <Divider />
-          <Box textAlign="center">
-            <Box mt={4}>
-              <Box className={classes.subTitle} component="h3">
-                PCやスマホから、ペーパーレスでお手軽利用！
-              </Box>
-              <Box className={classes.subContent} component="h6" mt={2}>
-                通勤中など、紙やペンが手元にない状態であっても、
-                <br />
-                読書メンタルマップの作成・管理ができます
-              </Box>
-              <Image src={terminalImage} width={200} height={200} style={{ margin: 'auto' }} />
-            </Box>
-
-            <Box mt={10}>
-              <Box className={classes.subTitle} component="h3">
-                マップ作成をサポートするヒント機能！
-              </Box>
-              <Box className={classes.subContent} component="h6" mt={2}>
-                「どうやってマップを作ったらいいか分からない・・・」という方向けの、
-                <br />
-                充実したヒント機能！
-              </Box>
-              <Image src={ideaImage} width={200} height={200} style={{ margin: 'auto' }} />
-            </Box>
-
-            <Box mt={10}>
-              <Box className={classes.subTitle} component="h3">
-                読書遍歴をログとして記録！
-              </Box>
-              <Box className={classes.subContent} component="h6" mt={2}>
-                読破してきた書籍がログとして貯まることで、達成感が味わえます
-              </Box>
-
-              <Image src={researchImage} width={200} height={200} style={{ margin: 'auto' }} />
-            </Box>
-
-            <Box mt={10}>
-              <Box className={classes.subTitle} component="h3">
-                登録した書籍をTwitterでシェア！
-              </Box>
-              <Box className={classes.subContent} component="h6" mt={2}>
-                読書仲間で「いいね」を送り合って、モチベを高めよう！
-                <Box style={{ color: 'red' }}>(※ メンタルマップの中身が公開されることはありません)</Box>
-              </Box>
-              <Image src={favoImage} width={200} height={200} style={{ margin: 'auto' }} />
-            </Box>
+          <Box my={4}>
+            <Grid container spacing={8}>
+              <Grid item xs={12} sm={6}>
+                <Box>
+                  <Box className={classes.subTitle} component="h3">
+                    PCやスマホから、ペーパーレスでお手軽利用！
+                  </Box>
+                  <Image src={terminalImage} width={200} height={200} style={{ margin: 'auto' }} />
+                  <Box className={classes.subContent} component="h6" mt={2}>
+                    通勤中など、紙やペンが手元にない状態であっても、読書メンタルマップの作成・管理ができます
+                  </Box>
+                </Box>
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <Box>
+                  <Box className={classes.subTitle} component="h3">
+                    マップ作成をサポートするヒント機能！
+                  </Box>
+                  <Image src={ideaImage} width={200} height={200} style={{ margin: 'auto' }} />
+                  <Box className={classes.subContent} component="h6" mt={2}>
+                    「どうやってマップを作ったらいいか分からない・・・」という方向けの充実したヒント機能！
+                  </Box>
+                </Box>
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <Box className={classes.subTitle} component="h3">
+                  読書遍歴をログとして記録！
+                </Box>
+                <Image src={researchImage} width={200} height={200} style={{ margin: 'auto' }} />
+                <Box className={classes.subContent} component="h6" mt={2}>
+                  読破してきた書籍がログとして貯まることで、達成感が味わえます
+                </Box>
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <Box className={classes.subTitle} component="h3">
+                  登録した書籍をTwitterでシェア！
+                </Box>
+                <Image src={favoImage} width={200} height={200} style={{ margin: 'auto' }} />
+                <Box className={classes.subContent} component="h6" mt={2}>
+                  読書仲間で「いいね」を送り合って、モチベを高めよう！
+                  <Box style={{ fontSize: '0.8rem', color: 'red' }}>
+                    (※ メンタルマップの中身が公開されることはありません)
+                  </Box>
+                </Box>
+              </Grid>
+            </Grid>
           </Box>
-
-          <Box component="h6" textAlign="center" py={4}>
+          <Divider />
+          <Box component="h6" textAlign="center" py={4} mb={2}>
             <Box className={classes.subTitle}>まずはワンタップで無料登録♪</Box>
-            <Box my={1}>
-              <TwitterLoginButton label={'Twitter ログイン / 新規登録'} onClick={() => dispatch(signIn())} />
-            </Box>
-            <Box my={1}>
-              <PrimaryButton label="ゲストログイン" onClick={() => dispatch(signInGuestUser())} />
-            </Box>
+            <Grid container component="h6" spacing={1}>
+              <Grid item xs={12} sm={6}>
+                <Box textAlign="center">
+                  <TwitterLoginButton label={'Twitter ログイン / 新規登録'} onClick={() => dispatch(signIn())} />
+                </Box>
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <Box textAlign="center">
+                  <PrimaryButton label="ユーザー登録無しで利用" onClick={() => dispatch(signInGuestUser())} />
+                </Box>
+              </Grid>
+            </Grid>
           </Box>
           <Divider />
           <Box display="flex" justifyContent="center" alignItems="center" mt={4}>
