@@ -122,8 +122,16 @@ const TopPage = () => {
             Yomukatsu使い方(字幕動画)
           </Box>
           <Divider />
-          <Box className={classes.youtube} textAlign="center" mt={2}>rial"
-            <iframe width="1280" height="720" src="https://www.youtube.com/embed/XGzbGH1NvLk" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          <Box className={classes.youtube} textAlign="center" mt={2}>
+            rial"
+            <iframe
+              width="1280"
+              height="720"
+              src="https://www.youtube.com/embed/XGzbGH1NvLk"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe>
           </Box>
         </Box>
 
