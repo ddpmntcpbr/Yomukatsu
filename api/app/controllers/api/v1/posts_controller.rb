@@ -30,10 +30,6 @@ class Api::V1::PostsController < Api::V1::ApiController
     render json: {}, status: :ok
   end
 
-  def post_count
-    render json: Post.count
-  end
-
   private
 
     def post_params

@@ -41,7 +41,7 @@ module Myapp
     # クロスドメイン対策は入れておいたほうが良い
     config.middleware.insert_before 0, Rack::Cors do
       allow do
-        origins "*"
+        origins "http://127.0.0.1:8000", "https://yomukatsu.com"
         resource "*",
                  headers: :any,
                  expose: ["access-token", "expiry", "token-type", "uid", "client"],
