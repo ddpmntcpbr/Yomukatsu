@@ -87,12 +87,12 @@ const TopPage = () => {
   return (
     <Box>
       <Helmet
-            meta={[
-              { name: 'twitter:card', content: 'summary' },
-              { name: 'twitter:image', content: 'https://yomukatsu.com/static/media/top.f831f1d2.png' },
-              { name: 'twitter:title', content: '積読解消アプリ Yomukatsu!' },
-              { name: 'twitter:description', content: '読書メンタルマップで積読解消をサポート!' },
-            ]}
+        meta={[
+          { name: 'twitter:card', content: 'summary' },
+          { name: 'twitter:image', content: 'https://yomukatsu.com/static/media/top.f831f1d2.png' },
+          { name: 'twitter:title', content: '積読解消アプリ Yomukatsu!' },
+          { name: 'twitter:description', content: '読書メンタルマップで積読解消をサポート!' },
+        ]}
       />
       <img src={topPageImage} alt="topPageImage" />
       <Box component={Paper} p={2} className={classes.paper}>
@@ -223,12 +223,7 @@ const TopPage = () => {
             <Box className={classes.subTitle}>まずはワンタップで無料登録♪</Box>
             <Grid container component="h6" spacing={1}>
               <Grid item xs={12} sm={6}>
-                <Image
-                  src={topPageTwitterCardLogo}
-                  width={150}
-                  height={150}
-                  style={{ margin: 'auto' }}
-                />
+                <Image src={topPageTwitterCardLogo} width={150} height={150} style={{ margin: 'auto' }} />
               </Grid>
               <Grid item xs={12} sm={6}>
                 <Box textAlign="center" my={1}>
