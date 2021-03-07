@@ -8,6 +8,7 @@ import postEditScreenShotImage from 'assets/img/src/postEditScreenShot.png'
 import researchImage from 'assets/img/src/research.png'
 import terminalImage from 'assets/img/src/terminal.png'
 import topPageImage from 'assets/img/src/top.png'
+import topPageTwitterCardLogo from 'assets/img/src/topPageTwitterCardLogo.png'
 import womanImage from 'assets/img/src/woman.png'
 import { TwitterLoginButton } from 'components/UIkit'
 import { PrimaryButton } from 'components/UIkit'
@@ -18,7 +19,6 @@ import Image from 'react-image-resizer'
 import { useSelector, useDispatch } from 'react-redux'
 import { listenAuthState, signIn, signInGuestUser } from 'reducks/users/operations'
 import { getSignedIn } from 'reducks/users/selectors'
-import topPageTwitterCardLogo from 'assets/img/src/topPageTwitterCardLogo.png'
 
 const useStyles = makeStyles((theme) => ({
   paper: {
