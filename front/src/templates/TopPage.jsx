@@ -89,12 +89,9 @@ const TopPage = () => {
       <Helmet
         meta={[
           { name: 'twitter:card', content: 'summary' },
-          {
-            name: 'twitter:image',
-            content: topPageTwitterCardLogo,
-          },
-          { name: 'twitter:title', content: 'Yomukatsu' },
-          { name: 'twitter:description', content: '積読解消サポート!' },
+          { name: 'twitter:image', content: 'https://yomukatsu.com/static/media/topPageTwitterCardLogo.d97da2bc.png' },
+          { name: 'twitter:title', content: '積読解消アプリ Yomukatsu!' },
+          { name: 'twitter:description', content: '読書メンタルマップで積読解消をサポート!' },
         ]}
       />
       <img src={topPageImage} alt="topPageImage" />
@@ -226,12 +223,13 @@ const TopPage = () => {
             <Box className={classes.subTitle}>まずはワンタップで無料登録♪</Box>
             <Grid container component="h6" spacing={1}>
               <Grid item xs={12} sm={6}>
-                <Box textAlign="center">
-                  <TwitterLoginButton label={'Twitter ログイン / 新規登録'} onClick={() => dispatch(signIn())} />
-                </Box>
+                <Image src={topPageTwitterCardLogo} width={150} height={150} style={{ margin: 'auto' }} />
               </Grid>
               <Grid item xs={12} sm={6}>
-                <Box textAlign="center">
+                <Box textAlign="center" my={1}>
+                  <TwitterLoginButton label={'Twitter ログイン / 新規登録'} onClick={() => dispatch(signIn())} />
+                </Box>
+                <Box textAlign="center" my={1}>
                   <PrimaryButton label="ユーザー登録無しで利用" onClick={() => dispatch(signInGuestUser())} />
                 </Box>
               </Grid>
