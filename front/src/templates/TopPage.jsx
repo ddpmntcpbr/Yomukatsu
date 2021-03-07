@@ -117,23 +117,24 @@ const TopPage = () => {
           </Grid>
         </Grid>
 
-        {/* <Box py={4}>
+        <Box py={4}>
           <Box className={classes.title} component="h2">
-            Yomukatsu使い方(字幕動画)
+            【3分動画】Yomukatsu使い方 字幕解説
           </Box>
           <Divider />
           <Box className={classes.youtube} textAlign="center" mt={2}>
+            rial"
             <iframe
-              width="480"
-              height="270"
-              src="https://www.youtube.com/embed/qBvS3Ilp_3o"
+              width="1280"
+              height="720"
+              src="https://www.youtube.com/embed/XGzbGH1NvLk"
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
               title="tutorial"
             ></iframe>
           </Box>
-        </Box> */}
+        </Box>
 
         <Box py={4}>
           <Box className={classes.title} component="h2">
@@ -220,7 +221,7 @@ const TopPage = () => {
             </Grid>
           </Box>
           <Divider />
-          <Box component="h6" textAlign="center" py={4} mb={2}>
+          <Box textAlign="center" py={4} mb={2}>
             <Box className={classes.subTitle}>まずはワンタップで無料登録♪</Box>
             <Grid container component="h6" spacing={1}>
               <Grid item xs={12} sm={6}>
