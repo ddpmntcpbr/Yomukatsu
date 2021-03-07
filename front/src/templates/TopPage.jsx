@@ -89,7 +89,7 @@ const TopPage = () => {
       <Helmet
         meta={[
           { name: 'twitter:card', content: 'summary' },
-          { name: 'twitter:image', content: 'https://yomukatsu.com/static/media/top.f831f1d2.png' },
+          { name: 'twitter:image', content: 'https://yomukatsu.com/static/media/topPageTwitterCardLogo.d97da2bc.png' },
           { name: 'twitter:title', content: '積読解消アプリ Yomukatsu!' },
           { name: 'twitter:description', content: '読書メンタルマップで積読解消をサポート!' },
         ]}
