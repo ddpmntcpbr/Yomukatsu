@@ -8,6 +8,7 @@ import postEditScreenShotImage from 'assets/img/src/postEditScreenShot.png'
 import researchImage from 'assets/img/src/research.png'
 import terminalImage from 'assets/img/src/terminal.png'
 import topPageImage from 'assets/img/src/top.png'
+import topPageTwitterCardLogo from 'assets/img/src/topPageTwitterCardLogo.png'
 import womanImage from 'assets/img/src/woman.png'
 import { TwitterLoginButton } from 'components/UIkit'
 import { PrimaryButton } from 'components/UIkit'
@@ -90,7 +91,7 @@ const TopPage = () => {
           { name: 'twitter:card', content: 'summary' },
           {
             name: 'twitter:image',
-            content: 'https://www.book.yomukatsu.com/static/media/logo.e89c3802.png',
+            content: topPageTwitterCardLogo,
           },
           { name: 'twitter:title', content: 'Yomukatsu' },
           { name: 'twitter:description', content: '積読解消サポート!' },
