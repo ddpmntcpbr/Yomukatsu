@@ -18,6 +18,7 @@ import Image from 'react-image-resizer'
 import { useSelector, useDispatch } from 'react-redux'
 import { listenAuthState, signIn, signInGuestUser } from 'reducks/users/operations'
 import { getSignedIn } from 'reducks/users/selectors'
+import topPageTwitterCardLogo from 'assets/img/src/topPageTwitterCardLogo.png'
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -90,7 +91,7 @@ const TopPage = () => {
           { name: 'twitter:card', content: 'summary' },
           {
             name: 'twitter:image',
-            content: 'https://www.book.yomukatsu.com/static/media/logo.e89c3802.png',
+            content: topPageTwitterCardLogo,
           },
           { name: 'twitter:title', content: 'Yomukatsu' },
           { name: 'twitter:description', content: '積読解消サポート!' },
