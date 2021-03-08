@@ -12,7 +12,7 @@ URL: https://yomukatsu.com/
 ※ 推奨ブラウザはChrome、Safariになります
 
 ### 解説記事( Qiita )
-URL: https://qiita.com/ddpmntcpbr/private/739dbb992b5ffac3fc2f
+URL: https://qiita.com/ddpmntcpbr/items/739dbb992b5ffac3fc2f
 
 開発の背景から解説しています。
 
