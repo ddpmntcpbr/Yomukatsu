@@ -88,7 +88,7 @@ const TopPage = () => {
     <Box>
       <Helmet
         meta={[
-          { name: 'twitter:card', content: 'summary' },
+          { name: 'twitter:card', content: 'summary_large_image' },
           { name: 'twitter:image', content: 'https://yomukatsu.com/static/media/topPageTwitterCardLogo.d97da2bc.png' },
           { name: 'twitter:title', content: '積読解消アプリ Yomukatsu!' },
           { name: 'twitter:description', content: '読書メンタルマップで積読解消をサポート!' },
@@ -121,11 +121,10 @@ const TopPage = () => {
           </Box>
           <Divider />
           <Box className={classes.youtube} textAlign="center" mt={2}>
-            rial"
             <iframe
               width="1280"
               height="720"
-              src="https://www.youtube.com/embed/XGzbGH1NvLk"
+              src="https://www.youtube.com/embed/gnfPJgAigRc"
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
