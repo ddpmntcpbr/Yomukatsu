@@ -85,26 +85,25 @@ const Setting = () => {
         <Box px={2} pt={2}>
           <Box>ユーザ情報</Box>
           <Box display="flex" alignItems="center" py={2}>
-          {isGuestUser() ? (
-            <Box className={classes.userImage}>
-              <img src={guestUserImage} alt="guestUserImage" width="48px" height="48px" />
-            </Box>
-            ):(
-            <Box className={classes.userImage}>
-              <img src={userImage} alt="userImage" width="48px" height="48px" />
-            </Box>
+            {isGuestUser() ? (
+              <Box className={classes.userImage}>
+                <img src={guestUserImage} alt="guestUserImage" width="48px" height="48px" />
+              </Box>
+            ) : (
+              <Box className={classes.userImage}>
+                <img src={userImage} alt="userImage" width="48px" height="48px" />
+              </Box>
             )}
 
             {isGuestUser() ? (
               <Box ml={4} fontSize="1.0rem" fontWeight="bold">
                 ゲストユーザー
               </Box>
-              ):(
+            ) : (
               <Box ml={4} fontSize="1.0rem" fontWeight="bold">
                 {userName + '@' + userNickname}
               </Box>
-              )}
-
+            )}
           </Box>
           <Box textAlign="center">
             <SecondaryButton label="ログアウト" onClick={() => dispatch(signOut())} />

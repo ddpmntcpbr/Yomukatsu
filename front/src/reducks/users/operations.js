@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { push } from 'connected-react-router'
-import { _sleep,createRandamString } from '../../helpers'
+import { _sleep, createRandamString } from '../../helpers'
 import { hideLoadingAction, showLoadingAction } from '../loading/actions'
 // import { hideLoading, showLoading } from "../loading/operations";
 import { setNotificationAction } from '../notification/actions'
