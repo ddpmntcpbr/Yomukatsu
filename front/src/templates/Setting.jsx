@@ -9,6 +9,7 @@ import LibraryBooksIcon from '@material-ui/icons/LibraryBooks'
 import MailIcon from '@material-ui/icons/Mail'
 import TwitterIcon from '@material-ui/icons/Twitter'
 import { makeStyles } from '@material-ui/styles'
+import guestUserImage from 'assets/img/src/guestUserImage.png'
 import { FormDialog } from 'components/Setting'
 import { SecondaryButton, QuestionDialog } from 'components/UIkit'
 import { push } from 'connected-react-router'
@@ -70,18 +71,39 @@ const Setting = () => {
     setUserDeleteDialogOpen(false)
   }, [dispatch, setUserDeleteDialogOpen])
 
+  const isGuestUser = () => {
+    if (!userName && !userImage && !userNickname) {
+      return true
+    } else {
+      return false
+    }
+  }
+
   return (
     <Box mb={2}>
       <Box component={Paper} p={2} className={classes.paper}>
         <Box px={2} pt={2}>
           <Box>ユーザ情報</Box>
           <Box display="flex" alignItems="center" py={2}>
-            <Box className={classes.userImage}>
-              <img src={userImage} alt="userImage" width="48px" height="48px" />
-            </Box>
-            <Box ml={4} fontSize="1.0rem" fontWeight="bold">
-              {userName + '@' + userNickname}
-            </Box>
+            {isGuestUser() ? (
+              <Box className={classes.userImage}>
+                <img src={guestUserImage} alt="guestUserImage" width="48px" height="48px" />
+              </Box>
+            ) : (
+              <Box className={classes.userImage}>
+                <img src={userImage} alt="userImage" width="48px" height="48px" />
+              </Box>
+            )}
+
+            {isGuestUser() ? (
+              <Box ml={4} fontSize="1.0rem" fontWeight="bold">
+                ゲストユーザー
+              </Box>
+            ) : (
+              <Box ml={4} fontSize="1.0rem" fontWeight="bold">
+                {userName + '@' + userNickname}
+              </Box>
+            )}
           </Box>
           <Box textAlign="center">
             <SecondaryButton label="ログアウト" onClick={() => dispatch(signOut())} />
@@ -104,7 +126,7 @@ const Setting = () => {
             <Typography variant="inherit">利用規約</Typography>
           </MenuItem>
 
-          {userName === 'ゲストユーザー' && userNickname === 'guest_user' ? (
+          {isGuestUser() ? (
             <MenuItem
               className={classes.menuItem}
               onClick={() => dispatch(setNotificationAction('error', 'ゲストユーザーではご利用できません'))}
@@ -137,7 +159,7 @@ const Setting = () => {
             </ListItemIcon>
             <Typography variant="inherit">Github ソースコード</Typography>
           </MenuItem>
-          {userName === 'ゲストユーザー' && userNickname === 'guest_user' ? (
+          {isGuestUser() ? (
             <MenuItem
               className={classes.menuItem}
               onClick={() => dispatch(setNotificationAction('error', 'ゲストユーザーではご利用できません'))}
