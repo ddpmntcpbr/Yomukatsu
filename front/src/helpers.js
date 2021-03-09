@@ -1,5 +1,14 @@
 export const _sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
 
+export const createRandamString = (length) =>{
+  var characters = "abcdefghijklmnopqrstuvwxyz0123456789";
+  var randamString = "";
+  for(var i=0; i<length; i++){
+    randamString += characters[Math.floor(Math.random() * characters.length)];
+  }
+  return randamString
+}
+
 export const isNonEmptyArray = (obj) => {
   if (typeof obj === 'undefined') {
     return false
