@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { push } from 'connected-react-router'
-import { _sleep } from '../../helpers'
+import { _sleep,createRandamString } from '../../helpers'
 import { hideLoadingAction, showLoadingAction } from '../loading/actions'
 // import { hideLoading, showLoading } from "../loading/operations";
 import { setNotificationAction } from '../notification/actions'
@@ -81,11 +81,15 @@ export const signInGuestUser = () => {
       await _sleep(1000)
     }
 
-    const apiUrl = process.env.REACT_APP_API_V1_URL + '/auth/sign_in'
+    const apiUrl = process.env.REACT_APP_API_V1_URL + '/auth'
+
+    const email = createRandamString(20) + '@guestuser.com'
+    const password = createRandamString(30)
 
     const data = {
-      email: process.env.REACT_APP_GUEST_USER_SIGNIN_EMAIL,
-      password: process.env.REACT_APP_GUEST_USER_SIGNIN_PASSWORD,
+      name: 'ゲストユーザー',
+      email: email,
+      password: password,
     }
 
     await axios
