@@ -83,7 +83,7 @@ export const signInGuestUser = () => {
 
     const apiUrl = process.env.REACT_APP_API_V1_URL + '/auth'
 
-    const email = createRandamString(20) + '@guestuser.com'
+    const email = createRandamString(20) + '@example.com'
     const password = createRandamString(30)
 
     const data = {
