@@ -10,14 +10,13 @@ import terminalImage from 'assets/img/src/terminal.png'
 import topPageImage from 'assets/img/src/top.png'
 import topPageTwitterCardLogo from 'assets/img/src/topPageTwitterCardLogo.png'
 import womanImage from 'assets/img/src/woman.png'
-import { TwitterLoginButton } from 'components/UIkit'
 import { PrimaryButton } from 'components/UIkit'
 import { push } from 'connected-react-router'
 import React, { useEffect } from 'react'
 import { Helmet } from 'react-helmet'
 import Image from 'react-image-resizer'
 import { useSelector, useDispatch } from 'react-redux'
-import { listenAuthState, signIn, signInGuestUser } from 'reducks/users/operations'
+import { listenAuthState, signInGuestUser } from 'reducks/users/operations'
 import { getSignedIn } from 'reducks/users/selectors'
 
 const useStyles = makeStyles((theme) => ({
@@ -97,15 +96,7 @@ const TopPage = () => {
       <img src={topPageImage} alt="topPageImage" />
       <Box component={Paper} p={2} className={classes.paper}>
         <Grid container className={classes.content} component="h6" spacing={1}>
-          <Grid item xs={12} sm={6}>
-            <Box textAlign="center">
-              <TwitterLoginButton label={'Twitter ログイン / 新規登録'} onClick={() => dispatch(signIn())} />
-              <Box py={1} fontSize="0.8rem">
-                勝手にツイートすることはありません
-              </Box>
-            </Box>
-          </Grid>
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={12}>
             <Box textAlign="center">
               <PrimaryButton label="ユーザー登録無しで利用" onClick={() => dispatch(signInGuestUser())} />
               <Box py={1} fontSize="0.8rem">
@@ -225,9 +216,6 @@ const TopPage = () => {
                 <Image src={topPageTwitterCardLogo} width={150} height={150} style={{ margin: 'auto' }} />
               </Grid>
               <Grid item xs={12} sm={6}>
-                <Box textAlign="center" my={1}>
-                  <TwitterLoginButton label={'Twitter ログイン / 新規登録'} onClick={() => dispatch(signIn())} />
-                </Box>
                 <Box textAlign="center" my={1}>
                   <PrimaryButton label="ユーザー登録無しで利用" onClick={() => dispatch(signInGuestUser())} />
                 </Box>

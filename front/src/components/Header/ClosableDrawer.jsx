@@ -8,14 +8,13 @@ import AttachFileIcon from '@material-ui/icons/AttachFile'
 import BookmarkBorderIcon from '@material-ui/icons/BookmarkBorder'
 import ExitToAppIcon from '@material-ui/icons/ExitToApp'
 import PermIdentityIcon from '@material-ui/icons/PermIdentity'
-import TwitterIcon from '@material-ui/icons/Twitter'
 import { makeStyles } from '@material-ui/styles'
 import { push } from 'connected-react-router'
 import React from 'react'
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
 import { signOut } from 'reducks/users/operations'
-import { signIn, signInGuestUser } from 'reducks/users/operations'
+import { signInGuestUser } from 'reducks/users/operations'
 import { getSignedIn } from 'reducks/users/selectors'
 
 const useStyles = makeStyles((theme) => ({
@@ -58,10 +57,6 @@ const ClosableDrawer = (props) => {
     props.onClose(event)
   }
 
-  const handleTwitterSignIn = (event) => {
-    dispatch(signIn())
-    props.onClose(event)
-  }
 
   const handleGuestSignIn = (event) => {
     dispatch(signInGuestUser())
@@ -122,12 +117,6 @@ const ClosableDrawer = (props) => {
               </div>
             ) : (
               <div>
-                <ListItem button key="twitter_signin" onClick={(e) => handleTwitterSignIn(e)}>
-                  <ListItemIcon>
-                    <TwitterIcon />
-                  </ListItemIcon>
-                  <ListItemText primary={'Twitter ログイン'} />
-                </ListItem>
                 <ListItem button key="guest_signin" onClick={(e) => handleGuestSignIn(e)}>
                   <ListItemIcon>
                     <PermIdentityIcon />
