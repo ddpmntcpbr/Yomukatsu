@@ -40,7 +40,7 @@ gem "active_model_serializers", "~> 0.10.0"
 # for image uploader with AWS S3
 gem "carrierwave", "1.1.0"
 gem "fog-aws", "1.4.0"
-gem "mini_magick", "4.7.0"
+gem "mini_magick", "4.9.4"
 
 group :development, :test do
   gem "factory_bot_rails"
